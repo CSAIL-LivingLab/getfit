@@ -67,10 +67,12 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier], @"device_id",
                             nil];
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"/register" parameters:params];
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"register" parameters:params];
 
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        OSLog(@"%@", request);
         
         // If a key was provided, store it in the keychain
         if ([JSON objectForKey:@"key"]) {
@@ -82,10 +84,14 @@
                 OSLog(@"Device registered with key: %@", [JSON objectForKey:@"key"]);
             }
         }
+        OSLog(@"%@", JSON);
         
         registrationInProgress = NO;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Could not register device" message:@"The device could not be registered, please try again later." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        OSLog(@"\n-----\njson: %@\n-------\n", JSON);
+        OSLog(@"%@", error);
+        
         [alertView show];
         
         registrationInProgress = NO;
@@ -123,7 +129,8 @@
     // Start timers
     uploadTimer = [NSTimer scheduledTimerWithTimeInterval:[[[OSConfiguration currentConfig] dataUploadPeriod] doubleValue] target:self selector:@selector(uploadData:) userInfo:nil repeats:YES];
     
-    configTimer = [NSTimer scheduledTimerWithTimeInterval:[[[OSConfiguration currentConfig] configUpdatePeriod] doubleValue] target:self selector:@selector(refreshConfig:) userInfo:nil repeats:YES];
+    // Turn off config updating for now, as I don't see a reason for it -- ARC 2014-08-19.
+    //    configTimer = [NSTimer scheduledTimerWithTimeInterval:[[[OSConfiguration currentConfig] configUpdatePeriod] doubleValue] target:self selector:@selector(refreshConfig:) userInfo:nil repeats:YES];
     
     // For debugging
     //[self uploadData:nil];
@@ -264,14 +271,21 @@
         NSDictionary *params = @{
             @"file_hash": jsonFileHash,
             @"device_id": [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier],
-            @"data": jsonFile
+            @"data": jsonFile,
+            @"datastore_owner__uuid": [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier],
+            @"bearer_token": @"3f4851fd8a"
+            
         };
         
-        OSLog(@"Parameters: %@", params);
+//        OSLog(@"Parameters: %@", params);
         
-        NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"/upload" parameters:params];
+        NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"upload" parameters:params];
+
+        OSLog(@"%@", request);
         
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            
+            OSLog(@"\n\n\n\n%@\n\n\n\n", JSON);
             
             if ([JSON objectForKey:@"status"] && [[JSON objectForKey:@"status"] isEqualToString:@"ok"]) {
                 OSLog(@"Data succesfully uploaded!");
@@ -291,6 +305,8 @@
                 OSLog(@"Could not upload collected data");
             }
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            OSLog(@"\n\nerror: %@\n", error);
+            OSLog(@"\njson: %@\n", JSON);
             OSLog(@"Could not upload collected data");
         }];
         

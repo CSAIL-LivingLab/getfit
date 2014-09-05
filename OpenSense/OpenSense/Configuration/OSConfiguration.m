@@ -83,7 +83,7 @@
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *filePath = [documentsPath stringByAppendingPathComponent:@"config.json"];
     
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:@"/config" parameters:nil];
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:@"config" parameters:nil];
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.outputStream = [NSOutputStream outputStreamToFileAtPath:filePath append:NO];
     

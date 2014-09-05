@@ -45,10 +45,10 @@ function handleRequest(path, data, res) {
     switch (path) {
         // Register a new device
         case '/register': {
-            if (!data.device_id) { // Make sure that a device id is specified
+            if (!data.datastore_owner__uuid) { // Make sure that a device id is specified
                 res.writeHead(400, {"Content-Type": "text/json"});
                 res.end(JSON.stringify({
-                    error: "Missing device_id parameter"
+                    error: "Missing datastore_owner__uuid parameter"
                 }));
             } else {
                 // Generate a random key that the device can use to encrypt data
@@ -80,10 +80,10 @@ function handleRequest(path, data, res) {
 
         // Upload probe data
         case '/upload': {
-            if (!data.device_id) { // Make sure that a device id is specified
+            if (!data.datastore_owner__uuid) { // Make sure that a device id is specified
                 res.writeHead(400, {"Content-Type": "text/json"});
                 res.end(JSON.stringify({
-                    error: "Missing device_id parameter"
+                    error: "Missing datastore_owner__uuid parameter"
                 }));
             } else if (!data.file_hash) { // Make sure that the file hash is specified
                 res.writeHead(400, {"Content-Type": "text/json"});
@@ -118,10 +118,10 @@ function handleRequest(path, data, res) {
                         status: 'ok'
                     }));
 
-                    console.log('Data received for device: ' + data.device_id);
+                    console.log('Data received for device: ' + data.datastore_owner__uuid);
 
                     // Create data directory if necessary
-                    mkdirp("data/" + data.device_id, function (err) {
+                    mkdirp("data/" + data.datastore_owner__uuid, function (err) {
                         if (err) {
                             console.log(err);
                         }
@@ -135,12 +135,12 @@ function handleRequest(path, data, res) {
                                 ".json";
 
                             // Save data file
-                            fs.writeFile("data/" + data.device_id + "/" + filename, data.data, function(err) {
+                            fs.writeFile("data/" + data.datastore_owner__uuid + "/" + filename, data.data, function(err) {
                                 if (err) {
                                     console.log(err);
                                 } else {
                                     // Make file only readable and writeable by current user
-                                    fs.chmodSync("data/" + data.device_id + "/" + filename, '700');
+                                    fs.chmodSync("data/" + data.datastore_owner__uuid + "/" + filename, '700');
                                 }
                             }); 
                         }
