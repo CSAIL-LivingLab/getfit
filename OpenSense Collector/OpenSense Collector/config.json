@@ -1,0 +1,52 @@
+{
+  "name": "awesome2",
+  "version": 2,
+  "dataUploadOnWifiOnly": true,
+  "baseUrl": "http://128.52.170.143:4000/",
+  "configUpdatePeriod": 21600,
+  "dataArchivePeriod": 300,
+  "dataUploadPeriod": 7200,
+  "maxDataFileSizeKb": 1024,
+  "dataRequests": {
+    "battery": [
+      {
+        "interval": -1
+      }
+    ],
+    "proximity": [
+      {
+        "interval": -1
+      }
+    ],
+    "positioning": [
+      {
+        "interval": -1
+      }
+    ],
+    "stepcounter": [
+      {
+        "interval": -1
+      }
+    ],
+    "motion": [
+      {
+        "interval": -1,
+        "frequency": 1800,
+        "duration": 5,
+        "updateInterval":0.1
+      }
+    ],
+    "deviceinfo": [
+      {
+        "interval": -1,
+        "frequency":10
+      }
+    ],
+    "activitymanager": [
+      {
+        "interval": -1,
+        "frequency": 15
+      }
+    ],
+  }
+}
