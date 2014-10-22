@@ -281,7 +281,7 @@
         
         NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"upload" parameters:params];
 
-        OSLog(@"%@", request);
+        OSLog(@"%@", params);
         
         AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
             
