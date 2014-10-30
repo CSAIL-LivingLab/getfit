@@ -8,7 +8,9 @@
 
 #import "StatusViewController.h"
 #import "OpenSense.h"
-@interface StatusViewController ()
+@interface StatusViewController (){
+    NSUserDefaults *defaults;
+}
 
 @end
 
@@ -26,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    defaults = [NSUserDefaults standardUserDefaults];
     // Subscribe to batch saved notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(batchesUpdated:) name:kOpenSenseBatchSavedNotification object:nil];
     
@@ -67,7 +69,7 @@
 
 - (IBAction)toggleCollecting:(id)sender
 {
-    if ([OpenSense sharedInstance].isRunning)
+    if ([defaults boolForKey:@"OSCollecting"]) // turn off
     {
         [[OpenSense sharedInstance] stopCollector];
         [self.runningView setHidden:YES];
@@ -80,15 +82,14 @@
         // Reset entries count
         entriesCount = 0;
     }
-    else
+    else // turn on
     {
-        if ([[OpenSense sharedInstance] startCollector]) {
-            [self.runningView setHidden:NO];
-            [self.pausedView setHidden:YES];
-            
-            // Start timer to update label
-            elapsedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
-        }
+        [[OpenSense sharedInstance] startCollector];
+        [self.runningView setHidden:NO];
+        [self.pausedView setHidden:YES];
+        
+        // Start timer to update label
+        elapsedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
     }
 }
 

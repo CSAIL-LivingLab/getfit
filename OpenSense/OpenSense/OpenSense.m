@@ -21,7 +21,9 @@
 #import "OSActivityManagerProbe.h"
 #import "OSMotionProbe.h"
 
-@implementation OpenSense
+@implementation OpenSense {
+    NSUserDefaults *defaults;
+}
 
 @synthesize isRunning;
 @synthesize startTime;
@@ -43,7 +45,7 @@
     if (self)
     {
         registrationInProgress = NO;
-        
+        defaults = [NSUserDefaults standardUserDefaults];
         NSError *error = nil;
         if (![STKeychain getPasswordForUsername:@"OpenSense" andServiceName:@"OpenSense" error:&error]) {
             [self registerDevice];
@@ -116,6 +118,7 @@
     // Update state information
     isRunning = YES;
     startTime = [NSDate date];
+    [defaults setBool:YES forKey:@"OSCollecting"];
     
     // Start all probes
     activeProbes = [[NSMutableArray alloc] init];
@@ -150,8 +153,10 @@
     {
         [probe stopProbe];
     }
-    activeProbes = nil;
     
+    // update state information
+    activeProbes = nil;
+    [defaults setBool:NO forKey:@"OSCollecting"];
     isRunning = NO;
     
     // Stop timers

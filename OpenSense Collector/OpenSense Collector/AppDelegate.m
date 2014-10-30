@@ -27,7 +27,7 @@
         [defaults setBool:NO  forKey:@"OSCollecting"];
         [defaults synchronize];
     }
-    [defaults boolForKey:@"OSCollecting"];
+//    [defaults boolForKey:@"OSCollecting"];
     
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
@@ -72,12 +72,12 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        if ([[OpenSense sharedInstance] isRunning]){
-            [defaults setBool:YES forKey:@"OSCollecting"];
-            [[OpenSense sharedInstance] stopCollector];
-        } else {
-            [defaults setBool:NO forKey:@"OSCollecting"];
-        }
+//        if ([[OpenSense sharedInstance] isRunning]){
+//            [defaults setBool:YES forKey:@"OSCollecting"];
+//            [[OpenSense sharedInstance] stopCollector];
+//        } else {
+//            [defaults setBool:NO forKey:@"OSCollecting"];
+//        }
         
         OSLog(@"\n\nRunning in the background!\n\n");
         
