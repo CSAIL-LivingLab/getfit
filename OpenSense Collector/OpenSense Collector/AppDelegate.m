@@ -34,6 +34,7 @@
     return YES;
 }
 
+
 - (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     OSLog(@"application performFetchWithCompletionHandler entered");
    
@@ -41,13 +42,15 @@
     if ([defaults boolForKey:@"OSCollecting"]) {
         
         [[OpenSense sharedInstance] startCollector];
-        [NSTimer scheduledTimerWithTimeInterval:15 target:[OpenSense sharedInstance] selector:@selector(stopCollectorAndUploadData) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:10 target:[OpenSense sharedInstance] selector:@selector(stopCollectorAndUploadData) userInfo:nil repeats:NO];
         
-        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        // have to make sure that the collector will also run in the background next time.
+        [defaults setBool:YES forKey:@"OSCollecting"];
+        
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
         NSDate *now = [NSDate date];
         localNotification.fireDate = now;
-        localNotification.alertBody = @"performFetchWithCompletionHandler called. startCollector called";
+        localNotification.alertBody = @"performFetchWithCompletionHandler called";
         localNotification.soundName = UILocalNotificationDefaultSoundName;
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     }
@@ -91,6 +94,7 @@
     OSLog(@"application did become active");
     if ([defaults boolForKey:@"OSCollecting"]){
         [[OpenSense sharedInstance] startCollector];
+        
     } else {
         [[OpenSense sharedInstance] stopCollector];
     }

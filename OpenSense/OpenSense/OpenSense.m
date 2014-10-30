@@ -228,12 +228,14 @@
 
 - (void) stopCollectorAndUploadData
 {
-    [self stopCollector];
+//    [self stopCollector];
     [self uploadData:nil];
 }
 
 - (void)uploadData:(id)sender
 {
+    OSLog(@"uploadData called");
+    
     // Fetch probe data, but if openSense is running, skip the currently used probe file to avoid conflicts. See Thesis p. 37
     BOOL * skipCurrent = [OpenSense sharedInstance].isRunning;
     [[OSLocalStorage sharedInstance] fetchBatchesForProbe:nil skipCurrent:skipCurrent parseJSON:NO success:^(NSArray *batches) {
