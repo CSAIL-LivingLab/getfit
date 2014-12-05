@@ -15,11 +15,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    #ifdef SHOW_ENCRYPTION_KEY
-        OSLog(@"Encryption key: %@", [[OpenSense sharedInstance] encryptionKey]);
-    #endif
-    
     // configure app on first launch
     defaults = [NSUserDefaults standardUserDefaults];
     if (![defaults boolForKey:@"OSHasLaunchedOnce"]) {

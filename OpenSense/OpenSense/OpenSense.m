@@ -168,11 +168,6 @@
     [[OSLocalStorage sharedInstance] fetchBatchesForProbe:probeIdentifier skipCurrent:NO parseJSON:YES success:success];
 }
 
-- (NSString*)encryptionKey
-{
-    return [STKeychain getPasswordForUsername:@"OpenSense" andServiceName:@"OpenSense" error:nil];
-}
-
 - (void) stopCollectorAndUploadData
 {
 //    [self stopCollector];

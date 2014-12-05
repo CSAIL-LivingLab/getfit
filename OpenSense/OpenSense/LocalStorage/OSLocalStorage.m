@@ -9,8 +9,6 @@
 #import "OSLocalStorage.h"
 #import "OpenSense.h"
 #import "OSConfiguration.h"
-
-// OpenSense isn't found unless
 #import "NSData+AESCrypt.h"
 
 @implementation OSLocalStorage
@@ -177,6 +175,7 @@
                     if ([line length] <= 0) { // Skip blank lines
                         continue;
                     }
+                    NSLog(@"%@", lines);
                     
                     NSData *data = [[NSData alloc] initWithBase64EncodedString:line];
                     
