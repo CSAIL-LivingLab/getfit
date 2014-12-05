@@ -9,6 +9,8 @@
 #import "OSLocalStorage.h"
 #import "OpenSense.h"
 #import "OSConfiguration.h"
+
+// OpenSense isn't found unless
 #import "NSData+AESCrypt.h"
 
 @implementation OSLocalStorage
@@ -176,17 +178,12 @@
                         continue;
                     }
                     
-                    // Create data object and decrypt it
-                    NSData *encryptedData = [[NSData alloc] initWithBase64EncodedString:line];
-                    NSData *decryptedData = [[NSData alloc] initWithBase64EncodedString:line];
-//                    NSData *decryptedData = [encryptedData AES256DecryptWithKey:[OpenSense sharedInstance].encryptionKey];
-                    OSLog(@"encrypted data: %@", encryptedData);
-                    OSLog(@"decrypted data: %@", decryptedData);
+                    NSData *data = [[NSData alloc] initWithBase64EncodedString:line];
                     
                     // Parse JSON if needed
                     if (parseJSON) {
                         NSError *error = nil;
-                        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:decryptedData options:kNilOptions error:&error];
+                        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                         
                         if (!json) {
                             OSLog(@"Could not parse %@ error: %@", file, [error localizedDescription]);
@@ -198,7 +195,7 @@
                         }
                     } else {
                         // Just add the NSData object to our final array
-                        [allBatches addObject:decryptedData];
+                        [allBatches addObject:data];
                     }
                 }
             }

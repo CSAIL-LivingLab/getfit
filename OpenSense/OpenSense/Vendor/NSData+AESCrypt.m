@@ -1,7 +1,7 @@
 //
 //  NSData+AESCrypt.m
 //
-//  AES Encrypt/Decrypt
+//  AES '/Decrypt
 //  Created by Jim Dovey and 'Jean'
 //  See http://iphonedevelopment.blogspot.com/2009/02/strong-encryption-for-cocoa-cocoa-touch.html
 //
