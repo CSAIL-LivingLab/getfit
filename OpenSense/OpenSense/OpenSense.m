@@ -63,42 +63,10 @@
     }
     registrationInProgress = YES;
     
-    // Make HTTP request to register the device
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[OSConfiguration currentConfig].baseUrl];
+    [STKeychain storeUsername:@"OpenSense" andPassword:@"1" forServiceName:@"OpenSense" updateExisting:NO error:nil];
+    registrationInProgress = NO;
     
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier], @"device_id",
-                            nil];
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"register" parameters:params];
-
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
-        OSLog(@"%@", request);
-        
-        // If a key was provided, store it in the keychain
-        if ([JSON objectForKey:@"key"]) {
-            
-            NSError *error = nil;
-            if (![STKeychain storeUsername:@"OpenSense" andPassword:[JSON objectForKey:@"key"] forServiceName:@"OpenSense" updateExisting:NO error:&error]) {
-                OSLog(@"Could not store encryption key: %@", [error localizedDescription]);
-            } else {            
-                OSLog(@"Device registered with key: %@", [JSON objectForKey:@"key"]);
-            }
-        }
-        OSLog(@"%@", JSON);
-        
-        registrationInProgress = NO;
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Could not register device" message:@"The device could not be registered, please try again later." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        OSLog(@"\n-----\njson: %@\n-------\n", JSON);
-        OSLog(@"%@", error);
-        
-        [alertView show];
-        
-        registrationInProgress = NO;
-    }];
-    [operation start];
+    OSLog(@"Device registered with key: 1");
 }
 
 - (BOOL)startCollector
@@ -283,8 +251,6 @@
             @"bearer_token": @"3f4851fd8a"
             
         };
-        
-//        OSLog(@"Parameters: %@", params);
         
         NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"upload" parameters:params];
 
