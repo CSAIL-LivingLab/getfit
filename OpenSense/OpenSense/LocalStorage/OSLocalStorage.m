@@ -53,7 +53,8 @@
     }
     
     // Encrypt data
-    NSData *encryptedJsonData = [jsonData AES256EncryptWithKey:[OpenSense sharedInstance].encryptionKey];
+//    NSData *encryptedJsonData = [jsonData AES256EncryptWithKey:[OpenSense sharedInstance].encryptionKey];
+    NSData *encryptedJsonData = jsonData;
     NSString *encryptedJsonDataStr = [encryptedJsonData base64Encoding];
     
     // Rotate probe data file ifneedbe
@@ -180,7 +181,10 @@
                     
                     // Create data object and decrypt it
                     NSData *encryptedData = [[NSData alloc] initWithBase64EncodedString:line];
-                    NSData *decryptedData = [encryptedData AES256DecryptWithKey:[OpenSense sharedInstance].encryptionKey];
+                    NSData *decryptedData = [[NSData alloc] initWithBase64EncodedString:line];
+//                    NSData *decryptedData = [encryptedData AES256DecryptWithKey:[OpenSense sharedInstance].encryptionKey];
+                    OSLog(@"encrypted data: %@", encryptedData);
+                    OSLog(@"decrypted data: %@", decryptedData);
                     
                     // Parse JSON if needed
                     if (parseJSON) {
