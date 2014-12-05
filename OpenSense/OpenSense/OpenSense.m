@@ -44,42 +44,16 @@
     
     if (self)
     {
-        registrationInProgress = NO;
         defaults = [NSUserDefaults standardUserDefaults];
-        NSError *error = nil;
-        if (![STKeychain getPasswordForUsername:@"OpenSense" andServiceName:@"OpenSense" error:&error]) {
-            [self registerDevice];
-        }
     }
     
     return self;
-}
-
-- (void)registerDevice
-{
-    // Make sure that registration can not be called multiple times at once
-    if (registrationInProgress) {
-        return;
-    }
-    registrationInProgress = YES;
-    
-    [STKeychain storeUsername:@"OpenSense" andPassword:@"1" forServiceName:@"OpenSense" updateExisting:NO error:nil];
-    registrationInProgress = NO;
-    
-    OSLog(@"Device registered with key: 1");
 }
 
 - (BOOL)startCollector
 {
     // Make sure that the collector process is not already running
     if (isRunning) {
-        return NO;
-    }
-    
-    // Make sure that the encryption key is available
-    NSError *error = nil;
-    if (![STKeychain getPasswordForUsername:@"OpenSense" andServiceName:@"OpenSense" error:&error]) {
-        [self registerDevice];
         return NO;
     }
     
