@@ -52,16 +52,13 @@
         return;
     }
     
-    // Encrypt data
-//    NSData *encryptedJsonData = [jsonData AES256EncryptWithKey:[OpenSense sharedInstance].encryptionKey];
-    NSData *encryptedJsonData = jsonData;
-    NSString *encryptedJsonDataStr = [encryptedJsonData base64Encoding];
+    NSString *jsonDataStr = [jsonData base64Encoding];
     
     // Rotate probe data file ifneedbe
     [self logrotate];
     
     // Append data to file    
-    [self appendToProbeDataFile:encryptedJsonDataStr];
+    [self appendToProbeDataFile:jsonDataStr];
     
     // Post "batch saved" notification
     [[NSNotificationCenter defaultCenter] postNotificationName:kOpenSenseBatchSavedNotification object:jsonDict];
