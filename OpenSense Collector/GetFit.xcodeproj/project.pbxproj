@@ -54,6 +54,21 @@
 		3DDED6EF167D098B006DE4F8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6ED167D098B006DE4F8 /* MainStoryboard.storyboard */; };
 		3DFE62551694DE4500145310 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DFE62541694DE4500145310 /* Icon.png */; };
 		3DFE62571694DE4800145310 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DFE62561694DE4800145310 /* Icon@2x.png */; };
+		941895E71A59EA5700B5BC15 /* chart_column.png in Resources */ = {isa = PBXBuildFile; fileRef = 941895E41A59EA5700B5BC15 /* chart_column.png */; };
+		941895E81A59EA5700B5BC15 /* chart_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 941895E51A59EA5700B5BC15 /* chart_line.png */; };
+		941895E91A59EA5700B5BC15 /* chart_pie.png in Resources */ = {isa = PBXBuildFile; fileRef = 941895E61A59EA5700B5BC15 /* chart_pie.png */; };
+		941895EC1A59EA6B00B5BC15 /* Resources.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895EB1A59EA6B00B5BC15 /* Resources.m */; };
+		941895F01A59EA9700B5BC15 /* PageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895EF1A59EA9700B5BC15 /* PageVC.m */; };
+		941895F71A59EACB00B5BC15 /* GraphVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895F41A59EACB00B5BC15 /* GraphVC.m */; };
+		941895F81A59EACB00B5BC15 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895F61A59EACB00B5BC15 /* GraphView.m */; };
+		941895FC1A59EAEA00B5BC15 /* ExerciseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895FB1A59EAEA00B5BC15 /* ExerciseVC.m */; };
+		941896021A59EB0200B5BC15 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895FF1A59EB0200B5BC15 /* AboutVC.m */; };
+		941896031A59EB0200B5BC15 /* AboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941896011A59EB0200B5BC15 /* AboutView.m */; };
+		941896071A59EB2300B5BC15 /* OAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941896061A59EB2300B5BC15 /* OAuthVC.m */; };
+		941896111A59EBAD00B5BC15 /* MinuteTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960A1A59EBAD00B5BC15 /* MinuteTVC.m */; };
+		941896121A59EBAD00B5BC15 /* ActivityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960C1A59EBAD00B5BC15 /* ActivityPickerView.m */; };
+		941896131A59EBAD00B5BC15 /* MinuteEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */; };
+		941896141A59EBAD00B5BC15 /* MinuteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 941896101A59EBAD00B5BC15 /* MinuteStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,8 +146,8 @@
 		3DDED6DF167D098B006DE4F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DDED6E1167D098B006DE4F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3DDED6E3167D098B006DE4F8 /* OpenSense Collector-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenSense Collector-Prefix.pch"; sourceTree = "<group>"; };
-		3DDED6E4167D098B006DE4F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3DDED6E5167D098B006DE4F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3DDED6E4167D098B006DE4F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "OpenSense Collector/AppDelegate.h"; sourceTree = "<group>"; };
+		3DDED6E5167D098B006DE4F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "OpenSense Collector/AppDelegate.m"; sourceTree = "<group>"; };
 		3DDED6E7167D098B006DE4F8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3DDED6E9167D098B006DE4F8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3DDED6EB167D098B006DE4F8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -140,6 +155,33 @@
 		3DDED704167D098B006DE4F8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3DFE62541694DE4500145310 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		3DFE62561694DE4800145310 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		941895E41A59EA5700B5BC15 /* chart_column.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chart_column.png; sourceTree = "<group>"; };
+		941895E51A59EA5700B5BC15 /* chart_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chart_line.png; sourceTree = "<group>"; };
+		941895E61A59EA5700B5BC15 /* chart_pie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chart_pie.png; sourceTree = "<group>"; };
+		941895EA1A59EA6B00B5BC15 /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resources.h; sourceTree = "<group>"; };
+		941895EB1A59EA6B00B5BC15 /* Resources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resources.m; sourceTree = "<group>"; };
+		941895EE1A59EA9700B5BC15 /* PageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageVC.h; sourceTree = "<group>"; };
+		941895EF1A59EA9700B5BC15 /* PageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageVC.m; sourceTree = "<group>"; };
+		941895F31A59EACB00B5BC15 /* GraphVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphVC.h; sourceTree = "<group>"; };
+		941895F41A59EACB00B5BC15 /* GraphVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphVC.m; sourceTree = "<group>"; };
+		941895F51A59EACB00B5BC15 /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		941895F61A59EACB00B5BC15 /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		941895FA1A59EAEA00B5BC15 /* ExerciseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExerciseVC.h; sourceTree = "<group>"; };
+		941895FB1A59EAEA00B5BC15 /* ExerciseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExerciseVC.m; sourceTree = "<group>"; };
+		941895FE1A59EB0200B5BC15 /* AboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
+		941895FF1A59EB0200B5BC15 /* AboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
+		941896001A59EB0200B5BC15 /* AboutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutView.h; sourceTree = "<group>"; };
+		941896011A59EB0200B5BC15 /* AboutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutView.m; sourceTree = "<group>"; };
+		941896051A59EB2300B5BC15 /* OAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthVC.h; sourceTree = "<group>"; };
+		941896061A59EB2300B5BC15 /* OAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthVC.m; sourceTree = "<group>"; };
+		941896091A59EBAD00B5BC15 /* MinuteTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteTVC.h; sourceTree = "<group>"; };
+		9418960A1A59EBAD00B5BC15 /* MinuteTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteTVC.m; sourceTree = "<group>"; };
+		9418960B1A59EBAD00B5BC15 /* ActivityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityPickerView.h; sourceTree = "<group>"; };
+		9418960C1A59EBAD00B5BC15 /* ActivityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityPickerView.m; sourceTree = "<group>"; };
+		9418960D1A59EBAD00B5BC15 /* MinuteEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteEntry.h; sourceTree = "<group>"; };
+		9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteEntry.m; sourceTree = "<group>"; };
+		9418960F1A59EBAD00B5BC15 /* MinuteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteStore.h; sourceTree = "<group>"; };
+		941896101A59EBAD00B5BC15 /* MinuteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +302,8 @@
 		3DDED6C6167D098B006DE4F8 = {
 			isa = PBXGroup;
 			children = (
+				941895E21A59E9C300B5BC15 /* External */,
+				941895E11A59E9A900B5BC15 /* GetFit */,
 				3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */,
 				3DDED6DB167D098B006DE4F8 /* OpenSense Collector */,
 				3DFE62561694DE4800145310 /* Icon@2x.png */,
@@ -303,8 +347,6 @@
 			children = (
 				3D8C708C1694A1B800619CDB /* Classes */,
 				3D8C707716948DF700619CDB /* Assets */,
-				3DDED6E4167D098B006DE4F8 /* AppDelegate.h */,
-				3DDED6E5167D098B006DE4F8 /* AppDelegate.m */,
 				3DDED6ED167D098B006DE4F8 /* MainStoryboard.storyboard */,
 				3DB21B08169740BC00F6B294 /* Vendor */,
 				3DDED6DC167D098B006DE4F8 /* Supporting Files */,
@@ -326,6 +368,105 @@
 				3DDCAA9D16B5EF630063DC29 /* Common.h */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		941895E11A59E9A900B5BC15 /* GetFit */ = {
+			isa = PBXGroup;
+			children = (
+				941895EA1A59EA6B00B5BC15 /* Resources.h */,
+				941895EB1A59EA6B00B5BC15 /* Resources.m */,
+				941895E31A59EA4600B5BC15 /* Charts */,
+				941895F11A59EAA100B5BC15 /* Page */,
+				941895F91A59EADF00B5BC15 /* Exercise */,
+				941895F21A59EABB00B5BC15 /* Graph */,
+				941895FD1A59EAF400B5BC15 /* About */,
+				941896041A59EB1600B5BC15 /* OAuth */,
+				941896081A59EB9D00B5BC15 /* Minute */,
+				3DDED6E4167D098B006DE4F8 /* AppDelegate.h */,
+				3DDED6E5167D098B006DE4F8 /* AppDelegate.m */,
+			);
+			name = GetFit;
+			sourceTree = "<group>";
+		};
+		941895E21A59E9C300B5BC15 /* External */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+		941895E31A59EA4600B5BC15 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				941895E41A59EA5700B5BC15 /* chart_column.png */,
+				941895E51A59EA5700B5BC15 /* chart_line.png */,
+				941895E61A59EA5700B5BC15 /* chart_pie.png */,
+			);
+			name = Charts;
+			sourceTree = "<group>";
+		};
+		941895F11A59EAA100B5BC15 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				941895EE1A59EA9700B5BC15 /* PageVC.h */,
+				941895EF1A59EA9700B5BC15 /* PageVC.m */,
+			);
+			name = Page;
+			sourceTree = "<group>";
+		};
+		941895F21A59EABB00B5BC15 /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				941895F31A59EACB00B5BC15 /* GraphVC.h */,
+				941895F41A59EACB00B5BC15 /* GraphVC.m */,
+				941895F51A59EACB00B5BC15 /* GraphView.h */,
+				941895F61A59EACB00B5BC15 /* GraphView.m */,
+			);
+			name = Graph;
+			sourceTree = "<group>";
+		};
+		941895F91A59EADF00B5BC15 /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				941895FA1A59EAEA00B5BC15 /* ExerciseVC.h */,
+				941895FB1A59EAEA00B5BC15 /* ExerciseVC.m */,
+			);
+			name = Exercise;
+			sourceTree = "<group>";
+		};
+		941895FD1A59EAF400B5BC15 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				941895FE1A59EB0200B5BC15 /* AboutVC.h */,
+				941895FF1A59EB0200B5BC15 /* AboutVC.m */,
+				941896001A59EB0200B5BC15 /* AboutView.h */,
+				941896011A59EB0200B5BC15 /* AboutView.m */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
+		941896041A59EB1600B5BC15 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				941896051A59EB2300B5BC15 /* OAuthVC.h */,
+				941896061A59EB2300B5BC15 /* OAuthVC.m */,
+			);
+			name = OAuth;
+			sourceTree = "<group>";
+		};
+		941896081A59EB9D00B5BC15 /* Minute */ = {
+			isa = PBXGroup;
+			children = (
+				941896091A59EBAD00B5BC15 /* MinuteTVC.h */,
+				9418960A1A59EBAD00B5BC15 /* MinuteTVC.m */,
+				9418960B1A59EBAD00B5BC15 /* ActivityPickerView.h */,
+				9418960C1A59EBAD00B5BC15 /* ActivityPickerView.m */,
+				9418960D1A59EBAD00B5BC15 /* MinuteEntry.h */,
+				9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */,
+				9418960F1A59EBAD00B5BC15 /* MinuteStore.h */,
+				941896101A59EBAD00B5BC15 /* MinuteStore.m */,
+			);
+			name = Minute;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,11 +557,13 @@
 				3DFE62571694DE4800145310 /* Icon@2x.png in Resources */,
 				3DB21AF516973F0F00F6B294 /* background-texture.png in Resources */,
 				3DB21AF616973F0F00F6B294 /* background-texture@2x.png in Resources */,
+				941895E91A59EA5700B5BC15 /* chart_pie.png in Resources */,
 				3DB21AF716973F0F00F6B294 /* probes.png in Resources */,
 				3DB21AF816973F0F00F6B294 /* probes@2x.png in Resources */,
 				3DB21AF916973F0F00F6B294 /* start_hover.png in Resources */,
 				3DB21AFA16973F0F00F6B294 /* start_hover@2x.png in Resources */,
 				3DB21AFB16973F0F00F6B294 /* start.png in Resources */,
+				941895E71A59EA5700B5BC15 /* chart_column.png in Resources */,
 				3DB21AFC16973F0F00F6B294 /* start@2x.png in Resources */,
 				3DB21AFD16973F0F00F6B294 /* statistics.png in Resources */,
 				3DB21AFE16973F0F00F6B294 /* statistics@2x.png in Resources */,
@@ -430,6 +573,7 @@
 				3DB21B0216973F0F00F6B294 /* stop_hover@2x.png in Resources */,
 				3DB21B0316973F0F00F6B294 /* stop.png in Resources */,
 				3DB21B0416973F0F00F6B294 /* stop@2x.png in Resources */,
+				941895E81A59EA5700B5BC15 /* chart_line.png in Resources */,
 				3D5AEA0516A4977A00741652 /* config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,13 +586,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DDED6E2167D098B006DE4F8 /* main.m in Sources */,
+				941896141A59EBAD00B5BC15 /* MinuteStore.m in Sources */,
+				941895F71A59EACB00B5BC15 /* GraphVC.m in Sources */,
+				941895EC1A59EA6B00B5BC15 /* Resources.m in Sources */,
+				941896071A59EB2300B5BC15 /* OAuthVC.m in Sources */,
 				3DDED6E6167D098B006DE4F8 /* AppDelegate.m in Sources */,
+				941896031A59EB0200B5BC15 /* AboutView.m in Sources */,
 				3D8C708F1694A1D500619CDB /* StatusViewController.m in Sources */,
+				941896121A59EBAD00B5BC15 /* ActivityPickerView.m in Sources */,
 				3D6788611694AC8300553E04 /* ProbesViewController.m in Sources */,
+				941895F81A59EACB00B5BC15 /* GraphView.m in Sources */,
+				941896111A59EBAD00B5BC15 /* MinuteTVC.m in Sources */,
 				3D4B3B20169729C300FFEA73 /* CollectedDataBatchViewController.m in Sources */,
+				941895FC1A59EAEA00B5BC15 /* ExerciseVC.m in Sources */,
 				3DB21B6016978F1E00F6B294 /* TabBarViewController.m in Sources */,
+				941896131A59EBAD00B5BC15 /* MinuteEntry.m in Sources */,
 				3D084273169DE60B0053F4C9 /* BatchCell.m in Sources */,
+				941896021A59EB0200B5BC15 /* AboutVC.m in Sources */,
 				3D084274169DE60B0053F4C9 /* BatchDataCell.m in Sources */,
+				941895F01A59EA9700B5BC15 /* PageVC.m in Sources */,
 				3DB69EF216B1C0B1009570F3 /* CollectedDataViewController.m in Sources */,
 				3DB69EF816B1C3A8009570F3 /* PositioningProbeDataViewController.m in Sources */,
 				3DB69EFB16B1C543009570F3 /* LoadingView.m in Sources */,
