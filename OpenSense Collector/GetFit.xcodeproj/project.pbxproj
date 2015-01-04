@@ -362,7 +362,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3DDED6CB167D098B006DE4F8 /* Build configuration list for PBXProject "OpenSense Collector" */;
+			buildConfigurationList = 3DDED6CB167D098B006DE4F8 /* Build configuration list for PBXProject "GetFit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -580,7 +580,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3DDED6CB167D098B006DE4F8 /* Build configuration list for PBXProject "OpenSense Collector" */ = {
+		3DDED6CB167D098B006DE4F8 /* Build configuration list for PBXProject "GetFit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3DDED713167D098B006DE4F8 /* Debug */,
