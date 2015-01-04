@@ -128,16 +128,15 @@
     if (_exercising) {
         [_startButton setTitle:@"Stop" forState:UIControlStateNormal];
          _startTime = [NSDate timeIntervalSinceReferenceDate];
-//        [[OpenSense sharedInstance] startCollector];
+        [[OpenSense sharedInstance] startCollector];
         
-//        NSLog(@"%@", [[OpenSense sharedInstance] availableProbes]);
         
         [self updateStopwatch];
     } else {
         [_startButton setTitle:@"Start" forState:UIControlStateNormal];
         
         [self saveMinuteEntry];
-//        [[OpenSense sharedInstance] stopCollector];
+        [[OpenSense sharedInstance] stopCollector];
 
         // clear the pickers
         [ _activityButton setTitle:@"-select activity-" forState:UIControlStateNormal];
