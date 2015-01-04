@@ -12,6 +12,8 @@
 #import "MinuteStore.h"
 #import "MinuteEntry.h"
 
+#import "OpenSense.h"
+
 
 @interface ExerciseVC ()
 
