@@ -198,7 +198,6 @@
 		3DDED6DC167D098B006DE4F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3DDED6DD167D098B006DE4F8 /* GetFit-Info.plist */,
 				3DDED6DE167D098B006DE4F8 /* InfoPlist.strings */,
 				3DFE62561694DE4800145310 /* Icon@2x.png */,
 				3DFE62541694DE4500145310 /* Icon.png */,
@@ -318,21 +317,21 @@
 			children = (
 				3DDED6E1167D098B006DE4F8 /* main.m */,
 				3DDED6E3167D098B006DE4F8 /* GetFit-Prefix.pch */,
+				3DDED6DD167D098B006DE4F8 /* GetFit-Info.plist */,
 				3DDCAA9D16B5EF630063DC29 /* Common.h */,
 				3DDED6E7167D098B006DE4F8 /* Default.png */,
 				3DDED6E9167D098B006DE4F8 /* Default@2x.png */,
 				3DDED6EB167D098B006DE4F8 /* Default-568h@2x.png */,
 			);
-			name = Common;
-			path = ../Common;
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3DDED6D0167D098B006DE4F8 /* OpenSense Collector */ = {
+		3DDED6D0167D098B006DE4F8 /* GetFit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3DDED715167D098B006DE4F8 /* Build configuration list for PBXNativeTarget "OpenSense Collector" */;
+			buildConfigurationList = 3DDED715167D098B006DE4F8 /* Build configuration list for PBXNativeTarget "GetFit" */;
 			buildPhases = (
 				3DDED6CD167D098B006DE4F8 /* Sources */,
 				3DDED6CE167D098B006DE4F8 /* Frameworks */,
@@ -342,9 +341,9 @@
 			);
 			dependencies = (
 			);
-			name = "GetFit";
-			productName = "GetFit";
-			productReference = 3DDED6D1167D098B006DE4F8 /* GetFit.app */;
+			name = GetFit;
+			productName = GetFit;
+			productReference = 3DDED6D1167D098B006DE4F8 /* OpenSense.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -379,7 +378,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				3DDED6D0167D098B006DE4F8 /* OpenSense Collector */,
+				3DDED6D0167D098B006DE4F8 /* GetFit */,
 			);
 		};
 /* End PBXProject section */
@@ -530,8 +529,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OpenSense Collector/GetFit-Prefix.pch";
-				INFOPLIST_FILE = "OpenSense Collector/GetFit-Info.plist";
+				GCC_PREFIX_HEADER = "Common/GetFit-Prefix.pch";
+				INFOPLIST_FILE = "Common/GetFit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
@@ -552,8 +551,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OpenSense Collector/GetFit-Prefix-Prefix.pch";
-				INFOPLIST_FILE = "OpenSense Collector/GetFit-Prefix-Info.plist";
+				GCC_PREFIX_HEADER = "Common/GetFit-Prefix-Prefix.pch";
+				INFOPLIST_FILE = "Common/GetFit-Prefix-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
@@ -579,7 +578,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3DDED715167D098B006DE4F8 /* Build configuration list for PBXNativeTarget "OpenSense Collector" */ = {
+		3DDED715167D098B006DE4F8 /* Build configuration list for PBXNativeTarget "GetFit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3DDED716167D098B006DE4F8 /* Debug */,
