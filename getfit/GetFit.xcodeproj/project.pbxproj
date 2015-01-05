@@ -19,7 +19,6 @@
 		3DDED6D6167D098B006DE4F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DDED6D5167D098B006DE4F8 /* UIKit.framework */; };
 		3DDED6D8167D098B006DE4F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DDED6D7167D098B006DE4F8 /* Foundation.framework */; };
 		3DDED6DA167D098B006DE4F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DDED6D9167D098B006DE4F8 /* CoreGraphics.framework */; };
-		3DDED6E0167D098B006DE4F8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6DE167D098B006DE4F8 /* InfoPlist.strings */; };
 		3DDED6E2167D098B006DE4F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDED6E1167D098B006DE4F8 /* main.m */; };
 		3DDED6E8167D098B006DE4F8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6E7167D098B006DE4F8 /* Default.png */; };
 		3DDED6EA167D098B006DE4F8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6E9167D098B006DE4F8 /* Default@2x.png */; };
@@ -81,7 +80,6 @@
 		3DDED6D7167D098B006DE4F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3DDED6D9167D098B006DE4F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3DDED6DD167D098B006DE4F8 /* GetFit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GetFit-Info.plist"; sourceTree = "<group>"; };
-		3DDED6DF167D098B006DE4F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DDED6E1167D098B006DE4F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3DDED6E3167D098B006DE4F8 /* GetFit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GetFit-Prefix.pch"; sourceTree = "<group>"; };
 		3DDED6E7167D098B006DE4F8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -198,9 +196,6 @@
 		3DDED6DC167D098B006DE4F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3DDED6DE167D098B006DE4F8 /* InfoPlist.strings */,
-				3DFE62561694DE4800145310 /* Icon@2x.png */,
-				3DFE62541694DE4500145310 /* Icon.png */,
 			);
 			name = "Supporting Files";
 			path = "OpenSense Collector";
@@ -319,6 +314,8 @@
 				3DDED6E3167D098B006DE4F8 /* GetFit-Prefix.pch */,
 				3DDED6DD167D098B006DE4F8 /* GetFit-Info.plist */,
 				3DDCAA9D16B5EF630063DC29 /* Common.h */,
+				3DFE62561694DE4800145310 /* Icon@2x.png */,
+				3DFE62541694DE4500145310 /* Icon.png */,
 				3DDED6E7167D098B006DE4F8 /* Default.png */,
 				3DDED6E9167D098B006DE4F8 /* Default@2x.png */,
 				3DDED6EB167D098B006DE4F8 /* Default-568h@2x.png */,
@@ -405,7 +402,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DDED6E0167D098B006DE4F8 /* InfoPlist.strings in Resources */,
 				3DDED6E8167D098B006DE4F8 /* Default.png in Resources */,
 				3DDED6EA167D098B006DE4F8 /* Default@2x.png in Resources */,
 				3DDED6EC167D098B006DE4F8 /* Default-568h@2x.png in Resources */,
@@ -447,14 +443,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3DDED6DE167D098B006DE4F8 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3DDED6DF167D098B006DE4F8 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		9416456D1A59F17300B9B2CD /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
