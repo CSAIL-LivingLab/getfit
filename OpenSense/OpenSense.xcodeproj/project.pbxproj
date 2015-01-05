@@ -121,7 +121,6 @@
 		3DDED6A2167D04CF006DE4F8 /* OpenSense-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenSense-Prefix.pch"; sourceTree = "<group>"; };
 		3DDED6A3167D04CF006DE4F8 /* OpenSense.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenSense.h; sourceTree = "<group>"; };
 		3DDED6A5167D04CF006DE4F8 /* OpenSense.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenSense.m; sourceTree = "<group>"; };
-		3DDED6AD167D04CF006DE4F8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3DDED6AF167D04CF006DE4F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		3DDED6B7167D04CF006DE4F8 /* OpenSenseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenSenseTests-Info.plist"; sourceTree = "<group>"; };
 		3DDED6B9167D04CF006DE4F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -222,7 +221,6 @@
 				3D7A747316B03D2F000B4A0D /* SystemConfiguration.framework */,
 				3D98CA8216AF4BE10009F3C4 /* Security.framework */,
 				3DDED69E167D04CF006DE4F8 /* Foundation.framework */,
-				3DDED6AD167D04CF006DE4F8 /* SenTestingKit.framework */,
 				3DDED6AF167D04CF006DE4F8 /* UIKit.framework */,
 				3DF797B01694BFD600E84594 /* CoreFoundation.framework */,
 			);
