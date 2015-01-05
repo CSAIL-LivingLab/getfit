@@ -80,10 +80,10 @@
 		3DDED6D5167D098B006DE4F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3DDED6D7167D098B006DE4F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3DDED6D9167D098B006DE4F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		3DDED6DD167D098B006DE4F8 /* OpenSense Collector-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OpenSense Collector-Info.plist"; sourceTree = "<group>"; };
+		3DDED6DD167D098B006DE4F8 /* GetFit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GetFit-Info.plist"; sourceTree = "<group>"; };
 		3DDED6DF167D098B006DE4F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DDED6E1167D098B006DE4F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3DDED6E3167D098B006DE4F8 /* OpenSense Collector-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenSense Collector-Prefix.pch"; sourceTree = "<group>"; };
+		3DDED6E3167D098B006DE4F8 /* GetFit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GetFit-Prefix.pch"; sourceTree = "<group>"; };
 		3DDED6E7167D098B006DE4F8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3DDED6E9167D098B006DE4F8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3DDED6EB167D098B006DE4F8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 		3DDED6DC167D098B006DE4F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3DDED6DD167D098B006DE4F8 /* OpenSense Collector-Info.plist */,
+				3DDED6DD167D098B006DE4F8 /* GetFit-Info.plist */,
 				3DDED6DE167D098B006DE4F8 /* InfoPlist.strings */,
 				3DFE62561694DE4800145310 /* Icon@2x.png */,
 				3DFE62541694DE4500145310 /* Icon.png */,
@@ -317,7 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				3DDED6E1167D098B006DE4F8 /* main.m */,
-				3DDED6E3167D098B006DE4F8 /* OpenSense Collector-Prefix.pch */,
+				3DDED6E3167D098B006DE4F8 /* GetFit-Prefix.pch */,
 				3DDCAA9D16B5EF630063DC29 /* Common.h */,
 				3DDED6E7167D098B006DE4F8 /* Default.png */,
 				3DDED6E9167D098B006DE4F8 /* Default@2x.png */,
@@ -530,8 +530,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OpenSense Collector/OpenSense Collector-Prefix.pch";
-				INFOPLIST_FILE = "OpenSense Collector/OpenSense Collector-Info.plist";
+				GCC_PREFIX_HEADER = "OpenSense Collector/GetFit-Prefix.pch";
+				INFOPLIST_FILE = "OpenSense Collector/GetFit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
@@ -552,8 +552,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OpenSense Collector/OpenSense Collector-Prefix.pch";
-				INFOPLIST_FILE = "OpenSense Collector/OpenSense Collector-Info.plist";
+				GCC_PREFIX_HEADER = "OpenSense Collector/GetFit-Prefix-Prefix.pch";
+				INFOPLIST_FILE = "OpenSense Collector/GetFit-Prefix-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
