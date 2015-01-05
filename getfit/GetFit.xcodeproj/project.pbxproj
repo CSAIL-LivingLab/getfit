@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3D35C2C61694C768000ADA14 /* libOpenSense.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D35C2C01694C720000ADA14 /* libOpenSense.a */; };
-		3D5AEA0516A4977A00741652 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 3D5AEA0416A4977A00741652 /* config.json */; };
 		3D7A747816B03D43000B4A0D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7A747716B03D43000B4A0D /* MobileCoreServices.framework */; };
 		3D7A747A16B03D50000B4A0D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7A747916B03D50000B4A0D /* SystemConfiguration.framework */; };
 		3D7FA2D616E5A0B1001ED0FA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7FA2D516E5A0B1001ED0FA /* libz.dylib */; };
@@ -22,7 +21,6 @@
 		3DDED6DA167D098B006DE4F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DDED6D9167D098B006DE4F8 /* CoreGraphics.framework */; };
 		3DDED6E0167D098B006DE4F8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6DE167D098B006DE4F8 /* InfoPlist.strings */; };
 		3DDED6E2167D098B006DE4F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDED6E1167D098B006DE4F8 /* main.m */; };
-		3DDED6E6167D098B006DE4F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDED6E5167D098B006DE4F8 /* AppDelegate.m */; };
 		3DDED6E8167D098B006DE4F8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6E7167D098B006DE4F8 /* Default.png */; };
 		3DDED6EA167D098B006DE4F8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6E9167D098B006DE4F8 /* Default@2x.png */; };
 		3DDED6EC167D098B006DE4F8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6EB167D098B006DE4F8 /* Default-568h@2x.png */; };
@@ -45,6 +43,8 @@
 		941896121A59EBAD00B5BC15 /* ActivityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960C1A59EBAD00B5BC15 /* ActivityPickerView.m */; };
 		941896131A59EBAD00B5BC15 /* MinuteEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */; };
 		941896141A59EBAD00B5BC15 /* MinuteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 941896101A59EBAD00B5BC15 /* MinuteStore.m */; };
+		94B01BE81A5AEF890079F8A1 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B01BE71A5AEF890079F8A1 /* config.json */; };
+		94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +66,6 @@
 
 /* Begin PBXFileReference section */
 		3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenSense.xcodeproj; path = ../OpenSense/OpenSense.xcodeproj; sourceTree = "<group>"; };
-		3D5AEA0416A4977A00741652 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = config.json; path = "OpenSense Collector/config.json"; sourceTree = "<group>"; };
 		3D7A747716B03D43000B4A0D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3D7A747916B03D50000B4A0D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3D7FA2D516E5A0B1001ED0FA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -76,7 +75,7 @@
 		3DB21B54169740D600F6B294 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "../../../../../../Downloads/CorePlot_1.1/Binaries/iOS/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		3DB21B5616975B1E00F6B294 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3DB69F0216B1D750009570F3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		3DDCAA9D16B5EF630063DC29 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		3DDCAA9D16B5EF630063DC29 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = ../Common.h; sourceTree = "<group>"; };
 		3DDED6D1167D098B006DE4F8 /* OpenSense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DDED6D5167D098B006DE4F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3DDED6D7167D098B006DE4F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -85,8 +84,6 @@
 		3DDED6DF167D098B006DE4F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DDED6E1167D098B006DE4F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3DDED6E3167D098B006DE4F8 /* OpenSense Collector-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenSense Collector-Prefix.pch"; sourceTree = "<group>"; };
-		3DDED6E4167D098B006DE4F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "OpenSense Collector/AppDelegate.h"; sourceTree = "<group>"; };
-		3DDED6E5167D098B006DE4F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = "OpenSense Collector/AppDelegate.m"; sourceTree = "<group>"; };
 		3DDED6E7167D098B006DE4F8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3DDED6E9167D098B006DE4F8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3DDED6EB167D098B006DE4F8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -123,6 +120,9 @@
 		9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteEntry.m; sourceTree = "<group>"; };
 		9418960F1A59EBAD00B5BC15 /* MinuteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteStore.h; sourceTree = "<group>"; };
 		941896101A59EBAD00B5BC15 /* MinuteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteStore.m; sourceTree = "<group>"; };
+		94B01BE71A5AEF890079F8A1 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		94B01BE91A5AEFD40079F8A1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,12 +216,13 @@
 		941895E11A59E9A900B5BC15 /* GetFit */ = {
 			isa = PBXGroup;
 			children = (
+				94B01BEC1A5AF0000079F8A1 /* Common2 */,
+				94B01BE91A5AEFD40079F8A1 /* AppDelegate.h */,
+				94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */,
 				9416456D1A59F17300B9B2CD /* MainStoryboard.storyboard */,
-				3D5AEA0416A4977A00741652 /* config.json */,
+				94B01BE71A5AEF890079F8A1 /* config.json */,
 				941645611A59F01F00B9B2CD /* ViewController.h */,
 				941645621A59F01F00B9B2CD /* ViewController.m */,
-				3DDED6E4167D098B006DE4F8 /* AppDelegate.h */,
-				3DDED6E5167D098B006DE4F8 /* AppDelegate.m */,
 				941895EA1A59EA6B00B5BC15 /* Resources.h */,
 				941895EB1A59EA6B00B5BC15 /* Resources.m */,
 				941895E31A59EA4600B5BC15 /* Charts */,
@@ -318,6 +319,13 @@
 			name = Minute;
 			sourceTree = "<group>";
 		};
+		94B01BEC1A5AF0000079F8A1 /* Common2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Common2;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -402,12 +410,12 @@
 				3DDED6EA167D098B006DE4F8 /* Default@2x.png in Resources */,
 				3DDED6EC167D098B006DE4F8 /* Default-568h@2x.png in Resources */,
 				3DFE62551694DE4500145310 /* Icon.png in Resources */,
+				94B01BE81A5AEF890079F8A1 /* config.json in Resources */,
 				3DFE62571694DE4800145310 /* Icon@2x.png in Resources */,
 				9416456B1A59F17300B9B2CD /* MainStoryboard.storyboard in Resources */,
 				941895E91A59EA5700B5BC15 /* chart_pie.png in Resources */,
 				941895E71A59EA5700B5BC15 /* chart_column.png in Resources */,
 				941895E81A59EA5700B5BC15 /* chart_line.png in Resources */,
-				3D5AEA0516A4977A00741652 /* config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,7 +431,6 @@
 				941895F71A59EACB00B5BC15 /* GraphVC.m in Sources */,
 				941895EC1A59EA6B00B5BC15 /* Resources.m in Sources */,
 				941896071A59EB2300B5BC15 /* OAuthVC.m in Sources */,
-				3DDED6E6167D098B006DE4F8 /* AppDelegate.m in Sources */,
 				941896031A59EB0200B5BC15 /* AboutView.m in Sources */,
 				941896121A59EBAD00B5BC15 /* ActivityPickerView.m in Sources */,
 				941895F81A59EACB00B5BC15 /* GraphView.m in Sources */,
@@ -433,6 +440,7 @@
 				941896021A59EB0200B5BC15 /* AboutVC.m in Sources */,
 				941645631A59F01F00B9B2CD /* ViewController.m in Sources */,
 				941895F01A59EA9700B5BC15 /* PageVC.m in Sources */,
+				94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
