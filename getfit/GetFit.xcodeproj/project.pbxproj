@@ -54,7 +54,7 @@
 			remoteGlobalIDString = 3DDED69B167D04CF006DE4F8;
 			remoteInfo = OpenSense;
 		};
-		3D35C2C11694C720000ADA14 /* PBXContainerItemProxy */ = {
+		94BA09591A5AF9C000DBBB2F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */;
 			proxyType = 2;
@@ -75,7 +75,7 @@
 		3DB21B5616975B1E00F6B294 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3DB69F0216B1D750009570F3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		3DDCAA9D16B5EF630063DC29 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = ../Common/Common.h; sourceTree = "<group>"; };
-		3DDED6D1167D098B006DE4F8 /* OpenSense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = OpenSense.app; path = GetFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DDED6D1167D098B006DE4F8 /* GetFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DDED6D5167D098B006DE4F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3DDED6D7167D098B006DE4F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3DDED6D9167D098B006DE4F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -150,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				3D35C2C01694C720000ADA14 /* libOpenSense.a */,
-				3D35C2C21694C720000ADA14 /* OpenSenseTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,7 +158,6 @@
 			isa = PBXGroup;
 			children = (
 				3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */,
-				941895E21A59E9C300B5BC15 /* External */,
 				941895E11A59E9A900B5BC15 /* GetFit */,
 				3DDED6D2167D098B006DE4F8 /* Products */,
 			);
@@ -168,7 +166,7 @@
 		3DDED6D2167D098B006DE4F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3DDED6D1167D098B006DE4F8 /* OpenSense.app */,
+				3DDED6D1167D098B006DE4F8 /* GetFit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,13 +213,6 @@
 				3DDED6D4167D098B006DE4F8 /* Frameworks */,
 			);
 			name = GetFit;
-			sourceTree = "<group>";
-		};
-		941895E21A59E9C300B5BC15 /* External */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = External;
 			sourceTree = "<group>";
 		};
 		941895E31A59EA4600B5BC15 /* Charts */ = {
@@ -331,7 +322,7 @@
 			);
 			name = GetFit;
 			productName = GetFit;
-			productReference = 3DDED6D1167D098B006DE4F8 /* OpenSense.app */;
+			productReference = 3DDED6D1167D098B006DE4F8 /* GetFit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -377,13 +368,6 @@
 			fileType = archive.ar;
 			path = libOpenSense.a;
 			remoteRef = 3D35C2BF1694C720000ADA14 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3D35C2C21694C720000ADA14 /* OpenSenseTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OpenSenseTests.octest;
-			remoteRef = 3D35C2C11694C720000ADA14 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
