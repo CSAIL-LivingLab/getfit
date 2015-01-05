@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D084273169DE60B0053F4C9 /* BatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D08426F169DE60B0053F4C9 /* BatchCell.m */; };
-		3D084274169DE60B0053F4C9 /* BatchDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D084271169DE60B0053F4C9 /* BatchDataCell.m */; };
 		3D35C2C61694C768000ADA14 /* libOpenSense.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D35C2C01694C720000ADA14 /* libOpenSense.a */; };
 		3D5AEA0516A4977A00741652 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 3D5AEA0416A4977A00741652 /* config.json */; };
 		3D7A747816B03D43000B4A0D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D7A747716B03D43000B4A0D /* MobileCoreServices.framework */; };
@@ -18,7 +16,6 @@
 		3DA2596216B0837C00190683 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA2596116B0837C00190683 /* MapKit.framework */; };
 		3DA2596416B0879F00190683 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA2596316B0879F00190683 /* CoreLocation.framework */; };
 		3DB21B5716975B1E00F6B294 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB21B5616975B1E00F6B294 /* QuartzCore.framework */; };
-		3DB69EFB16B1C543009570F3 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB69EFA16B1C543009570F3 /* LoadingView.m */; };
 		3DB69F0316B1D750009570F3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB69F0216B1D750009570F3 /* CoreMotion.framework */; };
 		3DDED6D6167D098B006DE4F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DDED6D5167D098B006DE4F8 /* UIKit.framework */; };
 		3DDED6D8167D098B006DE4F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DDED6D7167D098B006DE4F8 /* Foundation.framework */; };
@@ -68,23 +65,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3D08426E169DE60B0053F4C9 /* BatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatchCell.h; sourceTree = "<group>"; };
-		3D08426F169DE60B0053F4C9 /* BatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatchCell.m; sourceTree = "<group>"; };
-		3D084270169DE60B0053F4C9 /* BatchDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatchDataCell.h; sourceTree = "<group>"; };
-		3D084271169DE60B0053F4C9 /* BatchDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatchDataCell.m; sourceTree = "<group>"; };
 		3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OpenSense.xcodeproj; path = ../OpenSense/OpenSense.xcodeproj; sourceTree = "<group>"; };
 		3D5AEA0416A4977A00741652 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = config.json; path = "OpenSense Collector/config.json"; sourceTree = "<group>"; };
 		3D7A747716B03D43000B4A0D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3D7A747916B03D50000B4A0D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3D7FA2D216E5A090001ED0FA /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		3D7FA2D516E5A0B1001ED0FA /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3D98CA8416AF4C230009F3C4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3DA2596116B0837C00190683 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3DA2596316B0879F00190683 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3DB21B54169740D600F6B294 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "../../../../../../Downloads/CorePlot_1.1/Binaries/iOS/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		3DB21B5616975B1E00F6B294 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		3DB69EF916B1C543009570F3 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
-		3DB69EFA16B1C543009570F3 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
 		3DB69F0216B1D750009570F3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		3DDCAA9D16B5EF630063DC29 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		3DDED6D1167D098B006DE4F8 /* OpenSense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSense.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,8 +91,8 @@
 		3DDED6E9167D098B006DE4F8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3DDED6EB167D098B006DE4F8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3DDED704167D098B006DE4F8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		3DFE62541694DE4500145310 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		3DFE62561694DE4800145310 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		3DFE62541694DE4500145310 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		3DFE62561694DE4800145310 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		941645611A59F01F00B9B2CD /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		941645621A59F01F00B9B2CD /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9416456C1A59F17300B9B2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -158,28 +148,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3D08426A169DE60B0053F4C9 /* Probes */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Probes;
-			path = Classes/Probes;
-			sourceTree = "<group>";
-		};
-		3D08426D169DE60B0053F4C9 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				3D08426E169DE60B0053F4C9 /* BatchCell.h */,
-				3D08426F169DE60B0053F4C9 /* BatchCell.m */,
-				3D084270169DE60B0053F4C9 /* BatchDataCell.h */,
-				3D084271169DE60B0053F4C9 /* BatchDataCell.m */,
-				3DB69EF916B1C543009570F3 /* LoadingView.h */,
-				3DB69EFA16B1C543009570F3 /* LoadingView.m */,
-			);
-			name = Views;
-			path = Classes/Views;
-			sourceTree = "<group>";
-		};
 		3D35C2B71694C720000ADA14 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,32 +157,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3D8C707716948DF700619CDB /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Assets;
-			sourceTree = "<group>";
-		};
-		3D8C708C1694A1B800619CDB /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				3D08426A169DE60B0053F4C9 /* Probes */,
-				3D08426D169DE60B0053F4C9 /* Views */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
 		3DDED6C6167D098B006DE4F8 = {
 			isa = PBXGroup;
 			children = (
 				3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */,
 				941895E21A59E9C300B5BC15 /* External */,
 				941895E11A59E9A900B5BC15 /* GetFit */,
-				3DDED6DB167D098B006DE4F8 /* OpenSense Collector */,
-				3DFE62561694DE4800145310 /* Icon@2x.png */,
-				3DFE62541694DE4500145310 /* Icon.png */,
-				3DDED6D4167D098B006DE4F8 /* Frameworks */,
 				3DDED6D2167D098B006DE4F8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -231,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				3D7FA2D516E5A0B1001ED0FA /* libz.dylib */,
-				3D7FA2D216E5A090001ED0FA /* libTestFlight.a */,
 				3DB69F0216B1D750009570F3 /* CoreMotion.framework */,
 				3DA2596316B0879F00190683 /* CoreLocation.framework */,
 				3DA2596116B0837C00190683 /* MapKit.framework */,
@@ -248,16 +195,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3DDED6DB167D098B006DE4F8 /* OpenSense Collector */ = {
-			isa = PBXGroup;
-			children = (
-				3D8C708C1694A1B800619CDB /* Classes */,
-				3D8C707716948DF700619CDB /* Assets */,
-				3DDED6DC167D098B006DE4F8 /* Supporting Files */,
-			);
-			path = "OpenSense Collector";
-			sourceTree = "<group>";
-		};
 		3DDED6DC167D098B006DE4F8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,21 +206,24 @@
 				3DDED6E9167D098B006DE4F8 /* Default@2x.png */,
 				3DDED6EB167D098B006DE4F8 /* Default-568h@2x.png */,
 				3DDCAA9D16B5EF630063DC29 /* Common.h */,
+				3DFE62561694DE4800145310 /* Icon@2x.png */,
+				3DFE62541694DE4500145310 /* Icon.png */,
 			);
 			name = "Supporting Files";
+			path = "OpenSense Collector";
 			sourceTree = "<group>";
 		};
 		941895E11A59E9A900B5BC15 /* GetFit */ = {
 			isa = PBXGroup;
 			children = (
 				9416456D1A59F17300B9B2CD /* MainStoryboard.storyboard */,
+				3D5AEA0416A4977A00741652 /* config.json */,
 				941645611A59F01F00B9B2CD /* ViewController.h */,
 				941645621A59F01F00B9B2CD /* ViewController.m */,
 				3DDED6E4167D098B006DE4F8 /* AppDelegate.h */,
 				3DDED6E5167D098B006DE4F8 /* AppDelegate.m */,
 				941895EA1A59EA6B00B5BC15 /* Resources.h */,
 				941895EB1A59EA6B00B5BC15 /* Resources.m */,
-				3D5AEA0416A4977A00741652 /* config.json */,
 				941895E31A59EA4600B5BC15 /* Charts */,
 				941895F11A59EAA100B5BC15 /* Page */,
 				941895F91A59EADF00B5BC15 /* Exercise */,
@@ -291,6 +231,8 @@
 				941895FD1A59EAF400B5BC15 /* About */,
 				941896041A59EB1600B5BC15 /* OAuth */,
 				941896081A59EB9D00B5BC15 /* Minute */,
+				3DDED6DC167D098B006DE4F8 /* Supporting Files */,
+				3DDED6D4167D098B006DE4F8 /* Frameworks */,
 			);
 			name = GetFit;
 			sourceTree = "<group>";
@@ -488,12 +430,9 @@
 				941896111A59EBAD00B5BC15 /* MinuteTVC.m in Sources */,
 				941895FC1A59EAEA00B5BC15 /* ExerciseVC.m in Sources */,
 				941896131A59EBAD00B5BC15 /* MinuteEntry.m in Sources */,
-				3D084273169DE60B0053F4C9 /* BatchCell.m in Sources */,
 				941896021A59EB0200B5BC15 /* AboutVC.m in Sources */,
 				941645631A59F01F00B9B2CD /* ViewController.m in Sources */,
-				3D084274169DE60B0053F4C9 /* BatchDataCell.m in Sources */,
 				941895F01A59EA9700B5BC15 /* PageVC.m in Sources */,
-				3DB69EFB16B1C543009570F3 /* LoadingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,7 +481,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -566,7 +505,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
