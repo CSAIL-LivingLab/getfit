@@ -27,8 +27,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qO2-bm-ks2">
-                                <rect key="frame" x="0.0" y="172" width="194" height="30"/>
-                                <state key="normal" title="-> Grant Access to al_carter">
+                                <rect key="frame" x="0.0" y="172" width="174" height="30"/>
+                                <state key="normal" title="Grant Access to al_carter">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -36,8 +36,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lls-B8-WbC">
-                                <rect key="frame" x="0.0" y="134" width="113" height="30"/>
-                                <state key="normal" title="-> Create Tables">
+                                <rect key="frame" x="0.0" y="134" width="149" height="30"/>
+                                <state key="normal" title="Create Repo &amp; Tables">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -45,8 +45,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rZx-Oy-jjc">
-                                <rect key="frame" x="0.0" y="210" width="104" height="30"/>
-                                <state key="normal" title="-> Delete Repo">
+                                <rect key="frame" x="0.0" y="210" width="85" height="30"/>
+                                <state key="normal" title="Delete Repo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -63,8 +63,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VY0-kC-GeL">
-                                <rect key="frame" x="0.0" y="248" width="118" height="30"/>
-                                <state key="normal" title="-> Log into Getfit">
+                                <rect key="frame" x="0.0" y="248" width="98" height="30"/>
+                                <state key="normal" title="Log into Getfit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
