@@ -344,7 +344,7 @@
 			);
 			name = "GetFit";
 			productName = "GetFit";
-			productReference = 3DDED6D1167D098B006DE4F8 /* OpenSense.app */;
+			productReference = 3DDED6D1167D098B006DE4F8 /* GetFit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
