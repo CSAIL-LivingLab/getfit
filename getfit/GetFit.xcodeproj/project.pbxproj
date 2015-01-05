@@ -54,13 +54,6 @@
 			remoteGlobalIDString = 3DDED69B167D04CF006DE4F8;
 			remoteInfo = OpenSense;
 		};
-		94BA09591A5AF9C000DBBB2F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3DDED6AC167D04CF006DE4F8;
-			remoteInfo = OpenSenseTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
