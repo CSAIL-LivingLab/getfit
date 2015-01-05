@@ -18,8 +18,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="756" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPV-SB-DIb">
-                                <rect key="frame" x="0.0" y="96" width="124" height="30"/>
-                                <state key="normal" title="-> Select from DB">
+                                <rect key="frame" x="0.0" y="96" width="104" height="30"/>
+                                <state key="normal" title="Select from DB">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -84,8 +84,8 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1H-au-aEh">
-                                <rect key="frame" x="0.0" y="58" width="108" height="30"/>
-                                <state key="normal" title="--> Create User">
+                                <rect key="frame" x="0.0" y="58" width="225" height="30"/>
+                                <state key="normal" title="--> Create User (needs token, id)">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

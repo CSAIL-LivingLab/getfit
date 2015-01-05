@@ -42,114 +42,73 @@
                                  initWithTransport:transport
                                  strictRead:YES
                                  strictWrite:YES];
-    
-
-    
-    
-//     url = [NSURL URLWithString:@"http://datahub.csail.mit.edu/service"]; // chose you server
-//    
-//    // Talk to a server via HTTP, using a binary protocol
-//    transport = [[THTTPClient alloc] initWithURL:url];
-//    
-//    protocol = [[TBinaryProtocol alloc]
-//        initWithTransport:transport
-//        strictRead:YES
-//        strictWrite:YES];
-
-    
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
- /*
 - (IBAction)dbCreateUser:(id)sender {
-//    datahub_accountAccountServiceClient *client = [[datahub_accountAccountServiceClient alloc] initWithProtocol:protocol];
-//    
-//    // create
-//    [client create_account:@"ACCOUNT_NAME" email:@"ACCOUNT_EMAIL" password:@"ACCOUNT PASSWORD" app_id:@"APP_ID" app_token:@"APP_TOKEN"];
-//    
-//    // delete
-//    [client remove_account:@"ACCOUNT_NAME" app_id:@"APP_ID" app_token:@"APP_TOKEN"];
+    datahub_accountAccountServiceClient *accountClient = [[datahub_accountAccountServiceClient alloc] initWithProtocol:protocol];
     
+    // create
+    [accountClient create_account:@"ACCOUNT_NAME" email:@"ACCOUNT_EMAIL" password:@"ACCOUNT PASSWORD" app_id:@"APP_ID" app_token:@"APP_TOKEN"];
     
+    // delete
+    [accountClient remove_account:@"ACCOUNT_NAME" app_id:@"APP_ID" app_token:@"APP_TOKEN"];
 }
-  */
 
 - (IBAction)dbConnect:(id)sender {
     @try {
         client = [[datahubDataHubClient alloc] initWithProtocol:protocol];
         conparams = [[datahubConnectionParams alloc] initWithClient_id:@"foo" seq_id:nil user:@"anantb" password:@"anant" repo_base:nil];
         connection = [client open_connection:conparams];
+        
+        if (connection == nil) {
+            [NSException raise:@"No connection detected" format:nil];
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Success"
+                                                        message:@"Established a connection to datahub"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
     } @catch (NSException *exception) {
-        NSLog(@"Connect/Query Exception: %@", exception);
+        NSLog(@"Connect Exception: %@", exception);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Error"
+                                                        message:@"A connection could not be established"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+          [alert show];
     }
-    connection ? NSLog(@"connected successfully"):nil;
-    
 }
     
-    
-    
-    
-    
-//    @try {
-//
-//        url = [NSURL URLWithString:@"http://datahub.csail.mit.edu/service"]; // chose you server
-//
-//        // Talk to a server via HTTP, using a binary protocol
-////        transport = [[THTTPClient alloc] initWithURL:url];
-////        
-////        protocol = [[TBinaryProtocol alloc]
-////                    initWithTransport:transport
-////                    strictRead:YES
-////                    strictWrite:YES];
-////        
-////        client = [[datahubDataHubClient alloc] initWithProtocol:protocol];
-////        
-////        datahubConnectionParams *conparams = [[datahubConnectionParams alloc] initWithClient_id:@"foo" seq_id:nil user:@"anantb" password:@"anant" repo_base:nil];
-////        
-////        connection = [client open_connection:conparams];
-//        
-//        
-//        
-//    }
-//    @catch (NSException *exception) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Error"
-//                                                      message:@"A connection could not be established"
-//                                                     delegate:nil
-//                                            cancelButtonTitle:@"OK"
-//                                            otherButtonTitles:nil];
-//        [alert show];
-//        
-//        NSLog(@"Connection Exception: %@", exception);
-//    }
-//    
-    //
-//    @try {
-//        datahubDataHubClient *server = [[datahubDataHubClient alloc] initWithProtocol:protocol];
-//        datahubConnectionParams *conparams = [[datahubConnectionParams alloc] initWithClient_id:@"foo" seq_id:nil user:@"anantb" password:@"anant" repo_base:nil];
-//        dhConnection = [server open_connection:conparams];
-//    }
-//    @catch (NSException *exception) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Error"
-//                                                        message:@"A connection could not be established"
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"OK"
-//                                              otherButtonTitles:nil];
-//        [alert show];
-//
-//    }
-    
 
-/*
+
 - (IBAction)dbSelect:(id)sender {
-    datahubResultSet *results =  [client execute_sql:connection query:@"select * from test.demo" query_params:nil];
-    
-    NSLog(@"%@", results);
+    @try {
+        if (connection == nil) {
+            [NSException raise:@"No connection detected" format:nil];
+        }
+        
+        datahubResultSet *results =  [client execute_sql:connection query:@"select * from test.demo" query_params:nil];
+        NSLog(@"%@", results);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Query Success"
+                                                        message:@"Check the log for details."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Query Exception: %@", exception);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Query Error"
+                                                        message:@"Maybe you forgot to establish a connection?\n\nCheck the log for details."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (IBAction)dbCreate:(id)sender {
@@ -191,7 +150,6 @@
     
  
 }
- */
 
 
 @end
