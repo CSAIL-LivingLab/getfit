@@ -342,8 +342,8 @@
 			);
 			dependencies = (
 			);
-			name = "OpenSense Collector";
-			productName = "OpenSense Collector";
+			name = "GetFit";
+			productName = "GetFit";
 			productReference = 3DDED6D1167D098B006DE4F8 /* OpenSense.app */;
 			productType = "com.apple.product-type.application";
 		};
