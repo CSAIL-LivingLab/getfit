@@ -75,7 +75,7 @@
 		3DB21B5616975B1E00F6B294 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3DB69F0216B1D750009570F3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		3DDCAA9D16B5EF630063DC29 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = ../Common/Common.h; sourceTree = "<group>"; };
-		3DDED6D1167D098B006DE4F8 /* OpenSense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSense.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DDED6D1167D098B006DE4F8 /* OpenSense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = OpenSense.app; path = GetFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DDED6D5167D098B006DE4F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3DDED6D7167D098B006DE4F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3DDED6D9167D098B006DE4F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -193,14 +193,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3DDED6DC167D098B006DE4F8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Supporting Files";
-			path = "OpenSense Collector";
-			sourceTree = "<group>";
-		};
 		941895E11A59E9A900B5BC15 /* GetFit */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,7 +212,6 @@
 				941895FD1A59EAF400B5BC15 /* About */,
 				941896041A59EB1600B5BC15 /* OAuth */,
 				941896081A59EB9D00B5BC15 /* Minute */,
-				3DDED6DC167D098B006DE4F8 /* Supporting Files */,
 				3DDED6D4167D098B006DE4F8 /* Frameworks */,
 			);
 			name = GetFit;
@@ -525,7 +516,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_NAME = OpenSense;
+				PRODUCT_NAME = GetFit;
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}/../OpenSense/\"/**";
 				WRAPPER_EXTENSION = app;
