@@ -200,7 +200,6 @@
 			children = (
 				3DDED6DD167D098B006DE4F8 /* OpenSense Collector-Info.plist */,
 				3DDED6DE167D098B006DE4F8 /* InfoPlist.strings */,
-				3DDED6E3167D098B006DE4F8 /* OpenSense Collector-Prefix.pch */,
 				3DFE62561694DE4800145310 /* Icon@2x.png */,
 				3DFE62541694DE4500145310 /* Icon.png */,
 			);
@@ -318,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				3DDED6E1167D098B006DE4F8 /* main.m */,
+				3DDED6E3167D098B006DE4F8 /* OpenSense Collector-Prefix.pch */,
 				3DDCAA9D16B5EF630063DC29 /* Common.h */,
 				3DDED6E7167D098B006DE4F8 /* Default.png */,
 				3DDED6E9167D098B006DE4F8 /* Default@2x.png */,
