@@ -120,6 +120,9 @@
         [minuteStore addMinuteEntry:me];
     }
     
+    [minuteStore postToDataHub];
+    [minuteStore postToGetFit];
+    
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"Minutes Saved" message:@"" delegate:nil
                           cancelButtonTitle:@"ok"

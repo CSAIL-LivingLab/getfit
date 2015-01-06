@@ -12,15 +12,19 @@
 
 @end
 
-@implementation OAuthVC
-UIWebView *webView;
-NSString *urlStr;
+@implementation OAuthVC {
+    UIWebView *webView;
+    NSString *urlStr;
+    NSString *email;
+    NSString *token;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // make a bar button
     [self makeDoneButton];
+    [self makeScrapeButton];
     
     // prep the url
     [self prepUrl];
@@ -38,6 +42,12 @@ NSString *urlStr;
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                     style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
     self.navigationItem.rightBarButtonItem = rightButton;
+}
+
+- (void) makeScrapeButton {
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Scrape"
+                                                                   style:UIBarButtonSystemItemAction target:self action:@selector(scrape)];
+    self.navigationItem.leftBarButtonItem = leftButton;
 }
 
 - (void) setupWebView {
@@ -60,6 +70,34 @@ NSString *urlStr;
 }
 
 // extract email address
+// extract tokens
+
+- (void) scrape {
+    NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
+    
+    if ([url rangeOfString:@"profile"].location != NSNotFound) {
+        [self extractEmail];
+    } else if ([url rangeOfString:@"dashboard"].location != NSNotFound) {
+        [self extractTokens];
+    }
+    
+}
+
+- (void) extractEmail {
+    NSLog(@"extract Email hit");
+    
+    NSString * jsCallBack = [NSString stringWithFormat:@"document.getElementById(\"edit-mail\").value"];
+    email = [webView stringByEvaluatingJavaScriptFromString:jsCallBack];
+    
+    NSLog(@"%@", email);
+    
+    
+}
+
+- (void) extractTokens {
+    NSLog(@"extract tokens hit");
+}
+
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];

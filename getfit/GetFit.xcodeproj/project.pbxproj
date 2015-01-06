@@ -221,12 +221,12 @@
 		3DDED6C6167D098B006DE4F8 = {
 			isa = PBXGroup;
 			children = (
-				94AAABD11A5B21E7005E92D6 /* CFNetwork.framework */,
-				94AAAB881A5B2188005E92D6 /* gen-cocoa */,
-				94AAAB8D1A5B2188005E92D6 /* thrift */,
 				3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */,
 				941895E11A59E9A900B5BC15 /* GetFit */,
+				94AAAB881A5B2188005E92D6 /* gen-cocoa */,
+				94AAAB8D1A5B2188005E92D6 /* thrift */,
 				3DDED6D2167D098B006DE4F8 /* Products */,
+				94AAABD11A5B21E7005E92D6 /* CFNetwork.framework */,
 			);
 			sourceTree = "<group>";
 		};

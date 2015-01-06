@@ -93,9 +93,9 @@
     _startButton.layer.cornerRadius = _startButton.bounds.size.width/2;
     [_startButton.layer setBorderColor:[[UIColor redColor] CGColor]];
     [_startButton.layer setBackgroundColor:[redStuff CGColor]];
-    [_startButton addTarget:self action:@selector(startRecording) forControlEvents:UIControlEventTouchUpInside];
-    _startButton.alpha = 0.4;
-     _startButton.userInteractionEnabled = NO;
+    [_startButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
+//    _startButton.alpha = 0.4;
+//     _startButton.userInteractionEnabled = NO;
     [self.view addSubview:_startButton];
     
     // make stopwatch
@@ -107,7 +107,11 @@
     [self.view addSubview:_stopwatch];
     
     
-    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+
+
 }
 
 
@@ -121,7 +125,7 @@
 
 #pragma mark - buttons
 
-- (void) startRecording {
+- (void) toggleRecording {
     [self dismissPickers];
     _exercising = !_exercising;
     
@@ -135,8 +139,8 @@
     } else {
         [_startButton setTitle:@"Start" forState:UIControlStateNormal];
         
-        [self saveMinuteEntry];
         [[OpenSense sharedInstance] stopCollector];
+        [self saveMinuteEntry];
 
         // clear the pickers
         [ _activityButton setTitle:@"-select activity-" forState:UIControlStateNormal];
@@ -213,6 +217,7 @@
     // add to the MinuteStore
     MinuteStore *ms = [MinuteStore sharedStore];
     [ms addMinuteEntry:_minuteEntry];
+    [ms postToDataHub];
 }
 
 
