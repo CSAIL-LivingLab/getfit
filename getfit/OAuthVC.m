@@ -80,7 +80,7 @@
     } else if ([url rangeOfString:@"dashboard"].location != NSNotFound) {
         [self extractTokens];
     }
-    
+
 }
 
 - (void) extractEmail {
@@ -88,7 +88,6 @@
     
     NSString * jsCallBack = [NSString stringWithFormat:@"document.getElementById(\"edit-mail\").value"];
     email = [webView stringByEvaluatingJavaScriptFromString:jsCallBack];
-    
     NSLog(@"%@", email);
     
     
@@ -96,12 +95,23 @@
 
 - (void) extractTokens {
     NSLog(@"extract tokens hit");
+    
+    NSString * jsCallBack = [webView stringByEvaluatingJavaScriptFromString:@"var index; var arr = document.getElementsByName('form_id'); for (var i = 0; i < arr.length; i++) {    if ('getfit_minutes_single_form_2' == arr[i].value) {        index = i;    };} var form_token = document.getElementsByName('form_token')[index].value; var form_build_id = document.getElementsByName('form_build_id')[index].value; var form_id = 'getfit_minutes_single_form_2'; function foo() { return form_token+','+form_build_id+','+form_id; } foo();"];
+    NSString *indexStr = [webView stringByEvaluatingJavaScriptFromString:jsCallBack];
+    
+    NSLog(@"%@", indexStr);
+
+
+    
+    
+    
+    
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
-    NSLog(@"%@", url);
+//    [self scrape];
     // hide window
     // extract email address
     // close window
