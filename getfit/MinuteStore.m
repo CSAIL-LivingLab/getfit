@@ -113,7 +113,53 @@
 }
 
 - (void) postToGetFit {
-    NSLog(@"post to GetFit not yet implemented");
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-DD"];
+    
+    for (int i=0; i< [_privateMinutes count]; i++) {
+        MinuteEntry *me = [_privateMinutes objectAtIndex:i];
+        
+        
+        NSString *endDate = [dateFormatter stringFromDate:me.endTime];
+        NSString *duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
+        
+        // get the form info
+        NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+        NSString *form_token = [defaults objectForKey:@"form_token"];
+        NSString *form_build_id = [defaults objectForKey:@"form_build_id"];
+        NSString *form_id = [defaults objectForKey:@"form_id"];
+        
+        // format the data
+        NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, me.activity, me.intensity, endDate, duration];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+        
+        // format the request and send
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/system/ajax"]];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Current-Type"];
+        [request setHTTPBody:postData];
+        NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+        
+        if(conn) {
+            NSLog(@"Connection Successful");
+        } else {
+            NSLog(@"Connection could not be made");
+        }
+
+    }
+    
+    [_privateMinutes removeAllObjects];
+}
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData*)data {
+    NSLog(@"connection didReceiveData");
+}
+
+- (void) connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"connection did finish loading");
 }
 
 

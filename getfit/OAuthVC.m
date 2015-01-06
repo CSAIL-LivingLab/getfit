@@ -7,6 +7,7 @@
 //
 
 #import "OAuthVC.h"
+#import "MinuteStore.h"
 
 @interface OAuthVC ()
 
@@ -64,6 +65,12 @@
     NSString * jsCallBack = [NSString stringWithFormat:@"document.getElementById(\"edit-mail\").value"];
     email = [myWebView stringByEvaluatingJavaScriptFromString:jsCallBack];
     [defaults setObject:email forKey:@"email"];
+    
+    // to be handled elsewhere eventually.
+    MinuteStore *ms = [MinuteStore sharedStore];
+    [ms postToGetFit];
+    
+    [self dismiss];
 }
 
 - (void) extractTokens {

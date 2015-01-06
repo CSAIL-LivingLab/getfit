@@ -8,6 +8,8 @@
 
 #import "ExerciseVC.h"
 #import "Resources.h"
+#import "OAuthVC.h"
+
 
 #import "MinuteStore.h"
 #import "MinuteEntry.h"
@@ -41,6 +43,8 @@
     CGRect windowFrame = self.view.frame;
     CGFloat buttonWidth = 150;
     UIColor *systemBlue = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
+    UIColor *systemBackground = [UIColor lightGrayColor];
+    
     _minuteEntry = [[MinuteEntry alloc] init];
     
     // make pickers
@@ -69,6 +73,7 @@
     _activityButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     _activityButton.layer.borderWidth = 2.0;
     [_activityButton.layer setBorderColor:[systemBlue CGColor]];
+    [_activityButton.layer setBackgroundColor:[systemBackground CGColor]];
     [_activityButton addTarget:self action:@selector(editAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_activityButton];
     
@@ -80,7 +85,8 @@
     _intensityButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     _intensityButton.layer.borderWidth = 2.0;
     [_intensityButton addTarget:self action:@selector(editIntensity) forControlEvents:UIControlEventTouchUpInside];
-    [ _intensityButton.layer setBorderColor:[systemBlue CGColor]];
+    [_intensityButton.layer setBorderColor:[systemBlue CGColor]];
+    [_intensityButton.layer setBackgroundColor:[systemBackground CGColor]];
     [self.view addSubview: _intensityButton];
     
     
@@ -94,7 +100,7 @@
     [_startButton.layer setBorderColor:[[UIColor redColor] CGColor]];
     [_startButton.layer setBackgroundColor:[redStuff CGColor]];
     [_startButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
-//    _startButton.alpha = 0.4;
+    _startButton.alpha = 0.4;
 //     _startButton.userInteractionEnabled = NO;
     [self.view addSubview:_startButton];
     
@@ -217,7 +223,16 @@
     // add to the MinuteStore
     MinuteStore *ms = [MinuteStore sharedStore];
     [ms addMinuteEntry:_minuteEntry];
-    [ms postToDataHub];
+//    [ms postToDataHub];
+
+    
+//     stop gap: load the OAuthVC and have the user log in
+    OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:navController animated:YES completion:nil];
+    // postToGetFit should be called after the user fills in their info. Right now, oAuthVC is calling it.
+//    [ms postToGetFit];
 }
 
 

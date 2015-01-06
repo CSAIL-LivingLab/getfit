@@ -9,6 +9,7 @@
 // YOU'RE ADDING Activity Pickers the new rows.
 
 #import "MinuteTVC.h"
+#import "OAuthVC.h"
 
 #import "MinuteStore.h"
 #import "MinuteEntry.h"
@@ -121,13 +122,24 @@
     }
     
     [minuteStore postToDataHub];
-    [minuteStore postToGetFit];
+    //    [minuteStore postToGetFit];
+    
     
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"Minutes Saved" message:@"" delegate:nil
                           cancelButtonTitle:@"ok"
                           otherButtonTitles:nil];
     [alert show];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
+    OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:navController animated:YES completion:nil];
+    
+
+    
 }
 
 - (void) newMinuteEntryForTable {
