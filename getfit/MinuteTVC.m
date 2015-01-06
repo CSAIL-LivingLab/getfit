@@ -225,8 +225,11 @@
             minuteEntry.duration = [self minutesFromString:selection];
             break;
         default:
-            [NSException raise:@"out of bounds"
-                        format:@"Your picker index.row is >= 4. Use [self datePickerChanged]"];
+            // sometimes is called when the datePicker is toggled before another picker has set its value.
+            [self datePickerChanged:nil];
+            return nil;
+//            [NSException raise:@"out of bounds"
+//                        format:@"Your picker index.row is >= 4. Use [self datePickerChanged]"];
     }
     
     // assign the selection to the cell
