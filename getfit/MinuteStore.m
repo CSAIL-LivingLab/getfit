@@ -118,6 +118,8 @@
     
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
+        me.activity = @"snuggling";
+        me.intensity = @"HIGH";
         
         
         NSString *endDate = [dateFormatter stringFromDate:me.endTime];
@@ -134,13 +136,16 @@
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
         
-        // format the request and send
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/system/ajax"]];
+        // create request and send
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/system/ajax"]];
         [request setHTTPMethod:@"POST"];
         [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Current-Type"];
         [request setHTTPBody:postData];
         NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+        
+        
+        NSLog(@"%@", [request allHTTPHeaderFields]);
         
         if(conn) {
             NSLog(@"Connection Successful");

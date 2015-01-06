@@ -20,7 +20,7 @@
 @property (weak, nonatomic) NSString *activity;
 @property (weak, nonatomic) NSString *intensity;
 @property NSInteger duration;
-@property (weak, nonatomic) NSDate *endTime;
+@property (strong, nonatomic) NSDate *endTime;
 
 
 
