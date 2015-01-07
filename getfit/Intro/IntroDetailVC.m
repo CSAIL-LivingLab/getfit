@@ -57,7 +57,7 @@
         NSString *password = [defaults objectForKey:@"password"];
         
         // setup for DH accountClient
-        NSURL *url = [NSURL URLWithString:@"https://datahub.csail.mit.edu/service"];
+        NSURL *url = [NSURL URLWithString:@"https://datahub.csail.mit.edu/service/account"];
         THTTPClient *transport = [[THTTPClient alloc] initWithURL:url];
         TBinaryProtocol *protocol = [[TBinaryProtocol alloc]
                                      initWithTransport:transport
@@ -68,6 +68,7 @@
         [accountClient create_account:username email:email password:password app_id:appID app_token:appToken];
     }
     @catch (NSException *exception) {
+        NSLog(@"%@", exception);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"There was an error" message:@"please check your network connection" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
         [alert show];
     }
