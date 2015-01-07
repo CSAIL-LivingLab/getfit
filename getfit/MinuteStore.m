@@ -106,11 +106,11 @@
                                  strictRead:YES
                                  strictWrite:YES];
     datahubDataHubClient * client = [[datahubDataHubClient alloc] initWithProtocol:protocol];
-    datahubConnectionParams *conparams = [[datahubConnectionParams alloc] initWithClient_id:@"foo" seq_id:nil user:secret.DHSuperUser password:secret.DHSuperUserPassword repo_base:nil];
-    datahubConnection *connection = [client open_connection:conparams];
-    datahubResultSet *result =  [client execute_sql:connection query:statement query_params:nil];
+//    datahubConnectionParams *conparams = [[datahubConnectionParams alloc] initWithClient_id:@"foo" seq_id:nil user:seret.DHSuperUser password:secret.DHSuperUserPassword app_id:secret.DHAppID app_token:secret.DHAppToken repo_base:@"getfit"];
+//    datahubConnection *connection = [client open_connection:conparams];
+//    datahubResultSet *result =  [client execute_sql:connection query:statement query_params:nil];
 
-    NSLog(@"%@", result);
+//    NSLog(@"%@", result);
     
     [_privateMinutes removeAllObjects];
 }

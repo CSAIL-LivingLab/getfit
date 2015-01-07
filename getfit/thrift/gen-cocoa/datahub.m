@@ -28,7 +28,7 @@
   return self;
 }
 
-- (id) initWithClient_id: (NSString *) client_id seq_id: (NSString *) seq_id user: (NSString *) user password: (NSString *) password repo_base: (NSString *) repo_base
+- (id) initWithClient_id: (NSString *) client_id seq_id: (NSString *) seq_id user: (NSString *) user password: (NSString *) password app_id: (NSString *) app_id app_token: (NSString *) app_token repo_base: (NSString *) repo_base
 {
   self = [super init];
   __client_id = [client_id retain_stub];
@@ -39,6 +39,10 @@
   __user_isset = YES;
   __password = [password retain_stub];
   __password_isset = YES;
+  __app_id = [app_id retain_stub];
+  __app_id_isset = YES;
+  __app_token = [app_token retain_stub];
+  __app_token_isset = YES;
   __repo_base = [repo_base retain_stub];
   __repo_base_isset = YES;
   return self;
@@ -67,6 +71,16 @@
     __password = [[decoder decodeObjectForKey: @"password"] retain_stub];
     __password_isset = YES;
   }
+  if ([decoder containsValueForKey: @"app_id"])
+  {
+    __app_id = [[decoder decodeObjectForKey: @"app_id"] retain_stub];
+    __app_id_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"app_token"])
+  {
+    __app_token = [[decoder decodeObjectForKey: @"app_token"] retain_stub];
+    __app_token_isset = YES;
+  }
   if ([decoder containsValueForKey: @"repo_base"])
   {
     __repo_base = [[decoder decodeObjectForKey: @"repo_base"] retain_stub];
@@ -93,6 +107,14 @@
   {
     [encoder encodeObject: __password forKey: @"password"];
   }
+  if (__app_id_isset)
+  {
+    [encoder encodeObject: __app_id forKey: @"app_id"];
+  }
+  if (__app_token_isset)
+  {
+    [encoder encodeObject: __app_token forKey: @"app_token"];
+  }
   if (__repo_base_isset)
   {
     [encoder encodeObject: __repo_base forKey: @"repo_base"];
@@ -105,6 +127,8 @@
   [__seq_id release_stub];
   [__user release_stub];
   [__password release_stub];
+  [__app_id release_stub];
+  [__app_token release_stub];
   [__repo_base release_stub];
   [super dealloc_stub];
 }
@@ -193,6 +217,48 @@
   __password_isset = NO;
 }
 
+- (NSString *) app_id {
+  return [[__app_id retain_stub] autorelease_stub];
+}
+
+- (void) setApp_id: (NSString *) app_id {
+  [app_id retain_stub];
+  [__app_id release_stub];
+  __app_id = app_id;
+  __app_id_isset = YES;
+}
+
+- (BOOL) app_idIsSet {
+  return __app_id_isset;
+}
+
+- (void) unsetApp_id {
+  [__app_id release_stub];
+  __app_id = nil;
+  __app_id_isset = NO;
+}
+
+- (NSString *) app_token {
+  return [[__app_token retain_stub] autorelease_stub];
+}
+
+- (void) setApp_token: (NSString *) app_token {
+  [app_token retain_stub];
+  [__app_token release_stub];
+  __app_token = app_token;
+  __app_token_isset = YES;
+}
+
+- (BOOL) app_tokenIsSet {
+  return __app_token_isset;
+}
+
+- (void) unsetApp_token {
+  [__app_token release_stub];
+  __app_token = nil;
+  __app_token_isset = NO;
+}
+
 - (NSString *) repo_base {
   return [[__repo_base retain_stub] autorelease_stub];
 }
@@ -264,6 +330,22 @@
       case 5:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
+          [self setApp_id: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 6:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
+          [self setApp_token: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 7:
+        if (fieldType == TType_STRING) {
+          NSString * fieldValue = [inProtocol readString];
           [self setRepo_base: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
@@ -308,9 +390,23 @@
       [outProtocol writeFieldEnd];
     }
   }
+  if (__app_id_isset) {
+    if (__app_id != nil) {
+      [outProtocol writeFieldBeginWithName: @"app_id" type: TType_STRING fieldID: 5];
+      [outProtocol writeString: __app_id];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (__app_token_isset) {
+    if (__app_token != nil) {
+      [outProtocol writeFieldBeginWithName: @"app_token" type: TType_STRING fieldID: 6];
+      [outProtocol writeString: __app_token];
+      [outProtocol writeFieldEnd];
+    }
+  }
   if (__repo_base_isset) {
     if (__repo_base != nil) {
-      [outProtocol writeFieldBeginWithName: @"repo_base" type: TType_STRING fieldID: 5];
+      [outProtocol writeFieldBeginWithName: @"repo_base" type: TType_STRING fieldID: 7];
       [outProtocol writeString: __repo_base];
       [outProtocol writeFieldEnd];
     }
@@ -333,6 +429,10 @@
   [ms appendFormat: @"\"%@\"", __user];
   [ms appendString: @",password:"];
   [ms appendFormat: @"\"%@\"", __password];
+  [ms appendString: @",app_id:"];
+  [ms appendFormat: @"\"%@\"", __app_id];
+  [ms appendString: @",app_token:"];
+  [ms appendFormat: @"\"%@\"", __app_token];
   [ms appendString: @",repo_base:"];
   [ms appendFormat: @"\"%@\"", __repo_base];
   [ms appendString: @")"];
@@ -351,7 +451,7 @@
   return self;
 }
 
-- (id) initWithClient_id: (NSString *) client_id seq_id: (NSString *) seq_id user: (NSString *) user repo_base: (NSString *) repo_base cursor: (int64_t) cursor
+- (id) initWithClient_id: (NSString *) client_id seq_id: (NSString *) seq_id user: (NSString *) user is_app: (BOOL) is_app repo_base: (NSString *) repo_base cursor: (int64_t) cursor
 {
   self = [super init];
   __client_id = [client_id retain_stub];
@@ -360,6 +460,8 @@
   __seq_id_isset = YES;
   __user = [user retain_stub];
   __user_isset = YES;
+  __is_app = is_app;
+  __is_app_isset = YES;
   __repo_base = [repo_base retain_stub];
   __repo_base_isset = YES;
   __cursor = cursor;
@@ -384,6 +486,11 @@
   {
     __user = [[decoder decodeObjectForKey: @"user"] retain_stub];
     __user_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"is_app"])
+  {
+    __is_app = [decoder decodeBoolForKey: @"is_app"];
+    __is_app_isset = YES;
   }
   if ([decoder containsValueForKey: @"repo_base"])
   {
@@ -411,6 +518,10 @@
   if (__user_isset)
   {
     [encoder encodeObject: __user forKey: @"user"];
+  }
+  if (__is_app_isset)
+  {
+    [encoder encodeBool: __is_app forKey: @"is_app"];
   }
   if (__repo_base_isset)
   {
@@ -494,6 +605,23 @@
   __user_isset = NO;
 }
 
+- (BOOL) is_app {
+  return __is_app;
+}
+
+- (void) setIs_app: (BOOL) is_app {
+  __is_app = is_app;
+  __is_app_isset = YES;
+}
+
+- (BOOL) is_appIsSet {
+  return __is_app_isset;
+}
+
+- (void) unsetIs_app {
+  __is_app_isset = NO;
+}
+
 - (NSString *) repo_base {
   return [[__repo_base retain_stub] autorelease_stub];
 }
@@ -572,6 +700,14 @@
         }
         break;
       case 4:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self setIs_app: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 5:
         if (fieldType == TType_STRING) {
           NSString * fieldValue = [inProtocol readString];
           [self setRepo_base: fieldValue];
@@ -579,7 +715,7 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
-      case 5:
+      case 6:
         if (fieldType == TType_I64) {
           int64_t fieldValue = [inProtocol readI64];
           [self setCursor: fieldValue];
@@ -619,15 +755,20 @@
       [outProtocol writeFieldEnd];
     }
   }
+  if (__is_app_isset) {
+    [outProtocol writeFieldBeginWithName: @"is_app" type: TType_BOOL fieldID: 4];
+    [outProtocol writeBool: __is_app];
+    [outProtocol writeFieldEnd];
+  }
   if (__repo_base_isset) {
     if (__repo_base != nil) {
-      [outProtocol writeFieldBeginWithName: @"repo_base" type: TType_STRING fieldID: 4];
+      [outProtocol writeFieldBeginWithName: @"repo_base" type: TType_STRING fieldID: 5];
       [outProtocol writeString: __repo_base];
       [outProtocol writeFieldEnd];
     }
   }
   if (__cursor_isset) {
-    [outProtocol writeFieldBeginWithName: @"cursor" type: TType_I64 fieldID: 5];
+    [outProtocol writeFieldBeginWithName: @"cursor" type: TType_I64 fieldID: 6];
     [outProtocol writeI64: __cursor];
     [outProtocol writeFieldEnd];
   }
@@ -647,6 +788,8 @@
   [ms appendFormat: @"\"%@\"", __seq_id];
   [ms appendString: @",user:"];
   [ms appendFormat: @"\"%@\"", __user];
+  [ms appendString: @",is_app:"];
+  [ms appendFormat: @"%i", __is_app];
   [ms appendString: @",repo_base:"];
   [ms appendFormat: @"\"%@\"", __repo_base];
   [ms appendString: @",cursor:"];

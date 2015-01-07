@@ -45,12 +45,16 @@ enum datahubPrivilegeType {
   NSString * __seq_id;
   NSString * __user;
   NSString * __password;
+  NSString * __app_id;
+  NSString * __app_token;
   NSString * __repo_base;
 
   BOOL __client_id_isset;
   BOOL __seq_id_isset;
   BOOL __user_isset;
   BOOL __password_isset;
+  BOOL __app_id_isset;
+  BOOL __app_token_isset;
   BOOL __repo_base_isset;
 }
 
@@ -59,11 +63,13 @@ enum datahubPrivilegeType {
 @property (nonatomic, retain, getter=seq_id, setter=setSeq_id:) NSString * seq_id;
 @property (nonatomic, retain, getter=user, setter=setUser:) NSString * user;
 @property (nonatomic, retain, getter=password, setter=setPassword:) NSString * password;
+@property (nonatomic, retain, getter=app_id, setter=setApp_id:) NSString * app_id;
+@property (nonatomic, retain, getter=app_token, setter=setApp_token:) NSString * app_token;
 @property (nonatomic, retain, getter=repo_base, setter=setRepo_base:) NSString * repo_base;
 #endif
 
 - (id) init;
-- (id) initWithClient_id: (NSString *) client_id seq_id: (NSString *) seq_id user: (NSString *) user password: (NSString *) password repo_base: (NSString *) repo_base;
+- (id) initWithClient_id: (NSString *) client_id seq_id: (NSString *) seq_id user: (NSString *) user password: (NSString *) password app_id: (NSString *) app_id app_token: (NSString *) app_token repo_base: (NSString *) repo_base;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -95,6 +101,18 @@ enum datahubPrivilegeType {
 - (BOOL) passwordIsSet;
 
 #if !__has_feature(objc_arc)
+- (NSString *) app_id;
+- (void) setApp_id: (NSString *) app_id;
+#endif
+- (BOOL) app_idIsSet;
+
+#if !__has_feature(objc_arc)
+- (NSString *) app_token;
+- (void) setApp_token: (NSString *) app_token;
+#endif
+- (BOOL) app_tokenIsSet;
+
+#if !__has_feature(objc_arc)
 - (NSString *) repo_base;
 - (void) setRepo_base: (NSString *) repo_base;
 #endif
@@ -106,12 +124,14 @@ enum datahubPrivilegeType {
   NSString * __client_id;
   NSString * __seq_id;
   NSString * __user;
+  BOOL __is_app;
   NSString * __repo_base;
   int64_t __cursor;
 
   BOOL __client_id_isset;
   BOOL __seq_id_isset;
   BOOL __user_isset;
+  BOOL __is_app_isset;
   BOOL __repo_base_isset;
   BOOL __cursor_isset;
 }
@@ -120,12 +140,13 @@ enum datahubPrivilegeType {
 @property (nonatomic, retain, getter=client_id, setter=setClient_id:) NSString * client_id;
 @property (nonatomic, retain, getter=seq_id, setter=setSeq_id:) NSString * seq_id;
 @property (nonatomic, retain, getter=user, setter=setUser:) NSString * user;
+@property (nonatomic, getter=is_app, setter=setIs_app:) BOOL is_app;
 @property (nonatomic, retain, getter=repo_base, setter=setRepo_base:) NSString * repo_base;
 @property (nonatomic, getter=cursor, setter=setCursor:) int64_t cursor;
 #endif
 
 - (id) init;
-- (id) initWithClient_id: (NSString *) client_id seq_id: (NSString *) seq_id user: (NSString *) user repo_base: (NSString *) repo_base cursor: (int64_t) cursor;
+- (id) initWithClient_id: (NSString *) client_id seq_id: (NSString *) seq_id user: (NSString *) user is_app: (BOOL) is_app repo_base: (NSString *) repo_base cursor: (int64_t) cursor;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -149,6 +170,12 @@ enum datahubPrivilegeType {
 - (void) setUser: (NSString *) user;
 #endif
 - (BOOL) userIsSet;
+
+#if !__has_feature(objc_arc)
+- (BOOL) is_app;
+- (void) setIs_app: (BOOL) is_app;
+#endif
+- (BOOL) is_appIsSet;
 
 #if !__has_feature(objc_arc)
 - (NSString *) repo_base;

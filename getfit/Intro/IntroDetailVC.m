@@ -43,7 +43,6 @@
     @try {
         Secret *secret = [Secret sharedSecret];
         NSString * appID = [secret DHAppID];
-//        NSString * appName = [secret DHAppName];
         NSString * appToken = [secret DHAppToken];
         
         // username and password
@@ -64,8 +63,8 @@
                                      strictRead:YES
                                      strictWrite:YES];
         datahub_accountAccountServiceClient *accountClient = [[datahub_accountAccountServiceClient alloc] initWithProtocol:protocol];
-        
-        [accountClient create_account:username email:email password:password app_id:appID app_token:appToken];
+        [accountClient create_account:username email:email password:password repo_name:@"getfit" app_id:appID app_token:appToken];
+
     }
     @catch (NSException *exception) {
         NSLog(@"%@", exception);
