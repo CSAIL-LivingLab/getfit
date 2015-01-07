@@ -78,7 +78,6 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:nameTextField.text forKey:@"name"];
     [defaults setObject:emailTextField.text forKey:@"email"];
-
 }
 
 #pragma mark - keyboard hiding/showing

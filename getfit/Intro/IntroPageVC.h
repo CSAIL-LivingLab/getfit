@@ -10,4 +10,6 @@
 
 @interface IntroPageVC : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
+- (void) foo;
+
 @end

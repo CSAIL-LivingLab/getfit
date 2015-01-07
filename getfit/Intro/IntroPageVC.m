@@ -57,6 +57,11 @@
     }
 }
 
+- (void) foo{
+    NSLog(@"foo");
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UIPageViewController Page Count
 
 - (NSInteger) presentationCountForPageViewController:(UIPageViewController *)pageViewController {

@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    url = [NSURL URLWithString:@"http://datahub.csail.mit.edu/service"]; // chose you server
+    url = [NSURL URLWithString:@"https://datahub.csail.mit.edu/service"]; // chose you server
     
     // Talk to a server via HTTP, using a binary protocol
     transport = [[THTTPClient alloc] initWithURL:url];
