@@ -43,6 +43,11 @@
 		941896131A59EBAD00B5BC15 /* MinuteEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */; };
 		941896141A59EBAD00B5BC15 /* MinuteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 941896101A59EBAD00B5BC15 /* MinuteStore.m */; };
 		9431EE811A5C9BC000B7EC36 /* Secret.m in Sources */ = {isa = PBXBuildFile; fileRef = 9431EE801A5C9BC000B7EC36 /* Secret.m */; };
+		9431EE8B1A5CC4F000B7EC36 /* IntroPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9431EE8A1A5CC4F000B7EC36 /* IntroPageVC.m */; };
+		9431EE8F1A5CC52900B7EC36 /* IntroAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9431EE8D1A5CC52900B7EC36 /* IntroAboutVC.m */; };
+		9431EE901A5CC52900B7EC36 /* IntroAboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9431EE8E1A5CC52900B7EC36 /* IntroAboutVC.xib */; };
+		9431EE941A5CC54900B7EC36 /* IntroDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9431EE921A5CC54900B7EC36 /* IntroDetailVC.m */; };
+		9431EE951A5CC54900B7EC36 /* IntroDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9431EE931A5CC54900B7EC36 /* IntroDetailVC.xib */; };
 		94AAABBD1A5B2188005E92D6 /* account.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AAAB8A1A5B2188005E92D6 /* account.m */; };
 		94AAABBE1A5B2188005E92D6 /* datahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AAAB8C1A5B2188005E92D6 /* datahub.m */; };
 		94AAABBF1A5B2188005E92D6 /* TBinaryProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AAAB911A5B2188005E92D6 /* TBinaryProtocol.m */; };
@@ -135,6 +140,14 @@
 		941896101A59EBAD00B5BC15 /* MinuteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteStore.m; sourceTree = "<group>"; };
 		9431EE7F1A5C9BC000B7EC36 /* Secret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Secret.h; sourceTree = "<group>"; };
 		9431EE801A5C9BC000B7EC36 /* Secret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secret.m; sourceTree = "<group>"; };
+		9431EE891A5CC4F000B7EC36 /* IntroPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroPageVC.h; path = Intro/IntroPageVC.h; sourceTree = "<group>"; };
+		9431EE8A1A5CC4F000B7EC36 /* IntroPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroPageVC.m; path = Intro/IntroPageVC.m; sourceTree = "<group>"; };
+		9431EE8C1A5CC52900B7EC36 /* IntroAboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroAboutVC.h; path = Intro/IntroAboutVC.h; sourceTree = "<group>"; };
+		9431EE8D1A5CC52900B7EC36 /* IntroAboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroAboutVC.m; path = Intro/IntroAboutVC.m; sourceTree = "<group>"; };
+		9431EE8E1A5CC52900B7EC36 /* IntroAboutVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IntroAboutVC.xib; path = Intro/IntroAboutVC.xib; sourceTree = "<group>"; };
+		9431EE911A5CC54900B7EC36 /* IntroDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroDetailVC.h; path = Intro/IntroDetailVC.h; sourceTree = "<group>"; };
+		9431EE921A5CC54900B7EC36 /* IntroDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroDetailVC.m; path = Intro/IntroDetailVC.m; sourceTree = "<group>"; };
+		9431EE931A5CC54900B7EC36 /* IntroDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IntroDetailVC.xib; path = Intro/IntroDetailVC.xib; sourceTree = "<group>"; };
 		94AAAB891A5B2188005E92D6 /* account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = account.h; sourceTree = "<group>"; };
 		94AAAB8A1A5B2188005E92D6 /* account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = account.m; sourceTree = "<group>"; };
 		94AAAB8B1A5B2188005E92D6 /* datahub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = datahub.h; sourceTree = "<group>"; };
@@ -224,8 +237,6 @@
 		3DDED6C6167D098B006DE4F8 = {
 			isa = PBXGroup;
 			children = (
-				9431EE7F1A5C9BC000B7EC36 /* Secret.h */,
-				9431EE801A5C9BC000B7EC36 /* Secret.m */,
 				3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */,
 				941895E11A59E9A900B5BC15 /* GetFit */,
 				94AAAB881A5B2188005E92D6 /* gen-cocoa */,
@@ -266,6 +277,7 @@
 		941895E11A59E9A900B5BC15 /* GetFit */ = {
 			isa = PBXGroup;
 			children = (
+				9431EE871A5CC4CC00B7EC36 /* Intro */,
 				94B01BEC1A5AF0000079F8A1 /* Common */,
 				94B01BE91A5AEFD40079F8A1 /* AppDelegate.h */,
 				94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */,
@@ -275,6 +287,8 @@
 				941645621A59F01F00B9B2CD /* ViewController.m */,
 				941895EA1A59EA6B00B5BC15 /* Resources.h */,
 				941895EB1A59EA6B00B5BC15 /* Resources.m */,
+				9431EE7F1A5C9BC000B7EC36 /* Secret.h */,
+				9431EE801A5C9BC000B7EC36 /* Secret.m */,
 				941895E31A59EA4600B5BC15 /* Charts */,
 				941895F11A59EAA100B5BC15 /* Page */,
 				941895F91A59EADF00B5BC15 /* Exercise */,
@@ -359,6 +373,21 @@
 				941896101A59EBAD00B5BC15 /* MinuteStore.m */,
 			);
 			name = Minute;
+			sourceTree = "<group>";
+		};
+		9431EE871A5CC4CC00B7EC36 /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				9431EE891A5CC4F000B7EC36 /* IntroPageVC.h */,
+				9431EE8A1A5CC4F000B7EC36 /* IntroPageVC.m */,
+				9431EE8C1A5CC52900B7EC36 /* IntroAboutVC.h */,
+				9431EE8D1A5CC52900B7EC36 /* IntroAboutVC.m */,
+				9431EE8E1A5CC52900B7EC36 /* IntroAboutVC.xib */,
+				9431EE911A5CC54900B7EC36 /* IntroDetailVC.h */,
+				9431EE921A5CC54900B7EC36 /* IntroDetailVC.m */,
+				9431EE931A5CC54900B7EC36 /* IntroDetailVC.xib */,
+			);
+			name = Intro;
 			sourceTree = "<group>";
 		};
 		94AAAB881A5B2188005E92D6 /* gen-cocoa */ = {
@@ -538,12 +567,14 @@
 				3DDED6E8167D098B006DE4F8 /* Default.png in Resources */,
 				3DDED6EA167D098B006DE4F8 /* Default@2x.png in Resources */,
 				3DDED6EC167D098B006DE4F8 /* Default-568h@2x.png in Resources */,
+				9431EE901A5CC52900B7EC36 /* IntroAboutVC.xib in Resources */,
 				3DFE62551694DE4500145310 /* Icon.png in Resources */,
 				94B01BE81A5AEF890079F8A1 /* config.json in Resources */,
 				3DFE62571694DE4800145310 /* Icon@2x.png in Resources */,
 				9416456B1A59F17300B9B2CD /* MainStoryboard.storyboard in Resources */,
 				941895E91A59EA5700B5BC15 /* chart_pie.png in Resources */,
 				941895E71A59EA5700B5BC15 /* chart_column.png in Resources */,
+				9431EE951A5CC54900B7EC36 /* IntroDetailVC.xib in Resources */,
 				941895E81A59EA5700B5BC15 /* chart_line.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,6 +603,7 @@
 				941896121A59EBAD00B5BC15 /* ActivityPickerView.m in Sources */,
 				941895F81A59EACB00B5BC15 /* GraphView.m in Sources */,
 				94AAABC31A5B2188005E92D6 /* TProtocolUtil.m in Sources */,
+				9431EE8F1A5CC52900B7EC36 /* IntroAboutVC.m in Sources */,
 				941896111A59EBAD00B5BC15 /* MinuteTVC.m in Sources */,
 				941895FC1A59EAEA00B5BC15 /* ExerciseVC.m in Sources */,
 				94AAABC71A5B2188005E92D6 /* TFramedTransport.m in Sources */,
@@ -589,7 +621,9 @@
 				94AAABD01A5B2188005E92D6 /* TSharedProcessorFactory.m in Sources */,
 				941895F01A59EA9700B5BC15 /* PageVC.m in Sources */,
 				94AAABC91A5B2188005E92D6 /* TMemoryBuffer.m in Sources */,
+				9431EE941A5CC54900B7EC36 /* IntroDetailVC.m in Sources */,
 				94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */,
+				9431EE8B1A5CC4F000B7EC36 /* IntroPageVC.m in Sources */,
 				94AAABC81A5B2188005E92D6 /* THTTPClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
