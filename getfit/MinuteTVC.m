@@ -227,7 +227,7 @@
         default:
             // sometimes is called when the datePicker is toggled before another picker has set its value.
             [self datePickerChanged:nil];
-            return nil;
+            return;
 //            [NSException raise:@"out of bounds"
 //                        format:@"Your picker index.row is >= 4. Use [self datePickerChanged]"];
     }

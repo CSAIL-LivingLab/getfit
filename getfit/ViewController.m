@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "OAuthVC.h"
 #import "PageVC.h"
+#import "Secret.h"
 
 #import "datahub.h"
 #import "account.h"
@@ -45,19 +46,23 @@
 
 
 - (IBAction)dbCreateUser:(id)sender {
+    Secret *secret = [Secret sharedSecret];
+    
     datahub_accountAccountServiceClient *accountClient = [[datahub_accountAccountServiceClient alloc] initWithProtocol:protocol];
     
     // create
-    [accountClient create_account:@"ACCOUNT_NAME" email:@"ACCOUNT_EMAIL" password:@"ACCOUNT PASSWORD" app_id:@"APP_ID" app_token:@"APP_TOKEN"];
+    [accountClient create_account:@"norm" email:@"albert.r.carter.mit@gmail.com" password:@"ACCOUNT PASSWORD" app_id:@"APP_ID" app_token:@"APP_TOKEN"];
     
     // delete
     [accountClient remove_account:@"ACCOUNT_NAME" app_id:@"APP_ID" app_token:@"APP_TOKEN"];
 }
 
 - (IBAction)dbConnect:(id)sender {
+    Secret *secret = [Secret sharedSecret];
+    
     @try {
         client = [[datahubDataHubClient alloc] initWithProtocol:protocol];
-        conparams = [[datahubConnectionParams alloc] initWithClient_id:@"foo" seq_id:nil user:@"al_carter" password:@"Gh6$U2!Y" repo_base:nil];
+        conparams = [[datahubConnectionParams alloc] initWithClient_id:@"foo" seq_id:nil user:secret.DHSuperUser password:secret.DHSuperUserPassword repo_base:nil];
         connection = [client open_connection:conparams];
         
         if (connection == nil) {

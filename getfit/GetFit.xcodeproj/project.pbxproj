@@ -42,6 +42,7 @@
 		941896121A59EBAD00B5BC15 /* ActivityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960C1A59EBAD00B5BC15 /* ActivityPickerView.m */; };
 		941896131A59EBAD00B5BC15 /* MinuteEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */; };
 		941896141A59EBAD00B5BC15 /* MinuteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 941896101A59EBAD00B5BC15 /* MinuteStore.m */; };
+		9431EE811A5C9BC000B7EC36 /* Secret.m in Sources */ = {isa = PBXBuildFile; fileRef = 9431EE801A5C9BC000B7EC36 /* Secret.m */; };
 		94AAABBD1A5B2188005E92D6 /* account.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AAAB8A1A5B2188005E92D6 /* account.m */; };
 		94AAABBE1A5B2188005E92D6 /* datahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AAAB8C1A5B2188005E92D6 /* datahub.m */; };
 		94AAABBF1A5B2188005E92D6 /* TBinaryProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AAAB911A5B2188005E92D6 /* TBinaryProtocol.m */; };
@@ -132,6 +133,8 @@
 		9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteEntry.m; sourceTree = "<group>"; };
 		9418960F1A59EBAD00B5BC15 /* MinuteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteStore.h; sourceTree = "<group>"; };
 		941896101A59EBAD00B5BC15 /* MinuteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteStore.m; sourceTree = "<group>"; };
+		9431EE7F1A5C9BC000B7EC36 /* Secret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Secret.h; sourceTree = "<group>"; };
+		9431EE801A5C9BC000B7EC36 /* Secret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secret.m; sourceTree = "<group>"; };
 		94AAAB891A5B2188005E92D6 /* account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = account.h; sourceTree = "<group>"; };
 		94AAAB8A1A5B2188005E92D6 /* account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = account.m; sourceTree = "<group>"; };
 		94AAAB8B1A5B2188005E92D6 /* datahub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = datahub.h; sourceTree = "<group>"; };
@@ -221,6 +224,8 @@
 		3DDED6C6167D098B006DE4F8 = {
 			isa = PBXGroup;
 			children = (
+				9431EE7F1A5C9BC000B7EC36 /* Secret.h */,
+				9431EE801A5C9BC000B7EC36 /* Secret.m */,
 				3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */,
 				941895E11A59E9A900B5BC15 /* GetFit */,
 				94AAAB881A5B2188005E92D6 /* gen-cocoa */,
@@ -555,6 +560,7 @@
 				94AAABC41A5B2188005E92D6 /* TSocketServer.m in Sources */,
 				941896141A59EBAD00B5BC15 /* MinuteStore.m in Sources */,
 				941895F71A59EACB00B5BC15 /* GraphVC.m in Sources */,
+				9431EE811A5C9BC000B7EC36 /* Secret.m in Sources */,
 				941895EC1A59EA6B00B5BC15 /* Resources.m in Sources */,
 				941896071A59EB2300B5BC15 /* OAuthVC.m in Sources */,
 				94AAABCB1A5B2188005E92D6 /* TNSStreamTransport.m in Sources */,
