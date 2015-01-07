@@ -13,12 +13,16 @@
 @end
 
 @implementation IntroDetailVC
+@synthesize usernameLabel, passwordLabel, detailTextArea;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [self.view.window setBackgroundColor:[UIColor redColor]];
-    // Do any additional setup after loading the view from its nib.
+    detailTextArea.text = @"Use it to view your data at \nhttps://datahub.csail.mit.edu.\n\nThere's no need to write it down. You can access it anytime from this app, or reset it online.";
+    usernameLabel.text = [defaults objectForKey:@"username"];
+    passwordLabel.text = [defaults objectForKey:@"password"];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -13,17 +13,102 @@
 @end
 
 @implementation IntroAboutVC
+@synthesize nameTextField, emailTextField, swipeToContinue;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self.view.window setBackgroundColor:[UIColor greenColor]];
-    // Do any additional setup after loading the view from its nib.
+    swipeToContinue.alpha = 0;
+    swipeToContinue.hidden = NO;
+    
+    [nameTextField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+    [emailTextField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [self.view addGestureRecognizer:tapBackground];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - helpers
+
+- (BOOL) checkForReady {
+    if ([nameTextField.text length] > 0 && [self NSStringIsValidEmail:emailTextField.text] ) {
+        return YES;
+    }
+    return NO;
+}
+
+// should check for MIT email addresses.
+-(BOOL) NSStringIsValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
+
+#pragma mark - change 
+
+// fade in swipe button. Save user defaults accordingly.
+- (void) textChanged:(UITextField *)textField{
+    // fade in button
+    if ([self checkForReady] && swipeToContinue.alpha < 1.0) {
+        swipeToContinue.hidden = NO;
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{ swipeToContinue.alpha = 1;}
+                         completion:nil];
+        
+    } else if (![self checkForReady] && swipeToContinue.alpha > 0) {
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{ swipeToContinue.alpha = 0;}
+                         completion:nil];
+        swipeToContinue.hidden = YES;
+    }
+    
+    // save defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nameTextField.text forKey:@"name"];
+    [defaults setObject:emailTextField.text forKey:@"email"];
+
+}
+
+#pragma mark - keyboard hiding/showing
+
+- (void) textFieldDidBeginEditing:(UITextField *)textField {
+    [self animateTextField:textField up:YES];
+}
+
+- (void) textFieldDidEndEditing:(UITextField *)textField {
+    [self animateTextField:textField up:NO];
+}
+
+- (void) animateTextField: (UITextField *) textField up:(BOOL)up {
+    const int movementDistance = 205; // try to match keyboard size
+    const float movementDuration = 0.3f; // speed of movement
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
+
+- (void)dismissKeyboard {
+    [nameTextField resignFirstResponder];
+    [emailTextField resignFirstResponder];
+}
+
 
 /*
 #pragma mark - Navigation

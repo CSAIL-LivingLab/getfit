@@ -28,14 +28,13 @@
     introAboutVC = [[IntroAboutVC alloc] init];
     introDetailVC = [[IntroDetailVC alloc] init];
     
-    viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, introAboutVC, nil];
-    
+    viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, introDetailVC, nil];
+    [self setTitle:@"Welcome!"];
     if (introAboutVC !=nil ) {
         self.dataSource = self;
         [self setViewControllers:@[introAboutVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
     }
     
-    // Do any additional setup after loading the view.
 }
 
 - (UIViewController *) pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {

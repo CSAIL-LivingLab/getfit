@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IntroAboutVC : UIViewController
+@interface IntroAboutVC : UIViewController <UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UILabel *swipeToContinue;
 
 @end

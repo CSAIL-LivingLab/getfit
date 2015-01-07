@@ -7,6 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroAboutVC">
             <connections>
+                <outlet property="emailTextField" destination="t9Y-SL-hHc" id="EA3-fw-gYu"/>
+                <outlet property="nameTextField" destination="4PG-xu-JUk" id="9a8-tj-KEy"/>
+                <outlet property="swipeToContinue" destination="LZu-oZ-wrP" id="Uej-dQ-osT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,73 +18,78 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wmd-QH-puR">
-                    <rect key="frame" x="8" y="53" width="584" height="323"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wmd-QH-puR">
+                    <rect key="frame" x="8" y="80" width="584" height="301"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="323" id="SFX-RQ-mI1"/>
+                        <constraint firstAttribute="height" constant="301" id="hQy-2m-0FU"/>
                     </constraints>
                     <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</mutableString>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="SFX-RQ-mI1"/>
+                        </mask>
+                    </variation>
                 </textView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t9Y-SL-hHc">
-                    <rect key="frame" x="8" y="484" width="584" height="30"/>
+                    <rect key="frame" x="8" y="479" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="qsx-qJ-uYo"/>
+                    </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I agree to Participate In This Study" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NjH-NR-yld">
-                    <rect key="frame" x="8" y="402" width="584" height="21"/>
+                    <rect key="frame" x="8" y="401" width="584" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4PG-xu-JUk">
-                    <rect key="frame" x="8" y="446" width="584" height="30"/>
+                    <rect key="frame" x="8" y="441" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="gCx-GX-gdm"/>
+                    </connections>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CSAIL Living Lab + MIT GetFit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Km6-Qh-yzb">
-                    <rect key="frame" x="184" y="31" width="233" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe Right to Continue >>" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZu-oZ-wrP">
+                    <rect key="frame" x="171" y="529" width="259.5" height="24.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="NjH-NR-yld" firstAttribute="top" secondItem="Wmd-QH-puR" secondAttribute="bottom" constant="26" id="27V-HT-AzY"/>
-                <constraint firstItem="Wmd-QH-puR" firstAttribute="top" secondItem="Km6-Qh-yzb" secondAttribute="bottom" constant="24.5" id="4NP-jL-ZQi"/>
-                <constraint firstItem="Km6-Qh-yzb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="31" id="6Ka-eT-hGx"/>
                 <constraint firstAttribute="trailing" secondItem="t9Y-SL-hHc" secondAttribute="trailing" constant="8" id="6ya-tS-ZRn"/>
                 <constraint firstItem="t9Y-SL-hHc" firstAttribute="top" secondItem="4PG-xu-JUk" secondAttribute="bottom" constant="8" id="8Fc-0Q-D9x"/>
                 <constraint firstAttribute="centerY" secondItem="Wmd-QH-puR" secondAttribute="centerY" constant="85.5" id="8sT-Ro-EG5"/>
                 <constraint firstItem="t9Y-SL-hHc" firstAttribute="top" secondItem="4PG-xu-JUk" secondAttribute="bottom" constant="8" id="A2d-Us-jqZ"/>
-                <constraint firstItem="4PG-xu-JUk" firstAttribute="top" secondItem="NjH-NR-yld" secondAttribute="bottom" constant="23" id="GCg-OQ-xg4"/>
-                <constraint firstItem="Km6-Qh-yzb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="31" id="Idk-7h-Vm2"/>
+                <constraint firstItem="4PG-xu-JUk" firstAttribute="top" secondItem="NjH-NR-yld" secondAttribute="bottom" constant="20" id="GCg-OQ-xg4"/>
                 <constraint firstAttribute="trailing" secondItem="4PG-xu-JUk" secondAttribute="trailing" constant="8" id="LSg-je-nx4"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NjH-NR-yld" secondAttribute="trailing" constant="8" id="Nr9-5N-Obs"/>
-                <constraint firstItem="Km6-Qh-yzb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="184" id="Sm8-Vw-Auv"/>
-                <constraint firstItem="Wmd-QH-puR" firstAttribute="centerX" secondItem="Km6-Qh-yzb" secondAttribute="centerX" id="Y78-0F-XPs"/>
+                <constraint firstItem="Wmd-QH-puR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="X9J-Wc-LoT"/>
                 <constraint firstItem="Wmd-QH-puR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="cSs-J1-a0J"/>
                 <constraint firstItem="t9Y-SL-hHc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="cpc-pT-pg1"/>
-                <constraint firstAttribute="centerY" secondItem="Km6-Qh-yzb" secondAttribute="centerY" constant="281.5" id="gSI-tx-Mqq"/>
+                <constraint firstItem="LZu-oZ-wrP" firstAttribute="top" secondItem="t9Y-SL-hHc" secondAttribute="bottom" constant="20" id="dgZ-Mi-kOs"/>
                 <constraint firstItem="NjH-NR-yld" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="hcL-SC-WAX"/>
+                <constraint firstAttribute="centerX" secondItem="LZu-oZ-wrP" secondAttribute="centerX" id="hv2-a6-JR1"/>
                 <constraint firstItem="NjH-NR-yld" firstAttribute="width" secondItem="4PG-xu-JUk" secondAttribute="width" id="jEI-EH-gok"/>
                 <constraint firstItem="4PG-xu-JUk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="kGI-bp-l2i"/>
                 <constraint firstAttribute="trailing" secondItem="NjH-NR-yld" secondAttribute="trailing" constant="8" id="nhO-6j-UOx"/>
                 <constraint firstAttribute="trailing" secondItem="Wmd-QH-puR" secondAttribute="trailing" constant="8" id="tjf-Q0-RWa"/>
-                <constraint firstItem="Wmd-QH-puR" firstAttribute="top" secondItem="Km6-Qh-yzb" secondAttribute="bottom" constant="1" id="ulZ-HZ-WUf"/>
+                <constraint firstItem="NjH-NR-yld" firstAttribute="top" secondItem="Wmd-QH-puR" secondAttribute="bottom" constant="20" id="w6K-0e-i9t"/>
                 <constraint firstItem="t9Y-SL-hHc" firstAttribute="width" secondItem="4PG-xu-JUk" secondAttribute="width" id="ylE-10-zgz"/>
-                <constraint firstItem="Wmd-QH-puR" firstAttribute="top" secondItem="Km6-Qh-yzb" secondAttribute="bottom" constant="1" id="zoX-09-DiZ"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="4NP-jL-ZQi"/>
-                    <exclude reference="zoX-09-DiZ"/>
-                    <exclude reference="Idk-7h-Vm2"/>
-                    <exclude reference="Sm8-Vw-Auv"/>
-                    <exclude reference="gSI-tx-Mqq"/>
+                    <exclude reference="8sT-Ro-EG5"/>
+                    <exclude reference="27V-HT-AzY"/>
                     <exclude reference="jEI-EH-gok"/>
                     <exclude reference="A2d-Us-jqZ"/>
                     <exclude reference="ylE-10-zgz"/>

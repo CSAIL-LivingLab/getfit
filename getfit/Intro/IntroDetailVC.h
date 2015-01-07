@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface IntroDetailVC : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *passwordLabel;
+@property (weak, nonatomic) IBOutlet UITextView *detailTextArea;
 
 @end

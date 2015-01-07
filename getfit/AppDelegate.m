@@ -65,8 +65,10 @@
     pageControl.pageIndicatorTintColor = [UIColor grayColor];
     pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
 
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introPageVC];
+    
 
-    self.window.rootViewController = introPageVC;
+    self.window.rootViewController = navController;
     self.window.backgroundColor = [UIColor whiteColor];
 
 
@@ -78,6 +80,7 @@
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:minuteTVC];
     navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+
     
     [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
 }
