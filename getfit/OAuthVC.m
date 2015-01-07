@@ -65,6 +65,7 @@
     NSString * jsCallBack = [NSString stringWithFormat:@"document.getElementById(\"edit-mail\").value"];
     email = [myWebView stringByEvaluatingJavaScriptFromString:jsCallBack];
     [defaults setObject:email forKey:@"email"];
+    [defaults synchronize];
     
     // to be handled elsewhere eventually.
     MinuteStore *ms = [MinuteStore sharedStore];
