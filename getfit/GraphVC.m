@@ -15,6 +15,17 @@
 
 @implementation GraphVC
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.tabBarItem.title = @"Progress";
+        //        UIImage *image = [UIImage imageNamed:@"graph.png"];
+        //        self.tabBarItem.image = image;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

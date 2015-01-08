@@ -10,7 +10,11 @@
 #import "OpenSense.h"
 
 #import "IntroPageVC.h"
-#import "PageVC.h"
+
+//#import "PageVC.h"
+#import "ExerciseVC.h"
+#import "GraphVC.h"
+#import "AboutVC.h"
 #import "MinuteTVC.h"
 
 @implementation AppDelegate
@@ -21,40 +25,45 @@
 
     // load intro screens on first launch
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    if (![defaults boolForKey:@"hasLaunchedBefore"]) {
-    if (YES) {
+    if (![defaults boolForKey:@"hasLaunchedBefore"]) {
         [defaults setBool:YES forKey:@"hasLaunchedBefore"];
         [defaults synchronize];
         
         [self loadIntroViews];
         
-        [self.window makeKeyAndVisible];
+    } else {
+        
+        [self loadMainViews];
     }
-
-
-//        PageVC *pageVC = [[PageVC alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:NULL];
-//        //UIPageViewControllerTransitionStylePageScroll
-//    
-//        UIPageControl *pageControl = [UIPageControl appearance];
-//        pageControl.pageIndicatorTintColor = [UIColor grayColor];
-//        pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
-//    
-//    
-//        self.window.rootViewController = pageVC;
-//        self.window.backgroundColor = [UIColor whiteColor];
-//    
-//        // add plus button
-//        CGRect frame = [UIScreen mainScreen].bounds;
-//        CGRect rightFrame = CGRectMake(frame.size.width - 170, 10, 200, 40);
-//        UIButton *plusButton = [[UIButton alloc] initWithFrame:rightFrame];
-//        [plusButton setTitle:@"add minutes +" forState:UIControlStateNormal];
-//        [plusButton setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-//        [plusButton addTarget:self action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
-//        [self.window.rootViewController.view addSubview:plusButton];
-//        
-//        [self.window makeKeyAndVisible];
+    
+    [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void) loadMainViews {
+    
+    ExerciseVC *exerciseVC = [[ExerciseVC alloc] init];
+    GraphVC *graphVC = [[GraphVC alloc] init];
+    AboutVC *aboutVC = [[AboutVC alloc] init];
+    
+    // add tabs
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[exerciseVC, graphVC, aboutVC];
+    self.window.rootViewController = tabBarController;
+    self.window.backgroundColor = [UIColor whiteColor];
+
+    
+    // add plus button
+    CGRect frame = [UIScreen mainScreen].bounds;
+    CGRect rightFrame = CGRectMake(frame.size.width - 170, 10, 200, 40);
+    UIButton *plusButton = [[UIButton alloc] initWithFrame:rightFrame];
+    [plusButton setTitle:@"add minutes +" forState:UIControlStateNormal];
+    [plusButton setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [plusButton addTarget:self action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.window.rootViewController.view addSubview:plusButton];
+    
+    [self.window makeKeyAndVisible];
 }
 
 - (void) loadIntroViews{

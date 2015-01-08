@@ -15,6 +15,17 @@
 
 @implementation AboutVC
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.tabBarItem.title = @"About";
+        //        UIImage *image = [UIImage imageNamed:@"About.png"];
+        //        self.tabBarItem.image = image;
+    }
+    return self;
+}
+
 - (void) loadView {
     [super loadView];
     
