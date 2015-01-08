@@ -53,9 +53,9 @@
     
     // some useful varibales
     CGRect windowFrame = self.view.frame;
-    CGFloat buttonWidth = 150;
+    CGFloat buttonWidth = 140;
     UIColor *systemBlue = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
-    UIColor *systemBackground = [UIColor lightGrayColor];
+    UIColor *systemBackground = [UIColor colorWithRed:.921568627 green:.941176471 blue:.945098039 alpha:1.0];
     
     _minuteEntry = [[MinuteEntry alloc] init];
     
@@ -77,7 +77,7 @@
     [self.view addGestureRecognizer:tapBackground];
     
     // make buttons
-    _activityButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 75, buttonWidth, buttonWidth)];
+    _activityButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 75, buttonWidth, buttonWidth)];
     [_activityButton setTitle:@"-select action-" forState:UIControlStateNormal];
     [_activityButton setTitleColor:systemBlue forState:UIControlStateNormal];
     _activityButton.layer.cornerRadius = _activityButton.bounds.size.width/2;
@@ -89,7 +89,7 @@
     [_activityButton addTarget:self action:@selector(editAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_activityButton];
     
-    _intensityButton = [[UIButton alloc] initWithFrame:CGRectMake(windowFrame.size.width-25-buttonWidth, 75, buttonWidth, buttonWidth)];
+    _intensityButton = [[UIButton alloc] initWithFrame:CGRectMake(windowFrame.size.width-10-buttonWidth, 75, buttonWidth, buttonWidth)];
     [ _intensityButton setTitle:@"-select intensity-" forState:UIControlStateNormal];
     [ _intensityButton setTitleColor:systemBlue forState:UIControlStateNormal];
     _intensityButton.layer.cornerRadius =  _intensityButton.bounds.size.width/2;
@@ -113,7 +113,7 @@
     [_startButton.layer setBackgroundColor:[redStuff CGColor]];
     [_startButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
     _startButton.alpha = 0.4;
-//     _startButton.userInteractionEnabled = NO;
+     _startButton.userInteractionEnabled = NO;
     [self.view addSubview:_startButton];
     
     // make stopwatch
