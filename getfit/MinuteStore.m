@@ -104,7 +104,8 @@
     @try {
         datahubResultSet *result_set = [datahub_client execute_sql:con_app query:statement query_params:nil];
         NSLog(@"result_set: %@", result_set);
-        [_privateMinutes removeAllObjects];
+        // minutes are posted to datahub before getfit, so do not remove the objects here
+//        [_privateMinutes removeAllObjects];
     }
     @catch (NSException *exception) {
         NSLog(@"%@", exception);
@@ -117,9 +118,6 @@
     
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
-        me.activity = @"snuggling";
-        me.intensity = @"HIGH";
-        
         
         NSString *endDate = [dateFormatter stringFromDate:me.endTime];
         NSString *duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
@@ -129,7 +127,6 @@
         NSString *form_token = [defaults objectForKey:@"form_token"];
         NSString *form_build_id = [defaults objectForKey:@"form_build_id"];
         NSString *form_id = [defaults objectForKey:@"form_id"];
-        [defaults synchronize];
         
         // format the data
         NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, me.activity, me.intensity, endDate, duration];

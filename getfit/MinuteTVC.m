@@ -124,6 +124,14 @@
     [minuteStore postToDataHub];
     //    [minuteStore postToGetFit];
     
+
+    // stopgap
+    OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:navController animated:YES completion:nil];
+    
+
     
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"Minutes Saved" message:@"" delegate:nil
@@ -131,14 +139,6 @@
                           otherButtonTitles:nil];
     [alert show];
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    
-    OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
-    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:navController animated:YES completion:nil];
-    
-
     
 }
 

@@ -59,21 +59,6 @@
 
 }
 
-- (void) extractEmail {
-    NSLog(@"extract Email hit");
-    
-    NSString * jsCallBack = [NSString stringWithFormat:@"document.getElementById(\"edit-mail\").value"];
-    email = [myWebView stringByEvaluatingJavaScriptFromString:jsCallBack];
-    [defaults setObject:email forKey:@"email"];
-    [defaults synchronize];
-    
-    // to be handled elsewhere eventually.
-    MinuteStore *ms = [MinuteStore sharedStore];
-    [ms postToGetFit];
-    
-    [self dismiss];
-}
-
 - (void) extractTokens {
     NSLog(@"extract tokens hit");
     
@@ -89,11 +74,11 @@
     [defaults setObject:form_token forKey:@"form_token"];
     [defaults setObject:form_build_id forKey:@"form_build_id"];
     [defaults setObject:form_id forKey:@"form_id"];
-    
-    // once tokens are extracted, extrac the user email
-    NSURL *profileURL =[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/profile"];
-    NSURLRequest *nsrequest=[NSURLRequest requestWithURL:profileURL];
-    [myWebView loadRequest:nsrequest];
+    [defaults synchronize];
+    // once tokens are extracted, post to getFit and close the page
+    MinuteStore *ms = [MinuteStore sharedStore];
+    [ms postToGetFit];
+    [self dismiss];
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
@@ -107,13 +92,9 @@
     }
     
     // should hide the webView and do this all automatically.
-    if ([url rangeOfString:@"profile"].location != NSNotFound) {
-        [self extractEmail];
-    } else if ([url rangeOfString:@"dashboard"].location != NSNotFound) {
+    if ([url rangeOfString:@"dashboard"].location != NSNotFound) {
         [self extractTokens];
     }
-
-
 
     
 }

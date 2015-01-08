@@ -55,8 +55,14 @@
     [self addSubview:title];
     
     // Body
+    NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
+    NSString *email = [defaults objectForKey:@"email"];
+    NSString *password = [defaults objectForKey:@"password"];
+    
     UILabel *body = [[UILabel alloc] initWithFrame:CGRectMake(20, 180, 320-40, 100)];
-    [body setText:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem.\n\tdatahub.csail.mit.edu\n\tyour username: al_carter"];
+    NSString *bodyText = [NSString stringWithFormat:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem.\n\thttp://datahub.csail.mit.edu\n\tusername: %@\n\tpassword: %@", email, password];
+    
+    [body setText:bodyText];
     [body setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
     [body setNumberOfLines:0];
     [body sizeToFit];
@@ -66,14 +72,14 @@
 
 - (void) addDataCollectionSlider {
     // title
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(20, 290, 320-40, 20)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(20, 310, 320-40, 20)];
     [title setText:@"Pause Data Collection"];
     [title setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
     [title setNumberOfLines:0];
     [title sizeToFit];
     [self addSubview:title];
     
-    UILabel *body = [[UILabel alloc] initWithFrame:CGRectMake(20, 310, 320-40, 100)];
+    UILabel *body = [[UILabel alloc] initWithFrame:CGRectMake(20, 330, 320-40, 100)];
     [body setText:@"stop data collection for a period of time"];
     [body setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
     [body setNumberOfLines:0];
@@ -81,7 +87,7 @@
     [self addSubview:body];
     
     // Slider
-    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(20, 360, 320-40, 20)];
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(20, 380, 320-40, 20)];
     [self addSubview:slider];
     
 }

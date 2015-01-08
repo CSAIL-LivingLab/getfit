@@ -26,11 +26,8 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     [self loadMainViews];
-    
-    if (![defaults boolForKey:@"hasLaunchedBefore"]) {
-        [defaults setBool:YES forKey:@"hasLaunchedBefore"];
-        [defaults synchronize];
         
+    if (![defaults stringForKey:@"email"]) {
         [self loadIntroViews];
     }
     

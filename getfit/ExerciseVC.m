@@ -78,7 +78,7 @@
     
     // make buttons
     _activityButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 75, buttonWidth, buttonWidth)];
-    [_activityButton setTitle:@"-select action-" forState:UIControlStateNormal];
+    [_activityButton setTitle:@"-select activity-" forState:UIControlStateNormal];
     [_activityButton setTitleColor:systemBlue forState:UIControlStateNormal];
     _activityButton.layer.cornerRadius = _activityButton.bounds.size.width/2;
     _activityButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -166,6 +166,7 @@
         
         // reset the button
         [self activateRecordingButtonIfPossible];
+        
     }
 }
 
@@ -190,7 +191,8 @@
 }
 
 - (void) activateRecordingButtonIfPossible {
-    if (![_minuteEntry.activity isEqualToString:@""] && ![_minuteEntry.intensity isEqualToString:@""]) {
+    
+    if (![_activityButton.titleLabel.text isEqualToString:@"-select activity-"] && ![_activityButton.titleLabel.text isEqualToString:@"-select intensity-"]) {
         _startButton.alpha = 1.0;
         _startButton.userInteractionEnabled = YES;
     } else {
