@@ -190,8 +190,7 @@
 - (IBAction)getfitButtonClick:(id)sender {
     NSLog(@"getFitButtonClicked");
     
-    IntroPageVC *introPageVC = self.parentViewController;
-    [introPageVC foo];
+    UIViewController *introPageVC = self.parentViewController;
     [introPageVC dismissViewControllerAnimated:YES completion:nil];
     
     

@@ -7,13 +7,25 @@
 //
 
 #import "IntroAboutVC.h"
+#import "IntroPageVC.h"
 
 @interface IntroAboutVC ()
-
+@property (weak, nonatomic) IntroPageVC *introPageVC;
+@property BOOL ready;
 @end
 
 @implementation IntroAboutVC
-@synthesize nameTextField, emailTextField, swipeToContinue;
+@synthesize nameTextField, emailTextField, swipeToContinue, ready, introPageVC;
+
+// hack so that it's possible to access the parent PageVC's array of pages
+
+- (instancetype) initWithParentPageVC: (IntroPageVC *)parentPageVC {
+    self = [super init];
+    if (self) {
+        self.introPageVC = parentPageVC;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,12 +50,15 @@
 
 #pragma mark - helpers
 
-- (BOOL) checkForReady {
+- (void) checkForReady {
     if ([nameTextField.text length] > 0 && [self NSStringIsValidEmail:emailTextField.text] ) {
-        return YES;
+        ready = YES;
     }
-    return NO;
+    else {
+        ready = NO;
+    };
 }
+
 
 // should check for MIT email addresses.
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
@@ -60,14 +75,21 @@
 
 // fade in swipe button. Save user defaults accordingly.
 - (void) textChanged:(UITextField *)textField{
+    [self checkForReady];
+    
+    // if it's ready to go, add the detail view controller
+    if (ready) {
+        [introPageVC addIntroDetailVCToArr];
+    }
+    
     // fade in button
-    if ([self checkForReady] && swipeToContinue.alpha < 1.0) {
+    if (ready && swipeToContinue.alpha < 1.0) {
         swipeToContinue.hidden = NO;
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn
                          animations:^{ swipeToContinue.alpha = 1;}
                          completion:nil];
         
-    } else if (![self checkForReady] && swipeToContinue.alpha > 0) {
+    } else if (!ready && swipeToContinue.alpha > 0) {
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut
                          animations:^{ swipeToContinue.alpha = 0;}
                          completion:nil];

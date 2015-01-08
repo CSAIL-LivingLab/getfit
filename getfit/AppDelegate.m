@@ -20,21 +20,18 @@
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // load intro screens on first launch
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [self loadMainViews];
+    
     if (![defaults boolForKey:@"hasLaunchedBefore"]) {
-//    if (YES) {
         [defaults setBool:YES forKey:@"hasLaunchedBefore"];
         [defaults synchronize];
         
         [self loadIntroViews];
-        
-    } else {
-        
-        [self loadMainViews];
     }
     
     [self.window makeKeyAndVisible];
@@ -71,17 +68,15 @@
     
     IntroPageVC *introPageVC = [[IntroPageVC alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:NULL];
     
+    // sneakily make sure the UiPageViewController is called again whenever anything is added to its array of objects
     UIPageControl *pageControl = [UIPageControl appearance];
-    pageControl.pageIndicatorTintColor = [UIColor grayColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    pageControl.pageIndicatorTintColor = [UIColor clearColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor clearColor];
 
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introPageVC];
-    
-
-    self.window.rootViewController = navController;
-    self.window.backgroundColor = [UIColor whiteColor];
 
 
+    [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
 }
 
 

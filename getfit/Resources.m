@@ -56,7 +56,7 @@
 }
 
 - (datahub_accountAccountServiceClient *) createDataHubAccountClient {
-    NSURL *account_url = [[NSURL alloc] initWithString:@"http://datahub.csail.mit.edu/service/account"];
+    NSURL *account_url = [[NSURL alloc] initWithString:@"https://datahub.csail.mit.edu/service/account"];
     THTTPClient *account_transport = [[THTTPClient alloc] initWithURL:account_url];
     TBinaryProtocol *account_protocol = [[TBinaryProtocol alloc] initWithTransport:account_transport];
     datahub_accountAccountServiceClient *account_client = [[datahub_accountAccountServiceClient alloc] initWithProtocol:account_protocol];

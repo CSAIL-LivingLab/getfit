@@ -10,6 +10,5 @@
 
 @interface IntroPageVC : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
-- (void) foo;
-
+- (void) addIntroDetailVCToArr;
 @end

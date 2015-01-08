@@ -25,16 +25,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    introAboutVC = [[IntroAboutVC alloc] init];
-    introDetailVC = [[IntroDetailVC alloc] init];
+    introAboutVC = [[IntroAboutVC alloc] initWithParentPageVC:self];
     
-    viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, introDetailVC, nil];
+    viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, nil];
     [self setTitle:@"Welcome!"];
     if (introAboutVC !=nil ) {
         self.dataSource = self;
         [self setViewControllers:@[introAboutVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
     }
     
+}
+
+- (void) addIntroDetailVCToArr {
+    if ([viewControllerArray count] < 2) {
+        introDetailVC = [[IntroDetailVC alloc] init];
+        viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, introDetailVC, nil];
+    } else {
+        viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, nil];
+    }
 }
 
 - (UIViewController *) pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
@@ -57,10 +65,7 @@
     }
 }
 
-- (void) foo{
-    NSLog(@"foo");
-    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 #pragma mark - UIPageViewController Page Count
 
