@@ -20,8 +20,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.tabBarItem.title = @"Progress";
-        //        UIImage *image = [UIImage imageNamed:@"graph.png"];
-        //        self.tabBarItem.image = image;
+                UIImage *image = [UIImage imageNamed:@"chart.png"];
+                self.tabBarItem.image = image;
     }
     return self;
 }

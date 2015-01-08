@@ -20,8 +20,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.tabBarItem.title = @"About";
-        //        UIImage *image = [UIImage imageNamed:@"About.png"];
-        //        self.tabBarItem.image = image;
+                UIImage *image = [UIImage imageNamed:@"info.png"];
+                self.tabBarItem.image = image;
     }
     return self;
 }

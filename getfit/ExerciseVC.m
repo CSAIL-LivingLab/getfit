@@ -42,8 +42,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.tabBarItem.title = @"Timer";
-//        UIImage *image = [UIImage imageNamed:@"Timer.png"];
-//        self.tabBarItem.image = image;
+        UIImage *image = [UIImage imageNamed:@"clock.png"];
+        self.tabBarItem.image = image;
     }
     return self;
 }
