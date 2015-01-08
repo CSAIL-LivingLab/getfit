@@ -8,6 +8,12 @@
 
 #import "Resources.h"
 
+// datahub
+#import "datahub.h"
+#import "account.h"
+#import <THTTPClient.h>
+#import <TBinaryProtocol.h>
+
 @implementation Resources
 @synthesize activities, intensities, durations;
 // this file exists to store the UIPicker options. The only reason it exists is because I haven't had time to refactor the MinuteTVC and ExerciseVC to make the UIPickerViewDataSources orthagonal
@@ -39,6 +45,25 @@
                 format:@"Use +[Resources sharedResources]"];
     return nil;
 }
+
+- (datahubDataHubClient *) createDataHubClient {
+    NSURL *datahub_url = [[NSURL alloc] initWithString:@"https://datahub.csail.mit.edu/service"];
+    THTTPClient *datahub_transport = [[THTTPClient alloc] initWithURL:datahub_url];
+    TBinaryProtocol *datahub_protocol = [[TBinaryProtocol alloc] initWithTransport:datahub_transport];
+    datahubDataHubClient *datahub_client = [[datahubDataHubClient alloc] initWithProtocol:datahub_protocol];
+    
+    return datahub_client;
+}
+
+- (datahub_accountAccountServiceClient *) createDataHubAccountClient {
+    NSURL *account_url = [[NSURL alloc] initWithString:@"http://datahub.csail.mit.edu/service/account"];
+    THTTPClient *account_transport = [[THTTPClient alloc] initWithURL:account_url];
+    TBinaryProtocol *account_protocol = [[TBinaryProtocol alloc] initWithTransport:account_transport];
+    datahub_accountAccountServiceClient *account_client = [[datahub_accountAccountServiceClient alloc] initWithProtocol:account_protocol];
+    
+    return account_client;
+}
+
 
 
 @end

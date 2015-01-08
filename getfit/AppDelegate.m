@@ -25,7 +25,8 @@
 
     // load intro screens on first launch
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (![defaults boolForKey:@"hasLaunchedBefore"]) {
+//    if (![defaults boolForKey:@"hasLaunchedBefore"]) {
+    if (YES) {
         [defaults setBool:YES forKey:@"hasLaunchedBefore"];
         [defaults synchronize];
         
