@@ -20,11 +20,15 @@
 @interface IntroDetailVC ()
 @property NSString * appID;
 @property NSString *appToken;
+@property NSString *username;
+@property NSString *password;
+@property NSString *email;
+
 
 @end
 
 @implementation IntroDetailVC
-@synthesize thankYouLabel, setUpLabel, usernameStrLabel, passwordStrLabel, usernameLabel, passwordLabel, detailTextArea, spinnerIndicator, setupLabel, getfitButton, appID, appToken;
+@synthesize thankYouLabel, setUpLabel, usernameStrLabel, passwordStrLabel, usernameLabel, passwordLabel, detailTextArea, spinnerIndicator, setupLabel, getfitButton, appID, appToken, username, password, email;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,9 +55,13 @@
     [defaults setObject:[self createPassword] forKey:@"password"];
     [defaults setObject:[self createUsername] forKey:@"username"];
     [defaults synchronize];
-
-//    [self createUser:username withEmail:email andPasword:password];
     
+    username = [defaults objectForKey:@"username"];
+    password = [defaults objectForKey:@"password"];
+    email = [defaults objectForKey:@"email"];
+    
+
+    [self createUser:username withEmail:email andPasword:password];
     [self dropSchemaIfExists];
     [self createSchema];
     [self showResults];
@@ -87,7 +95,7 @@
     NSString *dropScript = @"drop table getfit.device cascade; drop table getfit.battery cascade; drop table getfit.deviceinfo cascade; drop table getfit.motion cascade; drop table getfit.positioning cascade; drop table getfit.proximity cascade; drop table getfit.device cascade; drop table getfit.activity cascade; drop table getfit.minutes cascade; drop table getfit.opensense cascade;";
     
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
-    datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:@"vampiresquid"];
+    datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
     datahubConnection * con_app = [datahub_client open_connection:con_params_app];
     
     @try {
@@ -104,7 +112,7 @@
     NSString *creationScript = @"create table getfit.device(    device_id varchar(50) primary key NOT NULL,    createdate timestamp default LOCALTIMESTAMP); create table getfit.battery(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    level integer,    state varchar(20));create table getfit.deviceinfo(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    brightness decimal,    country varchar(20),    language varchar(20),    system_version varchar(20));create table getfit.motion(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    attitude_pitch decimal,    attitude_roll decimal,    attitude_yaw decimal,    gravity_x decimal,    gravity_y decimal,    gravity_z decimal,    rotationRate_x decimal,    rotationRate_y decimal,    rotationRate_z decimal,    userAcceleration_x decimal,    userAcceleration_y decimal,    userAcceleration_z decimal);create table getfit.positioning(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    horizontal_accuracy decimal,    lat decimal,    lon decimal,    speed decimal,    course decimal,    altitude decimal,    vertical_accuracy decimal);create table getfit.proximity(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    state boolean);create table getfit.activity(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp NOT NULL,    activity varchar(50),    confidence varchar(50),    steps integer,    startDate timestamp NOT NULL,    endDate timestamp NOT NULL); create table getfit.minutes( minute_id SERIAL primary key, activity varchar(50), intensity varchar(20), duration integer, endDate timestamp); create table getfit.opensense ( id SERIAL primary key, data bytea);";
 
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
-    datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:@"vampiresquid"];
+    datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
     datahubConnection * con_app = [datahub_client open_connection:con_params_app];
     
     @try {
@@ -120,7 +128,7 @@
     // add a random string after the user's email, reducing collision risk.
 - (NSString *) createUsername {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *email = [defaults objectForKey:@"email"];
+   email = [defaults objectForKey:@"email"];
     
     // strip the email of its extra characters
     NSRange range = [email rangeOfString:@"@"];
@@ -136,7 +144,7 @@
     }
     
     // append the string
-    NSString *username = [NSString stringWithFormat:@"%@_%@", email, randomString];
+    username = [NSString stringWithFormat:@"%@_%@", email, randomString];
     return username;
 }
 

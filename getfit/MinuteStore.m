@@ -11,10 +11,8 @@
 #import "Secret.h"
 
 // datahub
+#import "Resources.h"
 #import "datahub.h"
-#import <THTTPClient.h>
-#import <TBinaryProtocol.h>
-
 
 
 @interface MinuteStore()
@@ -72,8 +70,9 @@
 }
 
 - (void) postToDataHub {
-    Secret *secret = [Secret sharedSecret];
-    
+    NSString *appID = [Secret sharedSecret].DHAppID;
+    NSString *appToken = [Secret sharedSecret].DHAppToken;
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
     // edit the first entry. Delete this if not testing.
 //    MinuteEntry *me0 = [_privateMinutes objectAtIndex:0];
@@ -81,10 +80,8 @@
 //    me0.intensity = @"silly";
     
     
-    
     //format query
     NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.minutes(activity, intensity, duration, endDate) values "];
-
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
         NSInteger *endTimeInt = (NSInteger)roundf([me.endTime timeIntervalSince1970]);
@@ -98,21 +95,20 @@
         }
     }
              
-    // connect to server and query
-    NSURL * url = [NSURL URLWithString:@"http://datahub.csail.mit.edu/service"];
-    THTTPClient *transport = [[THTTPClient alloc] initWithURL:url];
-    TBinaryProtocol *protocol = [[TBinaryProtocol alloc]
-                                 initWithTransport:transport
-                                 strictRead:YES
-                                 strictWrite:YES];
-    datahubDataHubClient * client = [[datahubDataHubClient alloc] initWithProtocol:protocol];
-//    datahubConnectionParams *conparams = [[datahubConnectionParams alloc] initWithClient_id:@"foo" seq_id:nil user:seret.DHSuperUser password:secret.DHSuperUserPassword app_id:secret.DHAppID app_token:secret.DHAppToken repo_base:@"getfit"];
-//    datahubConnection *connection = [client open_connection:conparams];
-//    datahubResultSet *result =  [client execute_sql:connection query:statement query_params:nil];
-
-//    NSLog(@"%@", result);
+    // connect to server
+    datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
+    datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
+    datahubConnection * con_app = [datahub_client open_connection:con_params_app];
     
-    [_privateMinutes removeAllObjects];
+    // query
+    @try {
+        datahubResultSet *result_set = [datahub_client execute_sql:con_app query:statement query_params:nil];
+        NSLog(@"result_set: %@", result_set);
+        [_privateMinutes removeAllObjects];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", exception);
+    }
 }
 
 - (void) postToGetFit {

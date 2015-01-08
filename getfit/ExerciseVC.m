@@ -235,7 +235,7 @@
     // add to the MinuteStore
     MinuteStore *ms = [MinuteStore sharedStore];
     [ms addMinuteEntry:_minuteEntry];
-//    [ms postToDataHub];
+    [ms postToDataHub];
 
     
 //     stop gap: load the OAuthVC and have the user log in
