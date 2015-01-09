@@ -40,7 +40,11 @@
     if ([viewControllerArray count] < 2) {
         introDetailVC = [[IntroDetailVC alloc] init];
         viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, introDetailVC, nil];
-    } else {
+    }
+}
+
+- (void) removeIntroDetailVCFromArr {
+    if ([viewControllerArray count] > 1) {
         viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, nil];
     }
 }

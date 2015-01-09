@@ -11,4 +11,5 @@
 @interface IntroPageVC : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 - (void) addIntroDetailVCToArr;
+- (void) removeIntroDetailVCFromArr;
 @end

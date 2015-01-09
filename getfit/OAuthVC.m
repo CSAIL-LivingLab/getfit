@@ -75,6 +75,11 @@
     [defaults setObject:form_build_id forKey:@"form_build_id"];
     [defaults setObject:form_id forKey:@"form_id"];
     [defaults synchronize];
+    
+    NSLog(@"form_token: %@", form_token);
+    NSLog(@"form_build_id: %@", form_build_id);
+    NSLog(@"form_id: %@", form_id);
+    
     // once tokens are extracted, post to getFit and close the page
     MinuteStore *ms = [MinuteStore sharedStore];
     [ms postToGetFit];

@@ -80,6 +80,8 @@
     // if it's ready to go, add the detail view controller
     if (ready) {
         [introPageVC addIntroDetailVCToArr];
+    } else {
+        [introPageVC removeIntroDetailVCFromArr];
     }
     
     // fade in button
