@@ -88,18 +88,22 @@
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
+    NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
+    NSLog(@"------\nURL:  %@\n------", url);
+    
     // save cookies for MinuteStore.
-    NSHTTPCookie *cookie;
+    /*
+     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (cookie in [cookieJar cookies]) {
-        NSLog(@"%@", cookie);
+        NSLog(@"\n\n%@\n", cookie);
         NSLog(@"----\n");
     }
+     */
     
     
     // figure out which methods to call, based on the url
-    NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
-    NSLog(@"------\n%@\n------", url);
+
     
     
     // do nothing unless it's a getfit url
