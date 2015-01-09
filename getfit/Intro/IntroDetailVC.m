@@ -75,7 +75,7 @@
     } @catch (NSException *exception) {
         NSString *errorTitle;
         NSString *errorMessage;
-        NSLog(@"$@", exception);
+        NSLog(@"%@", exception);
         
         if ([exception.name rangeOfString:@"datahub_accountAccountException"].location != NSNotFound) {
             errorTitle = @"duplicate account";
