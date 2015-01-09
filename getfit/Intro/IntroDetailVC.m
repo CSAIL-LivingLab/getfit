@@ -61,13 +61,13 @@
     email = [defaults objectForKey:@"email"];
     
 
-    [self createUser:username withEmail:email andPasword:password];
+    [self createUser];
     [self dropSchemaIfExists];
     [self createSchema];
     [self showResults];
 }
 
-- (void) createUser:(NSString *)username withEmail:(NSString*)email andPasword:(NSString *)password {
+- (void) createUser {
     @try {
         // setup for DH accountClient
         datahub_accountAccountServiceClient *account_client = [[Resources sharedResources] createDataHubAccountClient];
