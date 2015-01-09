@@ -24,15 +24,17 @@
 
     // load intro screens on first launch
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     [self loadMainViews];
-        
+    
+    // load the intro view if the user's email isn't set
     if (![defaults stringForKey:@"email"]) {
-        [self loadIntroViews];
-    }
+        [self loadIntroViews]; }
     
+    // set default for cookie storage
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    
+    // show
     [self.window makeKeyAndVisible];
-    
     return YES;
 }
 
