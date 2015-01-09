@@ -114,12 +114,12 @@
 
 - (void) postToGetFit {
     
-    NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [cookieJar cookies]) {
-        NSLog(@"\n\n%@\n", cookie);
-        NSLog(@"----\n");
-    }
+//    NSHTTPCookie *cookie;
+//    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//    for (cookie in [cookieJar cookies]) {
+//        NSLog(@"\n\n%@\n", cookie);
+//        NSLog(@"----\n");
+//    }
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-DD"];
@@ -155,7 +155,17 @@
         NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
         
         
-        NSLog(@"%@", [request allHTTPHeaderFields]);
+        NSURLResponse *response;
+        NSError *error;
+        [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        int code = (int)[httpResponse statusCode];
+        
+        NSLog(@"httpResponse: %@", httpResponse);
+        
+        
+        
+        
         
         if(conn) {
             NSLog(@"Connection Successful");
