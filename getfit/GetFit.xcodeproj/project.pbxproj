@@ -753,7 +753,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_NAME = OpenSense;
+				PRODUCT_NAME = GetFit;
 				PROVISIONING_PROFILE = "1d8b0701-ccfb-4a3d-b565-ebe8b473d26e";
 				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}/../OpenSense/\"/**";
 				WRAPPER_EXTENSION = app;
