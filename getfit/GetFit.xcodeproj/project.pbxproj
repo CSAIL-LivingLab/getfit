@@ -73,6 +73,8 @@
 		94AAABD21A5B21E7005E92D6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AAABD11A5B21E7005E92D6 /* CFNetwork.framework */; };
 		94B01BE81A5AEF890079F8A1 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B01BE71A5AEF890079F8A1 /* config.json */; };
 		94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */; };
+		94CECD9E1A64565200DBE4C1 /* TestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CECD9C1A64565200DBE4C1 /* TestVC.m */; };
+		94CECD9F1A64565200DBE4C1 /* TestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94CECD9D1A64565200DBE4C1 /* TestVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +205,9 @@
 		94B01BE71A5AEF890079F8A1 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		94B01BE91A5AEFD40079F8A1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		94CECD9B1A64565200DBE4C1 /* TestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestVC.h; sourceTree = "<group>"; };
+		94CECD9C1A64565200DBE4C1 /* TestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestVC.m; sourceTree = "<group>"; };
+		94CECD9D1A64565200DBE4C1 /* TestVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +245,9 @@
 		3DDED6C6167D098B006DE4F8 = {
 			isa = PBXGroup;
 			children = (
+				94CECD9B1A64565200DBE4C1 /* TestVC.h */,
+				94CECD9C1A64565200DBE4C1 /* TestVC.m */,
+				94CECD9D1A64565200DBE4C1 /* TestVC.xib */,
 				3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */,
 				941895E11A59E9A900B5BC15 /* GetFit */,
 				3DDED6D2167D098B006DE4F8 /* Products */,
@@ -569,6 +577,7 @@
 				3DDED6EA167D098B006DE4F8 /* Default@2x.png in Resources */,
 				3DDED6EC167D098B006DE4F8 /* Default-568h@2x.png in Resources */,
 				9431EE901A5CC52900B7EC36 /* IntroAboutVC.xib in Resources */,
+				94CECD9F1A64565200DBE4C1 /* TestVC.xib in Resources */,
 				3DFE62551694DE4500145310 /* Icon.png in Resources */,
 				94B01BE81A5AEF890079F8A1 /* config.json in Resources */,
 				3DFE62571694DE4800145310 /* Icon@2x.png in Resources */,
@@ -602,6 +611,7 @@
 				94038E1B1A6081C000B9E936 /* TSSLSocketException.m in Sources */,
 				94038E171A6081C000B9E936 /* TNSFileHandleTransport.m in Sources */,
 				941895EC1A59EA6B00B5BC15 /* Resources.m in Sources */,
+				94CECD9E1A64565200DBE4C1 /* TestVC.m in Sources */,
 				941896071A59EB2300B5BC15 /* OAuthVC.m in Sources */,
 				94038E0F1A6081C000B9E936 /* TProtocolException.m in Sources */,
 				941896031A59EB0200B5BC15 /* AboutView.m in Sources */,

@@ -15,6 +15,7 @@
 #import "ExerciseVC.h"
 #import "GraphVC.h"
 #import "AboutVC.h"
+#import "TestVC.h"
 #import "MinuteTVC.h"
 
 @implementation AppDelegate
@@ -44,10 +45,11 @@
     ExerciseVC *exerciseVC = [[ExerciseVC alloc] init];
     GraphVC *graphVC = [[GraphVC alloc] init];
     AboutVC *aboutVC = [[AboutVC alloc] init];
+    TestVC *testVC = [[TestVC alloc] init];
     
     // add tabs
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[exerciseVC, graphVC, aboutVC];
+    tabBarController.viewControllers = @[testVC, exerciseVC, graphVC, aboutVC];
     self.window.rootViewController = tabBarController;
     self.window.backgroundColor = [UIColor whiteColor];
 

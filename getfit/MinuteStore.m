@@ -176,7 +176,7 @@
         [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         int code = (int)[httpResponse statusCode];
-        NSLog(@"httpResponse: %@", httpResponse);
+        NSLog(@"\n\nhttpResponse: %@", httpResponse);
         
         
         /*
