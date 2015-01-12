@@ -237,17 +237,26 @@
     // add to the MinuteStore
     MinuteStore *ms = [MinuteStore sharedStore];
     [ms addMinuteEntry:_minuteEntry];
-    [ms postToDataHub];
-//    [ms postToGetFit];
-
     
-//     stop gap: load the OAuthVC and have the user log in
-    OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
-    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:navController animated:YES completion:nil];
-    // postToGetFit should be called after the user fills in their info. Right now, oAuthVC is calling it.
-//    [ms postToGetFit];
+    // post minutes to DataHub
+    [ms postToDataHub];
+    
+    
+    // If it's been 3 weeks, the user has to refresh their tokens,
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDate *lastTokenExtract = [defaults objectForKey:@"last_token_extract"];
+    NSTimeInterval timeDiff = [[NSDate date] timeIntervalSinceDate:lastTokenExtract];
+    NSNumber * days = [NSNumber numberWithInt:((NSInteger) timeDiff) / (60*60*24)];
+    
+    
+    if (!isnan(timeDiff) && days < [NSNumber numberWithInt:21]) {
+        [ms postToGetFit];
+    } else {
+        OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
+        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentViewController:navController animated:YES completion:nil];
+    }
 }
 
 

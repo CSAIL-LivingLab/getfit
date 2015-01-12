@@ -74,11 +74,8 @@
     [defaults setObject:form_token forKey:@"form_token"];
     [defaults setObject:form_build_id forKey:@"form_build_id"];
     [defaults setObject:form_id forKey:@"form_id"];
+    [defaults setObject:[NSDate date] forKey:@"last_token_extract"];
     [defaults synchronize];
-    
-    NSLog(@"form_token: %@", form_token);
-    NSLog(@"form_build_id: %@", form_build_id);
-    NSLog(@"form_id: %@", form_id);
     
     // once tokens are extracted, post to getFit and close the page
     MinuteStore *ms = [MinuteStore sharedStore];
@@ -86,15 +83,7 @@
     // save cookies for MinuteStore.
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    
-    /*
-    for (cookie in [cookieJar cookies]) {
-        NSLog(@"\n\nOAUTHVC COOKIE: %@\n", cookie);
-        NSLog(@"----\n");
-    }
-     */
-    
-
+  
     
     [ms postToGetFit];
     [self dismiss];
@@ -103,14 +92,6 @@
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
-    NSLog(@"------\nURL:  %@\n\n------", url);
-    
-
-    
-    
-    // figure out which methods to call, based on the url
-
-    
     
     // do nothing unless it's a getfit url
     if ([url rangeOfString:@"getfit"].location == NSNotFound || [url rangeOfString:@"idp.mit.edu"].location != NSNotFound) {
