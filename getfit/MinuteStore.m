@@ -113,14 +113,6 @@
 }
 
 - (void) postToGetFit {
-    
-//    NSHTTPCookie *cookie;
-//    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-//    for (cookie in [cookieJar cookies]) {
-//        NSLog(@"\n\n%@\n", cookie);
-//        NSLog(@"----\n");
-//    }
-    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-DD"];
     

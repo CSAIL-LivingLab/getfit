@@ -55,7 +55,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-DD"];
 
     // create the entry and format somet hings
-    MinuteEntry *me = [[MinuteEntry alloc] initEntryWithActivity:@"WORKAGAINPLEASE" intensity:@"high" duration:200 andEndTime:[NSDate date]];
+    MinuteEntry *me = [[MinuteEntry alloc] initEntryWithActivity:@"WORK_AGAIN_4" intensity:@"high" duration:200 andEndTime:[NSDate date]];
     NSString *endDate = [dateFormatter stringFromDate:me.endTime];
     NSString *duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
     
@@ -69,7 +69,6 @@
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray * cookies  = [cookieJar cookies];
     NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
-
     
     // format the post body
     NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, me.activity, me.intensity, endDate, duration];
@@ -79,16 +78,9 @@
     // format the request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/system/ajax"]];
     [request setHTTPMethod:@"POST"];
-    //        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setAllHTTPHeaderFields:headers];
     [request setHTTPBody:postData];
-    
-    
-    NSLog(@"MINUTE STORE REQUEST HEADER: %@\n\n", [request allHTTPHeaderFields]);
-    NSLog(@"MINUTE STORE REQUEST BODY: %@\n\n", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]);
-    
-//    NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
     
     NSURLResponse *response;
     NSError *error;
@@ -105,14 +97,4 @@
     [self presentViewController:navController animated:YES completion:nil];
 }
 
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData*)data {
-    NSLog(@"\n\nconnection didReceiveData\n\n");
-    NSLog(@"data: %@", data);
-}
-
-- (void) connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"\n\nconnection did finish loading\n\n");
-    NSLog(@"data: %@", connection);
-}
 @end

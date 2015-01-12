@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestVC : UIViewController <NSURLConnectionDataDelegate>
+@interface TestVC : UIViewController
 
 - (IBAction)postToGetFit:(id)sender;
 - (IBAction)loadOAuthVC:(id)sender;
