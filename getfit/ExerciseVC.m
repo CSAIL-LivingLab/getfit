@@ -238,16 +238,14 @@
     MinuteStore *ms = [MinuteStore sharedStore];
     [ms addMinuteEntry:_minuteEntry];
     [ms postToDataHub];
-    [ms postToGetFit];
+//    [ms postToGetFit];
 
     
 //     stop gap: load the OAuthVC and have the user log in
-    /*
     OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
     navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:navController animated:YES completion:nil];
-     */
     // postToGetFit should be called after the user fills in their info. Right now, oAuthVC is calling it.
 //    [ms postToGetFit];
 }

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class MinuteEntry;
 
-@interface MinuteStore : NSObject <NSURLConnectionDataDelegate>
+@interface MinuteStore : NSObject
 + (instancetype) sharedStore;
 
 - (MinuteEntry *) createMinuteEntryWithActivity:(NSString *) activity

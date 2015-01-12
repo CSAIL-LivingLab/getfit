@@ -116,11 +116,21 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-DD"];
     
+    // intensity must be all lower case
+    // duration must be >= 1
+    // spaces for activities work
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
         
+        NSString *activity = me.activity;
+        NSString *intensity = me.intensity;
         NSString *endDate = [dateFormatter stringFromDate:me.endTime];
         NSString *duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
+        
+        // default to a duration of 1, to make sure _something_ gets posted
+        if ([duration isEqualToString:@"0"]) {
+            duration = @"1";
+        }
         
         // get the form info
         NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
@@ -128,69 +138,33 @@
         NSString *form_build_id = [defaults objectForKey:@"form_build_id"];
         NSString *form_id = [defaults objectForKey:@"form_id"];
         
-        // format the data
-        NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, me.activity, me.intensity, endDate, @"100"/*duration*/];
-        post = [post stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
-        
-        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-//        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
-        
-
+        // gather the cookies
         NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         NSArray * cookies  = [cookieJar cookies];
         NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
+  
+        // format the post body
+        NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, activity, intensity, endDate, duration];
+        post = [post stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
-        
-//        for (NSHTTPCookie *cookie in [cookieJar cookies]) {
-//            NSLog(@"\n\nMINUTE STORE COOKIE: %@\n", cookie);
-//            NSLog(@"----\n");
-//        }
-        
-        
-        // create request and send
+        // format the request
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/system/ajax"]];
         [request setHTTPMethod:@"POST"];
-//        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         [request setAllHTTPHeaderFields:headers];
-        
-        
         [request setHTTPBody:postData];
-        NSLog(@"MINUTE STORE REQUEST HEADER: %@", [request allHTTPHeaderFields]);
-        NSLog(@"MINUTE STORE REQUEST BODY: %@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]);
-        
-        NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
-        
         
         NSURLResponse *response;
         NSError *error;
+        
         [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        int code = (int)[httpResponse statusCode];
-        NSLog(@"\n\nhttpResponse: %@", httpResponse);
-        
-        
-        /*
-        if(conn) {
-            NSLog(@"Connection Successful");
-        } else {
-            NSLog(@"Connection could not be made");
-        }
-        */
+        NSLog(@"\n\nhttpResponse:\n %@", [httpResponse allHeaderFields]);
 
     }
     
     [_privateMinutes removeAllObjects];
-}
-
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData*)data {
-    NSLog(@"connection didReceiveData");
-}
-
-- (void) connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"connection did finish loading");
 }
 
 
