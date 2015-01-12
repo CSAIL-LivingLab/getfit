@@ -35,14 +35,22 @@
     locationManager = [[CLLocationManager alloc] init];
     [locationManager setDelegate:self];
     
-    [locationManager startMonitoringSignificantLocationChanges];
+    int authStatus = [CLLocationManager authorizationStatus];
+    
+    if (authStatus == kCLAuthorizationStatusNotDetermined && floor(kCFCoreFoundationVersionNumber) > kCFCoreFoundationVersionNumber_iOS_7_1) {
+        [locationManager requestAlwaysAuthorization];
+    } else {
+//        [locationManager startMonitoringSignificantLocationChanges];
+        [self startMonitoringLocation];
+    }
     
     [super startProbe];
 }
 
 - (void)stopProbe
 {
-    [locationManager stopMonitoringSignificantLocationChanges];
+//    [locationManager stopMonitoringSignificantLocationChanges];
+    [locationManager stopUpdatingLocation];
     locationManager = nil;
     
     [super stopProbe];
@@ -66,6 +74,11 @@
     return data;
 }
 
+- (void) startMonitoringLocation {
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    [locationManager startUpdatingLocation];
+}
+
 #pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
@@ -81,6 +94,29 @@
 {
     OSLog(@"Could not monitor location: %@", [error localizedDescription]);
 }
+
+- (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusAuthorizedAlways) {
+//        [manager startMonitoringSignificantLocationChanges];
+        [self startMonitoringLocation];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @end

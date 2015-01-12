@@ -129,7 +129,7 @@
             // find stepCounts for that activity
             [sc queryStepCountStartingFrom:startDate to:endDate toQueue:activityQueue withHandler:^(NSInteger numberOfSteps, NSError *error) {
                 NSNumber *steps = [[NSNumber alloc] initWithInteger:numberOfSteps];
-                point = [point initWithObjectsAndKeys:
+                point = [[NSDictionary alloc ] initWithObjectsAndKeys:
                                        activityString, @"activity",
                                        confidenceString, @"confidence",
                                        steps, @"steps",

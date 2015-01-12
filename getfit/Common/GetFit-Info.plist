@@ -64,5 +64,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location data is sent to datahub, where you can edit and delete your information at any time.</string>
 </dict>
 </plist>
