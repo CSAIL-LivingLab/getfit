@@ -40,6 +40,7 @@
     if ([viewControllerArray count] < 2) {
         introDetailVC = [[IntroDetailVC alloc] init];
         viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, introDetailVC, nil];
+        [self setViewControllers:@[introAboutVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
     }
 }
 

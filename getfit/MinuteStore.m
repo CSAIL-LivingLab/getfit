@@ -149,6 +149,9 @@
         [request setHTTPMethod:@"POST"];
         [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//        [request setAllHTTPHeaderFields:<#(NSDictionary *)#>]
+        
+        
         [request setHTTPBody:postData];
         
         

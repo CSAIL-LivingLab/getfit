@@ -105,11 +105,16 @@
     [cm queryActivityStartingFromDate:lastSampleDate toDate:now toQueue:activityQueue withHandler:^(NSArray *activities, NSError *error){
         
         // for each returned activity
-        for(int i=0;i<[activities count]-1;i++) {
+        for(int i=0;i<[activities count];i++) {
             CMMotionActivity *a = [activities objectAtIndex:i];
             
             NSDate *startDate = a.startDate;
-            NSDate *endDate = [[activities objectAtIndex:i+1] startDate];
+            NSDate *endDate;
+            if (i+1 < [activities count]) {
+                endDate = [[activities objectAtIndex:i+1] startDate];
+            } else {
+                endDate = [NSDate date];
+            }
             
             NSString *activityString = @"unknown";
             if (a.running) activityString = @"running";

@@ -28,6 +28,7 @@
     
     // load the intro view if the user's email isn't set
     if (![defaults stringForKey:@"email"]) {
+//    if (YES) {
         [self loadIntroViews]; }
     
     // set default for cookie storage

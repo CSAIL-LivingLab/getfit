@@ -82,6 +82,16 @@
     
     // once tokens are extracted, post to getFit and close the page
     MinuteStore *ms = [MinuteStore sharedStore];
+    
+    // save cookies for MinuteStore.
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [cookieJar cookies]) {
+        NSLog(@"\n\nCOOKIE: %@\n", cookie);
+        NSLog(@"----\n");
+    }
+
+    
     [ms postToGetFit];
     [self dismiss];
 }
@@ -89,17 +99,9 @@
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
-    NSLog(@"------\nURL:  %@\n------", url);
+    NSLog(@"------\nURL:  %@\n\n------", url);
     
-    // save cookies for MinuteStore.
-    /*
-     NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [cookieJar cookies]) {
-        NSLog(@"\n\n%@\n", cookie);
-        NSLog(@"----\n");
-    }
-     */
+
     
     
     // figure out which methods to call, based on the url
