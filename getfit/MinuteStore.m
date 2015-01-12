@@ -137,23 +137,36 @@
         NSString *form_id = [defaults objectForKey:@"form_id"];
         
         // format the data
-        NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, me.activity, me.intensity, endDate, duration];
+        NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, me.activity, me.intensity, endDate, @"100"/*duration*/];
         post = [post stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+//        NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+        
+
+        NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        NSArray * cookies  = [cookieJar cookies];
+        NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
+        
+        
+//        for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+//            NSLog(@"\n\nMINUTE STORE COOKIE: %@\n", cookie);
+//            NSLog(@"----\n");
+//        }
+        
         
         // create request and send
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/system/ajax"]];
         [request setHTTPMethod:@"POST"];
-        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//        [request setAllHTTPHeaderFields:<#(NSDictionary *)#>]
+        [request setAllHTTPHeaderFields:headers];
         
         
         [request setHTTPBody:postData];
-        
+        NSLog(@"MINUTE STORE REQUEST HEADER: %@", [request allHTTPHeaderFields]);
+        NSLog(@"MINUTE STORE REQUEST BODY: %@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]);
         
         NSURLConnection *conn = [[NSURLConnection alloc]initWithRequest:request delegate:self];
         
@@ -163,18 +176,16 @@
         [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         int code = (int)[httpResponse statusCode];
-        
         NSLog(@"httpResponse: %@", httpResponse);
         
         
-        
-        
-        
+        /*
         if(conn) {
             NSLog(@"Connection Successful");
         } else {
             NSLog(@"Connection could not be made");
         }
+        */
 
     }
     

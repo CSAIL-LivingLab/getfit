@@ -86,10 +86,14 @@
     // save cookies for MinuteStore.
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    
+    /*
     for (cookie in [cookieJar cookies]) {
-        NSLog(@"\n\nCOOKIE: %@\n", cookie);
+        NSLog(@"\n\nOAUTHVC COOKIE: %@\n", cookie);
         NSLog(@"----\n");
     }
+     */
+    
 
     
     [ms postToGetFit];

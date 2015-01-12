@@ -51,7 +51,6 @@
 		941895E81A59EA5700B5BC15 /* chart_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 941895E51A59EA5700B5BC15 /* chart_line.png */; };
 		941895E91A59EA5700B5BC15 /* chart_pie.png in Resources */ = {isa = PBXBuildFile; fileRef = 941895E61A59EA5700B5BC15 /* chart_pie.png */; };
 		941895EC1A59EA6B00B5BC15 /* Resources.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895EB1A59EA6B00B5BC15 /* Resources.m */; };
-		941895F01A59EA9700B5BC15 /* PageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895EF1A59EA9700B5BC15 /* PageVC.m */; };
 		941895F71A59EACB00B5BC15 /* GraphVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895F41A59EACB00B5BC15 /* GraphVC.m */; };
 		941895F81A59EACB00B5BC15 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895F61A59EACB00B5BC15 /* GraphView.m */; };
 		941895FC1A59EAEA00B5BC15 /* ExerciseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895FB1A59EAEA00B5BC15 /* ExerciseVC.m */; };
@@ -167,8 +166,6 @@
 		941895E61A59EA5700B5BC15 /* chart_pie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chart_pie.png; sourceTree = "<group>"; };
 		941895EA1A59EA6B00B5BC15 /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resources.h; sourceTree = "<group>"; };
 		941895EB1A59EA6B00B5BC15 /* Resources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resources.m; sourceTree = "<group>"; };
-		941895EE1A59EA9700B5BC15 /* PageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageVC.h; sourceTree = "<group>"; };
-		941895EF1A59EA9700B5BC15 /* PageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageVC.m; sourceTree = "<group>"; };
 		941895F31A59EACB00B5BC15 /* GraphVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphVC.h; sourceTree = "<group>"; };
 		941895F41A59EACB00B5BC15 /* GraphVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphVC.m; sourceTree = "<group>"; };
 		941895F51A59EACB00B5BC15 /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
@@ -381,7 +378,6 @@
 				9431EE7F1A5C9BC000B7EC36 /* Secret.h */,
 				9431EE801A5C9BC000B7EC36 /* Secret.m */,
 				941895E31A59EA4600B5BC15 /* Charts */,
-				941895F11A59EAA100B5BC15 /* Page */,
 				941895F91A59EADF00B5BC15 /* Exercise */,
 				941895F21A59EABB00B5BC15 /* Graph */,
 				941895FD1A59EAF400B5BC15 /* About */,
@@ -401,15 +397,6 @@
 				941895E61A59EA5700B5BC15 /* chart_pie.png */,
 			);
 			name = Charts;
-			sourceTree = "<group>";
-		};
-		941895F11A59EAA100B5BC15 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				941895EE1A59EA9700B5BC15 /* PageVC.h */,
-				941895EF1A59EA9700B5BC15 /* PageVC.m */,
-			);
-			name = Page;
 			sourceTree = "<group>";
 		};
 		941895F21A59EABB00B5BC15 /* Graph */ = {
@@ -633,7 +620,6 @@
 				94038E111A6081C000B9E936 /* TSocketServer.m in Sources */,
 				941645631A59F01F00B9B2CD /* ViewController.m in Sources */,
 				94038E0C1A6081C000B9E936 /* TBinaryProtocol.m in Sources */,
-				941895F01A59EA9700B5BC15 /* PageVC.m in Sources */,
 				94038E251A6081C900B9E936 /* datahub.m in Sources */,
 				9431EE941A5CC54900B7EC36 /* IntroDetailVC.m in Sources */,
 				94038E161A6081C000B9E936 /* TMemoryBuffer.m in Sources */,
