@@ -684,7 +684,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1d8b0701-ccfb-4a3d-b565-ebe8b473d26e";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
@@ -709,7 +709,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1d8b0701-ccfb-4a3d-b565-ebe8b473d26e";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -732,7 +732,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = GetFit;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1d8b0701-ccfb-4a3d-b565-ebe8b473d26e";
 				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}/../OpenSense/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -745,16 +745,16 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Common/GetFit-Prefix-Prefix.pch";
-				INFOPLIST_FILE = "Common/GetFit-Prefix-Info.plist";
+				GCC_PREFIX_HEADER = "Common/GetFit-Prefix.pch";
+				INFOPLIST_FILE = "Common/GetFit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_NAME = OpenSense;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = GetFit;
+				PROVISIONING_PROFILE = "1d8b0701-ccfb-4a3d-b565-ebe8b473d26e";
 				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}/../OpenSense/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
