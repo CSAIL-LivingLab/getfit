@@ -23,5 +23,6 @@
 // need to be implemented
 - (void) postToGetFit;
 - (void) postToDataHub;
+- (BOOL) checkForValidCookies;
 
 @end

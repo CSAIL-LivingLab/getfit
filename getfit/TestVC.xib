@@ -33,11 +33,22 @@
                         <action selector="loadOAuthVC:" destination="-1" eventType="touchUpInside" id="af7-nf-bYM"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btb-3o-jyT">
+                    <rect key="frame" x="223" y="323" width="155" height="30"/>
+                    <state key="normal" title="Cookie Magic Monster">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cookieMonster:" destination="-1" eventType="touchUpInside" id="9m3-t2-5TY"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="VcV-4C-PQQ" secondAttribute="centerX" id="2Kp-dy-1Rb"/>
                 <constraint firstAttribute="centerY" secondItem="5aU-5e-jOS" secondAttribute="centerY" id="Rue-c6-P5X"/>
+                <constraint firstAttribute="centerX" secondItem="btb-3o-jyT" secondAttribute="centerX" constant="-0.5" id="bqC-Dt-r2N"/>
+                <constraint firstItem="btb-3o-jyT" firstAttribute="top" secondItem="5aU-5e-jOS" secondAttribute="bottom" constant="8" id="faa-Ak-yhk"/>
                 <constraint firstAttribute="centerX" secondItem="5aU-5e-jOS" secondAttribute="centerX" id="i3l-YA-qqI"/>
                 <constraint firstItem="5aU-5e-jOS" firstAttribute="top" secondItem="VcV-4C-PQQ" secondAttribute="bottom" constant="8" id="o8m-p9-IaS"/>
             </constraints>

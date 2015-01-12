@@ -12,5 +12,6 @@
 
 - (IBAction)postToGetFit:(id)sender;
 - (IBAction)loadOAuthVC:(id)sender;
+- (IBAction)cookieMonster:(id)sender;
 
 @end

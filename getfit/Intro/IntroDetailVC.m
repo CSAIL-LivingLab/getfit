@@ -78,7 +78,11 @@
         NSLog(@"%@", exception);
         
         if ([exception.name rangeOfString:@"datahub_accountAccountException"].location != NSNotFound) {
+            datahub_accountAccountException *acctException = (datahub_accountAccountException*) exception;
             errorTitle = @"duplicate account";
+            
+            NSLog(@"%@", acctException.message);
+            
             errorMessage = @"duplicate username and/or email detected. Please try another username or email.";
         } else {
             errorTitle = @"Connection Error";

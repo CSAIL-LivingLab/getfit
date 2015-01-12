@@ -241,17 +241,10 @@
     // post minutes to DataHub
     [ms postToDataHub];
     
-    
-    // If it's been 3 weeks, the user has to refresh their tokens,
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDate *lastTokenExtract = [defaults objectForKey:@"last_token_extract"];
-    NSTimeInterval timeDiff = [[NSDate date] timeIntervalSinceDate:lastTokenExtract];
-    NSNumber * days = [NSNumber numberWithInt:((NSInteger) timeDiff) / (60*60*24)];
-    
-    
-    if (!isnan(timeDiff) && days < [NSNumber numberWithInt:21]) {
+    if ([ms checkForValidCookies]) {
         [ms postToGetFit];
     } else {
+        // the oAuthVC will post the minutes
         OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;

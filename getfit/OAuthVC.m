@@ -24,7 +24,7 @@
     [super viewDidLoad];
     
     // make a bar button
-    [self makeDoneButton];
+//    [self makeDoneButton];
     
     // make the web view load
     [self setupWebView];
@@ -79,11 +79,6 @@
     
     // once tokens are extracted, post to getFit and close the page
     MinuteStore *ms = [MinuteStore sharedStore];
-    
-    // save cookies for MinuteStore.
-    NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-  
     
     [ms postToGetFit];
     [self dismiss];
