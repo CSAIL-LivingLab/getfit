@@ -10,6 +10,7 @@
 @class MinuteEntry;
 
 @interface MinuteStore : NSObject
+
 + (instancetype) sharedStore;
 
 - (MinuteEntry *) createMinuteEntryWithActivity:(NSString *) activity
@@ -20,9 +21,11 @@
 - (void) addMinuteEntry: (MinuteEntry *) minuteEntry;
 - (void) removeMinuteEntry:(MinuteEntry *)minuteEntry;
 
-// need to be implemented
+
 - (void) postToGetFit;
 - (void) postToDataHub;
 - (BOOL) checkForValidCookies;
+
+// special variable, to see if the MinuteTVC called this object.
 
 @end

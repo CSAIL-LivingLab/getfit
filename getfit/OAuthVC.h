@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MinuteTVC;
 
 @interface OAuthVC : UIViewController <UIWebViewDelegate, NSURLConnectionDelegate>
+
+
 
 @end

@@ -8,6 +8,7 @@
 
 #import "OAuthVC.h"
 #import "MinuteStore.h"
+#import "MinuteTVC.h"
 
 @interface OAuthVC ()
 

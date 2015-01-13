@@ -102,7 +102,7 @@
 }
 
 - (void) save {
-    MinuteStore *minuteStore = [MinuteStore sharedStore];
+    MinuteStore *ms = [MinuteStore sharedStore];
     
     // first, check to make sure everything is good
     for (MinuteEntry *me in minuteArr) {
@@ -118,29 +118,26 @@
     
     
     for (MinuteEntry *me in minuteArr) {
-        [minuteStore addMinuteEntry:me];
+        [ms addMinuteEntry:me];
     }
     
-    [minuteStore postToDataHub];
-    //    [minuteStore postToGetFit];
+    [ms postToDataHub];
     
-
-    // stopgap
-    OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
-    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:navController animated:YES completion:nil];
     
-
-    
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"Minutes Saved" message:@"" delegate:nil
-                          cancelButtonTitle:@"ok"
-                          otherButtonTitles:nil];
-    [alert show];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([ms checkForValidCookies]) {
+        [ms postToGetFit];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        // the oAuthVC will post the minutes
+        OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
+        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self presentViewController:navController animated:YES completion:nil];
+    }
     
 }
+
+
 
 - (void) newMinuteEntryForTable {
     // create a new minuteEntry

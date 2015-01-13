@@ -110,6 +110,8 @@
     @catch (NSException *exception) {
         NSLog(@"%@", exception);
     }
+    
+    
 }
 
 - (void) postToGetFit {
@@ -160,11 +162,12 @@
         
         [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        NSLog(@"\n\nhttpResponse:\n %@", [httpResponse allHeaderFields]);
+//        NSLog(@"\n\nhttpResponse:\n %@", [httpResponse allHeaderFields]);
 
     }
     
     [_privateMinutes removeAllObjects];
+    
 }
 
 - (BOOL) checkForValidCookies {
