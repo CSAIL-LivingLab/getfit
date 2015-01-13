@@ -104,9 +104,10 @@
     
     for (int i = 0; i< [cookies count]; i++) {
         cookie = [cookies objectAtIndex:i];
+        NSLog(@"\n\nCOOKIE:  %@", cookie);
+        NSLog(@"\nEXPIRATION DATE: %@", cookie.expiresDate);
+        
         if ([cookie.name rangeOfString:@"SSESS"].location != NSNotFound ) {
-            NSLog(@"\n\nCOOKIE:  %@", cookie);
-            NSLog(@"\nEXPIRATION DATE: %@", cookie.expiresDate);
             
             if ([[NSDate date] compare:cookie.expiresDate] == NSOrderedAscending) {
                 NSLog(@"cookie is valid");
