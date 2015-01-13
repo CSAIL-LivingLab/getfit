@@ -37,6 +37,10 @@
 
 
 - (void)dismiss {
+    if (self.minuteTVC !=nil) {
+        [self.minuteTVC dismissViewControllerAnimated:YES completion:nil];
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -11,6 +11,6 @@
 
 @interface OAuthVC : UIViewController <UIWebViewDelegate, NSURLConnectionDelegate>
 
-
+@property (weak, nonatomic) MinuteTVC *minuteTVC;
 
 @end

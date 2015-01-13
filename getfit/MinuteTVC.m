@@ -133,6 +133,7 @@
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentViewController:navController animated:YES completion:nil];
+        oAuthVC.minuteTVC = self;
     }
     
 }
