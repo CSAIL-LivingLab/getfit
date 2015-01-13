@@ -122,6 +122,8 @@
     }
     
     [ms postToDataHub];
+    [[Resources sharedResources] uploadOpenSenseData];
+
     
     if ([ms checkForValidCookies]) {
         [ms postToGetFit];

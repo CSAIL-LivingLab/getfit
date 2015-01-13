@@ -153,8 +153,6 @@
     } else {
         [_startButton setTitle:@"Start" forState:UIControlStateNormal];
         
-        [[OpenSense sharedInstance] stopCollector];
-        
         [self saveMinuteEntry];
 
         // clear the pickers
@@ -237,6 +235,10 @@
     
     // post minutes to DataHub
     [ms postToDataHub];
+    
+    // send OpenSense data to DataHub
+    [[Resources sharedResources] uploadOpenSenseData];
+    
 
     if ([ms checkForValidCookies]) {
         [ms postToGetFit];

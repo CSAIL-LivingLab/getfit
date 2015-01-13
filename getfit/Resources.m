@@ -86,19 +86,15 @@
     
     NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.opensense(data) values ('"];
     
-    batches = [[NSString stringWithFormat:@"%@", batches] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    batches = [[NSString stringWithFormat:@"%@", batches] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     [statement appendString:batches];
     [statement appendString:@"');"];
     
-    NSLog(@"\n\n\n\nSTATEMENT: %@\n\n\n\n", statement);
-    
     @try {
-        datahubResultSet *result_set = [datahub_client execute_sql:con_app query:statement query_params:nil];
-        NSLog(@"result_set: %@", result_set);
+        [datahub_client execute_sql:con_app query:statement query_params:nil];
         [[OpenSense sharedInstance] deleteAllBatches];
-        // minutes are posted to datahub before getfit, so do not remove the objects here
-        //        [_privateMinutes removeAllObjects];
+
     }
     @catch (NSException *exception) {
         NSLog(@"%@", exception);

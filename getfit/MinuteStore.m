@@ -180,7 +180,7 @@
     
     for (int i = 0; i< [cookies count]; i++) {
         cookie = [cookies objectAtIndex:i];
-          NSLog(@"\n\nCOOKIE:  %@", cookie.name);
+//          NSLog(@"\n\nCOOKIE:  %@", cookie.name);
         
         if ([cookie.name rangeOfString:@"SSESS"].location != NSNotFound && [[NSDate date] compare:cookie.expiresDate] == NSOrderedAscending) {
             drupalCookie = YES;
