@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 CSAIL Big Data Initiative. All rights reserved.
 //
 
+
 #import "Resources.h"
+#import "Secret.h"
 
 // datahub
 #import "datahub.h"
@@ -64,6 +66,44 @@
     return account_client;
 }
 
+
+- (void) uploadOpenSenseData {
+    [OpenSense sharedInstance].delegate = self;
+    [[OpenSense sharedInstance] stopCollector];
+    [[OpenSense sharedInstance] fetchAllBatches];
+}
+
+#pragma mark - OpenSenseDelegate
+
+- (void) didFinishFetchingBatches:(NSString *)batches {
+    NSString *appID = [Secret sharedSecret].DHAppID;
+    NSString *appToken = [Secret sharedSecret].DHAppToken;
+    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+    
+    datahubDataHubClient *datahub_client = [self createDataHubClient];
+    datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
+    datahubConnection * con_app = [datahub_client open_connection:con_params_app];
+    
+    NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.opensense(data) values ('"];
+    
+    batches = [[NSString stringWithFormat:@"%@", batches] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    
+    [statement appendString:batches];
+    [statement appendString:@"');"];
+    
+    NSLog(@"\n\n\n\nSTATEMENT: %@\n\n\n\n", statement);
+    
+    @try {
+        datahubResultSet *result_set = [datahub_client execute_sql:con_app query:statement query_params:nil];
+        NSLog(@"result_set: %@", result_set);
+        [[OpenSense sharedInstance] deleteAllBatches];
+        // minutes are posted to datahub before getfit, so do not remove the objects here
+        //        [_privateMinutes removeAllObjects];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", exception);
+    }
+}
 
 
 @end

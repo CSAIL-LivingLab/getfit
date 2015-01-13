@@ -154,6 +154,7 @@
         [_startButton setTitle:@"Start" forState:UIControlStateNormal];
         
         [[OpenSense sharedInstance] stopCollector];
+        
         [self saveMinuteEntry];
 
         // clear the pickers

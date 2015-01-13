@@ -12,4 +12,5 @@
 
 - (void) addIntroDetailVCToArr;
 - (void) removeIntroDetailVCFromArr;
+- (void) pushDetailVC;
 @end

@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestVC : UIViewController
+@interface TestVC : UIViewController <OpenSenseDelegate>
 
 - (IBAction)postToGetFit:(id)sender;
 - (IBAction)loadOAuthVC:(id)sender;
 - (IBAction)cookieMonster:(id)sender;
+- (IBAction)fetchOpenSense:(id)sender;
+- (IBAction)uploadOpenSense:(id)sender;
 
 @end

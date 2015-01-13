@@ -7,8 +7,9 @@
 //
 // file is used to test code that will be used for [MinuteStore postToGetFit];
 
-
+#import "OpenSense.h"
 #import "TestVC.h"
+#import "Resources.h"
 #import "MinuteStore.h"
 #import "Secret.h"
 #import "MinuteEntry.h"
@@ -120,6 +121,22 @@
     }
     
     
+}
+
+- (IBAction)fetchOpenSense:(id)sender {
+    [OpenSense sharedInstance].delegate = self;
+    [[OpenSense sharedInstance] stopCollector];
+    [[OpenSense sharedInstance] fetchAllBatches];
+}
+
+- (IBAction)uploadOpenSense:(id)sender {
+    [OpenSense sharedInstance].delegate = self;
+    [[OpenSense sharedInstance] stopCollector];
+    [[Resources sharedResources] uploadOpenSenseData];
+}
+
+- (void) didFinishFetchingBatches:(NSString *)batches {
+    NSLog(@"%@", batches);
 }
 
 @end

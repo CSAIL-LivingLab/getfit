@@ -11,6 +11,12 @@
 
 #define kOpenSenseBatchSavedNotification @"kOpenSenseBatchSavedNotification"
 
+@protocol OpenSenseDelegate <NSObject>
+
+- (void) didFinishFetchingBatches:(NSString *)batches;
+
+@end
+
 @interface OpenSense : NSObject {
     NSMutableArray *activeProbes;
     BOOL registrationInProgress;
@@ -20,6 +26,7 @@
 
 @property (assign, readonly) BOOL isRunning;
 @property (strong, readonly) NSDate *startTime;
+@property (strong, atomic) NSObject<OpenSenseDelegate> *delegate;
 
 + (OpenSense*)sharedInstance;
 - (BOOL)startCollector;
@@ -31,5 +38,8 @@
 - (void)localDataBatchesForProbe:(NSString*)probeIdentifier success:(void (^)(NSArray *batches))success;
 
 - (void) stopCollectorAndUploadData;
+
+- (void) fetchAllBatches;
+- (void) deleteAllBatches;
 
 @end

@@ -175,7 +175,6 @@
                     if ([line length] <= 0) { // Skip blank lines
                         continue;
                     }
-                    NSLog(@"%@", lines);
                     
                     NSData *data = [[NSData alloc] initWithBase64EncodedString:line];
                     

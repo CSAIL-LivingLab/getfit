@@ -15,7 +15,7 @@
 @end
 
 @implementation IntroAboutVC
-@synthesize nameTextField, emailTextField, swipeToContinue, ready, introPageVC;
+@synthesize nameTextField, emailTextField, ready, introPageVC, tapToContinue;
 
 // hack so that it's possible to access the parent PageVC's array of pages
 
@@ -27,10 +27,15 @@
     return self;
 }
 
+- (IBAction)tapToContinue:(id)sender {
+    [introPageVC pushDetailVC];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    swipeToContinue.alpha = 0;
-    swipeToContinue.hidden = NO;
+    
+    tapToContinue.alpha = 0;
+    tapToContinue.hidden = YES;
     
     [nameTextField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
     
@@ -85,17 +90,17 @@
     }
     
     // fade in button
-    if (ready && swipeToContinue.alpha < 1.0) {
-        swipeToContinue.hidden = NO;
+    if (ready && tapToContinue.alpha < 1.0) {
+        tapToContinue.hidden = NO;
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn
-                         animations:^{ swipeToContinue.alpha = 1;}
+                         animations:^{ tapToContinue.alpha = 1;}
                          completion:nil];
         
-    } else if (!ready && swipeToContinue.alpha > 0) {
+    } else if (!ready && tapToContinue.alpha > 0) {
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{ swipeToContinue.alpha = 0;}
+                         animations:^{ tapToContinue.alpha = 0;}
                          completion:nil];
-        swipeToContinue.hidden = YES;
+        tapToContinue.hidden = YES;
     }
     
     // save defaults

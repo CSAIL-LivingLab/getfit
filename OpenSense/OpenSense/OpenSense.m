@@ -230,19 +230,7 @@
             OSLog(@"\n\n\n\n%@\n\n\n\n", JSON);
             
             if ([JSON objectForKey:@"status"] && [[JSON objectForKey:@"status"] isEqualToString:@"ok"]) {
-                OSLog(@"Data succesfully uploaded!");
-                
-                // Determine file path
-                NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-                NSString *dataPath = [documentsPath stringByAppendingPathComponent:@"data"];
-                
-                // Find files in data directory
-                NSArray *probeDataFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dataPath error:NULL];
-                for (NSString *file in probeDataFiles) {
-                    if ([file hasPrefix:@"probedata"] && ![file isEqualToString:@"probedata"]) {
-                        [[NSFileManager defaultManager] removeItemAtPath:file error:nil]; // Delete file
-                    }
-                }
+                [self deleteAllBatches];
             } else {
                 OSLog(@"Could not upload collected data");
             }
@@ -258,6 +246,55 @@
         
         [operation start];
     }];
+}
+
+
+- (void) fetchAllBatches {
+    BOOL * skipCurrent = [OpenSense sharedInstance].isRunning;
+    NSMutableString *allJsonData = [NSMutableString stringWithString:@""];
+    
+    [[OSLocalStorage sharedInstance] fetchBatchesForProbe:nil skipCurrent:skipCurrent parseJSON:NO success:^(NSArray *batches) {
+        
+        OSLog(@"Constructing JSON document with %lu batches", (unsigned long)[batches count]);
+        
+        // Construct JSON document by comma-separating indvidual data batches
+        NSString *jsonFile = [[NSString alloc] init];
+        for (NSData *lineData in batches) {
+            NSString *lineStr = [[NSString alloc] initWithData:lineData encoding:NSUTF8StringEncoding];
+            
+            if (lineStr) {
+                jsonFile = [jsonFile stringByAppendingFormat:@"%@,", lineStr];
+            }
+        }
+        
+        // We don't need to append anything if no valid data was found
+        if ([jsonFile length] <= 0) {
+            return;
+        }
+        
+        // Remove the last comma
+        jsonFile = [jsonFile substringToIndex:[jsonFile length] - 1];
+        
+        // ...and add array brackets
+        jsonFile = [NSString stringWithFormat:@"[%@]", jsonFile];
+        [allJsonData appendString:jsonFile];
+        
+        [_delegate didFinishFetchingBatches:allJsonData];
+    }
+     ];
+}
+
+- (void) deleteAllBatches {
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *dataPath = [documentsPath stringByAppendingPathComponent:@"data"];
+    
+    // Find files in data directory
+    NSArray *probeDataFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dataPath error:NULL];
+    for (NSString *file in probeDataFiles) {
+        if ([file hasPrefix:@"probedata"] && ![file isEqualToString:@"probedata"]) {
+            [[NSFileManager defaultManager] removeItemAtPath:file error:nil]; // Delete file
+        }
+    }
 }
 
 - (void)refreshConfig:(id)sender

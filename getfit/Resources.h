@@ -7,9 +7,12 @@
 //
 @class datahubDataHubClient;
 @class datahub_accountAccountServiceClient;
+#import "OpenSense.h"
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface Resources : NSObject
+
+@interface Resources : NSObject <OpenSenseDelegate>
 
 + (instancetype) sharedResources;
 
@@ -19,5 +22,6 @@
 
 - (datahubDataHubClient *) createDataHubClient;
 - (datahub_accountAccountServiceClient *) createDataHubAccountClient;
+- (void) uploadOpenSenseData;
 
 @end

@@ -11,8 +11,10 @@
 @interface IntroAboutVC : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UILabel *swipeToContinue;
+
+@property (weak, nonatomic) IBOutlet UIButton *tapToContinue;
 
 - (instancetype) initWithParentPageVC: (IntroPageVC *) parentPageVC;
+- (IBAction)tapToContinue:(id)sender;
 
 @end

@@ -9,7 +9,7 @@
             <connections>
                 <outlet property="emailTextField" destination="t9Y-SL-hHc" id="EA3-fw-gYu"/>
                 <outlet property="nameTextField" destination="4PG-xu-JUk" id="9a8-tj-KEy"/>
-                <outlet property="swipeToContinue" destination="LZu-oZ-wrP" id="Uej-dQ-osT"/>
+                <outlet property="tapToContinue" destination="Jlg-m7-PZq" id="KHj-8g-BOp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,7 +25,7 @@
                         <constraint firstAttribute="height" constant="323" id="SFX-RQ-mI1"/>
                         <constraint firstAttribute="height" constant="270" id="hQy-2m-0FU"/>
                     </constraints>
-                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</mutableString>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <variation key="default">
@@ -41,19 +41,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4PG-xu-JUk">
-                    <rect key="frame" x="8" y="393.5" width="584" height="30"/>
+                    <rect key="frame" x="8" y="393" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="gCx-GX-gdm"/>
                     </connections>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe Right to Continue >>" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZu-oZ-wrP">
-                    <rect key="frame" x="171" y="476" width="259.5" height="24.5"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
-                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t9Y-SL-hHc">
                     <rect key="frame" x="8" y="431" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -62,23 +56,35 @@
                         <outlet property="delegate" destination="-1" id="qsx-qJ-uYo"/>
                     </connections>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jlg-m7-PZq">
+                    <rect key="frame" x="238.5" y="476" width="124" height="33"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Tap To Continue">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="tapToContinue:" destination="-1" eventType="touchUpInside" id="vOt-ZW-yhw"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="NjH-NR-yld" firstAttribute="top" secondItem="Wmd-QH-puR" secondAttribute="bottom" constant="26" id="27V-HT-AzY"/>
                 <constraint firstAttribute="trailing" secondItem="t9Y-SL-hHc" secondAttribute="trailing" constant="8" id="6ya-tS-ZRn"/>
+                <constraint firstItem="Jlg-m7-PZq" firstAttribute="top" secondItem="t9Y-SL-hHc" secondAttribute="bottom" constant="15" id="841-dI-OSe"/>
                 <constraint firstItem="t9Y-SL-hHc" firstAttribute="top" secondItem="4PG-xu-JUk" secondAttribute="bottom" constant="8" id="8Fc-0Q-D9x"/>
                 <constraint firstAttribute="centerY" secondItem="Wmd-QH-puR" secondAttribute="centerY" constant="85.5" id="8sT-Ro-EG5"/>
                 <constraint firstItem="t9Y-SL-hHc" firstAttribute="top" secondItem="4PG-xu-JUk" secondAttribute="bottom" constant="8" id="A2d-Us-jqZ"/>
+                <constraint firstAttribute="centerX" secondItem="Jlg-m7-PZq" secondAttribute="centerX" constant="-0.5" id="FGQ-Q9-oVI"/>
                 <constraint firstItem="4PG-xu-JUk" firstAttribute="top" secondItem="NjH-NR-yld" secondAttribute="bottom" constant="8" id="GCg-OQ-xg4"/>
                 <constraint firstAttribute="trailing" secondItem="4PG-xu-JUk" secondAttribute="trailing" constant="8" id="LSg-je-nx4"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NjH-NR-yld" secondAttribute="trailing" constant="8" id="Nr9-5N-Obs"/>
+                <constraint firstAttribute="centerX" secondItem="Jlg-m7-PZq" secondAttribute="centerX" constant="-0.5" id="Qg5-xT-TF1"/>
+                <constraint firstAttribute="centerX" secondItem="Jlg-m7-PZq" secondAttribute="centerX" constant="-0.5" id="SPF-w9-DLI"/>
                 <constraint firstItem="Wmd-QH-puR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="X9J-Wc-LoT"/>
                 <constraint firstItem="Wmd-QH-puR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="cSs-J1-a0J"/>
                 <constraint firstItem="t9Y-SL-hHc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="cpc-pT-pg1"/>
-                <constraint firstItem="LZu-oZ-wrP" firstAttribute="top" secondItem="t9Y-SL-hHc" secondAttribute="bottom" constant="15" id="dgZ-Mi-kOs"/>
                 <constraint firstItem="NjH-NR-yld" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="hcL-SC-WAX"/>
-                <constraint firstAttribute="centerX" secondItem="LZu-oZ-wrP" secondAttribute="centerX" id="hv2-a6-JR1"/>
                 <constraint firstItem="NjH-NR-yld" firstAttribute="width" secondItem="4PG-xu-JUk" secondAttribute="width" id="jEI-EH-gok"/>
                 <constraint firstItem="4PG-xu-JUk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="kGI-bp-l2i"/>
                 <constraint firstAttribute="trailing" secondItem="NjH-NR-yld" secondAttribute="trailing" constant="8" id="nhO-6j-UOx"/>
@@ -93,6 +99,8 @@
                     <exclude reference="jEI-EH-gok"/>
                     <exclude reference="A2d-Us-jqZ"/>
                     <exclude reference="ylE-10-zgz"/>
+                    <exclude reference="FGQ-Q9-oVI"/>
+                    <exclude reference="SPF-w9-DLI"/>
                 </mask>
             </variation>
         </view>

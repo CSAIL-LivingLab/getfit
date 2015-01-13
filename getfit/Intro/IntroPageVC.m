@@ -44,6 +44,10 @@
     }
 }
 
+- (void) pushDetailVC {
+    [self setViewControllers:@[introDetailVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:NULL];
+}
+
 - (void) removeIntroDetailVCFromArr {
     if ([viewControllerArray count] > 1) {
         viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, nil];
