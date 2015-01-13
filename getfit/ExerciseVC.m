@@ -32,10 +32,12 @@
 @property UIPickerView *activityPicker;
 @property UIPickerView *intensityPicker;
 
+@property BOOL didJustPostMinutesFromSeparateView;
+
 @end
 
 @implementation ExerciseVC
-
+@synthesize didJustPostMinutesFromSeparateView;
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,6 +54,7 @@
     [super viewDidLoad];
     
     // some useful varibales
+    didJustPostMinutesFromSeparateView = NO;
     CGRect windowFrame = self.view.frame;
     CGFloat buttonWidth = 140;
     UIColor *systemBlue = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
@@ -128,7 +131,11 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-
+    if (didJustPostMinutesFromSeparateView) {
+        didJustPostMinutesFromSeparateView = NO;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+    }
 
 }
 
@@ -240,10 +247,13 @@
     
     // post minutes to DataHub
     [ms postToDataHub];
-    
+
     if ([ms checkForValidCookies]) {
         [ms postToGetFit];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
     } else {
+        didJustPostMinutesFromSeparateView = YES;
         // the oAuthVC will post the minutes
         OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
@@ -251,8 +261,6 @@
         [self presentViewController:navController animated:YES completion:nil];
     }
     
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
-//    [alert show];
 }
 
 

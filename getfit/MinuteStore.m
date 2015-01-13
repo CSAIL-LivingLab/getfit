@@ -161,7 +161,7 @@
         NSError *error;
         
         [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+//        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
 //        NSLog(@"\n\nhttpResponse:\n %@", [httpResponse allHeaderFields]);
 
     }

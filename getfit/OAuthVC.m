@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationController.navigationBar.topItem.title = @"Please Log In to GetFit";
     // make a bar button
 //    [self makeDoneButton];
     
