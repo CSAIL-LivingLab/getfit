@@ -123,9 +123,11 @@
     
     [ms postToDataHub];
     
-    
     if ([ms checkForValidCookies]) {
         [ms postToGetFit];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         // the oAuthVC will post the minutes

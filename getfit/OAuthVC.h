@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class MinuteTVC;
 
-@interface OAuthVC : UIViewController <UIWebViewDelegate, NSURLConnectionDelegate>
+@interface OAuthVC : UIViewController <UIWebViewDelegate, NSURLConnectionDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) MinuteTVC *minuteTVC;
 

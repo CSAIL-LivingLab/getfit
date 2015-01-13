@@ -37,12 +37,20 @@
 
 
 - (void)dismiss {
-    if (self.minuteTVC !=nil) {
-        [self.minuteTVC dismissViewControllerAnimated:YES completion:nil];
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
+    // dismiss the view after the user clicks ok
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+    [alertView show];
+}
+
+
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.minuteTVC !=nil) {
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+            [self.minuteTVC dismissViewControllerAnimated:YES completion:nil];
+        }
+    
+        [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) makeDoneButton {
