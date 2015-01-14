@@ -304,7 +304,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // create a section for each entry
-    return [minuteArr count];
+//    return [minuteArr count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

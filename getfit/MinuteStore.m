@@ -157,13 +157,13 @@
         [request setAllHTTPHeaderFields:headers];
         [request setHTTPBody:postData];
         
-        NSURLResponse *response;
-        NSError *error;
+//        NSURLResponse *response;
+//        NSError *error;
         
-        [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-//        NSLog(@"\n\nhttpResponse:\n %@", [httpResponse allHeaderFields]);
-
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:nil];
+        
+//        [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     }
     
     [_privateMinutes removeAllObjects];
