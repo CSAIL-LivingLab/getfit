@@ -7,9 +7,10 @@
 //
 
 #import "GraphVC.h"
-#import "GraphView.h"
 
 @interface GraphVC ()
+
+@property UIWebView *webView;
 
 @end
 
@@ -22,21 +23,38 @@
         self.tabBarItem.title = @"Progress";
                 UIImage *image = [UIImage imageNamed:@"chart.png"];
                 self.tabBarItem.image = image;
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadWebView];
     
-    CGRect frame = [UIScreen mainScreen].bounds;
-    GraphView *graphView = [[GraphView alloc] initWithFrame:frame];
-    self.view = graphView;
+}
+
+- (void) loadWebView {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    CGRect frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height);
+    
+    self.webView = [[UIWebView alloc] initWithFrame:frame];
+    
+    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"datahubGraphs" ofType:@"html"];
+    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+    [self.webView loadHTMLString:htmlString baseURL:nil];
+    [self.view addSubview:self.webView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
 }
 
 /*

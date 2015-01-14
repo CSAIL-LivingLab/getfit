@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GraphVC : UIViewController
+@interface GraphVC : UIViewController <UIWebViewDelegate>
 
 @end
