@@ -174,67 +174,54 @@
 #pragma mark - Picker view DataSource/Delegate Methods
 
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    switch (pickerPath.row) {
-        case 1:
-            return [activities objectAtIndex:row];
-        case 2:
-            return [intensities objectAtIndex:row];
-        case 3:
-            return [durations objectAtIndex:row];
-        default:
-            return nil;
+    
+    
+    if (pickerView == activityPicker) {
+        return [activities objectAtIndex:row];
+    } else if (pickerView == intensityPicker) {
+        return [intensities objectAtIndex:row];
+    } else if (pickerView == durationPicker) {
+        return [durations objectAtIndex:row];
     }
+    return nil;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component {
-//    NSLog(@"The pickerPath.row is: %ld", (long)pickerPath.row);
-    switch (pickerPath.row) {
-        case 1:
-            return [activities count];
-            break;
-        case 2:
-            return [intensities count];
-            break;
-        case 3:
-            return [durations count];
-            break;
-        default:
-            return 4;
+    
+    if (thePickerView == activityPicker) {
+        return [activities count];
+    } else if (thePickerView == intensityPicker) {
+        return [intensities count];
+    } else if (thePickerView == durationPicker) {
+        return [durations count];
     }
+    return 4;
 }
 
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    
-    // find the cell and minuteEntry relevant to the picker
-    NSIndexPath *cellPath = [NSIndexPath indexPathForRow:pickerPath.row-1 inSection:pickerPath.section];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:cellPath];
+    NSIndexPath *cellPath;
     MinuteEntry * minuteEntry = [minuteArr objectAtIndex:pickerPath.section];
-    
-    // find what the user selected, and assign to the relevant cell
     NSString *selection = [NSString alloc];
-    switch (pickerPath.row) {
-        case 1:
-            selection = [activities objectAtIndex:row];
-            minuteEntry.activity = selection;
-            break;
-        case 2:
-            selection = [intensities objectAtIndex:row];
-            minuteEntry.intensity = selection;
-            break;
-        case 3:
-            selection = [durations objectAtIndex:row];
-            minuteEntry.duration = [self minutesFromString:selection];
-            break;
-        default:
-            // sometimes is called when the datePicker is toggled before another picker has set its value.
-            [self datePickerChanged:nil];
-            return;
-//            [NSException raise:@"out of bounds"
-//                        format:@"Your picker index.row is >= 4. Use [self datePickerChanged]"];
+    
+    if (thePickerView == activityPicker) {
+        cellPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        selection = [activities objectAtIndex:row];
+        minuteEntry.activity = selection;
+    } else if (thePickerView == intensityPicker) {
+        cellPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        selection = [intensities objectAtIndex:row];
+        minuteEntry.intensity = selection;
+    } else if (thePickerView == durationPicker) {
+        cellPath = [NSIndexPath indexPathForRow:2 inSection:0];
+        selection = [durations objectAtIndex:row];
+        minuteEntry.duration = [self minutesFromString:selection];
+    } else {
+        return;
     }
     
     // assign the selection to the cell
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:cellPath];
     cell.detailTextLabel.text = selection;
 }
 
