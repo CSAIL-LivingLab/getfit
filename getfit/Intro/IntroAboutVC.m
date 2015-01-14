@@ -95,6 +95,7 @@
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn
                          animations:^{ tapToContinue.alpha = 1;}
                          completion:nil];
+        [textField becomeFirstResponder];
         
     } else if (!ready && tapToContinue.alpha > 0) {
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut
