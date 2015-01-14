@@ -43,6 +43,8 @@
 }
 
 
+#pragma mark - UI Setup
+
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
         if (self.minuteTVC !=nil) {
@@ -73,6 +75,8 @@
 
 }
 
+# pragma mark - helper methods
+
 - (void) extractTokens {
     NSLog(@"extract tokens hit");
     
@@ -98,16 +102,64 @@
     [self dismiss];
 }
 
+- (void) hideWebViewAndShowSpinnerView {
+    myWebView.hidden = YES;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    // white view
+    UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height)];
+    
+    // activity indicator
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(screenRect.size.width/2-30, screenRect.size.height/2-30, 60, 60)];
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [activityIndicator startAnimating];
+    
+    
+    // label
+    UILabel *message = [[UILabel alloc] initWithFrame:CGRectMake(screenRect.size.width/2-150, screenRect.size.height/2+20, 300, 40)];
+    message.text = @"Sending Data to GetFit";
+    message.font = [UIFont systemFontOfSize:20];
+    message.textColor = [UIColor grayColor];
+    message.textAlignment = NSTextAlignmentCenter;
+    
+    
+    // add the views
+    [whiteView addSubview:activityIndicator];
+    [whiteView addSubview:message];
+    [self.view addSubview:whiteView];
+    
+    // make sure the view eventually dissapears, even if the web view doesn't load
+    NSTimeInterval delay = 15;
+    [self performSelector:@selector(dismiss) withObject:nil afterDelay:delay];
+}
+
+
+
+#pragma mark - UIWebViewDelegate
+
+- (void) webViewDidStartLoad:(UIWebView *)webView {
+    NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
+    NSLog(@"\n\nURL: %@", url);
+    
+    // detect the redirect url (https://idp.mit.edu/idp/profile/SAML2/Redirect/SSO)
+    // because the dashboard url will only show in webViewDidFinishLoad
+    if ([url rangeOfString:@"SAML2/Redirect"].location != NSNotFound) {
+        [self hideWebViewAndShowSpinnerView];
+    }
+    
+}
+
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
     
-    // do nothing unless it's a getfit url
+    // do nothing unless it's a getfit url. have to check because dashboard might sometimes pass this.
     if ([url rangeOfString:@"getfit"].location == NSNotFound || [url rangeOfString:@"idp.mit.edu"].location != NSNotFound) {
         return;
     }
     
-    // should hide the webView and do this all automatically.
+    // extrac the tokens.
     if ([url rangeOfString:@"dashboard"].location != NSNotFound) {
         [self extractTokens];
     }
