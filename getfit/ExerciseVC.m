@@ -166,6 +166,7 @@
 }
 
 - (void) editAction {
+    [_activityPicker reloadAllComponents];
     [UIView beginAnimations:@"MoveOut" context:nil];
     [_intensityPicker removeFromSuperview];
     [UIView commitAnimations];
@@ -177,6 +178,7 @@
 }
 
 - (void) editIntensity {
+    [_intensityPicker reloadAllComponents];
     [_activityPicker removeFromSuperview];
     [UIView commitAnimations];
     

@@ -134,6 +134,9 @@
             duration = @"1";
         }
         
+        // update the activityPickerArr
+        [[Resources sharedResources] setActivityAsFirst:activity];
+        
         // get the form info
         NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
         NSString *form_token = [defaults objectForKey:@"form_token"];

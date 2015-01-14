@@ -37,10 +37,16 @@
 
 
 - (void)dismiss {
+    // check to make sure the view is actually visible. The interval timer might cause alerts to be called, otherwise
+    if (!self.isViewLoaded || !self.view.window) {
+        return;
+    }
+        
     // dismiss the view after the user clicks ok
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
     [alertView show];
 }
+
 
 
 #pragma mark - UI Setup

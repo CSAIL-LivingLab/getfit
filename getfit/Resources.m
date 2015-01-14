@@ -33,8 +33,20 @@
 - (instancetype) initPrivate {
     self = [super init];
     
-    activities = [[NSArray alloc] initWithObjects:@"Aerobics", @"American football", @"Badminton", @"Ballet", @"Bandy", @"Baseball", @"Basketball", @"Beach Volleyball", @"Body Pump", @"Bowling", @"Boxing", @"Circuit Training", @"Cleaning", @"Climbing", @"Cricket", @"Cross country skiing", @"Curling", @"Cycling", @"Dancing", @"Disk Ultimate", @"Downhill skiing", @"Eliptical Training", @"Fencing", @"Floorball", @"Golfing", @"Gym Training", @"Handball", @"Hockey", @"Indoor Cycling", @"Kayaking", @"Kettlebell", @"Kite Surfing", @"Lacrosse", @"Marshall Arts", @"Paddling", @"Paintball", @"Parkour", @"Petanque", @"Pilates", @"Polo", @"Raquetball", @"Riding", @"Roller Blading", @"Roller Skiing", @"Roller Skating", @"Rowing", @"Rugby", @"Running", @"Running on Treadmill", @"Skuba Diving", @"Skateboarding", @"Snowboarding", @"Snow Shoeing", @"Soccer", @"Spinning", @"Squash", @"Stair Climbing", @"Stretching", @"Surfing", @"Swimming", @"Table Tennis", @"Tennis", @"Volleyball", @"Walking", @"Walking on Treadmill", @"Water Polo", @"Weight Training", @"Wheelchair", @"Wind Surfing", @"Wrestling", @"Yoga", @"Zumba", nil];
+    NSArray * tempActivities = [[NSArray alloc] initWithObjects:@"Aerobics", @"American football", @"Badminton", @"Ballet", @"Bandy", @"Baseball", @"Basketball", @"Beach Volleyball", @"Body Pump", @"Bowling", @"Boxing", @"Circuit Training", @"Cleaning", @"Climbing", @"Cricket", @"Cross country skiing", @"Curling", @"Cycling", @"Dancing", @"Disk Ultimate", @"Downhill skiing", @"Eliptical Training", @"Fencing", @"Floorball", @"Golfing", @"Gym Training", @"Handball", @"Hockey", @"Indoor Cycling", @"Kayaking", @"Kettlebell", @"Kite Surfing", @"Lacrosse", @"Marshall Arts", @"Paddling", @"Paintball", @"Parkour", @"Petanque", @"Pilates", @"Polo", @"Raquetball", @"Riding", @"Roller Blading", @"Roller Skiing", @"Roller Skating", @"Rowing", @"Rugby", @"Running", @"Running on Treadmill", @"Skuba Diving", @"Skateboarding", @"Snowboarding", @"Snow Shoeing", @"Soccer", @"Spinning", @"Squash", @"Stair Climbing", @"Stretching", @"Surfing", @"Swimming", @"Table Tennis", @"Tennis", @"Volleyball", @"Walking", @"Walking on Treadmill", @"Water Polo", @"Weight Training", @"Wheelchair", @"Wind Surfing", @"Wrestling", @"Yoga", @"Zumba", nil];
     
+    // load the user activity list
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults boolForKey:@"activitiesSet"]) {
+        [defaults setObject:tempActivities forKey:@"activities"];
+        [defaults setBool:YES forKey:@"activitiesSet"];
+        [defaults synchronize];
+        
+        activities = tempActivities;
+    } else {
+        activities = [defaults objectForKey:@"activities"];
+    }
+      
     intensities = [[NSArray alloc] initWithObjects:@"high", @"medium", @"low", nil];
     
     durations = [[NSArray alloc] initWithObjects:@"5 min", @"10 min", @"15 min", @"20 min", @"25 min", @"30 min", @"35 min", @"40 min", @"45 min", @"50 min", @"55 min", @"1 hr  0 min", @"1 hr  5 min", @"1 hr 10 min", @"1 hr 15 min", @"1 hr 20 min", @"1 hr 25 min", @"1 hr 30 min", @"1 hr 35 min", @"1 hr 40 min", @"1 hr 45 min", @"1 hr 50 min", @"1 hr 55 min", @"2 hr  0 min", @"2 hr 15 min", @"2 hr 30 min", @"2 hr 45 min", @"3 hr  0 min", @"3 hr 15 min", @"3 hr 30 min", @"3 hr 45 min", @"4 hr  0 min", @"4 hr 15 min", @"4 hr 30 min", @"4 hr 45 min", @"5 hr  0 min",nil];
@@ -47,6 +59,23 @@
                 format:@"Use +[Resources sharedResources]"];
     return nil;
 }
+
+- (void) setActivityAsFirst:(NSString *)activity {
+    
+    // insert at the front of the activities array
+    NSMutableArray *tempActivities = [NSMutableArray arrayWithArray:activities];
+    [tempActivities removeObject:activity];
+    [tempActivities insertObject:activity atIndex:0];
+    activities = [tempActivities copy];
+    
+    // synchronize the defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:activities forKey:@"activities"];
+    [defaults synchronize];
+    
+}
+
+# pragma mark - DataHub
 
 - (datahubDataHubClient *) createDataHubClient {
     NSURL *datahub_url = [[NSURL alloc] initWithString:@"https://datahub.csail.mit.edu/service"];
@@ -67,13 +96,14 @@
 }
 
 
+
+#pragma mark - OpenSense and OpenSenseDelegate
+
 - (void) uploadOpenSenseData {
     [OpenSense sharedInstance].delegate = self;
     [[OpenSense sharedInstance] stopCollector];
     [[OpenSense sharedInstance] fetchAllBatches];
 }
-
-#pragma mark - OpenSenseDelegate
 
 - (void) didFinishFetchingBatches:(NSString *)batches {
     NSString *appID = [Secret sharedSecret].DHAppID;
