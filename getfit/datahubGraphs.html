@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <title>Sample DataHub HTML</title>
+    <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/jquery/jquery.min.js"></script> 
+    <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/thrift/thrift.js"></script>
+    <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/datahub/datahub_types.js"></script>
+    <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/datahub/DataHub.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart", "table", "timeline", "map"]});
+    </script>
+
+    <style>
+    h2 {
+      text-align: center;
+      margin-bottom: 0;
+      font-family: "Helvetica Neue";
+      font-weight: lighter;
+      color: gray;
+    }
+    </style>
+  </head>
+  <body>
+  <div style="height:40px">
+  </div>
+  <div><h2>Minutes by Week</h2>
+    <div id="column-chart-div">
+    </div>
+  </div>
+  <div>
+    <h2>Activity Breakdown</h2>
+    <div id="pie-chart-div">
+    </div>
+  </div>
+  <div>
+    <h2>Your Activities</h2>
+    <div id="table-div">
+    </div>
+  </div>
+  <div style="height:100px">
+  </div>
+    
+  </body>
+</html>
+
+
+<script type="text/javascript">
+
+var app_id = "";
+var app_token = "";
+var repo_base = "";
+
+function makeCharts () {
+    
+    transport = new Thrift.Transport("https://datahub.csail.mit.edu/service/json"),
+    protocol = new Thrift.Protocol(transport),
+    client = new DataHubClient(protocol),
+    con_params = new ConnectionParams({'app_id': 'csail_livinglab_getfit_app_id', 'app_token': '67ca5c9d-1f0b-4ecd-81cd-941d2c8b8d6a', 'repo_base': 'ggxfgbj_hgps'}),
+    
+    
+    con = client.open_connection(con_params),
+    
+    // popular activities
+    activity_res = client.execute_sql(con, 'select activity, sum(duration) from getfit.minutes GROUP BY activity order by sum desc');
+    
+    // minutes by week
+    week_res = client.execute_sql(con, "select week_number, minutes from (SELECT sum(duration) as minutes, TRUNC(DATE_PART('day', '2015-02-02'::timestamp - enddate)/7) as week_number from getfit.minutes group by week_number) as numberedWeeks;");
+    
+    
+    
+    var activity_results_arr = []
+    activity_results_arr.push(activity_res.field_names)
+    $.each(activity_res.tuples, function(tuple_idx, tuple) {
+           var cell_arr = []
+           $.each(tuple.cells, function(cell_idx, cell) {
+                  var val = parseFloat(cell)
+                  cell_arr.push(isNaN(val) ? cell : val)
+                  });
+           activity_results_arr.push(cell_arr)
+           });
+           
+           
+           var week_results_arr = []
+           week_results_arr.push(week_res.field_names)
+           $.each(week_res.tuples, function(tuple_idx, tuple) {
+                  var cell_arr = []
+                  $.each(tuple.cells, function(cell_idx, cell) {
+                         var val = parseFloat(cell)
+                         cell_arr.push(isNaN(val) ? cell : val)
+                         });
+                  week_results_arr.push(cell_arr)
+                  });
+                  
+                  
+                  
+                  activity_data = google.visualization.arrayToDataTable(activity_results_arr);
+                  week_data = google.visualization.arrayToDataTable(week_results_arr);
+                  
+                  
+                  var column_chart = new google.visualization.ColumnChart(document.getElementById('column-chart-div'));
+                  
+                  var column_chart_options = {
+                      legend: {position: 'none'},
+                      hAxis: {
+                          title: 'Week Number',
+                          gridlines: {count: 10},
+                          format: '0',
+                          
+                      },
+                      vAxis: {
+                          title: 'Minutes'
+                      }
+                  };
+                  
+                  column_chart.draw(week_data, column_chart_options);
+                  
+                  var pie_chart = new google.visualization.PieChart(document.getElementById('pie-chart-div'));
+                  pie_chart.draw(activity_data, {});
+                  
+                  var table = new google.visualization.Table(document.getElementById('table-div'));
+                  table.draw(activity_data);
+ 
+}
+</script>

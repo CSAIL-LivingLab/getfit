@@ -7,10 +7,13 @@
 //
 
 #import "GraphVC.h"
-#import "GraphView.h"
+#import "Resources.h"
+#import "Secret.h"
 
 @interface GraphVC ()
 
+@property UIWebView *webView;
+@property NSString *script;
 @end
 
 @implementation GraphVC
@@ -22,21 +25,53 @@
         self.tabBarItem.title = @"Progress";
                 UIImage *image = [UIImage imageNamed:@"chart.png"];
                 self.tabBarItem.image = image;
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadWebView];
     
-    CGRect frame = [UIScreen mainScreen].bounds;
-    GraphView *graphView = [[GraphView alloc] initWithFrame:frame];
-    self.view = graphView;
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+        [self.webView stringByEvaluatingJavaScriptFromString:self.script];
+}
+
+- (void) loadWebView {
+    
+    //size and make webView
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGRect frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height);
+    self.webView = [[UIWebView alloc] initWithFrame:frame];
+    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"datahubGraphs" ofType:@"html"];
+    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+    [self.webView loadHTMLString:htmlString baseURL:nil];
+    
+    // load important keys
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    Secret *secret = [Secret sharedSecret];
+    NSString *app_id = secret.DHAppID;
+    NSString *app_token = secret.DHAppToken;
+    NSString *repo_base = [defaults stringForKey:@"username"];
+    
+    // update HTMl using keys and generate chart
+    self.script = [NSString stringWithFormat:@"app_id = '%@'; app_token = '%@'; repo_base = '%@'; makeCharts();", app_id, app_token, repo_base];
+    NSLog(@"%@", self.script);
+    
+    [self.view addSubview:self.webView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
 }
 
 /*

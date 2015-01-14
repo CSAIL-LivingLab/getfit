@@ -56,11 +56,11 @@
     
     // Body
     NSUserDefaults *defaults= [NSUserDefaults standardUserDefaults];
-    NSString *email = [defaults objectForKey:@"email"];
+    NSString *username = [defaults objectForKey:@"username"];
     NSString *password = [defaults objectForKey:@"password"];
     
     UILabel *body = [[UILabel alloc] initWithFrame:CGRectMake(20, 180, 320-40, 100)];
-    NSString *bodyText = [NSString stringWithFormat:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem.\n\thttp://datahub.csail.mit.edu\n\tusername: %@\n\tpassword: %@", email, password];
+    NSString *bodyText = [NSString stringWithFormat:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem.\n\thttp://datahub.csail.mit.edu\n\tusername: %@\n\tpassword: %@", username, password];
     
     [body setText:bodyText];
     [body setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
