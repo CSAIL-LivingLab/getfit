@@ -17,7 +17,13 @@
       font-family: "Helvetica Neue";
       font-weight: lighter;
       color: gray;
+    },
+
+    #google-visulization-errors-0 {
+        display: none;
     }
+
+
     </style>
   </head>
   <body>
@@ -55,7 +61,7 @@ function makeCharts () {
     transport = new Thrift.Transport("https://datahub.csail.mit.edu/service/json"),
     protocol = new Thrift.Protocol(transport),
     client = new DataHubClient(protocol),
-    con_params = new ConnectionParams({'app_id': 'csail_livinglab_getfit_app_id', 'app_token': '67ca5c9d-1f0b-4ecd-81cd-941d2c8b8d6a', 'repo_base': 'ggxfgbj_hgps'}),
+    con_params = new ConnectionParams({'app_id': app_id, 'app_token': app_token, 'repo_base': repo_base}),
     
     
     con = client.open_connection(con_params),
@@ -92,6 +98,11 @@ function makeCharts () {
                   });
                   
                   
+                  // fill week_results_arr with blank data, or it will show an error
+                  if (week_results_arr.length == 1) {
+                      week_results_arr = [["week_number", "minutes"], [0,0]];
+                  };
+                  
                   
                   activity_data = google.visualization.arrayToDataTable(activity_results_arr);
                   week_data = google.visualization.arrayToDataTable(week_results_arr);
@@ -104,7 +115,7 @@ function makeCharts () {
                       hAxis: {
                           title: 'Week Number',
                           gridlines: {count: 10},
-                          format: '0',
+                          format: 0,
                           
                       },
                       vAxis: {
