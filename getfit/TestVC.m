@@ -40,103 +40,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+- (IBAction)dateMagic:(id)sender {
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    int weekday = (int)[comps weekday];
+    NSLog(@"the weekday %d",weekday);
+    
+    NSDate *lastSunday = [[NSDate date] dateByAddingTimeInterval:-3600*24*(weekday-1)];
+    NSLog(@"lastSunday GMT: %@",lastSunday);
+    
+    [comps setHour:0];
+    NSDate *sunday12am = [gregorian dateFromComponents:comps];
+    NSLog(@"lastSunday GMT: %@",sunday12am);
+    
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
-
-- (IBAction)postToGetFit:(id)sender {
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-DD"];
-
-    // create the entry and format somet hings
-    MinuteEntry *me = [[MinuteEntry alloc] initEntryWithActivity:@"WORK_AGAIN_4" intensity:@"high" duration:200 andEndTime:[NSDate date]];
-    NSString *endDate = [dateFormatter stringFromDate:me.endTime];
-    NSString *duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
-    
-    // get the form info
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    NSString *form_token = [defaults objectForKey:@"form_token"];
-    NSString *form_build_id = [defaults objectForKey:@"form_build_id"];
-    NSString *form_id = [defaults objectForKey:@"form_id"];
-
-    // gather the cookies
-    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray * cookies  = [cookieJar cookies];
-    NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
-    
-    // format the post body
-    NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, me.activity, me.intensity, endDate, duration];
-    post = [post stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    
-    // format the request
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/system/ajax"]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setAllHTTPHeaderFields:headers];
-    [request setHTTPBody:postData];
-    
-    NSURLResponse *response;
-    NSError *error;
-    
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    NSLog(@"\n\nhttpResponse:\n %@", [httpResponse allHeaderFields]);
-}
-
-- (IBAction)loadOAuthVC:(id)sender {
-    OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
-    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:navController animated:YES completion:nil];
-}
-
-- (IBAction)cookieMonster:(id)sender {
-    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray * cookies  = [cookieJar cookies];
-    NSHTTPCookie *cookie;
-    
-    for (int i = 0; i< [cookies count]; i++) {
-        cookie = [cookies objectAtIndex:i];
-        NSLog(@"\n\nCOOKIE:  %@", cookie);
-        NSLog(@"\nEXPIRATION DATE: %@", cookie.expiresDate);
-        
-        if ([cookie.name rangeOfString:@"SSESS"].location != NSNotFound ) {
-            
-            if ([[NSDate date] compare:cookie.expiresDate] == NSOrderedAscending) {
-                NSLog(@"cookie is valid");
-            } else {
-                NSLog(@"cookie not valid");
-            }
-            
-            break;
-        }
-    }
-    
-    
-}
-
-- (IBAction)fetchOpenSense:(id)sender {
-    [OpenSense sharedInstance].delegate = self;
-    [[OpenSense sharedInstance] stopCollector];
-    [[OpenSense sharedInstance] fetchAllBatches];
-}
-
-- (IBAction)uploadOpenSense:(id)sender {
-    [OpenSense sharedInstance].delegate = self;
-    [[OpenSense sharedInstance] stopCollector];
-    [[Resources sharedResources] uploadOpenSenseData];
-}
-
-- (void) didFinishFetchingBatches:(NSString *)batches {
-    NSLog(@"%@", batches);
-}
-
 @end
