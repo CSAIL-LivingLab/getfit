@@ -74,7 +74,7 @@
     myWebView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, screenRect.size.width ,screenRect.size.height)];
     myWebView.delegate = self;
     
-    // If the certs are good, go to GetFit. Otherwise, re log in.
+    // If the certs are good, go to GetFit. Otherwise, assume that the user will need to log in.
     NSURL *nsurl;
     MinuteStore *ms = [MinuteStore sharedStore];
     if ([ms checkForValidCookies]) {
