@@ -241,7 +241,7 @@
     [[Resources sharedResources] uploadOpenSenseData];
     
 
-    if ([ms checkForValidCookies]) {
+    if ([ms checkForValidCookies] && [ms checkForValidTokens:_minuteEntry.endTime] ) {
         [ms postToGetFit];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [alert show];

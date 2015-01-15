@@ -33,13 +33,24 @@
                         <action selector="testCalendarSubclass:" destination="-1" eventType="touchUpInside" id="acL-hU-ZJJ"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FA5-0T-jBJ">
+                    <rect key="frame" x="251" y="247" width="99" height="30"/>
+                    <state key="normal" title="PushOAuthVC">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="pushOAuthVC:" destination="-1" eventType="touchUpInside" id="U3O-GH-zdL"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="zrc-os-25R" firstAttribute="top" secondItem="a7W-UR-u4C" secondAttribute="bottom" constant="8" id="4uc-4s-aHa"/>
                 <constraint firstAttribute="centerX" secondItem="zrc-os-25R" secondAttribute="centerX" id="PDJ-ZQ-tjZ"/>
                 <constraint firstAttribute="centerX" secondItem="a7W-UR-u4C" secondAttribute="centerX" id="Rwd-fV-dAP"/>
+                <constraint firstItem="a7W-UR-u4C" firstAttribute="top" secondItem="FA5-0T-jBJ" secondAttribute="bottom" constant="8" id="bcD-po-lmd"/>
                 <constraint firstAttribute="centerY" secondItem="a7W-UR-u4C" secondAttribute="centerY" id="ooE-uT-lZD"/>
+                <constraint firstAttribute="centerX" secondItem="FA5-0T-jBJ" secondAttribute="centerX" constant="-0.5" id="zOY-VH-SeI"/>
             </constraints>
         </view>
     </objects>

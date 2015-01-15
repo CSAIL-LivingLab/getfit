@@ -10,6 +10,7 @@
 
 @interface TestVC : UIViewController
 - (IBAction)firstSundayOfWeek:(id)sender;
+- (IBAction)pushOAuthVC:(id)sender;
 
 
 @end

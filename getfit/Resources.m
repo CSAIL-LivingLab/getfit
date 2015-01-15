@@ -166,6 +166,12 @@
     return nil;
 }
 
+- (NSDate *) nextSundayFromDate:(NSDate *)date {
+    NSDate *previousSunday = [self previousSundayForDate:date];
+    NSDate *nextSunday = [previousSunday dateByAddingTimeInterval:60*60*24*7];
+    return nextSunday;
+}
+
 
 
 @end

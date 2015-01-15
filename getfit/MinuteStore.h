@@ -25,6 +25,7 @@
 - (void) postToGetFit;
 - (void) postToDataHub;
 - (BOOL) checkForValidCookies;
+- (BOOL) checkForValidTokens:(NSDate *) postDate;
 
 // special variable, to see if the MinuteTVC called this object.
 

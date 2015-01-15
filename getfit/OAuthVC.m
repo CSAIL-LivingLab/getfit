@@ -9,6 +9,7 @@
 #import "OAuthVC.h"
 #import "MinuteStore.h"
 #import "MinuteTVC.h"
+#import "Resources.h"
 
 @interface OAuthVC ()
 
@@ -73,8 +74,15 @@
     myWebView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, screenRect.size.width ,screenRect.size.height)];
     myWebView.delegate = self;
     
-    // load url
-    NSURL *nsurl=[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/Shibboleth.sso/Login?target=https%3A%2F%2Fgetfit-d7-dev.mit.edu%2F%3Fq%3Dshib_login%2Ffront-page"];
+    // If the certs are good, go to GetFit. Otherwise, re log in.
+    NSURL *nsurl;
+    MinuteStore *ms = [MinuteStore sharedStore];
+    if ([ms checkForValidCookies]) {
+        nsurl = [NSURL URLWithString: @"https://getfit-d7-dev.mit.edu/dashboard"];
+    } else {
+        nsurl=[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/Shibboleth.sso/Login?target=https%3A%2F%2Fgetfit-d7-dev.mit.edu%2F%3Fq%3Dshib_login%2Ffront-page"];
+    }
+    
     NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
     [myWebView loadRequest:nsrequest];
     [self.view addSubview:myWebView];
@@ -84,18 +92,34 @@
 # pragma mark - helper methods
 
 - (void) extractTokens {
-    NSString * tokenStr = [myWebView stringByEvaluatingJavaScriptFromString:@"var index; var arr = document.getElementsByName('form_id'); for (var i = 0; i < arr.length; i++) {    if ('getfit_minutes_single_form_2' == arr[i].value) {        index = i;    };} var form_token = document.getElementsByName('form_token')[index].value; var form_build_id = document.getElementsByName('form_build_id')[index].value; var form_id = 'getfit_minutes_single_form_2'; function foo() { return form_token+','+form_build_id+','+form_id; } foo();"];
+    [myWebView stringByEvaluatingJavaScriptFromString:@"function getTokens () {    var form_token_objects = document.getElementsByName('form_token');    var form_tokens = [];        for (var i =  0; i < form_token_objects.length; i++) {        var value = form_token_objects[i].value;        form_tokens.push(value);    };    return form_tokens;}function getBuildIds() {    var form_build_id_objects = document.getElementsByName('form_build_id');    var form_build_ids = [];    for (var i =  0; i < form_build_id_objects.length; i++) {        var value = form_build_id_objects[i].value;        form_build_ids.push(value);    };    return form_build_ids;}    function getFormIds() {    var form_id_objects = document.getElementsByName('form_id');    var form_ids = [];        for (var i =  0; i < form_id_objects.length; i++) {    var value = form_id_objects[i].value;    form_ids.push(value);    };    return form_ids;}function getStartIndex() {    var ids = getFormIds();    for (var i = 0; i < ids.length; i++) {        var id = ids[i];        if (id == 'getfit_minutes_single_form_1') {            return i;        };    };}"];
     
     // parse tokens
-    NSArray *tokens = [tokenStr componentsSeparatedByString:@","];
-    NSString *form_token = tokens[0];
-    NSString *form_build_id = tokens[1];
-    NSString *form_id = tokens[2];
+    NSArray *form_tokens = [[myWebView stringByEvaluatingJavaScriptFromString:@"getTokens().toString();"] componentsSeparatedByString:@","];
+    NSArray *form_build_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getBuildIds().toString();"]componentsSeparatedByString:@","];
+    NSArray *form_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getFormIds().toString();"] componentsSeparatedByString:@","];
+    
+    
+    NSString *indexStr = [myWebView stringByEvaluatingJavaScriptFromString:@"getStartIndex().toString();"];
+    NSInteger indexInt = [indexStr integerValue];
+    
+    
+    // strip the arrays up to the index
+    // save the array
+    form_tokens = [form_tokens subarrayWithRange:NSMakeRange(indexInt, [form_tokens count]-2)];
+    form_ids = [form_ids subarrayWithRange:NSMakeRange(indexInt, [form_ids count]-2)];
+    form_build_ids = [form_build_ids subarrayWithRange:NSMakeRange(indexInt, [form_build_ids count]-2)];
+    
+//    NSLog(@"%@", form_tokens);
+//    NSLog(@"%@", form_ids);
+//    NSLog(@"%@", form_build_ids);
+
+    
     
     // set save as defaults.
-    [defaults setObject:form_token forKey:@"form_token"];
-    [defaults setObject:form_build_id forKey:@"form_build_id"];
-    [defaults setObject:form_id forKey:@"form_id"];
+    [defaults setObject:form_tokens forKey:@"form_tokens"];
+    [defaults setObject:form_build_ids forKey:@"form_build_ids"];
+    [defaults setObject:form_ids forKey:@"form_ids"];
     [defaults setObject:[NSDate date] forKey:@"last_token_extract"];
     [defaults synchronize];
     
@@ -144,7 +168,7 @@
 
 - (void) webViewDidStartLoad:(UIWebView *)webView {
     NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
-    NSLog(@"\n\nURL: %@", url);
+//    NSLog(@"\n\nURL: %@", url);
     
     // detect the redirect url (https://idp.mit.edu/idp/profile/SAML2/Redirect/SSO)
     // because the dashboard url will only show in webViewDidFinishLoad
