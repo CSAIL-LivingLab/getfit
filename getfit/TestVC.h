@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TestVC : UIViewController
-- (IBAction)dateMagic:(id)sender;
+- (IBAction)firstSundayOfWeek:(id)sender;
 
 
 @end
