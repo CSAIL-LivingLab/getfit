@@ -161,7 +161,6 @@
         
         // reset the button
         [self activateRecordingButtonIfPossible];
-        
     }
 }
 

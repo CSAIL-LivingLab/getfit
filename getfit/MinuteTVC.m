@@ -33,6 +33,8 @@
     CGFloat dividerFooterHeight;
     CGFloat bottomFooterHeight;
     
+    NSDate *dateAtLoad;
+    
 }
 @end
 
@@ -40,6 +42,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationController.navigationBar.topItem.title = @"Enter Minutes";
     
     // create save and cancel buttons
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Save"
@@ -85,7 +89,8 @@
 - (void) viewWillAppear:(BOOL)animated {
     
     // add a single entry to the tempMinuteArr
-    MinuteEntry *minuteEntry = [[MinuteEntry alloc] initEntryWithActivity:@"" intensity:@"" duration:0 andEndTime:[NSDate date]];
+    dateAtLoad = [NSDate date];
+    MinuteEntry *minuteEntry = [[MinuteEntry alloc] initEntryWithActivity:@"" intensity:@"" duration:0 andEndTime:dateAtLoad];
     [minuteArr addObject:minuteEntry];
     
     // resetup the dateTimePicker, so it uses the most current date
@@ -247,6 +252,44 @@
 }
 
 #pragma mark - helper methods
+- (void) setPickerValueToInitial:(NSIndexPath *) indexPath {
+    
+    // check to see if the minuteEntry is empty, and update the cell if necessary
+    MinuteEntry *me = [minuteArr objectAtIndex:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    NSLog(@"-----");
+    NSLog(@"indexPath.row: %ld", (long)indexPath.row);
+    NSLog(@"pickerPath.row: %ld", (long)pickerPath.row);
+    NSLog(me.duration == 0 ? @"me.duration == 0" : @"me.duration != 0" );
+    NSLog(@"me.intensity: %@", me.intensity);
+    NSLog(@"me.activity: %@", me.activity);
+    NSLog(pickerPath.row == 2 && [me.intensity isEqualToString:@""] ? @"true" : @"false");
+    NSLog(@"-----");
+
+    
+    // activityPicker
+    if (pickerPath.row == 1 && [me.activity isEqualToString:@""]) {
+        cell.detailTextLabel.text = [Resources sharedResources].activities[0];
+        me.activity = [Resources sharedResources].activities[0];
+        [cell layoutSubviews];
+    }
+    // intensityPicker
+    else if (pickerPath.row == 2 && [me.intensity isEqualToString:@""]) {
+        cell.detailTextLabel.text = [Resources sharedResources].intensities[0];
+        me.intensity = [Resources sharedResources].intensities[0];
+        [cell layoutIfNeeded];
+    }
+    // durationPicker
+    else if (pickerPath.row == 3 && me.duration == 0) {
+        cell.detailTextLabel.text = [Resources sharedResources].durations[0];
+        me.duration = [Resources sharedResources].durations[0];
+        [cell layoutSubviews];
+    }
+    // datePicker date is already set
+
+}
+
 - (void) hideAllDeselctedPickers {
     NSArray *pickers = @[activityPicker, intensityPicker, durationPicker, endTimePicker];
     for (int i = 0; i < [pickers count]; i++) {
@@ -321,13 +364,11 @@
     if (pickerPath==nil) {
         pickerPath = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
         
-        NSLog(@"indexPath .row: %ld, .section: %ld", (long)indexPath.row, (long)indexPath.section);
-        NSLog(@"pickerPath .row: %ld, .section: %ld", (long)pickerPath.row, (long)pickerPath.section);
-        
-        
         [self.tableView beginUpdates];
         [self.tableView insertRowsAtIndexPaths:@[pickerPath] withRowAnimation:UITableViewRowAnimationMiddle];
         [self.tableView endUpdates];
+        
+        [self setPickerValueToInitial:indexPath];
         
     } else if (pickerPath.section == indexPath.section && pickerPath.row -1 != indexPath.row){
         // picker is open, and user has clicked a row not related to the picker
@@ -347,9 +388,10 @@
         
         // make a new picker
         [self.tableView insertRowsAtIndexPaths:@[pickerPath] withRowAnimation:UITableViewRowAnimationMiddle];
+        [self setPickerValueToInitial:indexPath];
         
     } else {
-        // simple case.
+        // picker was open. User is closing it.
         // clear pickerPath. use tempPickerPath for deleting the row
         // because when deleteRowsAtIndexPaths is called, it calls heightForRowAtIndexPath,
         // which uses pickerPath to determine cell height.
@@ -381,23 +423,43 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.timeStyle = NSDateFormatterShortStyle;
         dateFormatter.dateStyle = NSDateFormatterShortStyle;
+        MinuteEntry *me = [minuteArr objectAtIndex:0];
+        
         
         switch (indexPath.row) {
             case 0:
                 cell.textLabel.text = @"Activity";
-                cell.detailTextLabel.text = @"- select -";
+                if ([me.activity isEqualToString:@""]) {
+                    cell.detailTextLabel.text = @"- select -";
+                } else {
+                    cell.detailTextLabel.text = me.activity;
+                }
+                
                 break;
             case 1:
                 cell.textLabel.text = @"Intensity";
-                cell.detailTextLabel.text = @"- select -";
+                if ([me.intensity isEqualToString:@""]) {
+                    cell.detailTextLabel.text = @"- select -";
+                } else {
+                    cell.detailTextLabel.text = me.intensity;
+                }
                 break;
             case 2:
                 cell.textLabel.text = @"Duration";
-                cell.detailTextLabel.text = @"- select -";
+                if (me.duration == 0) {
+                    cell.detailTextLabel.text = @"- select -";
+                } else {
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)me.duration];
+                }
                 break;
             case 3:
                 cell.textLabel.text = @"End Time";
-                cell.detailTextLabel.text = [dateFormatter stringFromDate:[NSDate date]];
+                if ([[NSDate date] compare:dateAtLoad] == NSOrderedSame) {
+                    cell.detailTextLabel.text = [dateFormatter stringFromDate:dateAtLoad];
+                } else {
+                    cell.detailTextLabel.text = [dateFormatter stringFromDate:me.endTime];
+                }
+                
                 break;
             default:
                 break;
