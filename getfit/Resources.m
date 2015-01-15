@@ -131,5 +131,41 @@
     }
 }
 
+# pragma mark - date utilities
+// subclassing NSCalendar isn't easily possible
+
+-(NSDate *)previousSundayForDate:(NSDate *)date
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    static NSUInteger SUNDAY = 1;
+
+    NSDate *startOfWeek;
+    [calendar rangeOfUnit:NSWeekCalendarUnit
+            startDate:&startOfWeek
+             interval:NULL
+              forDate:date];
+
+    if(calendar.firstWeekday == SUNDAY){
+
+        NSDate *beginningOfDate;
+        [calendar rangeOfUnit:NSDayCalendarUnit
+                startDate:&beginningOfDate
+                 interval:NULL forDate:date];
+        if ([startOfWeek isEqualToDate:beginningOfDate]) {
+            startOfWeek = [calendar dateByAddingComponents:(
+                                                        {
+                                                            NSDateComponents *comps = [[NSDateComponents alloc] init];
+                                                            comps.day = -7;
+                                                            comps;
+                                                        })
+                                                toDate:startOfWeek
+                                               options:0];
+        }
+        return startOfWeek;
+    }
+    return nil;
+}
+
+
 
 @end

@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSArray * durations;
 - (void) setActivityAsFirst:(NSString *) activity;
 
+- (NSDate *) previousSundayForDate:(NSDate *)date;
 
 - (datahubDataHubClient *) createDataHubClient;
 - (datahub_accountAccountServiceClient *) createDataHubAccountClient;
