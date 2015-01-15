@@ -112,7 +112,7 @@
     [_startButton.layer setBorderColor:[[UIColor redColor] CGColor]];
     [_startButton.layer setBackgroundColor:[redStuff CGColor]];
     [_startButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
-    _startButton.alpha = 0.4;
+    _startButton.alpha = 0.15;
      _startButton.userInteractionEnabled = NO;
     [self.view addSubview:_startButton];
     
@@ -192,7 +192,7 @@
         _startButton.alpha = 1.0;
         _startButton.userInteractionEnabled = YES;
     } else {
-        _startButton.alpha = 0.4;
+        _startButton.alpha = 0.15;
         _startButton.userInteractionEnabled = NO;
     }
 }
