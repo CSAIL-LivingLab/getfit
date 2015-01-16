@@ -9,7 +9,9 @@
 #import "AboutVC.h"
 #import "AboutView.h"
 
-@interface AboutVC ()
+@interface AboutVC () {
+    UISlider *slider;
+}
 
 @end
 
@@ -32,6 +34,7 @@
     CGRect frame = [UIScreen mainScreen].bounds;
     AboutView *aboutView = [[AboutView alloc] initWithFrame:frame];
     self.view = aboutView;
+    [self addSlider];
 }
 
 
@@ -40,9 +43,24 @@
     // Do any additional setup after loading the view.
 }
 
+- (void) addSlider{
+    
+    //labels
+    UILabel *minimum
+    
+    // Slider
+    slider = [[UISlider alloc] initWithFrame:CGRectMake(20, 380, 320-40, 20)];
+    [slider addTarget:self action:@selector(sliderDidChange:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:slider];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) sliderDidChange:(id) sender{
+    NSLog(@"slider value changed");
 }
 
 /*

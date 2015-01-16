@@ -57,7 +57,6 @@
     self.window.backgroundColor = [UIColor whiteColor];
 
     
-    
     [self.window makeKeyAndVisible];
 }
 
@@ -94,6 +93,14 @@
 }
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDate *resumeSensorDate = [defaults objectForKey:@"resumeSensorDate"];
+    
+    // do nothing if it's not time to resume tracking
+    if (resumeSensorDate !=nil && [resumeSensorDate compare:[NSDate date]] == NSOrderedDescending) {
+        return;
+    }
     
     // start gathering data, and then turn the collector off after 30 seconds
     NSLog(@"\n\n----SIGNIFICANTLOCATIONCHANGE-----\n\n");

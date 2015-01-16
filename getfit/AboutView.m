@@ -85,11 +85,6 @@
     [body setNumberOfLines:0];
     [body sizeToFit];
     [self addSubview:body];
-    
-    // Slider
-    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(20, 380, 320-40, 20)];
-    [self addSubview:slider];
-    
 }
 
 
