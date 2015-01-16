@@ -127,6 +127,11 @@
         }
     }
     
+    // connect to server
+    datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
+    datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
+    datahubConnection * con_app = [datahub_client open_connection:con_params_app];
+
     // query
     @try {
         [datahub_client execute_sql:con_app query:statement query_params:nil];
