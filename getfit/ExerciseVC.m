@@ -171,7 +171,6 @@
     //[_startButton.layer setBorderColor:[[UIColor redColor] CGColor]];
     [_startButton.layer setBackgroundColor:[[UIColor redColor] CGColor]];
     [_startButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
-    //_startButton.alpha = 0.4;
      _startButton.userInteractionEnabled = NO;
     [self.view addSubview:_startButton];
     [[_startButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:16]];
@@ -192,7 +191,7 @@
     CGRect frame = [UIScreen mainScreen].bounds;
     CGRect rightFrame = CGRectMake(frame.size.width - 190, 10, 200, 40);
     UIButton *plusButton = [[UIButton alloc] initWithFrame:rightFrame];
-    [plusButton setTitle:@"add past minutes +" forState:UIControlStateNormal];
+    [plusButton setTitle:@"manual entry +" forState:UIControlStateNormal];
     [plusButton setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
     AppDelegate *del = [[UIApplication sharedApplication] delegate];
     [plusButton addTarget:del action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
@@ -285,8 +284,6 @@
         [self adjustButtonForImage:_intensityButton];
         [self adjustButtonForImage:_activityButton];
 
-        // reset the button
-        
     }
 
 }
@@ -401,11 +398,11 @@
     [[Resources sharedResources] uploadOpenSenseData];
     
 
-    if ([ms checkForValidCookies]) {
+    if ([ms checkForValidCookies] && [ms checkForValidTokens:_minuteEntry.endTime] ) {
         [ms postToGetFit];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [alert show];
-    } else {
+    } else{
         // the oAuthVC will post the minutes
         OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];

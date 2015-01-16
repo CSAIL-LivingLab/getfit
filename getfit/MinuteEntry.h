@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MinuteEntry : NSObject
+@interface MinuteEntry : NSObject <NSCoding>
 
 
 - (instancetype) initEntryWithActivity:(NSString *) activity
@@ -16,11 +16,16 @@
                               duration:(NSInteger)duration
                             andEndTime:(NSDate *)endTime;
 - (BOOL) verifyEntry;
+- (void) encodeWithCoder : (NSCoder *)aCoder ;
+- (id) initWithCoder : (NSCoder *)aDecoder;
 
 @property (weak, nonatomic) NSString *activity;
 @property (weak, nonatomic) NSString *intensity;
 @property NSInteger duration;
 @property (strong, nonatomic) NSDate *endTime;
+@property BOOL postedToGetFit;
+@property BOOL postedToDataHub;
+
 
 
 
