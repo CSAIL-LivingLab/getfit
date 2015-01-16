@@ -43,7 +43,8 @@
         return;
     }
         
-    // dismiss the view after the user clicks ok
+    // dismiss the view after the user clicks ok.
+    // Uses UIAlertViewDelegate didDismissWithButtonIndex
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
     [alertView show];
 }
@@ -98,7 +99,6 @@
     NSArray *form_tokens = [[myWebView stringByEvaluatingJavaScriptFromString:@"getTokens().toString();"] componentsSeparatedByString:@","];
     NSArray *form_build_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getBuildIds().toString();"]componentsSeparatedByString:@","];
     NSArray *form_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getFormIds().toString();"] componentsSeparatedByString:@","];
-    
     
     NSString *indexStr = [myWebView stringByEvaluatingJavaScriptFromString:@"getStartIndex().toString();"];
     NSInteger indexInt = [indexStr integerValue];
@@ -195,10 +195,23 @@
     
 }
 
+- (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    if (!self.isViewLoaded || !self.view.window) {
+        return;
+    }
+    
+    // dismiss the view after the user clicks ok.
+    // Uses UIAlertViewDelegate didDismissWithButtonIndex
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"There was a problem loading getfit. Your minutes are saved on your phone and there is no need to re-enter them. The app will post to GetFit later." delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+    [alertView show];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 @end

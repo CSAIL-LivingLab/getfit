@@ -27,5 +27,6 @@
 - (BOOL) checkForValidCookies;
 - (BOOL) checkForValidTokens:(NSDate *) postDate;
 
+- (BOOL) isNetworkAvailable:(NSString *)hostname;
 
 @end

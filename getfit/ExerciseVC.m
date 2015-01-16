@@ -245,7 +245,7 @@
         [ms postToGetFit];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [alert show];
-    } else {
+    } else{
         // the oAuthVC will post the minutes
         OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
