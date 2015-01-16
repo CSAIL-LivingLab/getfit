@@ -110,18 +110,19 @@
     NSString *appToken = [Secret sharedSecret].DHAppToken;
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
-    datahubDataHubClient *datahub_client = [self createDataHubClient];
-    datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
-    datahubConnection * con_app = [datahub_client open_connection:con_params_app];
-    
-    NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.opensense(data) values ('"];
-    
-    batches = [[NSString stringWithFormat:@"%@", batches] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    [statement appendString:batches];
-    [statement appendString:@"');"];
-    
     @try {
+        
+        datahubDataHubClient *datahub_client = [self createDataHubClient];
+        datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
+        datahubConnection * con_app = [datahub_client open_connection:con_params_app];
+        
+        NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.opensense(data) values ('"];
+        
+        batches = [[NSString stringWithFormat:@"%@", batches] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        [statement appendString:batches];
+        [statement appendString:@"');"];
+    
         [datahub_client execute_sql:con_app query:statement query_params:nil];
         [[OpenSense sharedInstance] deleteAllBatches];
 
