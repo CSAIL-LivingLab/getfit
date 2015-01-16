@@ -19,12 +19,13 @@
 @property (strong, nonatomic) NSArray * activities;
 @property (strong, nonatomic) NSArray * intensities;
 @property (strong, nonatomic) NSArray * durations;
+
 - (void) setActivityAsFirst:(NSString *) activity;
-
-
 - (datahubDataHubClient *) createDataHubClient;
 - (datahub_accountAccountServiceClient *) createDataHubAccountClient;
 - (void) uploadOpenSenseData;
 
+- (NSDate *) previousSundayForDate:(NSDate *)date;
+- (NSDate *) nextSundayFromDate:(NSDate *)date;
 
 @end

@@ -15,6 +15,7 @@
 #import "datahub.h"
 
 
+
 @interface MinuteStore()
 
 @property (nonatomic) NSMutableArray *privateMinutes;
@@ -137,11 +138,16 @@
         // update the activityPickerArr
         [[Resources sharedResources] setActivityAsFirst:activity];
         
+        
+        // get the day of the week
+        NSInteger *dayIndex = [self indexOfDayInWeekForMinuteEntry:me];
+        
+        
         // get the form info
         NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-        NSString *form_token = [defaults objectForKey:@"form_token"];
-        NSString *form_build_id = [defaults objectForKey:@"form_build_id"];
-        NSString *form_id = [defaults objectForKey:@"form_id"];
+        NSString *form_token = [[defaults objectForKey:@"form_tokens"] objectAtIndex:dayIndex];
+        NSString *form_build_id = [[defaults objectForKey:@"form_build_ids"] objectAtIndex:dayIndex];
+        NSString *form_id = [[defaults objectForKey:@"form_ids"] objectAtIndex:dayIndex];
         
         // gather the cookies
         NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -173,6 +179,31 @@
     
 }
 
+- (NSInteger *) indexOfDayInWeekForMinuteEntry:(MinuteEntry *)me {
+    NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
+    [weekday setDateFormat: @"EEEE"];
+    NSString *weekdayStr = [weekday stringFromDate:me.endTime];
+    
+    if ([weekdayStr isEqualToString:@"Monday"]) {
+        return 0;
+    } else if ([weekdayStr isEqualToString:@"Tuesday"]) {
+        return 1;
+    } else if ([weekdayStr isEqualToString:@"Wednesday"]) {
+        return 2;
+    } else if ([weekdayStr isEqualToString:@"Thursday"]) {
+        return 3;
+    } else if ([weekdayStr isEqualToString:@"Friday"]) {
+        return 4;
+    } else if ([weekdayStr isEqualToString:@"Saturday"]) {
+        return 5;
+    } else if ([weekdayStr isEqualToString:@"Sunday"]) {
+        return 6;
+    }
+    
+     // return sunday for default
+     return 6;
+}
+
 - (BOOL) checkForValidCookies {
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     NSArray * cookies  = [cookieJar cookies];
@@ -193,6 +224,22 @@
     }
     
     return shibCookie && drupalCookie;
+}
+
+- (BOOL) checkForValidTokens:(NSDate *)postDate {
+    // used to find out if the user needs to reload the webpage
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDate *lastExtractDate = [defaults objectForKey:@"last_token_extract"];
+    
+    Resources *resources = [Resources sharedResources];
+    NSDate *sundayAfterExtract = [resources nextSundayFromDate:lastExtractDate];
+    
+    if ([postDate compare:sundayAfterExtract] == NSOrderedAscending) {
+        return YES;
+    }
+    
+    return NO;
+    
 }
 
 

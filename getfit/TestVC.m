@@ -40,103 +40,77 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (IBAction)postToGetFit:(id)sender {
+- (IBAction)firstSundayOfWeek:(id)sender {
+    // today 12:00am
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute fromDate:[NSDate date]];
+    [components setHour:0];
+    [components setMinute:0];
+    [components setSecond:0];
+    NSDate *today12am = [calendar dateFromComponents:components];
+    NSLog(@"today at 12am: %f", floor([today12am timeIntervalSince1970] * 1000));
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-DD"];
-
-    // create the entry and format somet hings
-    MinuteEntry *me = [[MinuteEntry alloc] initEntryWithActivity:@"WORK_AGAIN_4" intensity:@"high" duration:200 andEndTime:[NSDate date]];
-    NSString *endDate = [dateFormatter stringFromDate:me.endTime];
-    NSString *duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
+    // day of week today
+    NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
+    [weekday setDateFormat: @"EEEE"];
+    NSLog(@"The day of the week is: %@", [weekday stringFromDate:today12am]);
     
-    // get the form info
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    NSString *form_token = [defaults objectForKey:@"form_token"];
-    NSString *form_build_id = [defaults objectForKey:@"form_build_id"];
-    NSString *form_id = [defaults objectForKey:@"form_id"];
-
-    // gather the cookies
-    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray * cookies  = [cookieJar cookies];
-    NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
+    // sunday at 12:00am
+    NSDate *previousSunday = [self previousSundayForDate:today12am];
+    NSLog(@"previous sunday: %f", floor([previousSunday timeIntervalSince1970] * 1000));
     
-    // format the post body
-    NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, me.activity, me.intensity, endDate, duration];
-    post = [post stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    
-    // format the request
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/system/ajax"]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setAllHTTPHeaderFields:headers];
-    [request setHTTPBody:postData];
-    
-    NSURLResponse *response;
-    NSError *error;
-    
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    NSLog(@"\n\nhttpResponse:\n %@", [httpResponse allHeaderFields]);
 }
 
-- (IBAction)loadOAuthVC:(id)sender {
+- (IBAction)pushOAuthVC:(id)sender {
     OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
     navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:navController animated:YES completion:nil];
 }
 
-- (IBAction)cookieMonster:(id)sender {
-    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray * cookies  = [cookieJar cookies];
-    NSHTTPCookie *cookie;
+-(NSDate *)previousSundayForDate:(NSDate *)date
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    static NSUInteger SUNDAY = 1;
+    static NSUInteger MONDAY = 2;
     
-    for (int i = 0; i< [cookies count]; i++) {
-        cookie = [cookies objectAtIndex:i];
-        NSLog(@"\n\nCOOKIE:  %@", cookie);
-        NSLog(@"\nEXPIRATION DATE: %@", cookie.expiresDate);
+    NSDate *startOfWeek;
+    [calendar rangeOfUnit:NSWeekCalendarUnit
+            startDate:&startOfWeek
+             interval:NULL
+              forDate:date];
+    
+    if(calendar.firstWeekday == SUNDAY){
         
-        if ([cookie.name rangeOfString:@"SSESS"].location != NSNotFound ) {
-            
-            if ([[NSDate date] compare:cookie.expiresDate] == NSOrderedAscending) {
-                NSLog(@"cookie is valid");
-            } else {
-                NSLog(@"cookie not valid");
-            }
-            
-            break;
+        NSDate *beginningOfDate;
+        [calendar rangeOfUnit:NSDayCalendarUnit
+                startDate:&beginningOfDate
+                 interval:NULL forDate:date];
+        if ([startOfWeek isEqualToDate:beginningOfDate]) {
+            startOfWeek = [calendar dateByAddingComponents:(
+                                                        {
+                                                            NSDateComponents *comps = [[NSDateComponents alloc] init];
+                                                            comps.day = -7;
+                                                            comps;
+                                                        })
+                                                toDate:startOfWeek
+                                               options:0];
         }
+        return startOfWeek;
     }
+    if(calendar.firstWeekday == MONDAY)
+        return [calendar dateByAddingComponents:(
+                                             {
+                                                 NSDateComponents *comps = [[NSDateComponents alloc] init];
+                                                 comps.day = -1;
+                                                 comps;
+                                             })
+                                     toDate:startOfWeek
+                                    options:0];
     
+    return nil;
     
 }
 
-- (IBAction)fetchOpenSense:(id)sender {
-    [OpenSense sharedInstance].delegate = self;
-    [[OpenSense sharedInstance] stopCollector];
-    [[OpenSense sharedInstance] fetchAllBatches];
-}
-
-- (IBAction)uploadOpenSense:(id)sender {
-    [OpenSense sharedInstance].delegate = self;
-    [[OpenSense sharedInstance] stopCollector];
-    [[Resources sharedResources] uploadOpenSenseData];
-}
-
-- (void) didFinishFetchingBatches:(NSString *)batches {
-    NSLog(@"%@", batches);
-}
 
 @end

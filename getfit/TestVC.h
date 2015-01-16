@@ -8,12 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestVC : UIViewController <OpenSenseDelegate>
+@interface TestVC : UIViewController
+- (IBAction)firstSundayOfWeek:(id)sender;
+- (IBAction)pushOAuthVC:(id)sender;
 
-- (IBAction)postToGetFit:(id)sender;
-- (IBAction)loadOAuthVC:(id)sender;
-- (IBAction)cookieMonster:(id)sender;
-- (IBAction)fetchOpenSense:(id)sender;
-- (IBAction)uploadOpenSense:(id)sender;
 
 @end

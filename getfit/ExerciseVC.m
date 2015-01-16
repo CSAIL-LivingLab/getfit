@@ -112,7 +112,7 @@
     [_startButton.layer setBorderColor:[[UIColor redColor] CGColor]];
     [_startButton.layer setBackgroundColor:[redStuff CGColor]];
     [_startButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
-    _startButton.alpha = 0.4;
+    _startButton.alpha = 0.15;
      _startButton.userInteractionEnabled = NO;
     [self.view addSubview:_startButton];
     
@@ -161,7 +161,6 @@
         
         // reset the button
         [self activateRecordingButtonIfPossible];
-        
     }
 }
 
@@ -193,7 +192,7 @@
         _startButton.alpha = 1.0;
         _startButton.userInteractionEnabled = YES;
     } else {
-        _startButton.alpha = 0.4;
+        _startButton.alpha = 0.15;
         _startButton.userInteractionEnabled = NO;
     }
 }
@@ -242,7 +241,7 @@
     [[Resources sharedResources] uploadOpenSenseData];
     
 
-    if ([ms checkForValidCookies]) {
+    if ([ms checkForValidCookies] && [ms checkForValidTokens:_minuteEntry.endTime] ) {
         [ms postToGetFit];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [alert show];

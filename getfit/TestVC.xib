@@ -15,64 +15,42 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aU-5e-jOS">
-                    <rect key="frame" x="252" y="285" width="96" height="30"/>
-                    <state key="normal" title="Post to GetFit">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7W-UR-u4C">
+                    <rect key="frame" x="227" y="285" width="146" height="30"/>
+                    <state key="normal" title="First Sunday of Week">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="postToGetFit:" destination="-1" eventType="touchUpInside" id="cB1-tF-nCP"/>
+                        <action selector="firstSundayOfWeek:" destination="-1" eventType="touchUpInside" id="h0f-y8-bJr"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VcV-4C-PQQ">
-                    <rect key="frame" x="152" y="247" width="295" height="30"/>
-                    <state key="normal" title="Load OAuthVC To Get Cookies and Tokens">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrc-os-25R">
+                    <rect key="frame" x="219" y="323" width="161" height="30"/>
+                    <state key="normal" title="Test Calendar Subclass">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="loadOAuthVC:" destination="-1" eventType="touchUpInside" id="af7-nf-bYM"/>
+                        <action selector="testCalendarSubclass:" destination="-1" eventType="touchUpInside" id="acL-hU-ZJJ"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btb-3o-jyT">
-                    <rect key="frame" x="223" y="323" width="155" height="30"/>
-                    <state key="normal" title="Cookie Magic Monster">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FA5-0T-jBJ">
+                    <rect key="frame" x="251" y="247" width="99" height="30"/>
+                    <state key="normal" title="PushOAuthVC">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="cookieMonster:" destination="-1" eventType="touchUpInside" id="9m3-t2-5TY"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qks-N0-Zxd">
-                    <rect key="frame" x="240" y="361" width="119" height="30"/>
-                    <state key="normal" title="FetchOpenSense">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="fetchOpenSense:" destination="-1" eventType="touchUpInside" id="OpA-FK-oJC"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FS6-97-l3l">
-                    <rect key="frame" x="235" y="399" width="130" height="30"/>
-                    <state key="normal" title="UploadOpenSense">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="uploadOpenSense:" destination="-1" eventType="touchUpInside" id="bLP-0G-0uw"/>
+                        <action selector="pushOAuthVC:" destination="-1" eventType="touchUpInside" id="U3O-GH-zdL"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="VcV-4C-PQQ" secondAttribute="centerX" id="2Kp-dy-1Rb"/>
-                <constraint firstAttribute="centerX" secondItem="Qks-N0-Zxd" secondAttribute="centerX" constant="0.5" id="5h8-JT-aJQ"/>
-                <constraint firstItem="FS6-97-l3l" firstAttribute="top" secondItem="Qks-N0-Zxd" secondAttribute="bottom" constant="8" id="C5Z-FE-u90"/>
-                <constraint firstAttribute="centerX" secondItem="FS6-97-l3l" secondAttribute="centerX" id="Ec4-By-cXr"/>
-                <constraint firstAttribute="centerY" secondItem="5aU-5e-jOS" secondAttribute="centerY" id="Rue-c6-P5X"/>
-                <constraint firstAttribute="centerX" secondItem="btb-3o-jyT" secondAttribute="centerX" constant="-0.5" id="bqC-Dt-r2N"/>
-                <constraint firstItem="btb-3o-jyT" firstAttribute="top" secondItem="5aU-5e-jOS" secondAttribute="bottom" constant="8" id="faa-Ak-yhk"/>
-                <constraint firstAttribute="centerX" secondItem="5aU-5e-jOS" secondAttribute="centerX" id="i3l-YA-qqI"/>
-                <constraint firstItem="Qks-N0-Zxd" firstAttribute="top" secondItem="btb-3o-jyT" secondAttribute="bottom" constant="8" id="mCR-m4-jGB"/>
-                <constraint firstItem="5aU-5e-jOS" firstAttribute="top" secondItem="VcV-4C-PQQ" secondAttribute="bottom" constant="8" id="o8m-p9-IaS"/>
+                <constraint firstItem="zrc-os-25R" firstAttribute="top" secondItem="a7W-UR-u4C" secondAttribute="bottom" constant="8" id="4uc-4s-aHa"/>
+                <constraint firstAttribute="centerX" secondItem="zrc-os-25R" secondAttribute="centerX" id="PDJ-ZQ-tjZ"/>
+                <constraint firstAttribute="centerX" secondItem="a7W-UR-u4C" secondAttribute="centerX" id="Rwd-fV-dAP"/>
+                <constraint firstItem="a7W-UR-u4C" firstAttribute="top" secondItem="FA5-0T-jBJ" secondAttribute="bottom" constant="8" id="bcD-po-lmd"/>
+                <constraint firstAttribute="centerY" secondItem="a7W-UR-u4C" secondAttribute="centerY" id="ooE-uT-lZD"/>
+                <constraint firstAttribute="centerX" secondItem="FA5-0T-jBJ" secondAttribute="centerX" constant="-0.5" id="zOY-VH-SeI"/>
             </constraints>
         </view>
     </objects>
