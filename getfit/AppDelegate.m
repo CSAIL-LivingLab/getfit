@@ -35,6 +35,9 @@
     // set default for cookie storage
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     
+    // set up the
+    [self setupLocationManager];
+    
     // show
     [self.window makeKeyAndVisible];
     return YES;
@@ -90,6 +93,21 @@
 
     
     [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
+}
+
+- (void) setupLocationManager{
+    _locationManager = [[CLLocationManager alloc] init];
+    [_locationManager startMonitoringSignificantLocationChanges];
+    _locationManager.delegate = self;
+}
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    // start gathering data, and then turn the collector off after 30 seconds
+    NSLog(@"\n\n----SIGNIFICANTLOCATIONCHANGE-----\n\n");
+    OpenSense *opensense = [OpenSense sharedInstance];
+    [opensense startCollector];
+    [NSTimer scheduledTimerWithTimeInterval:5 target:[OpenSense sharedInstance] selector:@selector(stopCollector) userInfo:nil repeats:NO];
 }
 
 @end

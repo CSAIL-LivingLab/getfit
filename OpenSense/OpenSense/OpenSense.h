@@ -13,6 +13,7 @@
 
 @protocol OpenSenseDelegate <NSObject>
 
+@optional
 - (void) didFinishFetchingBatches:(NSString *)batches;
 
 @end
