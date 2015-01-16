@@ -143,8 +143,6 @@
         NSLog(@"%@", exception);
         return NO;
     }
-    
-    
 }
 
 - (BOOL) postToGetFit {
