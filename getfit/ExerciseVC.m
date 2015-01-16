@@ -186,14 +186,6 @@
 
 #pragma mark - buttons
 
--(void)offsetViews:(NSArray *)views byY:(int)yoff {
-    for (UIView *v in views) {
-        CGRect frame = v.frame;
-        frame.origin.y += yoff;
-        v.frame = frame;
-    }
-
-}
 
 - (void) toggleRecording {
     [self dismissPickers];
@@ -384,7 +376,7 @@
     
 }
 
-
+//generate a new image of a different size
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
     //UIGraphicsBeginImageContext(newSize);
     // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
@@ -396,6 +388,7 @@
     return newImage;
 }
 
+//fix up specified button so that title and image both show
 -(void)adjustButtonForImage:(UIButton *)button {
     // the space between the image and text
     CGFloat spacing = 6.0;
@@ -410,6 +403,16 @@
     CGSize titleSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName: button.titleLabel.font}];
     button.imageEdgeInsets = UIEdgeInsetsMake(- (titleSize.height + spacing), 0.0, 0.0, - titleSize.width);
     
+    
+}
+
+//move all views by specified yoff
+-(void)offsetViews:(NSArray *)views byY:(int)yoff {
+    for (UIView *v in views) {
+        CGRect frame = v.frame;
+        frame.origin.y += yoff;
+        v.frame = frame;
+    }
     
 }
 
