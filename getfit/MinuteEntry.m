@@ -19,6 +19,8 @@
         _intensity = @"";
         _duration = 0;
         _endTime = [NSDate date];
+        _postedToGetFit = NO;
+        _postedToDataHub = NO;
     }
     return self;
 }
@@ -34,6 +36,8 @@
         _intensity = intensity;
         _duration = duration;
         _endTime = endTime;
+        _postedToGetFit = NO;
+        _postedToDataHub = NO;
     }
     
     return self;
@@ -61,6 +65,8 @@
     [aCoder encodeObject:_endTime forKey:@"endTime"];
     
     [aCoder encodeInteger:_duration forKey:@"duration"];
+    [aCoder encodeBool:_postedToGetFit forKey:@"postedToGetFit"];
+    [aCoder encodeBool:_postedToDataHub forKey:@"postedToDataHub"];
 }
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder {
@@ -71,6 +77,8 @@
         _endTime = [aDecoder decodeObjectForKey:@"endTime"];
         
         _duration = [aDecoder decodeIntegerForKey:@"duration"];
+        _postedToGetFit = [aDecoder decodeIntegerForKey:@"postedToGetFit"];
+        _postedToDataHub = [aDecoder decodeIntegerForKey:@"postedToDataHub"];
     }
     return self;
 }

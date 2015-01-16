@@ -23,6 +23,8 @@
 @property (weak, nonatomic) NSString *intensity;
 @property NSInteger duration;
 @property (strong, nonatomic) NSDate *endTime;
+@property BOOL postedToGetFit;
+@property BOOL postedToDataHub;
 
 
 

@@ -77,6 +77,14 @@
     [_privateMinutes addObject:minuteEntry];
 }
 
+- (BOOL) removeMinuteEntryIfPostedToDataHubAndGetFit:(MinuteEntry *) minuteEntry {
+    if (minuteEntry.postedToGetFit && minuteEntry.postedToDataHub) {
+        [self removeMinuteEntry:minuteEntry];
+        return YES;
+    }
+    return NO;
+}
+
 - (void) removeMinuteEntry:(MinuteEntry *)minuteEntry {
     [_privateMinutes removeObject:minuteEntry];
 }
@@ -96,6 +104,12 @@
     NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.minutes(activity, intensity, duration, endDate) values "];
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
+        
+        // exclude the minutes that have already been posted to DataHub
+        if (me.postedToDataHub) {
+            break;
+        }
+        
         NSInteger *endTimeInt = (NSInteger)roundf([me.endTime timeIntervalSince1970]);
         NSString *insertStmt = [NSString stringWithFormat:@"('%@', '%@', %@, to_timestamp(%tu)),", me.activity, me.intensity, @(me.duration), endTimeInt];
         
@@ -114,8 +128,14 @@
     
     // query
     @try {
-        datahubResultSet *result_set = [datahub_client execute_sql:con_app query:statement query_params:nil];
-        NSLog(@"result_set: %@", result_set);
+        [datahub_client execute_sql:con_app query:statement query_params:nil];
+        
+        // mark minutes as posted by DataHub, and remove if appropriate
+        for (MinuteEntry *me in _privateMinutes){
+            me.postedToDataHub = YES;
+            [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
+        }
+        
         return YES;
         // minutes are posted to datahub before getfit, so do not remove the objects here
     }
@@ -143,6 +163,12 @@
     // spaces for activities work
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
+        
+        // exclude the minutes that have already been posted to DataHub
+        if (me.postedToGetFit) {
+            break;
+        }
+        
         
         NSString *activity = me.activity;
         NSString *intensity = me.intensity;
@@ -191,7 +217,9 @@
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:nil];
         
-        [self removeMinuteEntry:me];
+        me.postedToGetFit = YES;
+        
+        [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
     }
     
     return YES;
