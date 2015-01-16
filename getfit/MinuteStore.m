@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 CSAIL Big Data Initiative. All rights reserved.
 //
 
+#include<unistd.h>
+#include<netdb.h>
+
 #import "MinuteStore.h"
 #import "MinuteEntry.h"
 #import "Secret.h"
@@ -37,7 +40,12 @@
     self = [super init];
     
     if (self) {
-        _privateMinutes = [[NSMutableArray alloc] init];
+        NSString *path = [self entryArchivePath];
+        _privateMinutes = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        
+        if (!_privateMinutes) {
+            _privateMinutes = [[NSMutableArray alloc] init];
+        }
     }
     
     return self;
@@ -48,6 +56,9 @@
                 format:@"Use +[MinuteStore sharedStore]"];
     return nil;
 }
+
+
+
 
 # pragma mark - manipulating privateMinutes array;
 
@@ -70,7 +81,7 @@
     [_privateMinutes removeObject:minuteEntry];
 }
 
-- (void) postToDataHub {
+- (BOOL) postToDataHub {
     NSString *appID = [Secret sharedSecret].DHAppID;
     NSString *appToken = [Secret sharedSecret].DHAppToken;
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
@@ -105,20 +116,28 @@
     @try {
         datahubResultSet *result_set = [datahub_client execute_sql:con_app query:statement query_params:nil];
         NSLog(@"result_set: %@", result_set);
+        return YES;
         // minutes are posted to datahub before getfit, so do not remove the objects here
-//        [_privateMinutes removeAllObjects];
     }
     @catch (NSException *exception) {
         NSLog(@"%@", exception);
+        return NO;
     }
     
     
 }
 
-- (void) postToGetFit {
+- (BOOL) postToGetFit {
+    
+    if (![self isNetworkAvailable]) {
+        return NO;
+        [self saveChanges];
+    }
+    
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-DD"];
-    
+
     // intensity must be all lower case
     // duration must be >= 1
     // spaces for activities work
@@ -172,11 +191,10 @@
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:nil];
         
-//        [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        [self removeMinuteEntry:me];
     }
     
-    [_privateMinutes removeAllObjects];
-    
+    return YES;
 }
 
 - (NSInteger *) indexOfDayInWeekForMinuteEntry:(MinuteEntry *)me {
@@ -242,7 +260,39 @@
     
 }
 
+# pragma mark - persistance
 
+- (BOOL) saveChanges {
+    NSString *path = [self entryArchivePath];
+    return [NSKeyedArchiver archiveRootObject:self toFile:path];
+}
+
+- (NSString *)entryArchivePath {
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                                       NSUserDomainMask, YES);
+    // get first one, because ios
+    NSString *documentDirectory = [documentDirectories firstObject];
+    
+    return [documentDirectory stringByAppendingPathComponent:@"entry.archive"];
+}
+
+# pragma mark - network reachability
+
+-(BOOL)isNetworkAvailable
+{
+    char *hostname;
+    struct hostent *hostinfo;
+    hostname = "getfit.mit.edu";
+    hostinfo = gethostbyname (hostname);
+    if (hostinfo == NULL){
+        NSLog(@"-> no connection!\n");
+        return NO;
+    }
+    else{
+        NSLog(@"-> connection established!\n");
+        return YES;
+    }
+}
 
 
 @end

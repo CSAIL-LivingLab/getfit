@@ -53,4 +53,27 @@
 }
 
 
+# pragma mark - NSUserDefaults encoding decoding
+
+- (void) encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:_activity forKey:@"activity"];
+    [aCoder encodeObject:_intensity forKey:@"intensity"];
+    [aCoder encodeObject:_endTime forKey:@"endTime"];
+    
+    [aCoder encodeInteger:_duration forKey:@"duration"];
+}
+
+- (instancetype) initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        _activity = [aDecoder decodeObjectForKey:@"activity"];
+        _intensity = [aDecoder decodeObjectForKey:@"intensity"];
+        _endTime = [aDecoder decodeObjectForKey:@"endTime"];
+        
+        _duration = [aDecoder decodeIntegerForKey:@"duration"];
+    }
+    return self;
+}
+
+
 @end
