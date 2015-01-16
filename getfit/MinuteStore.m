@@ -126,12 +126,12 @@
             [statement appendString:@";"];
         }
     }
-             
+    
     // connect to server
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
     datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
     datahubConnection * con_app = [datahub_client open_connection:con_params_app];
-    
+
     // query
     @try {
         [datahub_client execute_sql:con_app query:statement query_params:nil];
@@ -146,6 +146,8 @@
         // minutes are posted to datahub before getfit, so do not remove the objects here
     }
     @catch (NSException *exception) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload failed" message:[NSString stringWithFormat:@"GetFit failed to connect to DataHub (%@)",[exception description]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
         NSLog(@"%@", exception);
         return NO;
     }
