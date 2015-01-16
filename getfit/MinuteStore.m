@@ -90,6 +90,12 @@
 }
 
 - (BOOL) postToDataHub {
+    
+    if (![self isNetworkAvailable:@"datahub.csail.mit.edu"]) {
+        [self saveChanges];
+        return NO;
+    }
+    
     NSString *appID = [Secret sharedSecret].DHAppID;
     NSString *appToken = [Secret sharedSecret].DHAppToken;
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
@@ -135,7 +141,7 @@
             me.postedToDataHub = YES;
             [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
         }
-        
+        [self saveChanges];
         return YES;
         // minutes are posted to datahub before getfit, so do not remove the objects here
     }
@@ -147,9 +153,9 @@
 
 - (BOOL) postToGetFit {
     
-    if (![self isNetworkAvailable]) {
-        return NO;
+    if (![self isNetworkAvailable:@"getfit.mit.edu"]) {
         [self saveChanges];
+        return NO;
     }
     
     
@@ -180,7 +186,6 @@
         
         // update the activityPickerArr
         [[Resources sharedResources] setActivityAsFirst:activity];
-        
         
         // get the day of the week
         NSInteger *dayIndex = [self indexOfDayInWeekForMinuteEntry:me];
@@ -219,7 +224,7 @@
         
         [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
     }
-    
+    [self saveChanges];
     return YES;
 }
 
@@ -304,12 +309,11 @@
 
 # pragma mark - network reachability
 
--(BOOL)isNetworkAvailable
+-(BOOL)isNetworkAvailable:(NSString *)hostname
 {
-    char *hostname;
+    const char *cHostname = [hostname UTF8String];
     struct hostent *hostinfo;
-    hostname = "getfit.mit.edu";
-    hostinfo = gethostbyname (hostname);
+    hostinfo = gethostbyname (cHostname);
     if (hostinfo == NULL){
         NSLog(@"-> no connection!\n");
         return NO;
