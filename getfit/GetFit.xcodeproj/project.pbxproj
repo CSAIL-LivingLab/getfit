@@ -510,7 +510,7 @@
 				ORGANIZATIONNAME = "MIT CSAIL Living Lab";
 				TargetAttributes = {
 					3DDED6D0167D098B006DE4F8 = {
-						DevelopmentTeam = 7W9YSG5RXR;
+						DevelopmentTeam = 4K8T4ETL5D;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 1;
@@ -698,8 +698,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Samuel Madden (AE6SV5S5V7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Samuel Madden (AE6SV5S5V7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Common/GetFit-Prefix.pch";
 				INFOPLIST_FILE = "Common/GetFit-Info.plist";
@@ -710,7 +710,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = GetFit;
-				PROVISIONING_PROFILE = "0b210290-0cd0-4448-9f29-3d2943587e5a";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}/../OpenSense/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -720,8 +720,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Samuel Madden (AE6SV5S5V7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Samuel Madden (AE6SV5S5V7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Common/GetFit-Prefix.pch";
 				INFOPLIST_FILE = "Common/GetFit-Info.plist";
@@ -732,7 +732,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = GetFit;
-				PROVISIONING_PROFILE = "0b210290-0cd0-4448-9f29-3d2943587e5a";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}/../OpenSense/\"/**";
 				WRAPPER_EXTENSION = app;
 			};
