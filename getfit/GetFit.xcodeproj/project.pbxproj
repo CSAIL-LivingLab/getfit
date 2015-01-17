@@ -71,6 +71,10 @@
 		94CECDA61A66F8F400DBE4C1 /* datahubGraphs.html in Resources */ = {isa = PBXBuildFile; fileRef = 94CECDA51A66F8F400DBE4C1 /* datahubGraphs.html */; };
 		DB6680C71A69B65D0080560E /* runner.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680C61A69B65D0080560E /* runner.png */; };
 		DB6680CA1A69B8780080560E /* intensity.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680C91A69B8780080560E /* intensity.png */; };
+		DB6680CD1A69F32E0080560E /* launch.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB6680CC1A69F32E0080560E /* launch.xib */; };
+		DB6680CF1A69F8940080560E /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680CE1A69F8940080560E /* launch.png */; };
+		DB6680D11A69F8FC0080560E /* launch-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680D01A69F8FC0080560E /* launch-bg.png */; };
+		DB6680D31A69F9890080560E /* ll-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680D21A69F9890080560E /* ll-logo.png */; };
 		DBAD5E441A695DFB000F9692 /* Secret.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAD5E431A695DFB000F9692 /* Secret.m */; };
 		DBCDFDB81A695FAD00FC4A09 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DBCDFDB71A695FAD00FC4A09 /* icon.png */; };
 /* End PBXBuildFile section */
@@ -200,6 +204,10 @@
 		94CECDA51A66F8F400DBE4C1 /* datahubGraphs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = datahubGraphs.html; sourceTree = "<group>"; };
 		DB6680C61A69B65D0080560E /* runner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = runner.png; path = ../../Assets/runner.png; sourceTree = "<group>"; };
 		DB6680C91A69B8780080560E /* intensity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = intensity.png; path = ../../Assets/intensity.png; sourceTree = "<group>"; };
+		DB6680CC1A69F32E0080560E /* launch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = launch.xib; sourceTree = "<group>"; };
+		DB6680CE1A69F8940080560E /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
+		DB6680D01A69F8FC0080560E /* launch-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-bg.png"; sourceTree = "<group>"; };
+		DB6680D21A69F9890080560E /* ll-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ll-logo.png"; sourceTree = "<group>"; };
 		DBAD5E421A695DFB000F9692 /* Secret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Secret.h; sourceTree = "<group>"; };
 		DBAD5E431A695DFB000F9692 /* Secret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secret.m; sourceTree = "<group>"; };
 		DBCDFDB71A695FAD00FC4A09 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -368,6 +376,7 @@
 		941895E11A59E9A900B5BC15 /* GetFit */ = {
 			isa = PBXGroup;
 			children = (
+				DB6680CB1A69F31A0080560E /* Launch */,
 				9431EE871A5CC4CC00B7EC36 /* Intro */,
 				94B01BEC1A5AF0000079F8A1 /* Common */,
 				94B01BE91A5AEFD40079F8A1 /* AppDelegate.h */,
@@ -480,6 +489,17 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		DB6680CB1A69F31A0080560E /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				DB6680CC1A69F32E0080560E /* launch.xib */,
+				DB6680D01A69F8FC0080560E /* launch-bg.png */,
+				DB6680CE1A69F8940080560E /* launch.png */,
+				DB6680D21A69F9890080560E /* ll-logo.png */,
+			);
+			name = Launch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -559,10 +579,14 @@
 			files = (
 				DBCDFDB81A695FAD00FC4A09 /* icon.png in Resources */,
 				3DDED6E8167D098B006DE4F8 /* Default.png in Resources */,
+				DB6680D11A69F8FC0080560E /* launch-bg.png in Resources */,
 				3DDED6EA167D098B006DE4F8 /* Default@2x.png in Resources */,
 				3DDED6EC167D098B006DE4F8 /* Default-568h@2x.png in Resources */,
+				DB6680CF1A69F8940080560E /* launch.png in Resources */,
+				DB6680D31A69F9890080560E /* ll-logo.png in Resources */,
 				9431EE901A5CC52900B7EC36 /* IntroAboutVC.xib in Resources */,
 				94CECD9F1A64565200DBE4C1 /* TestVC.xib in Resources */,
+				DB6680CD1A69F32E0080560E /* launch.xib in Resources */,
 				94B01BE81A5AEF890079F8A1 /* config.json in Resources */,
 				9416456B1A59F17300B9B2CD /* MainStoryboard.storyboard in Resources */,
 				DB6680CA1A69B8780080560E /* intensity.png in Resources */,
