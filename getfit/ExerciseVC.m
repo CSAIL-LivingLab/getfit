@@ -253,6 +253,8 @@
 }
 
 - (void) editAction {
+    Resources *resources = [Resources sharedResources];
+
     [_activityPicker reloadAllComponents];
     [UIView beginAnimations:@"MoveOut" context:nil];
     [_intensityPicker removeFromSuperview];
@@ -261,10 +263,16 @@
     [UIView beginAnimations:@"MoveIn" context:nil];
     [self.view insertSubview:_activityPicker aboveSubview:self.view];
     [UIView commitAnimations];
+    NSString *title = [resources.activities objectAtIndex:[_activityPicker selectedRowInComponent:0]];
+
+    [_activityButton setTitle:title forState:UIControlStateNormal];
+    [self adjustButtonForImage:_activityButton];
 
 }
 
 - (void) editIntensity {
+    Resources *resources = [Resources sharedResources];
+
     [_intensityPicker reloadAllComponents];
     [_activityPicker removeFromSuperview];
     [UIView commitAnimations];
@@ -272,6 +280,12 @@
     [UIView beginAnimations:@"MoveIn" context:nil];
     [self.view insertSubview:_intensityPicker aboveSubview:self.view];
     [UIView commitAnimations];
+    
+    NSString *title = [resources.intensities objectAtIndex:[_intensityPicker selectedRowInComponent:0]];
+    
+    [_intensityButton setTitle:title forState:UIControlStateNormal];
+    [self adjustButtonForImage:_intensityButton];
+
 }
 
 - (void) activateRecordingButtonIfPossible {
