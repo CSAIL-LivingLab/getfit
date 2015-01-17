@@ -177,7 +177,7 @@
         
         
         NSString *activity = me.activity;
-        NSString *intensity = me.intensity;
+        NSString *intensity = [me.intensity lowercaseString];
         NSString *endDate = [dateFormatter stringFromDate:me.endTime];
         NSString *duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
         

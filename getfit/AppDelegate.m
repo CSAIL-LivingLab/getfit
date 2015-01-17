@@ -35,9 +35,10 @@
     // set default for cookie storage
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     
-    // set up the
+    // set up the location manager
     [self setupLocationManager];
-    
+    [NSThread sleepForTimeInterval:.5];
+
     // show
     [self.window makeKeyAndVisible];
     return YES;
