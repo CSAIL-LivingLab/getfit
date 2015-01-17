@@ -35,6 +35,8 @@
     // set default for cookie storage
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     
+    [NSThread sleepForTimeInterval:.5];
+
     // show
     [self.window makeKeyAndVisible];
     return YES;
