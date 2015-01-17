@@ -46,6 +46,7 @@
     UIColor *blueColor;
     UIColor *greenColor;
     UIColor *textColor;
+    UIImage *activityImage;
     BOOL wasActive;
 
 }
@@ -84,13 +85,17 @@
     _activityPicker.delegate = self;
     [_activityPicker setBackgroundColor:[UIColor blackColor]];
     [_activityPicker reloadAllComponents];
-    
+    _activityPicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _activityPicker.layer.borderWidth = 1;
+
     _intensityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-250, self.view.bounds.size.width, 216)];
     _intensityPicker.dataSource = self;
     _intensityPicker.delegate = self;
     [_intensityPicker setBackgroundColor:[UIColor blackColor]];
     [_intensityPicker reloadAllComponents];
-
+    _intensityPicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _intensityPicker.layer.borderWidth = 1;
+    
     // tap the background to remove pickers
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPickers)];
     [tapBackground setNumberOfTapsRequired:1];
@@ -110,10 +115,12 @@
     [_activityButton.layer setBackgroundColor:[blueColor CGColor]];
     [_activityButton addTarget:self action:@selector(editAction) forControlEvents:UIControlEventTouchUpInside];
     CGSize s = [UIImage imageNamed:@"runner.png"].size;
-    UIImage *i =[self imageWithImage:[UIImage imageNamed:@"runner.png"] scaledToSize:CGSizeMake(s.width/2.0, s.height/2.0)];
-    [_activityButton setImage:i forState:UIControlStateNormal];
+    activityImage =[self imageWithImage:[UIImage imageNamed:@"runner.png"] scaledToSize:CGSizeMake(s.width/2.0, s.height/2.0)];
+    [_activityButton setImage:activityImage forState:UIControlStateNormal];
     [self adjustButtonForImage:_activityButton];
     [self.view addSubview:_activityButton];
+    _activityButton.titleLabel.numberOfLines = 2;
+    _activityButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     _intensityButton = [[UIButton alloc] initWithFrame:CGRectMake(windowFrame.size.width-10-buttonWidth, 175, buttonWidth, buttonWidth)];
     [ _intensityButton setTitle:kINTENSITY_TITLE forState:UIControlStateNormal];
@@ -122,9 +129,12 @@
     _intensityButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     _intensityButton.layer.borderWidth = 2.0;
      s = [UIImage imageNamed:@"intensity.png"].size;
-    i =[self imageWithImage:[UIImage imageNamed:@"intensity.png"] scaledToSize:CGSizeMake(s.width/2.0, s.height/2.0)];
+    UIImage *i =[self imageWithImage:[UIImage imageNamed:@"intensity.png"] scaledToSize:CGSizeMake(s.width/2.0, s.height/2.0)];
     [_intensityButton setImage:i forState:UIControlStateNormal];
     [self adjustButtonForImage:_intensityButton];
+    _intensityButton.titleLabel.numberOfLines = 2;
+    _intensityButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
 
     [_intensityButton addTarget:self action:@selector(editIntensity) forControlEvents:UIControlEventTouchUpInside];
     //[_intensityButton.layer setBorderColor:[greenColor CGColor]];
@@ -133,9 +143,18 @@
     [[_intensityButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:16]];
     [_intensityButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
-    
     _startButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _startButton.frame = CGRectMake(windowFrame.size.width/2-buttonWidth/2, 375, buttonWidth, buttonWidth);
+
+    CGRect screen = [UIScreen mainScreen].bounds;
+    
+    if (screen.size.height == 480) { //4 or 4S {
+        _startButton.frame = CGRectMake(windowFrame.size.width/2-buttonWidth/2, 290, buttonWidth, buttonWidth);
+        _stopwatch = [[UILabel alloc] initWithFrame:CGRectMake(0, 190,  windowFrame.size.width, 125)];
+
+    } else {
+        _startButton.frame = CGRectMake(windowFrame.size.width/2-buttonWidth/2, 375, buttonWidth, buttonWidth);
+        _stopwatch = [[UILabel alloc] initWithFrame:CGRectMake(0, 238,  windowFrame.size.width, 125)];
+    }
     [_startButton setTitle:@"Start" forState:UIControlStateNormal];
     [_startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _startButton.layer.borderWidth = 2.0;
@@ -148,7 +167,6 @@
     [[_startButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:16]];
 
     // make stopwatch
-    _stopwatch = [[UILabel alloc] initWithFrame:CGRectMake(0, 238,  windowFrame.size.width, 125)];
     [_stopwatch setText:@"00:00.0"];
     _stopwatch.textAlignment = NSTextAlignmentCenter;
     _stopwatch.font = [UIFont fontWithName:kFONT_NAME_BOLD size:90];
@@ -244,6 +262,7 @@
 
         // clear the pickers
         [ _activityButton setTitle:kACTIVITY_TITLE forState:UIControlStateNormal];
+        //[_activityButton setImage:activityImage forState:UIControlStateNormal];
         [ _intensityButton setTitle:kINTENSITY_TITLE forState:UIControlStateNormal];
         [self adjustButtonForImage:_intensityButton];
         [self adjustButtonForImage:_activityButton];
@@ -299,16 +318,26 @@
             //_stopwatch.layer.backgroundColor = [UIColor blackColor].CGColor;
             _stopwatch.hidden = NO;
             _startButton.hidden = NO;
-            [UIView animateWithDuration:1.0 delay:0.5 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-                _startButton.backgroundColor = [UIColor redColor];
-                //_stopwatch.layer.backgroundColor = textColor.CGColor; //can't animate uilabel background color!
-                _stopwatch.textColor = textColor;
+            [UIView animateWithDuration:.25 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
 
-                [self offsetViews:@[_intensityButton,_activityButton] byY:-100];
+                [self offsetViews:@[_intensityButton,_activityButton] byY:-25];
 
             }completion:^(BOOL done){
-                //some completition
+                [UIView animateWithDuration:.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                    [self offsetViews:@[_intensityButton,_activityButton] byY:-75];
+
+                    _startButton.backgroundColor = [UIColor redColor];
+                    //_stopwatch.layer.backgroundColor = textColor.CGColor; //can't animate uilabel background color!
+                    _stopwatch.textColor = textColor;
+                    
+                }completion:^(BOOL done){
+                    //some completition
+                }];
             }];
+            
+
+
+            
             _startButton.userInteractionEnabled = YES;
         }
     } else {
@@ -415,6 +444,19 @@
     // raise the image and push it right so it appears centered
     //  above the text
     CGSize titleSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName: button.titleLabel.font}];
+    
+    if (titleSize.width > button.frame.size.width * .8 && ![button.titleLabel.text isEqualToString:kINTENSITY_TITLE]) {
+        //insert newlines in label
+        NSString *label = button.titleLabel.text;
+        NSRange rOriginal = [label rangeOfString:@" "];
+        if (NSNotFound != rOriginal.location) {
+            label = [label stringByReplacingCharactersInRange: rOriginal withString:@"\n"];
+        }
+        [button setTitle:label forState:UIControlStateNormal];
+        titleSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName: button.titleLabel.font}];
+
+    }
+    
     button.imageEdgeInsets = UIEdgeInsetsMake(- (titleSize.height + spacing), 0.0, 0.0, - titleSize.width);
     
     
@@ -457,7 +499,7 @@
         title = [resources.intensities objectAtIndex:row];
     }
 
-    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:kFONT_NAME}];
     
     return attString;
     
@@ -470,8 +512,8 @@
     if (pickerView == _activityPicker) {
         NSString *activity = [resources.activities objectAtIndex:row];
         [_activityButton setTitle:activity forState:UIControlStateNormal];
+        //[_activityButton setImage:NULL forState:UIControlStateNormal];
         [self adjustButtonForImage:_activityButton];
-
         _minuteEntry.activity = activity;
         
     } else {
