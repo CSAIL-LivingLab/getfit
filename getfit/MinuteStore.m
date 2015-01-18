@@ -141,9 +141,9 @@
             me.postedToDataHub = YES;
             [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
         }
-//        [self saveChanges];
+        
+        [self saveChanges];
         return YES;
-        // minutes are posted to datahub before getfit, so do not remove the objects here
     }
     @catch (NSException *exception) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload failed" message:[NSString stringWithFormat:@"GetFit failed to connect to DataHub (%@)",[exception description]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];

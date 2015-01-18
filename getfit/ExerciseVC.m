@@ -186,8 +186,6 @@
     AppDelegate *del = [[UIApplication sharedApplication] delegate];
     [plusButton addTarget:del action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:plusButton];
-
-    
 }
 
 
@@ -283,6 +281,7 @@
     [self.view insertSubview:_activityPicker aboveSubview:self.view];
     [UIView commitAnimations];
     NSString *title = [resources.activities objectAtIndex:[_activityPicker selectedRowInComponent:0]];
+    self.minuteEntry.activity = [resources.activities objectAtIndex:[_activityPicker selectedRowInComponent:0]];
 
     [_activityButton setTitle:title forState:UIControlStateNormal];
     [self adjustButtonForImage:_activityButton];
@@ -301,6 +300,7 @@
     [UIView commitAnimations];
     
     NSString *title = [resources.intensities objectAtIndex:[_intensityPicker selectedRowInComponent:0]];
+    self.minuteEntry.intensity = [resources.intensities objectAtIndex:[_intensityPicker selectedRowInComponent:0]];
     
     [_intensityButton setTitle:title forState:UIControlStateNormal];
     [self adjustButtonForImage:_intensityButton];
