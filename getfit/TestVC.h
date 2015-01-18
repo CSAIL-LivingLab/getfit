@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TestVC : UIViewController
-- (IBAction)firstSundayOfWeek:(id)sender;
 - (IBAction)pushOAuthVC:(id)sender;
+- (IBAction)testSave:(id)sender;
 
 
 @end

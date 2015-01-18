@@ -99,7 +99,7 @@
     NSDate *resumeSensorDate = [defaults objectForKey:@"resumeSensorDate"];
     
     // do nothing if it's not time to resume tracking
-    if (resumeSensorDate !=nil && [resumeSensorDate compare:[NSDate date]] == NSOrderedAscending) {
+    if (resumeSensorDate !=nil && [resumeSensorDate compare:[NSDate date]] == NSOrderedDescending) {
         return;
     }
     

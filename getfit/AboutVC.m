@@ -81,6 +81,12 @@
                 @[@"1 week", @10080],
                 @[@"Forever", @999],
                 nil];
+    
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker:)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [self.view addGestureRecognizer:tapBackground];
+
+    
 }
 
 
@@ -89,9 +95,6 @@
     [UIView beginAnimations:@"MoveIn" context:nil];
     [self.view insertSubview:pausePicker aboveSubview:self.view];
     [UIView commitAnimations];
-    
-    
-    
     
 }
 
@@ -102,6 +105,11 @@
 
 # pragma mark - Picker
 
+- (void) dismissPicker:(id)sender {
+    [UIView beginAnimations:@"MoveOut" context:nil];
+    [pausePicker removeFromSuperview];
+    [UIView commitAnimations];
+}
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return [[pauseArr objectAtIndex:row] objectAtIndex:0];
@@ -121,6 +129,7 @@
     NSNumber *minutes = [[pauseArr objectAtIndex:row] objectAtIndex:1];
     NSDate *resumeDate;
     
+    /// 999 means do not resume
     if ([minutes isEqualToNumber:@999]) {
         resumeDate = [NSDate distantFuture];
     } else {

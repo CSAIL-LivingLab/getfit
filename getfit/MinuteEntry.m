@@ -77,8 +77,8 @@
         _endTime = [aDecoder decodeObjectForKey:@"endTime"];
         
         _duration = [aDecoder decodeIntegerForKey:@"duration"];
-        _postedToGetFit = [aDecoder decodeIntegerForKey:@"postedToGetFit"];
-        _postedToDataHub = [aDecoder decodeIntegerForKey:@"postedToDataHub"];
+        _postedToGetFit = [aDecoder decodeBoolForKey:@"postedToGetFit"];
+        _postedToDataHub = [aDecoder decodeBoolForKey:@"postedToDataHub"];
     }
     return self;
 }

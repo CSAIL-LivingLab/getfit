@@ -40,27 +40,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)firstSundayOfWeek:(id)sender {
-    // today 12:00am
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute fromDate:[NSDate date]];
-    [components setHour:0];
-    [components setMinute:0];
-    [components setSecond:0];
-    NSDate *today12am = [calendar dateFromComponents:components];
-    NSLog(@"today at 12am: %f", floor([today12am timeIntervalSince1970] * 1000));
-    
-    // day of week today
-    NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
-    [weekday setDateFormat: @"EEEE"];
-    NSLog(@"The day of the week is: %@", [weekday stringFromDate:today12am]);
-    
-    // sunday at 12:00am
-    NSDate *previousSunday = [self previousSundayForDate:today12am];
-    NSLog(@"previous sunday: %f", floor([previousSunday timeIntervalSince1970] * 1000));
-    
-}
-
 - (IBAction)pushOAuthVC:(id)sender {
     OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
@@ -68,48 +47,15 @@
     [self presentViewController:navController animated:YES completion:nil];
 }
 
--(NSDate *)previousSundayForDate:(NSDate *)date
-{
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    static NSUInteger SUNDAY = 1;
-    static NSUInteger MONDAY = 2;
+- (IBAction)testSave:(id)sender {
+    MinuteStore *ms = [MinuteStore sharedStore];
+    MinuteEntry *me = [ms createMinuteEntryWithActivity:@"foosball" intensity:@"low" duration:10 andEndTime:[NSDate date]];
     
-    NSDate *startOfWeek;
-    [calendar rangeOfUnit:NSWeekCalendarUnit
-            startDate:&startOfWeek
-             interval:NULL
-              forDate:date];
+    me.postedToDataHub = YES;
     
-    if(calendar.firstWeekday == SUNDAY){
-        
-        NSDate *beginningOfDate;
-        [calendar rangeOfUnit:NSDayCalendarUnit
-                startDate:&beginningOfDate
-                 interval:NULL forDate:date];
-        if ([startOfWeek isEqualToDate:beginningOfDate]) {
-            startOfWeek = [calendar dateByAddingComponents:(
-                                                        {
-                                                            NSDateComponents *comps = [[NSDateComponents alloc] init];
-                                                            comps.day = -7;
-                                                            comps;
-                                                        })
-                                                toDate:startOfWeek
-                                               options:0];
-        }
-        return startOfWeek;
-    }
-    if(calendar.firstWeekday == MONDAY)
-        return [calendar dateByAddingComponents:(
-                                             {
-                                                 NSDateComponents *comps = [[NSDateComponents alloc] init];
-                                                 comps.day = -1;
-                                                 comps;
-                                             })
-                                     toDate:startOfWeek
-                                    options:0];
-    
-    return nil;
-    
+    [ms removeMinuteEntryIfPostedToDataHubAndGetFit:me];
+
+    [ms saveChanges];
 }
 
 

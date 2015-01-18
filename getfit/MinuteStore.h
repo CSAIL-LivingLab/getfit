@@ -21,12 +21,15 @@
 - (void) addMinuteEntry: (MinuteEntry *) minuteEntry;
 - (void) removeMinuteEntry:(MinuteEntry *)minuteEntry;
 
-
 - (BOOL) postToGetFit;
 - (BOOL) postToDataHub;
 - (BOOL) checkForValidCookies;
 - (BOOL) checkForValidTokens:(NSDate *) postDate;
 
 - (BOOL) isNetworkAvailable:(NSString *)hostname;
+
+- (BOOL) removeMinuteEntryIfPostedToDataHubAndGetFit:(MinuteEntry *)minuteEntry;
+- (BOOL) saveChanges;
+
 
 @end

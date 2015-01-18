@@ -141,7 +141,7 @@
             me.postedToDataHub = YES;
             [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
         }
-        [self saveChanges];
+//        [self saveChanges];
         return YES;
         // minutes are posted to datahub before getfit, so do not remove the objects here
     }
@@ -297,12 +297,12 @@
 
 - (BOOL) saveChanges {
     NSString *path = [self entryArchivePath];
-    return [NSKeyedArchiver archiveRootObject:self toFile:path];
+    return [NSKeyedArchiver archiveRootObject:self.privateMinutes toFile:path];
 }
 
 - (NSString *)entryArchivePath {
-    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                                       NSUserDomainMask, YES);
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,                                                                       NSUserDomainMask, YES);
+    
     // get first one, because ios
     NSString *documentDirectory = [documentDirectories firstObject];
     
