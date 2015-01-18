@@ -80,7 +80,7 @@
     _minuteEntry = [[MinuteEntry alloc] init];
 
     // make pickers
-    _activityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-250, self.view.bounds.size.width, 216)];
+    _activityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
     _activityPicker.dataSource = self;
     _activityPicker.delegate = self;
     [_activityPicker setBackgroundColor:[UIColor blackColor]];
@@ -88,7 +88,7 @@
     _activityPicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _activityPicker.layer.borderWidth = 1;
 
-    _intensityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height-250, self.view.bounds.size.width, 216)];
+    _intensityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
     _intensityPicker.dataSource = self;
     _intensityPicker.delegate = self;
     [_intensityPicker setBackgroundColor:[UIColor blackColor]];
