@@ -10,16 +10,16 @@
 
 @interface DataHubCreation : NSObject
 
-@property NSString *username;
-@property NSString *password;
-@property NSString *email;
+//@property NSString *username;
+//@property NSString *password;
+//@property NSString *email;
 @property NSString *appID;
 @property NSString *appToken;
 
-- (BOOL) createUser;
-- (BOOL) dropSchemaIfExists;
-- (BOOL) createSchema;
-- (NSString *) createUsername;
+- (BOOL) createDataHubUserFromEmail:(NSString *)email andUsername:(NSString *)username andPassword:(NSString *) password;
+- (BOOL) dropSchemaIfExistsForUser:(NSString *)username;
+- (BOOL) createSchemaForUser:(NSString *)username;
+- (NSString *) createUsernameFromEmail:(NSString *)email;
 - (NSString *) createPassword;
 
 @end

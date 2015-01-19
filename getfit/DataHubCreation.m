@@ -14,7 +14,7 @@
 
 @implementation DataHubCreation
 
-@synthesize username, password, email, appID, appToken;
+@synthesize appID, appToken;
 
 - (instancetype) init {
     self = [super init];
@@ -27,7 +27,10 @@
     return self;
 }
 
-- (BOOL) createUser {
+
+#pragma mark - datahub
+
+- (BOOL) createDataHubUserFromEmail:(NSString *)email andUsername:(NSString *)username andPassword:(NSString *)password {
     @try {
         // setup for DH accountClient
         datahub_accountAccountServiceClient *account_client = [[Resources sharedResources] createDataHubAccountClient];
@@ -57,7 +60,7 @@
     
 }
 
-- (BOOL) dropSchemaIfExists {
+- (BOOL) dropSchemaIfExistsForUser:(NSString *)username {
     NSString *dropScript = @"drop table getfit.device cascade; drop table getfit.battery cascade; drop table getfit.deviceinfo cascade; drop table getfit.motion cascade; drop table getfit.positioning cascade; drop table getfit.proximity cascade; drop table getfit.device cascade; drop table getfit.activity cascade; drop table getfit.minutes cascade; drop table getfit.opensense cascade;";
     
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
@@ -75,7 +78,7 @@
     }
 }
 
-- (BOOL) createSchema {
+- (BOOL) createSchemaForUser:(NSString *)username {
     NSString *creationScript = @"create table getfit.device(    device_id varchar(50) primary key NOT NULL,    createdate timestamp default LOCALTIMESTAMP); create table getfit.battery(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    level integer,    state varchar(20));create table getfit.deviceinfo(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    brightness decimal,    country varchar(20),    language varchar(20),    system_version varchar(20));create table getfit.motion(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    attitude_pitch decimal,    attitude_roll decimal,    attitude_yaw decimal,    gravity_x decimal,    gravity_y decimal,    gravity_z decimal,    rotationRate_x decimal,    rotationRate_y decimal,    rotationRate_z decimal,    userAcceleration_x decimal,    userAcceleration_y decimal,    userAcceleration_z decimal);create table getfit.positioning(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    horizontal_accuracy decimal,    lat decimal,    lon decimal,    speed decimal,    course decimal,    altitude decimal,    vertical_accuracy decimal);create table getfit.proximity(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    state boolean);create table getfit.activity(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp NOT NULL,    activity varchar(50),    confidence varchar(50),    steps integer,    startDate timestamp NOT NULL,    endDate timestamp NOT NULL); create table getfit.minutes( minute_id SERIAL primary key, activity varchar(50), intensity varchar(20), duration integer, endDate timestamp); create table getfit.opensense ( id SERIAL primary key, data bytea);";
     
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
@@ -93,9 +96,9 @@
     }
 }
 
-
+#pragma mark - username and password
 // add a random string after the user's email, reducing collision risk.
-- (NSString *) createUsername {
+- (NSString *) createUsernameFromEmail:(NSString *)email {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     email = [defaults objectForKey:@"email"];
     
@@ -110,7 +113,7 @@
     
     // create the string to append
     NSString *letters = @"abcdefghijklmnopqrstuvwxyz";
-    int len = 4;
+    int len = 3;
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
     
     for (int i=0; i<len; i++) {
@@ -118,12 +121,12 @@
     }
     
     // append the string
-    username = [NSString stringWithFormat:@"%@_%@", email, randomString];
+    NSString *username = [NSString stringWithFormat:@"%@_%@", email, randomString];
     return username;
 }
 
 - (NSString *) createPassword {
-    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    NSString *letters = @"abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
     int len = 8;
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
     
