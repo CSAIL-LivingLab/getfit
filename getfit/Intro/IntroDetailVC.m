@@ -67,10 +67,18 @@
     
 
     // check for duplicate usernames/emails/previous authorization
-    [dhCreation createDataHubUserFromEmail:email andUsername:username andPassword:password];
+    NSNumber * newDataHubAcct = [dhCreation createDataHubUserFromEmail:email andUsername:username andPassword:password];
+    
+    if ([newDataHubAcct isEqualToNumber:@1]) {
+        NSLog(@"a ok");
+    } else if ([newDataHubAcct isEqualToNumber:@2]){
+        NSLog(@"duplicate user/email");
+    } else {
+        NSLog(@"unknown error. Probably network.");
+    }
 
     // check for schemas already created
-    [dhCreation createSchemaForUser:username];
+//    [dhCreation createSchemaForUser:username];
     [self showResults];
 }
 

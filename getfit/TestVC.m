@@ -14,6 +14,7 @@
 #import "Secret.h"
 #import "MinuteEntry.h"
 #import "OAuthVC.h"
+#import "DataHubCreation.h"
 
 @interface TestVC ()
 
@@ -58,5 +59,12 @@
     [ms saveChanges];
 }
 
+- (IBAction)regexExtractionTest:(id)sender {
+    
+    DataHubCreation * dhCreation = [[DataHubCreation alloc] init];
+    
+    [dhCreation createDataHubUserFromEmail:@"arcarter@mit.edu" andUsername:@"al_carter" andPassword:@"389jk34"];
+
+}
 
 @end

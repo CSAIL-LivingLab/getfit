@@ -30,32 +30,43 @@
 
 #pragma mark - datahub
 
-- (BOOL) createDataHubUserFromEmail:(NSString *)email andUsername:(NSString *)username andPassword:(NSString *)password {
+- (NSNumber *) createDataHubUserFromEmail:(NSString *)email andUsername:(NSString *)username andPassword:(NSString *)password {
     @try {
         // setup for DH accountClient
         datahub_accountAccountServiceClient *account_client = [[Resources sharedResources] createDataHubAccountClient];
         [account_client create_account:username email:email password:password repo_name:@"getfit" app_id:appID app_token:appToken];
-        return YES;
+        return @1;
     } @catch (NSException *exception) {
         NSString *errorTitle;
         NSString *errorMessage;
-        NSLog(@"%@", exception);
         
         if ([exception.name rangeOfString:@"datahub_accountAccountException"].location != NSNotFound) {
             datahub_accountAccountException *acctException = (datahub_accountAccountException*) exception;
-            errorTitle = @"duplicate account";
             
-            NSLog(@"%@", acctException.message);
+            // get and set the username/email
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            if ([acctException.message rangeOfString:@"Duplicate email"].location!=NSNotFound) {
+                NSString *tempUsername = [self extractUsernameFromErrorStr:acctException.message];
+                [defaults setObject:tempUsername forKey:@"username"];
+                [defaults setObject:email forKey:@"email"];
+                [defaults setObject:@"-user defined-" forKey:@"password"];
+                
+            } else if ([acctException.message rangeOfString:@"Duplicate username"].location!=NSNotFound){
+                NSString *tempEmail = [self extractEmailFromErrorStr:acctException.message];
+                [defaults setObject:tempEmail forKey:@"email"];
+                [defaults setObject:username forKey:@"username"];
+                [defaults setObject:@"-user defined-" forKey:@"password"];
+            }
+            [defaults synchronize];
+            return @2;
             
-            errorMessage = @"duplicate username and/or email detected. Please try another username or email.";
-        } else {
-            errorTitle = @"Connection Error";
-            errorMessage = @"The app is unable to connect to datahub. Please check your wireless conntion.";
+            
         }
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:errorTitle message:errorMessage delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil];
-        [alert show];
-        return NO;
+        
+        errorTitle = @"Connection Error";
+        errorMessage = @"The app is unable to connect to datahub. Please check your wireless conntion.";
+        return @3;
     }
     
 }
@@ -134,7 +145,46 @@
         [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform((uint32_t)[letters length])]];
     }
     return randomString;
+}
+
+- (NSString *) extractUsernameFromErrorStr:(NSString *)errStr {
+    NSString *extractedUsername;
+    NSString *pattern = @"=(.*)\\)";
+    NSError *error = NULL;
     
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSArray *matches = [regex matchesInString:errStr
+                                      options:0
+                                        range:NSMakeRange(0, [errStr length])];
+    
+    // only minutes extracted
+    extractedUsername = [errStr substringWithRange:[matches[0] range]];
+    
+    // trim the first and last characters, because regex in objective-c is unnecessarily complicated
+    extractedUsername = [extractedUsername substringWithRange:NSMakeRange(1 , [extractedUsername length]-2)];
+    
+    return extractedUsername;
+}
+
+- (NSString *) extractEmailFromErrorStr:(NSString *)errStr {
+    NSString *extractedEmail;
+    NSString *pattern = @"=(.*)\\)";
+    NSError *error = NULL;
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
+    
+    NSArray *matches = [regex matchesInString:errStr
+                                      options:0
+                                        range:NSMakeRange(0, [errStr length])];
+    
+    // only minutes extracted
+    extractedEmail = [errStr substringWithRange:[matches[0] range]];
+    
+    // trim the first and last characters, because regex in objective-c is unnecessarily complicated
+    extractedEmail = [extractedEmail substringWithRange:NSMakeRange(1 , [extractedEmail length]-2)];
+    
+    return extractedEmail;
 }
 
 @end

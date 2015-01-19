@@ -16,10 +16,13 @@
 @property NSString *appID;
 @property NSString *appToken;
 
-- (BOOL) createDataHubUserFromEmail:(NSString *)email andUsername:(NSString *)username andPassword:(NSString *) password;
+- (NSNumber *) createDataHubUserFromEmail:(NSString *)email andUsername:(NSString *)username andPassword:(NSString *) password;
 - (BOOL) dropSchemaIfExistsForUser:(NSString *)username;
 - (BOOL) createSchemaForUser:(NSString *)username;
 - (NSString *) createUsernameFromEmail:(NSString *)email;
 - (NSString *) createPassword;
+
+- (NSString *) extractUsernameFromErrorStr:(NSString *)errStr;
+- (NSString *) extractEmailFromErrorStr:(NSString *) errStr;
 
 @end
