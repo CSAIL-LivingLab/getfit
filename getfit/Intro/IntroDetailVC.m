@@ -40,46 +40,22 @@
     appID = [secret DHAppID];
     appToken = [secret DHAppToken];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    email = [defaults objectForKey:@"email"];
+    username = [defaults objectForKey:@"username"];
+    password = [defaults objectForKey:@"password"];
+    
+    
     // show spinny thing, and setup up
-    [self setUpDataHub]; //shows other things once it's done
+//    [self setUpDataHub]; //shows other things once it's done
 
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                     style:UIBarButtonItemStyleDone target:self action:@selector(save)];
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    
-}
-
-- (void) setUpDataHub {
-    // username and password
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
-    
-
-    email = [defaults objectForKey:@"email"];
-    password = [dhCreation createPassword];
-    username = [dhCreation createUsernameFromEmail:email];
-    
-    [defaults setObject:password forKey:@"password"];
-    [defaults setObject:username forKey:@"username"];
-    
-    [defaults synchronize];
-    
-
-    // check for duplicate usernames/emails/previous authorization
-    NSNumber * newDataHubAcct = [dhCreation createDataHubUserFromEmail:email andUsername:username andPassword:password];
-    
-    if ([newDataHubAcct isEqualToNumber:@1]) {
-        NSLog(@"a ok");
-    } else if ([newDataHubAcct isEqualToNumber:@2]){
-        NSLog(@"duplicate user/email");
-    } else {
-        NSLog(@"unknown error. Probably network.");
-    }
-
-    // check for schemas already created
-//    [dhCreation createSchemaForUser:username];
     [self showResults];
+
+    
 }
 
 

@@ -70,6 +70,7 @@
 		94CECD9F1A64565200DBE4C1 /* TestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94CECD9D1A64565200DBE4C1 /* TestVC.xib */; };
 		94CECDA61A66F8F400DBE4C1 /* datahubGraphs.html in Resources */ = {isa = PBXBuildFile; fileRef = 94CECDA51A66F8F400DBE4C1 /* datahubGraphs.html */; };
 		94EA56171A6C76450045EA4E /* DataHubCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA56161A6C76450045EA4E /* DataHubCreation.m */; };
+		94EA561B1A6CA6D40045EA4E /* IntroAuthorizationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA561A1A6CA6D40045EA4E /* IntroAuthorizationVC.m */; };
 		DB6680C71A69B65D0080560E /* runner.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680C61A69B65D0080560E /* runner.png */; };
 		DB6680CA1A69B8780080560E /* intensity.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680C91A69B8780080560E /* intensity.png */; };
 		DB6680CD1A69F32E0080560E /* launch.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB6680CC1A69F32E0080560E /* launch.xib */; };
@@ -205,6 +206,8 @@
 		94CECDA51A66F8F400DBE4C1 /* datahubGraphs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = datahubGraphs.html; sourceTree = "<group>"; };
 		94EA56151A6C76450045EA4E /* DataHubCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataHubCreation.h; sourceTree = "<group>"; };
 		94EA56161A6C76450045EA4E /* DataHubCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataHubCreation.m; sourceTree = "<group>"; };
+		94EA56191A6CA6D40045EA4E /* IntroAuthorizationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroAuthorizationVC.h; sourceTree = "<group>"; };
+		94EA561A1A6CA6D40045EA4E /* IntroAuthorizationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroAuthorizationVC.m; sourceTree = "<group>"; };
 		DB6680C61A69B65D0080560E /* runner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = runner.png; path = ../../Assets/runner.png; sourceTree = "<group>"; };
 		DB6680C91A69B8780080560E /* intensity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = intensity.png; path = ../../Assets/intensity.png; sourceTree = "<group>"; };
 		DB6680CC1A69F32E0080560E /* launch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = launch.xib; sourceTree = "<group>"; };
@@ -470,6 +473,8 @@
 				9431EE931A5CC54900B7EC36 /* IntroDetailVC.xib */,
 				94EA56151A6C76450045EA4E /* DataHubCreation.h */,
 				94EA56161A6C76450045EA4E /* DataHubCreation.m */,
+				94EA56191A6CA6D40045EA4E /* IntroAuthorizationVC.h */,
+				94EA561A1A6CA6D40045EA4E /* IntroAuthorizationVC.m */,
 			);
 			name = Intro;
 			sourceTree = "<group>";
@@ -650,6 +655,7 @@
 				94038E181A6081C000B9E936 /* TNSStreamTransport.m in Sources */,
 				94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */,
 				9431EE8B1A5CC4F000B7EC36 /* IntroPageVC.m in Sources */,
+				94EA561B1A6CA6D40045EA4E /* IntroAuthorizationVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
