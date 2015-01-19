@@ -8,6 +8,7 @@
 
 #import "IntroDetailVC.h"
 #import "Secret.h"
+#import "DataHubCreation.h"
 #import "IntroPageVC.h"
 
 #import "datahub.h"
@@ -52,8 +53,11 @@
 - (void) setUpDataHub {
     // username and password
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[self createPassword] forKey:@"password"];
-    [defaults setObject:[self createUsername] forKey:@"username"];
+    DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
+    
+    
+    [defaults setObject:[dhCreation createPassword] forKey:@"password"];
+    [defaults setObject:[dhCreation createUsername] forKey:@"username"];
     [defaults synchronize];
     
     username = [defaults objectForKey:@"username"];
@@ -128,41 +132,6 @@
     }
 }
 
-
-    // add a random string after the user's email, reducing collision risk.
-- (NSString *) createUsername {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-   email = [defaults objectForKey:@"email"];
-    
-    // strip the email of its extra characters
-    NSRange range = [email rangeOfString:@"@"];
-    email = [email substringToIndex:range.location];
-    
-    // create the string to append
-    NSString *letters = @"abcdefghijklmnopqrstuvwxyz";
-    int len = 4;
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
-    
-    for (int i=0; i<len; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform((uint32_t)[letters length])]];
-    }
-    
-    // append the string
-    username = [NSString stringWithFormat:@"%@_%@", email, randomString];
-    return username;
-}
-
-- (NSString *) createPassword {
-    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    int len = 8;
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
-        
-    for (int i=0; i<len; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform((uint32_t)[letters length])]];
-    }
-    return randomString;
-    
-}
 
 - (void) showResults {
     // hide setup stuff

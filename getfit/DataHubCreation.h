@@ -13,6 +13,13 @@
 @property NSString *username;
 @property NSString *password;
 @property NSString *email;
+@property NSString *appID;
+@property NSString *appToken;
 
+- (BOOL) createUser;
+- (BOOL) dropSchemaIfExists;
+- (BOOL) createSchema;
+- (NSString *) createUsername;
+- (NSString *) createPassword;
 
 @end
