@@ -46,14 +46,15 @@
     
 }
 
-- (void) pushNextVC{
+- (void) makeSchemaAndPushNextVC{
     // method for IntroAuthorizationVC to access
+    [self setupDataHubSchema];
     [self.introPageVC pushDetailVC];
 }
 
 
 - (IBAction)tapToContinue:(id)sender {
-    [self setUpDataHub];
+    [self setUpDataHubAccount];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,7 +63,7 @@
 }
 
 #pragma mark - datahubsetup
-- (void) setUpDataHub {
+- (void) setUpDataHubAccount {
     // username and password
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
@@ -81,6 +82,7 @@
     NSNumber * newDataHubAcct = [dhCreation createDataHubUserFromEmail:email andUsername:username andPassword:password];
     
     if ([newDataHubAcct isEqualToNumber:@1]) {
+        [self setupDataHubSchema];
         [introPageVC pushDetailVC];
     } else if ([newDataHubAcct isEqualToNumber:@2]){
         NSLog(@"duplicate user/email");
@@ -101,6 +103,20 @@
         [alert show];
     }
 }
+
+- (void) setupDataHubSchema{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
+    NSString *username = [defaults objectForKey:@"username"];
+    
+    @try {
+        [dhCreation createSchemaForUser:username];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"\n\nException: %@", exception);
+    }
+}
+
 
 #pragma mark - helpers
 

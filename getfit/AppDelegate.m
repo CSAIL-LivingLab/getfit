@@ -14,7 +14,7 @@
 //#import "PageVC.h"
 #import "ExerciseVC.h"
 #import "GraphVC.h"
-#import "AboutVC.h"
+#import "InfoVC.h"
 #import "TestVC.h"
 #import "MinuteTVC.h"
 
@@ -28,8 +28,8 @@
     [self loadMainViews];
     
     // load the intro view if the user's email isn't set
-//    if (![defaults stringForKey:@"email"]) {
-    if (YES) {
+    if (![defaults stringForKey:@"email"]) {
+//    if (YES) {
         [self loadIntroViews]; }
     
     // set default for cookie storage
@@ -48,7 +48,7 @@
     
     ExerciseVC *exerciseVC = [[ExerciseVC alloc] init];
     GraphVC *graphVC = [[GraphVC alloc] init];
-    AboutVC *aboutVC = [[AboutVC alloc] init];
+    InfoVC *aboutVC = [[InfoVC alloc] init];
     TestVC *testVC = [[TestVC alloc] init];
     
     // add tabs

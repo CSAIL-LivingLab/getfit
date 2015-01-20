@@ -18,7 +18,7 @@
 
 - (instancetype) initWithParentPageVC: (IntroPageVC *) parentPageVC;
 - (IBAction)tapToContinue:(id)sender;
-- (void) pushNextVC;
+- (void) makeSchemaAndPushNextVC;
 
 
 @end

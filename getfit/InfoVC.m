@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 CSAIL Big Data Initiative. All rights reserved.
 //
 
-#import "AboutVC.h"
+#import "InfoVC.h"
 #import "AboutView.h"
 #import "OpenSense.h"
 
-@interface AboutVC () {
+@interface InfoVC () {
     UIPickerView *pausePicker;
     NSArray *pauseArr;
 }
@@ -21,13 +21,13 @@
 
 @end
 
-@implementation AboutVC
+@implementation InfoVC
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.tabBarItem.title = @"About";
+        self.tabBarItem.title = @"Info";
                 UIImage *image = [UIImage imageNamed:@"info.png"];
                 self.tabBarItem.image = image;
     }
