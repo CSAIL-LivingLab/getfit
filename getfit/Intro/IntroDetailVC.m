@@ -29,12 +29,10 @@
 @end
 
 @implementation IntroDetailVC
-@synthesize thankYouLabel, setUpLabel, usernameStrLabel, passwordStrLabel, usernameLabel, passwordLabel, detailTextArea, spinnerIndicator, setupLabel, getfitButton, appID, appToken, username, password, email;
+@synthesize usernameLabel, passwordLabel, detailTextArea, getfitButton, appID, appToken, username, password, email;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    getfitButton.hidden = YES;
     
     Secret *secret = [Secret sharedSecret];
     appID = [secret DHAppID];
@@ -60,20 +58,8 @@
 
 
 - (void) showResults {
-    // hide setup stuff
-    spinnerIndicator.hidden = YES;
-    setupLabel.hidden = YES;
     
     // show new stuff
-    thankYouLabel.hidden = NO;
-    usernameStrLabel.hidden = NO;
-    passwordStrLabel.hidden = NO;
-    usernameLabel.hidden = NO;
-    passwordLabel.hidden = NO;
-    detailTextArea.hidden = NO;
-    getfitButton.hidden = NO;
-    
-    
     detailTextArea.text = @"Use it to view your data at \nhttps://datahub.csail.mit.edu.\n\nThere's no need to write it down. You can access it anytime from this app, or reset it online.";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     usernameLabel.text = [defaults objectForKey:@"username"];
