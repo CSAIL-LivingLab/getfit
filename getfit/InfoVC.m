@@ -7,12 +7,13 @@
 //
 
 #import "InfoVC.h"
-#import "AboutView.h"
+#import "InfoView.h"
 #import "OpenSense.h"
 
 @interface InfoVC () {
     UIPickerView *pausePicker;
     NSArray *pauseArr;
+    UILabel *pauseText;
 }
 
 
@@ -38,8 +39,9 @@
     [super loadView];
     
     CGRect frame = [UIScreen mainScreen].bounds;
-    AboutView *aboutView = [[AboutView alloc] initWithFrame:frame];
+    InfoView *aboutView = [[InfoView alloc] initWithFrame:frame];
     self.view = aboutView;
+    [self addPauseText];
     [self addPauseButtonAndPicker];
 }
 
@@ -49,12 +51,44 @@
     // Do any additional setup after loading the view.
 }
 
-- (void) addPauseButtonAndPicker{
+- (void) addPauseText {
+    if (pauseText != nil) {
+        [pauseText removeFromSuperview];
+    }
+    
     
     CGSize size = self.view.bounds.size;
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDate *pauseUntil = [defaults objectForKey:@"resumeSensorDate"];
     
-    //labels
-    UIButton *pauseButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 400, size.width, 30)];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm"];
+    NSString *dateString = [dateFormatter stringFromDate:pauseUntil];
+    
+    NSString *bodyStr;
+    if (pauseUntil !=nil && [pauseUntil compare:[NSDate date]] == NSOrderedAscending) {
+        bodyStr = @"stop data collection for a period of time. Data colleciton currently enabled.";
+    } else if ([pauseUntil compare:[NSDate distantFuture]] == NSOrderedSame) {
+        bodyStr = @"stop data collection for a period of time. Data colleciton currently disabled forever.";
+    } else {
+        bodyStr = [NSString stringWithFormat:@"stop data collection for a period of time. Data colleciton resuming on %@", dateString];
+    }
+    
+    // label
+    pauseText = [[UILabel alloc] initWithFrame:CGRectMake(20, 330, size.width-40, 100)];
+    [pauseText setText:bodyStr];
+    [pauseText setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
+    [pauseText setNumberOfLines:0];
+    [pauseText sizeToFit];
+    [self.view addSubview:pauseText];
+}
+
+- (void) addPauseButtonAndPicker{
+    CGSize size = self.view.bounds.size;
+    
+    // button
+    UIButton *pauseButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 390, size.width, 30)];
     [pauseButton setTitle:@"Pause Collector" forState:UIControlStateNormal];
     pauseButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [pauseButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -64,10 +98,10 @@
     pausePicker= [[UIPickerView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
     pausePicker.dataSource = self;
     pausePicker.delegate = self;
-//    [pausePicker setBackgroundColor:[UIColor blackColor]];
-    [pausePicker reloadAllComponents];
+    [pausePicker setBackgroundColor:[UIColor whiteColor]];
     pausePicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
     pausePicker.layer.borderWidth = 1;
+    [pausePicker reloadAllComponents];
     
     // remember to update pickerView didSelectRow if you update this array. Those values are hardcoded.
     pauseArr = [[NSArray alloc] initWithObjects:@[@"Resume Data Donation", @0],
@@ -140,6 +174,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:resumeDate forKey:@"resumeSensorDate"];
     [defaults synchronize];
+    [self addPauseText];
     
 }
 

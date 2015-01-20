@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 CSAIL Big Data Initiative. All rights reserved.
 //
 
-#import "AboutView.h"
+#import "InfoView.h"
 
-@implementation AboutView
+@implementation InfoView
 
 - (id) initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -16,7 +16,7 @@
         self.backgroundColor = [UIColor whiteColor];
         [self addGetFitInfo];
         [self addDataHubInfo];
-        [self addDataCollectionSlider];
+        [self addDataCollectionInfo];
         
     }
     return self;
@@ -70,7 +70,7 @@
     
 }
 
-- (void) addDataCollectionSlider {
+- (void) addDataCollectionInfo {
     // title
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(20, 310, 320-40, 20)];
     [title setText:@"Pause Data Collection"];
@@ -79,12 +79,7 @@
     [title sizeToFit];
     [self addSubview:title];
     
-    UILabel *body = [[UILabel alloc] initWithFrame:CGRectMake(20, 330, 320-40, 100)];
-    [body setText:@"stop data collection for a period of time"];
-    [body setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-    [body setNumberOfLines:0];
-    [body sizeToFit];
-    [self addSubview:body];
+    // other text in infoVC
 }
 
 

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutView : UIView
+@interface InfoView : UIView
 
 @end
