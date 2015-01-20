@@ -11,4 +11,6 @@
 
 @interface IntroAuthorizationVC : UIViewController <UIWebViewDelegate>
 
+@property (weak, nonatomic) IntroAboutVC *introAboutVC;
+
 @end

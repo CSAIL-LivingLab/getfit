@@ -7,6 +7,7 @@
 //
 
 #import "IntroAuthorizationVC.h"
+#import "IntroAboutVC.h"
 #import "Secret.h"
 
 @interface IntroAuthorizationVC () {
@@ -52,6 +53,7 @@
 }
 
 
+
 - (void) webViewDidFinishLoad:(UIWebView *)webView{
    
     NSString *url = [[webView.request URL] absoluteString];
@@ -59,6 +61,11 @@
     
     // only two urls, the datahub one and the livinglab one
     if (![url isEqualToString:@""] && [url rangeOfString:@"datahub"].location == NSNotFound) {
+        
+        // make sure the continue button target changes
+        [self.introAboutVC pushNextVC];
+        
+        // then dismiss self
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

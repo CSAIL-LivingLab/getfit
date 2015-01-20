@@ -46,11 +46,14 @@
     
 }
 
+- (void) pushNextVC{
+    // method for IntroAuthorizationVC to access
+    [self.introPageVC pushDetailVC];
+}
+
 
 - (IBAction)tapToContinue:(id)sender {
     [self setUpDataHub];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +88,8 @@
         IntroAuthorizationVC *introAuth = [[IntroAuthorizationVC alloc]  init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introAuth];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        introAuth.introAboutVC = self;
+        
         [self presentViewController:navController animated:YES completion:nil];
         
     } else {
