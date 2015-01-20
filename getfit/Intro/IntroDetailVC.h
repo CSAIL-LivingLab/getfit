@@ -12,16 +12,10 @@
 
 
 
-@property (weak, nonatomic) IBOutlet UILabel *thankYouLabel;
-@property (weak, nonatomic) IBOutlet UILabel *setUpLabel;
-@property (weak, nonatomic) IBOutlet UILabel *usernameStrLabel;
 @property (weak, nonatomic) IBOutlet UILabel *passwordStrLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *passwordLabel;
 @property (weak, nonatomic) IBOutlet UITextView *detailTextArea;
-
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerIndicator;
-@property (weak, nonatomic) IBOutlet UILabel *setupLabel;
 @property (weak, nonatomic) IBOutlet UIButton *getfitButton;
 
 - (IBAction)getfitButtonClick:(id)sender;

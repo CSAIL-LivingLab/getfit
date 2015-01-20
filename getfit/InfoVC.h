@@ -1,5 +1,5 @@
 //
-//  AboutView.h
+//  AboutVC.h
 //  GetFit
 //
 //  Created by Albert Carter on 12/17/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutView : UIView
+@interface InfoVC : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @end

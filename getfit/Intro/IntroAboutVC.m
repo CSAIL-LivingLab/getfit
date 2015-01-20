@@ -8,6 +8,8 @@
 
 #import "IntroAboutVC.h"
 #import "IntroPageVC.h"
+#import "IntroAuthorizationVC.h"
+#import "DataHubCreation.h"
 
 @interface IntroAboutVC ()
 @property (weak, nonatomic) IntroPageVC *introPageVC;
@@ -27,10 +29,6 @@
     return self;
 }
 
-- (IBAction)tapToContinue:(id)sender {
-    [introPageVC pushDetailVC];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -48,10 +46,77 @@
     
 }
 
+- (void) makeSchemaAndPushNextVC{
+    // method for IntroAuthorizationVC to access
+    [self setupDataHubSchema];
+    [self.introPageVC pushDetailVC];
+}
+
+
+- (IBAction)tapToContinue:(id)sender {
+    [self setUpDataHubAccount];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - datahubsetup
+- (void) setUpDataHubAccount {
+    // username and password
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
+    
+    NSString *email = [defaults objectForKey:@"email"];
+    NSString *password = [dhCreation createPassword];
+    NSString *username = [dhCreation createUsernameFromEmail:email];
+    
+    [defaults setObject:password forKey:@"password"];
+    [defaults setObject:username forKey:@"username"];
+    
+    [defaults synchronize];
+    
+    // check for duplicate usernames/emails/previous authorization
+    // this may overwrite email/password/username if there are duplicates
+    NSNumber * newDataHubAcct = [dhCreation createDataHubUserFromEmail:email andUsername:username andPassword:password];
+    
+    if ([newDataHubAcct isEqualToNumber:@1]) {
+        [self setupDataHubSchema];
+        [introPageVC pushDetailVC];
+    } else if ([newDataHubAcct isEqualToNumber:@2]){
+        NSLog(@"duplicate user/email");
+        
+        IntroAuthorizationVC *introAuth = [[IntroAuthorizationVC alloc]  init];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introAuth];
+        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        introAuth.introAboutVC = self;
+        
+        [self presentViewController:navController animated:YES completion:nil];
+        
+    } else {
+        [defaults setObject:nil forKey:@"password"];
+        [defaults setObject:nil forKey:@"email"];
+        [defaults setObject:nil forKey:@"username"];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"There was an unknown error creating your account. It was likely network related. Please try again later." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+- (void) setupDataHubSchema{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
+    NSString *username = [defaults objectForKey:@"username"];
+    
+    @try {
+        [dhCreation createSchemaForUser:username];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"\n\nException: %@", exception);
+    }
+}
+
 
 #pragma mark - helpers
 

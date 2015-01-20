@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 CSAIL Big Data Initiative. All rights reserved.
 //
 
+#include<unistd.h>
+#include<netdb.h>
+
 #import "MinuteStore.h"
 #import "MinuteEntry.h"
 #import "Secret.h"
@@ -37,7 +40,12 @@
     self = [super init];
     
     if (self) {
-        _privateMinutes = [[NSMutableArray alloc] init];
+        NSString *path = [self entryArchivePath];
+        _privateMinutes = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        
+        if (!_privateMinutes) {
+            _privateMinutes = [[NSMutableArray alloc] init];
+        }
     }
     
     return self;
@@ -48,6 +56,9 @@
                 format:@"Use +[MinuteStore sharedStore]"];
     return nil;
 }
+
+
+
 
 # pragma mark - manipulating privateMinutes array;
 
@@ -66,11 +77,25 @@
     [_privateMinutes addObject:minuteEntry];
 }
 
+- (BOOL) removeMinuteEntryIfPostedToDataHubAndGetFit:(MinuteEntry *) minuteEntry {
+    if (minuteEntry.postedToGetFit && minuteEntry.postedToDataHub) {
+        [self removeMinuteEntry:minuteEntry];
+        return YES;
+    }
+    return NO;
+}
+
 - (void) removeMinuteEntry:(MinuteEntry *)minuteEntry {
     [_privateMinutes removeObject:minuteEntry];
 }
 
-- (void) postToDataHub {
+- (BOOL) postToDataHub {
+    
+    if (![self isNetworkAvailable:@"datahub.csail.mit.edu"]) {
+        [self saveChanges];
+        return NO;
+    }
+    
     NSString *appID = [Secret sharedSecret].DHAppID;
     NSString *appToken = [Secret sharedSecret].DHAppToken;
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
@@ -85,6 +110,12 @@
     NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.minutes(activity, intensity, duration, endDate) values "];
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
+        
+        // exclude the minutes that have already been posted to DataHub
+        if (me.postedToDataHub) {
+            break;
+        }
+        
         NSInteger *endTimeInt = (NSInteger)roundf([me.endTime timeIntervalSince1970]);
         NSString *insertStmt = [NSString stringWithFormat:@"('%@', '%@', %@, to_timestamp(%tu)),", me.activity, me.intensity, @(me.duration), endTimeInt];
         
@@ -95,38 +126,58 @@
             [statement appendString:@";"];
         }
     }
-             
+    
     // connect to server
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
     datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
     datahubConnection * con_app = [datahub_client open_connection:con_params_app];
-    
+
     // query
     @try {
-        datahubResultSet *result_set = [datahub_client execute_sql:con_app query:statement query_params:nil];
-        NSLog(@"result_set: %@", result_set);
-        // minutes are posted to datahub before getfit, so do not remove the objects here
-//        [_privateMinutes removeAllObjects];
+        [datahub_client execute_sql:con_app query:statement query_params:nil];
+        
+        // mark minutes as posted by DataHub, and remove if appropriate
+        for (MinuteEntry *me in _privateMinutes){
+            me.postedToDataHub = YES;
+            [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
+        }
+        
+        [self saveChanges];
+        return YES;
     }
     @catch (NSException *exception) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Upload failed" message:[NSString stringWithFormat:@"GetFit failed to connect to DataHub (%@)",[exception description]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
         NSLog(@"%@", exception);
+        return NO;
+    }
+}
+
+- (BOOL) postToGetFit {
+    
+    if (![self isNetworkAvailable:@"getfit.mit.edu"]) {
+        [self saveChanges];
+        return NO;
     }
     
     
-}
-
-- (void) postToGetFit {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-DD"];
-    
+
     // intensity must be all lower case
     // duration must be >= 1
     // spaces for activities work
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
         
+        // exclude the minutes that have already been posted to DataHub
+        if (me.postedToGetFit) {
+            break;
+        }
+        
+        
         NSString *activity = me.activity;
-        NSString *intensity = me.intensity;
+        NSString *intensity = [me.intensity lowercaseString];
         NSString *endDate = [dateFormatter stringFromDate:me.endTime];
         NSString *duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
         
@@ -137,7 +188,6 @@
         
         // update the activityPickerArr
         [[Resources sharedResources] setActivityAsFirst:activity];
-        
         
         // get the day of the week
         NSInteger *dayIndex = [self indexOfDayInWeekForMinuteEntry:me];
@@ -172,11 +222,12 @@
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:nil];
         
-//        [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        me.postedToGetFit = YES;
+        
+        [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
     }
-    
-    [_privateMinutes removeAllObjects];
-    
+    [self saveChanges];
+    return YES;
 }
 
 - (NSInteger *) indexOfDayInWeekForMinuteEntry:(MinuteEntry *)me {
@@ -242,7 +293,38 @@
     
 }
 
+# pragma mark - persistance
 
+- (BOOL) saveChanges {
+    NSString *path = [self entryArchivePath];
+    return [NSKeyedArchiver archiveRootObject:self.privateMinutes toFile:path];
+}
+
+- (NSString *)entryArchivePath {
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,                                                                       NSUserDomainMask, YES);
+    
+    // get first one, because ios
+    NSString *documentDirectory = [documentDirectories firstObject];
+    
+    return [documentDirectory stringByAppendingPathComponent:@"entry.archive"];
+}
+
+# pragma mark - network reachability
+
+-(BOOL)isNetworkAvailable:(NSString *)hostname
+{
+    const char *cHostname = [hostname UTF8String];
+    struct hostent *hostinfo;
+    hostinfo = gethostbyname (cHostname);
+    if (hostinfo == NULL){
+        NSLog(@"-> no connection!\n");
+        return NO;
+    }
+    else{
+        NSLog(@"-> connection established!\n");
+        return YES;
+    }
+}
 
 
 @end

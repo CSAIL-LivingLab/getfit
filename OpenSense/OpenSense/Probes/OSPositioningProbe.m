@@ -75,7 +75,7 @@
 }
 
 - (void) startMonitoringLocation {
-    [locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
     [locationManager startUpdatingLocation];
 }
 

@@ -43,7 +43,8 @@
         return;
     }
         
-    // dismiss the view after the user clicks ok
+    // dismiss the view after the user clicks ok.
+    // Uses UIAlertViewDelegate didDismissWithButtonIndex
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
     [alertView show];
 }
@@ -91,14 +92,13 @@
 
 # pragma mark - helper methods
 
-- (void) extractTokens {
+- (void) extractTokensAndSave {
     [myWebView stringByEvaluatingJavaScriptFromString:@"function getTokens () {    var form_token_objects = document.getElementsByName('form_token');    var form_tokens = [];        for (var i =  0; i < form_token_objects.length; i++) {        var value = form_token_objects[i].value;        form_tokens.push(value);    };    return form_tokens;}function getBuildIds() {    var form_build_id_objects = document.getElementsByName('form_build_id');    var form_build_ids = [];    for (var i =  0; i < form_build_id_objects.length; i++) {        var value = form_build_id_objects[i].value;        form_build_ids.push(value);    };    return form_build_ids;}    function getFormIds() {    var form_id_objects = document.getElementsByName('form_id');    var form_ids = [];        for (var i =  0; i < form_id_objects.length; i++) {    var value = form_id_objects[i].value;    form_ids.push(value);    };    return form_ids;}function getStartIndex() {    var ids = getFormIds();    for (var i = 0; i < ids.length; i++) {        var id = ids[i];        if (id == 'getfit_minutes_single_form_1') {            return i;        };    };}"];
     
     // parse tokens
     NSArray *form_tokens = [[myWebView stringByEvaluatingJavaScriptFromString:@"getTokens().toString();"] componentsSeparatedByString:@","];
     NSArray *form_build_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getBuildIds().toString();"]componentsSeparatedByString:@","];
     NSArray *form_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getFormIds().toString();"] componentsSeparatedByString:@","];
-    
     
     NSString *indexStr = [myWebView stringByEvaluatingJavaScriptFromString:@"getStartIndex().toString();"];
     NSInteger indexInt = [indexStr integerValue];
@@ -189,16 +189,29 @@
     
     // extrac the tokens.
     if ([url rangeOfString:@"dashboard"].location != NSNotFound) {
-        [self extractTokens];
+        [self extractTokensAndSave];
     }
 
     
 }
 
+- (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    if (!self.isViewLoaded || !self.view.window) {
+        return;
+    }
+    
+    // dismiss the view after the user clicks ok.
+    // Uses UIAlertViewDelegate didDismissWithButtonIndex
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"There was a problem loading getfit. Your minutes are saved on your phone and there is no need to re-enter them. The app will post to GetFit later." delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+    [alertView show];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 @end

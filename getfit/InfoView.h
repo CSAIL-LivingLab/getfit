@@ -1,5 +1,5 @@
 //
-//  AboutVC.h
+//  AboutView.h
 //  GetFit
 //
 //  Created by Albert Carter on 12/17/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutVC : UIViewController
+@interface InfoView : UIView
 
 @end

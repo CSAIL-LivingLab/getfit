@@ -14,7 +14,7 @@
 //#import "PageVC.h"
 #import "ExerciseVC.h"
 #import "GraphVC.h"
-#import "AboutVC.h"
+#import "InfoVC.h"
 #import "TestVC.h"
 #import "MinuteTVC.h"
 
@@ -35,6 +35,10 @@
     // set default for cookie storage
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     
+    // set up the location manager
+    [self setupLocationManager];
+    [NSThread sleepForTimeInterval:.5];
+
     // show
     [self.window makeKeyAndVisible];
     return YES;
@@ -44,24 +48,14 @@
     
     ExerciseVC *exerciseVC = [[ExerciseVC alloc] init];
     GraphVC *graphVC = [[GraphVC alloc] init];
-    AboutVC *aboutVC = [[AboutVC alloc] init];
-//    TestVC *testVC = [[TestVC alloc] init];
-    
+    InfoVC *aboutVC = [[InfoVC alloc] init];
+
     // add tabs
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[exerciseVC, graphVC, aboutVC];
     self.window.rootViewController = tabBarController;
     self.window.backgroundColor = [UIColor whiteColor];
 
-    
-    // add plus button
-    CGRect frame = [UIScreen mainScreen].bounds;
-    CGRect rightFrame = CGRectMake(frame.size.width - 170, 10, 200, 40);
-    UIButton *plusButton = [[UIButton alloc] initWithFrame:rightFrame];
-    [plusButton setTitle:@"manual entry +" forState:UIControlStateNormal];
-    [plusButton setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-    [plusButton addTarget:self action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
-    [self.window.rootViewController.view addSubview:plusButton];
     
     [self.window makeKeyAndVisible];
 }
@@ -90,6 +84,29 @@
 
     
     [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
+}
+
+- (void) setupLocationManager{
+    _locationManager = [[CLLocationManager alloc] init];
+    [_locationManager startMonitoringSignificantLocationChanges];
+    _locationManager.delegate = self;
+}
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDate *resumeSensorDate = [defaults objectForKey:@"resumeSensorDate"];
+    
+    // do nothing if it's not time to resume tracking
+    if (resumeSensorDate !=nil && [resumeSensorDate compare:[NSDate date]] == NSOrderedDescending) {
+        return;
+    }
+    
+    // start gathering data, and then turn the collector off after 30 seconds
+    NSLog(@"\n\n----SIGNIFICANTLOCATIONCHANGE-----\n\n");
+    OpenSense *opensense = [OpenSense sharedInstance];
+    [opensense startCollector];
+    [NSTimer scheduledTimerWithTimeInterval:5 target:[OpenSense sharedInstance] selector:@selector(stopCollector) userInfo:nil repeats:NO];
 }
 
 @end

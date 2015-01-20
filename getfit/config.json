@@ -31,21 +31,21 @@
     "motion": [
       {
         "interval": -1,
-        "frequency": 1800,
-        "duration": 5,
-        "updateInterval":0.1
+        "frequency": 300,
+        "duration": 10,
+        "updateInterval":0.05
       }
     ],
     "deviceinfo": [
       {
         "interval": -1,
-        "frequency":10
+        "frequency":2
       }
     ],
     "activitymanager": [
       {
         "interval": -1,
-        "frequency": 15
+        "frequency": 300
       }
     ],
   }
