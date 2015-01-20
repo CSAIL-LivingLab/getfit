@@ -41,7 +41,7 @@
     myWebView.delegate = self;
     
     // If the certs are good, go to GetFit. Otherwise, assume that the user will need to log in.
-    NSString *urlStr = [NSString stringWithFormat:@"http://datahub.csail.mit.edu/permissions/apps/allow_access/%@/%@", appID, @"getfit"];
+    NSString *urlStr = [NSString stringWithFormat:@"http://datahub.csail.mit.edu/permissions/apps/allow_access/%@/%@?redirect_url=http://livinglab.mit.edu", appID, @"getfit"];
     
     NSURL *url = [NSURL URLWithString:urlStr];
     
@@ -51,8 +51,16 @@
     [self.view addSubview:myWebView];
 }
 
+
 - (void) webViewDidFinishLoad:(UIWebView *)webView{
-    // if it's the auth page, prevent them from changing their username
+   
+    NSString *url = [[webView.request URL] absoluteString];
+    
+    
+    // only two urls, the datahub one and the livinglab one
+    if (![url isEqualToString:@""] && [url rangeOfString:@"datahub"].location == NSNotFound) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 
