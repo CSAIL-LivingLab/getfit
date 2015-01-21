@@ -188,19 +188,30 @@
         }
         
         
-        NSString *activity = me.activity;
-        NSString *intensity = [me.intensity lowercaseString];
-        NSString *endDate = [dateFormatter stringFromDate:me.endTime];
-        NSString *duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
+        NSString *activity;
+        NSString *intensity;
+        NSString *endDate;
+        NSString *duration;
         
-        // default to a duration of 1, to make sure _something_ gets posted
-        if ([duration isEqualToString:@"0"]) {
-            duration = @"1";
+        if (me.activity != nil) {
+            activity = me.activity;
+        } else {
+            activity=@"undefined";
         }
         
-        if ([intensity isEqualToString:@""]) {
-            intensity = @"medium";
+        if (me.intensity !=nil){
+            intensity = me.intensity;
+        } else {
+            intensity=@"medium";
         }
+        
+        if (me.endTime != nil) {
+            endDate =[ dateFormatter stringFromDate:me.endTime];
+        } else {
+            endDate = [dateFormatter stringFromDate:[NSDate date]];
+        }
+        
+        duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
         
         // update the activityPickerArr
         [[Resources sharedResources] setActivityAsFirst:activity];
