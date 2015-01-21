@@ -402,6 +402,7 @@
     [ms postToDataHub];
     
     // send OpenSense data to DataHub
+    [[OpenSense sharedInstance] stopCollector];
     [[Resources sharedResources] uploadOpenSenseData];
     
 

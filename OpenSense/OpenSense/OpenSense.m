@@ -291,7 +291,9 @@
     // Find files in data directory
     NSArray *probeDataFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dataPath error:NULL];
     for (NSString *file in probeDataFiles) {
-        if ([file hasPrefix:@"probedata"] && ![file isEqualToString:@"probedata"]) {
+        if ([file hasPrefix:@"probedata"])
+//            && ![file isEqualToString:@"probedata"])
+        {
             [[NSFileManager defaultManager] removeItemAtPath:file error:nil]; // Delete file
         }
     }

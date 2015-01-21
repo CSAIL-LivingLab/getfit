@@ -125,6 +125,7 @@
     
         [datahub_client execute_sql:con_app query:statement query_params:nil];
         [[OpenSense sharedInstance] deleteAllBatches];
+        NSLog(@"opensense uploaded all batches");
 
     }
     @catch (NSException *exception) {
