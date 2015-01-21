@@ -12,8 +12,8 @@
 
 @interface GraphVC ()
 
-@property UIWebView *webView;
-@property NSString *script;
+@property (strong, nonatomic) UIWebView *webView;
+@property (strong, nonatomic) NSString *script;
 @end
 
 @implementation GraphVC
@@ -51,6 +51,7 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGRect frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height);
     self.webView = [[UIWebView alloc] initWithFrame:frame];
+    [self.webView setDelegate:self];
     
     
 //    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"datahubGraphs" ofType:@"html"];
@@ -84,7 +85,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    
+    [self.webView stringByEvaluatingJavaScriptFromString:self.script];
 }
 
 /*
