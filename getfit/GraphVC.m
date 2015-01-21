@@ -42,7 +42,7 @@
 //    NSString *dumblog = [self.webView stringByEvaluatingJavaScriptFromString:@"(function() {return 'hello'}());"];
 //    NSLog(@"%@", dumblog);
     
-        [self.webView stringByEvaluatingJavaScriptFromString:self.script];
+    [self.webView stringByEvaluatingJavaScriptFromString:self.script];
 }
 
 - (void) loadWebView {

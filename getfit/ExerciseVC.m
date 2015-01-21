@@ -393,19 +393,38 @@
     // save the EndTime
     _minuteEntry.endTime = [NSDate date];
     _minuteEntry.duration = min;
-    
-    // add to the MinuteStore
-    MinuteStore *ms = [MinuteStore sharedStore];
-    [ms addMinuteEntry:_minuteEntry];
-    
-    // post minutes to DataHub
-    [ms postToDataHub];
-    
+ 
     // send OpenSense data to DataHub
     [[OpenSense sharedInstance] stopCollector];
     [[Resources sharedResources] uploadOpenSenseData];
+ 
     
+    // add an alert asking the user whether they want to post to GetFit
+    NSString *alertMessage = [NSString stringWithFormat:@"You exercised for %d minutes. Would you like save this activity?", min];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save for GetFit?" message:alertMessage delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    [alert show];
+    
+    // add to the MinuteStore
+    }
 
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    NSLog(@"Button Index %ld", (long)buttonIndex);
+    
+    // 0 is cancel
+    if (buttonIndex == 0) {
+        return;
+    }
+    
+    MinuteStore *ms = [MinuteStore sharedStore];
+    [ms addMinuteEntry:_minuteEntry];
+    
+//     post minutes to DataHub
+    [ms postToDataHub];
+    
+    
     if ([ms checkForValidCookies] && [ms checkForValidTokens:_minuteEntry.endTime] ) {
         [ms postToGetFit];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
@@ -417,6 +436,7 @@
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentViewController:navController animated:YES completion:nil];
     }
+
     
 }
 
