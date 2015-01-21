@@ -86,6 +86,10 @@
 }
 
 - (void) removeMinuteEntry:(MinuteEntry *)minuteEntry {
+    minuteEntry.activity = nil;
+    minuteEntry.intensity = nil;
+    minuteEntry.endTime = nil;
+    minuteEntry.duration = nil;
     [_privateMinutes removeObject:minuteEntry];
 }
 
@@ -108,6 +112,7 @@
     
     //format query
     NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.minutes(activity, intensity, duration, endDate) values "];
+    int numberOfMinutesToPost = 0;
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
         
@@ -119,12 +124,19 @@
         NSInteger *endTimeInt = (NSInteger)roundf([me.endTime timeIntervalSince1970]);
         NSString *insertStmt = [NSString stringWithFormat:@"('%@', '%@', %@, to_timestamp(%tu)),", me.activity, me.intensity, @(me.duration), endTimeInt];
         
+        
         [statement appendString:insertStmt];
         
         if (i == [_privateMinutes count] -1) {
+            numberOfMinutesToPost++;
             [statement deleteCharactersInRange:NSMakeRange([statement length]-1, 1)];
             [statement appendString:@";"];
         }
+    }
+    
+    // make sure that we're actually posting _something_ to datahub
+    if (numberOfMinutesToPost < 1) {
+        return NO;
     }
     
     // connect to server

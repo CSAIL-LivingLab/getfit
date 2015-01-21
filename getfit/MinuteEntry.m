@@ -72,13 +72,15 @@
 - (instancetype) initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        _activity = [aDecoder decodeObjectForKey:@"activity"];
-        _intensity = [aDecoder decodeObjectForKey:@"intensity"];
-        _endTime = [aDecoder decodeObjectForKey:@"endTime"];
+        NSLog(@"DECODED ACTIVITY: %@", [aDecoder decodeObjectForKey:@"activity"]);
+        NSLog(@"decoded intensity: %@", [aDecoder decodeObjectForKey:@"intensity"]);
+        self.activity = [aDecoder decodeObjectForKey:@"activity"];
+        self.intensity = [aDecoder decodeObjectForKey:@"intensity"];
+        self.endTime = [aDecoder decodeObjectForKey:@"endTime"];
         
-        _duration = [aDecoder decodeIntegerForKey:@"duration"];
-        _postedToGetFit = [aDecoder decodeBoolForKey:@"postedToGetFit"];
-        _postedToDataHub = [aDecoder decodeBoolForKey:@"postedToDataHub"];
+        self.duration = [aDecoder decodeIntegerForKey:@"duration"];
+        self.postedToGetFit = [aDecoder decodeBoolForKey:@"postedToGetFit"];
+        self.postedToDataHub = [aDecoder decodeBoolForKey:@"postedToDataHub"];
     }
     return self;
 }
