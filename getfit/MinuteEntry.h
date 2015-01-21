@@ -19,8 +19,8 @@
 - (void) encodeWithCoder : (NSCoder *)aCoder ;
 - (id) initWithCoder : (NSCoder *)aDecoder;
 
-@property (weak, nonatomic) NSString *activity;
-@property (weak, nonatomic) NSString *intensity;
+@property (strong, nonatomic) NSString *activity;
+@property (strong, nonatomic) NSString *intensity;
 @property NSInteger duration;
 @property (strong, nonatomic) NSDate *endTime;
 @property BOOL postedToGetFit;

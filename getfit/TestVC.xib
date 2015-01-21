@@ -43,13 +43,24 @@
                         <action selector="usernameExtractionRegex:" destination="-1" eventType="touchUpInside" id="rkK-69-pkN"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNv-XT-SQz">
+                    <rect key="frame" x="203" y="323" width="195" height="30"/>
+                    <state key="normal" title="minuteStore postToDataHub">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="postToDataHub:" destination="-1" eventType="touchUpInside" id="1TW-lR-v83"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="hQm-IH-7fT" secondAttribute="centerY" id="8yo-Ut-fxR"/>
                 <constraint firstAttribute="centerX" secondItem="hQm-IH-7fT" secondAttribute="centerX" id="VHP-In-4U5"/>
+                <constraint firstItem="WNv-XT-SQz" firstAttribute="top" secondItem="hQm-IH-7fT" secondAttribute="bottom" constant="8" id="giP-py-dZe"/>
                 <constraint firstItem="FA5-0T-jBJ" firstAttribute="top" secondItem="Pkc-SW-Ox0" secondAttribute="bottom" constant="8" id="tep-7V-HJK"/>
                 <constraint firstAttribute="centerX" secondItem="Pkc-SW-Ox0" secondAttribute="centerX" constant="-0.5" id="uEQ-hU-chx"/>
+                <constraint firstAttribute="centerX" secondItem="WNv-XT-SQz" secondAttribute="centerX" constant="-0.5" id="xLo-Ob-VuR"/>
                 <constraint firstAttribute="centerX" secondItem="FA5-0T-jBJ" secondAttribute="centerX" constant="-0.5" id="zOY-VH-SeI"/>
             </constraints>
         </view>

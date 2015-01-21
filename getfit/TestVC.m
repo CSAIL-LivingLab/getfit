@@ -52,7 +52,8 @@
     MinuteStore *ms = [MinuteStore sharedStore];
     MinuteEntry *me = [ms createMinuteEntryWithActivity:@"foosball" intensity:@"low" duration:10 andEndTime:[NSDate date]];
     
-    me.postedToDataHub = YES;
+    me.postedToDataHub = NO;
+    me.postedToGetFit = YES;
     
     [ms removeMinuteEntryIfPostedToDataHubAndGetFit:me];
 
@@ -65,6 +66,12 @@
     
     [dhCreation createDataHubUserFromEmail:@"arcarter@mit.edu" andUsername:@"al_carter" andPassword:@"389jk34"];
 
+}
+
+- (IBAction)postToDataHub:(id)sender {
+    MinuteStore *ms = [MinuteStore sharedStore];
+    BOOL *didPost = [ms postToDataHub];
+    NSLog(didPost ? @"YES" : @"NO");
 }
 
 @end

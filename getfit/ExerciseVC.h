@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ExerciseVC : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface ExerciseVC : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate>
 
 @end

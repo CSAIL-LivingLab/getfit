@@ -12,8 +12,8 @@
 
 @interface GraphVC ()
 
-@property UIWebView *webView;
-@property NSString *script;
+@property (strong, nonatomic) UIWebView *webView;
+@property (strong, nonatomic) NSString *script;
 @end
 
 @implementation GraphVC
@@ -38,7 +38,11 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-        [self.webView stringByEvaluatingJavaScriptFromString:self.script];
+//    NSString *dumblog = [self.webView stringByEvaluatingJavaScriptFromString:@"(function() {return 'what'}());"];
+//    NSString *dumblog = [self.webView stringByEvaluatingJavaScriptFromString:@"(function() {return 'hello'}());"];
+//    NSLog(@"%@", dumblog);
+    
+    [self.webView stringByEvaluatingJavaScriptFromString:self.script];
 }
 
 - (void) loadWebView {
@@ -47,9 +51,19 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGRect frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height);
     self.webView = [[UIWebView alloc] initWithFrame:frame];
-    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"datahubGraphs" ofType:@"html"];
-    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
-    [self.webView loadHTMLString:htmlString baseURL:nil];
+    [self.webView setDelegate:self];
+    
+    
+//    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"datahubGraphs" ofType:@"html"];
+//    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+//    [self.webView loadHTMLString:htmlString baseURL:nil];
+//    
+    
+    NSURL *url = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/datahubGraphs.html"];
+//    NSURL *url = [NSURL URLWithString:@"http://google.com"];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:request];
+    
     
     // load important keys
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -71,7 +85,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    
+    [self.webView stringByEvaluatingJavaScriptFromString:self.script];
 }
 
 /*
