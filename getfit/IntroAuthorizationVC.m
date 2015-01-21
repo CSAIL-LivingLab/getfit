@@ -57,10 +57,11 @@
 - (void) webViewDidFinishLoad:(UIWebView *)webView{
    
     NSString *url = [[webView.request URL] absoluteString];
+    NSString *theTitle=[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     
     
     // only two urls, the datahub one and the livinglab one
-    if (![url isEqualToString:@""] && [url rangeOfString:@"datahub.csail.mit.edu"].location == NSNotFound) {
+    if (![url isEqualToString:@""] && [theTitle rangeOfString:@"Thank You"].location != NSNotFound) {
         
         // make sure the continue button target changes
         [self.introAboutVC makeSchemaAndPushNextVC];
