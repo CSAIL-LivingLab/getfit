@@ -309,7 +309,7 @@
 
 - (void) activateRecordingButtonIfPossible {
     
-    if (![_activityButton.titleLabel.text isEqualToString:kACTIVITY_TITLE] && ![_intensityButton.titleLabel.text isEqualToString:kINTENSITY_TITLE]) {
+    if (![_activityButton.titleLabel.text isEqualToString:kACTIVITY_TITLE]) {
         
         if (!wasActive) {
             wasActive = TRUE;

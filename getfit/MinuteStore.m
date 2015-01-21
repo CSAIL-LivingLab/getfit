@@ -198,6 +198,10 @@
             duration = @"1";
         }
         
+        if ([intensity isEqualToString:@""]) {
+            intensity = @"medium";
+        }
+        
         // update the activityPickerArr
         [[Resources sharedResources] setActivityAsFirst:activity];
         
