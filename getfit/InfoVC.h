@@ -1,5 +1,5 @@
 //
-//  AboutVC.h
+//  InfoVC.h
 //  GetFit
 //
 //  Created by Albert Carter on 12/17/14.

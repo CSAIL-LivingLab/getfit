@@ -1,5 +1,5 @@
 //
-//  AboutVC.m
+//  InfoVC.m
 //  GetFit
 //
 //  Created by Albert Carter on 12/17/14.
@@ -15,11 +15,6 @@
     NSArray *pauseArr;
     UILabel *pauseText;
 }
-
-
-
-
-
 @end
 
 @implementation InfoVC
@@ -39,8 +34,8 @@
     [super loadView];
     
     CGRect frame = [UIScreen mainScreen].bounds;
-    InfoView *aboutView = [[InfoView alloc] initWithFrame:frame];
-    self.view = aboutView;
+    InfoView *infoView = [[InfoView alloc] initWithFrame:frame];
+    self.view = infoView;
     [self addPauseText];
     [self addPauseButtonAndPicker];
 }
