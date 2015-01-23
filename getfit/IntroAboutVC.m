@@ -66,4 +66,24 @@
     [introPageVC pushDetailVC];
 }
 
+- (IBAction)donateChange:(id)sender {
+
+    if([self.donateSwitch isOn]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enable Location Sensing?" message:@"Donating sensor data requires your app location.\n\nYour data is anonomous, and you can stop data collection or delete your data at any time." delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
+        [alert show];
+    } else {
+        NSLog(@"switch off");
+    }
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    // app requests user location
+    if (buttonIndex == 0) {
+        NSLog(@"cancel");
+    } else {
+        NSLog(@"ok");
+    }
+}
+
 @end

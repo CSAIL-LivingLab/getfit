@@ -9,13 +9,15 @@
 @class IntroPageVC;
 #import <UIKit/UIKit.h>
 
-@interface IntroAboutVC : UIViewController <UITextFieldDelegate>
+@interface IntroAboutVC : UIViewController < UIAlertViewDelegate>
 
 - (instancetype) initWithParentPageVC: (IntroPageVC *) parentPageVC;
 
 - (IBAction)tapToContinue:(id)sender;
+- (IBAction)donateChange:(id)sender;
 
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
+@property (weak, nonatomic) IBOutlet UISwitch *donateSwitch;
 
 @end
