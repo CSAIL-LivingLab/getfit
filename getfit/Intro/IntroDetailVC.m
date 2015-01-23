@@ -60,7 +60,7 @@
 - (void) showResults {
     
     // show new stuff
-    detailTextArea.text = @"Use it to view your data at \nhttps://datahub.csail.mit.edu.\n\nThere's no need to write it down. You can access it anytime from this app, or reset it online.";
+    detailTextArea.text = @"Use it to view your data at \nhttps://datahub.csail.mit.edu.\n\nYou can access your password anytime from this app.";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     usernameLabel.text = [defaults objectForKey:@"username"];
     passwordLabel.text = [defaults objectForKey:@"password"];

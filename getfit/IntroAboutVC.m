@@ -41,12 +41,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-# pragma mark - navigation
-- (void) makeSchemaAndPushNextVC{
-    // method for IntroAuthorizationVC to access
-//    [self setupDataHubSchema];
-    [self.introPageVC pushDetailVC];
-}
+# pragma mark - things
 
 - (IBAction)tapToContinue:(id)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

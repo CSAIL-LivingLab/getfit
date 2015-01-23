@@ -15,8 +15,6 @@
 
 - (IBAction)tapToContinue:(id)sender;
 
-- (void) makeSchemaAndPushNextVC;
-
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 

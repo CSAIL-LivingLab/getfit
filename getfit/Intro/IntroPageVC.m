@@ -26,6 +26,7 @@
     [super viewDidLoad];
     
     introAboutVC = [[IntroAboutVC alloc] initWithParentPageVC:self];
+    introDetailVC = [[IntroDetailVC alloc] init];
     
     viewControllerArray = [[NSArray alloc] initWithObjects:introAboutVC, nil];
     [self setTitle:@"Welcome!"];
