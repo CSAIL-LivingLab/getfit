@@ -28,6 +28,7 @@
 @property UIButton *intensityButton;
 @property UIButton *activityButton;
 @property UIButton *startButton;
+@property UIButton *plusButton;
 
 @property UIPickerView *activityPicker;
 @property UIPickerView *intensityPicker;
@@ -180,12 +181,12 @@
     // add plus button
     CGRect frame = [UIScreen mainScreen].bounds;
     CGRect rightFrame = CGRectMake(frame.size.width - 190, 10, 200, 40);
-    UIButton *plusButton = [[UIButton alloc] initWithFrame:rightFrame];
-    [plusButton setTitle:@"manual entry +" forState:UIControlStateNormal];
-    [plusButton setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    _plusButton = [[UIButton alloc] initWithFrame:rightFrame];
+    [_plusButton setTitle:@"manual entry +" forState:UIControlStateNormal];
+    [_plusButton setTitleColor:blueColor forState:UIControlStateNormal];
     AppDelegate *del = [[UIApplication sharedApplication] delegate];
-    [plusButton addTarget:del action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:plusButton];
+    [_plusButton addTarget:del action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_plusButton];
 }
 
 
@@ -215,8 +216,10 @@
         [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             _intensityButton.backgroundColor = [UIColor clearColor];
             _activityButton.backgroundColor = [UIColor clearColor];
+            [_plusButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
             _stopwatch.textColor = textColor;
             _startButton.backgroundColor = [UIColor redColor];
+
 
             [self offsetViews:@[_stopwatch,_startButton] byY:-100];
             [self offsetViews:@[_intensityButton,_activityButton] byY:100];
@@ -226,6 +229,7 @@
             //some completition
             _intensityButton.hidden = TRUE;
             _activityButton.hidden = TRUE;
+            _plusButton.hidden = TRUE;
         }];
 
     } else {
@@ -234,11 +238,13 @@
 
         _intensityButton.hidden = FALSE;
         _activityButton.hidden = FALSE;
+        _plusButton.hidden = FALSE;
         _stopwatch.hidden = YES;
 
         [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             _intensityButton.backgroundColor = blueColor;
             _activityButton.backgroundColor = greenColor;
+            [_plusButton setTitleColor:blueColor forState:UIControlStateNormal];
             
             [self offsetViews:@[_stopwatch,_startButton] byY:100];
             //[self offsetViews:@[_intensityButton,_activityButton] byY:-100];
@@ -442,7 +448,9 @@
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentViewController:navController animated:YES completion:nil];
     }
-
+    
+    // create a new minuteEntry, for next time the user posts
+    _minuteEntry = [[MinuteEntry alloc] init];
     
 }
 

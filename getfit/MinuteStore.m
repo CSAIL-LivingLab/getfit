@@ -118,7 +118,7 @@
         
         // exclude the minutes that have already been posted to DataHub
         if (me.postedToDataHub) {
-            break;
+            continue;
         }
         
         NSInteger *endTimeInt = (NSInteger)roundf([me.endTime timeIntervalSince1970]);
@@ -187,11 +187,12 @@
     // duration must be >= 1
     // spaces for activities work
     for (int i=0; i< [_privateMinutes count]; i++) {
+        
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
         
         // exclude the minutes that have already been posted to DataHub
         if (me.postedToGetFit) {
-            break;
+            continue;
         }
         
         
