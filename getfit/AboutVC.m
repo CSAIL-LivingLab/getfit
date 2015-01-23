@@ -41,12 +41,9 @@
     return self;
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     pauseArr = [[NSArray alloc] initWithObjects:@[@"Resume Data Donation", @0],
                 @[@"10 min", @10],
@@ -73,10 +70,16 @@
     [self adjustButtonForImage:_pauseButton];
     _pauseButton.titleLabel.numberOfLines = 2;
     _pauseButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    
-    
-    // setup picker
-    pausePicker= [[UIPickerView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    // inform the user of whether sensors are on or not
+    [self adjustResumeLabelText];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    // setup the pickerView here, because the view sizes will be set.
+    pausePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 250)];
     pausePicker.dataSource = self;
     pausePicker.delegate = self;
     [pausePicker setBackgroundColor:[UIColor blackColor]];
@@ -87,6 +90,8 @@
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker:)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
+    
+    NSLog(@"My view's frame is: %@", NSStringFromCGRect(self.view.frame));
 }
 
 #pragma mark - Picker
@@ -147,11 +152,34 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:resumeDate forKey:@"resumeSensorDate"];
     [defaults synchronize];
-//    [self addPauseText];
-    
+    [self adjustResumeLabelText];
 }
 
-#pragma mark - button and image resizing
+# pragma mark
+
+// adjust the label informing the user of when data collection will resume
+- (void) adjustResumeLabelText {
+    //
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDate *pauseUntil = [defaults objectForKey:@"resumeSensorDate"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMM dd, hh:mm a"];
+    NSString *dateString = [dateFormatter stringFromDate:pauseUntil];
+    
+    NSString *bodyStr;
+    if (pauseUntil !=nil && [pauseUntil compare:[NSDate date]] == NSOrderedAscending) {
+        bodyStr = @"Sensors currently enabled.";
+    } else if ([pauseUntil compare:[NSDate distantFuture]] == NSOrderedSame) {
+        bodyStr = @"Sensors colleciton currently disabled forever.";
+    } else {
+        bodyStr = [NSString stringWithFormat:@"Sensors resuming at %@", dateString];
+    }
+    
+    // label
+    [_resumeLabel setText:bodyStr];
+}
+
+# pragma mark - button and image resizing
 
 //generate a new image of a different size
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
