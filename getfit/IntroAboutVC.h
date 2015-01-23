@@ -8,8 +8,10 @@
 
 @class IntroPageVC;
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface IntroAboutVC : UIViewController < UIAlertViewDelegate>
+
+@interface IntroAboutVC : UIViewController < UIAlertViewDelegate, CLLocationManagerDelegate>
 
 - (instancetype) initWithParentPageVC: (IntroPageVC *) parentPageVC;
 

@@ -64,7 +64,7 @@
     if (![url isEqualToString:@""] && [theTitle rangeOfString:@"Thank You"].location != NSNotFound) {
         
         // make sure the continue button target changes
-        [self.introAboutVC makeSchemaAndPushNextVC];
+//        [self.introAboutVC makeSchemaAndPushNextVC];
         
         // then dismiss self
         [self dismissViewControllerAnimated:YES completion:nil];

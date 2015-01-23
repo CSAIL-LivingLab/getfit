@@ -16,6 +16,7 @@
 
 @interface IntroAboutVC ()
 @property (weak, nonatomic) IntroPageVC *introPageVC;
+@property (strong, nonatomic) CLLocationManager *locationMngr;
 @end
 
 @implementation IntroAboutVC
@@ -44,6 +45,8 @@
 # pragma mark - things
 
 - (IBAction)tapToContinue:(id)sender {
+    self.locationMngr = nil;
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
     
@@ -69,7 +72,7 @@
 - (IBAction)donateChange:(id)sender {
 
     if([self.donateSwitch isOn]){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enable Location Sensing?" message:@"Donating sensor data requires your app location.\n\nYour data is anonomous, and you can stop data collection or delete your data at any time." delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enable Location Sensing?" message:@"\nDonating sensor data requires your app location.\n\nYour data is anonomous, and you can stop data collection or delete your data at any time." delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
         [alert show];
     } else {
         NSLog(@"switch off");
@@ -80,9 +83,16 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     // app requests user location
     if (buttonIndex == 0) {
-        NSLog(@"cancel");
+        [self.donateSwitch setOn:NO];
     } else {
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:[NSDate date] forKey:@"resumeSensorDate"];
+        [defaults synchronize];
         NSLog(@"ok");
+        
+        self.locationMngr = [[CLLocationManager alloc] init];
+        [self.locationMngr requestAlwaysAuthorization];
     }
 }
 
