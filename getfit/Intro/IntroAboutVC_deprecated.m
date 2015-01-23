@@ -6,17 +6,17 @@
 //  Copyright (c) 2015 MIT CSAIL Living Lab. All rights reserved.
 //
 
-#import "IntroAboutVC.h"
+#import "IntroAboutVC_deprecated.h"
 #import "IntroPageVC.h"
 #import "IntroAuthorizationVC.h"
 #import "DataHubCreation.h"
 
-@interface IntroAboutVC ()
+@interface IntroAboutVC_deprecated ()
 @property (weak, nonatomic) IntroPageVC *introPageVC;
 @property BOOL ready;
 @end
 
-@implementation IntroAboutVC
+@implementation IntroAboutVC_deprecated
 @synthesize emailTextField, ready, introPageVC, tapToContinue;
 
 // hack so that it's possible to access the parent PageVC's array of pages
@@ -65,10 +65,10 @@
     DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
     
     NSString *email = [defaults objectForKey:@"email"];
-    NSString *password = [dhCreation createPassword];
+    NSString *password = [dhCreation createRandomAlphaNumericString];
     
     // use the createPassword line, since we're just generating a string, anyhow.
-    NSString *username = [dhCreation createPassword];
+    NSString *username = [dhCreation createRandomAlphaNumericString];
     
     [defaults setObject:password forKey:@"password"];
     [defaults setObject:username forKey:@"username"];

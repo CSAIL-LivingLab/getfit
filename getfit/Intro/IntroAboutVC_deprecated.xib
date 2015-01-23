@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroAboutVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroAboutVC_deprecated">
             <connections>
                 <outlet property="emailTextField" destination="t9Y-SL-hHc" id="EA3-fw-gYu"/>
                 <outlet property="tapToContinue" destination="Jlg-m7-PZq" id="KHj-8g-BOp"/>

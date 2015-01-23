@@ -12,7 +12,7 @@
 
 @interface IntroPageVC ()
 
-@property IntroAboutVC *introAboutVC;
+@property IntroAboutVC*introAboutVC;
 @property IntroDetailVC *introDetailVC;
 @property NSArray *viewControllerArray;
 

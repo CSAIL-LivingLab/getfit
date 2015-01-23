@@ -136,8 +136,19 @@
     return username;
 }
 
-- (NSString *) createPassword {
+- (NSString *) createRandomAlphaNumericString {
     NSString *letters = @"abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789";
+    int len = 8;
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform((uint32_t)[letters length])]];
+    }
+    return randomString;
+}
+
+- (NSString *) createRandomAlphaString{
+    NSString *letters = @"abcdefghijkmnopqrstuvwxyz";
     int len = 8;
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
     
