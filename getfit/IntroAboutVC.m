@@ -130,8 +130,10 @@
         [defaults synchronize];
         NSLog(@"ok");
         
-        self.locationMngr = [[CLLocationManager alloc] init];
-        [self.locationMngr requestAlwaysAuthorization];
+        if ([self.locationMngr respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self.locationMngr requestWhenInUseAuthorization];
+        }
+        [self.locationMngr startUpdatingLocation];
     }
 }
 
