@@ -30,9 +30,9 @@
     // load the intro view if the user's email isn't set
     if (![defaults stringForKey:@"email"]) {
 //    if (YES) {
-        [defaults setObject:nil forKey:@"email"];
-        [defaults setObject:nil forKey:@"username"];
-        [defaults setObject:nil forKey:@"password"];
+        [defaults setObject:@"arcarter@mit.edu" forKey:@"email"];
+        [defaults setObject:@"al_carter" forKey:@"username"];
+        [defaults setObject:@"--" forKey:@"password"];
         [defaults synchronize];
         
         [self loadIntroViews]; }
