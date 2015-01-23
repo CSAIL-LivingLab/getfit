@@ -400,9 +400,9 @@
  
     
     // add an alert asking the user whether they want to post to GetFit
-    NSString *alertMessage = [NSString stringWithFormat:@"You exercised for %d minutes. Would you like save this activity?", min];
+    NSString *alertMessage = [NSString stringWithFormat:@"activity: %@\nintensity: %@\n duration: %d minutes.", _minuteEntry.activity, _minuteEntry.intensity, min];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save for GetFit?" message:alertMessage delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save to GetFit?" message:alertMessage delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     [alert show];
     
     // add to the MinuteStore

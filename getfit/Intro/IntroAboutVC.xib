@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroAboutVC">
             <connections>
                 <outlet property="emailTextField" destination="t9Y-SL-hHc" id="EA3-fw-gYu"/>
-                <outlet property="nameTextField" destination="4PG-xu-JUk" id="9a8-tj-KEy"/>
                 <outlet property="tapToContinue" destination="Jlg-m7-PZq" id="KHj-8g-BOp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -39,15 +39,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4PG-xu-JUk">
-                    <rect key="frame" x="8" y="393" width="584" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="gCx-GX-gdm"/>
-                    </connections>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t9Y-SL-hHc">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t9Y-SL-hHc">
                     <rect key="frame" x="8" y="431" width="584" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -55,7 +47,7 @@
                         <outlet property="delegate" destination="-1" id="qsx-qJ-uYo"/>
                     </connections>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jlg-m7-PZq">
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jlg-m7-PZq">
                     <rect key="frame" x="238" y="476" width="124" height="33"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Tap To Continue">
@@ -71,13 +63,9 @@
                 <constraint firstItem="NjH-NR-yld" firstAttribute="top" secondItem="Wmd-QH-puR" secondAttribute="bottom" constant="26" id="27V-HT-AzY"/>
                 <constraint firstAttribute="trailing" secondItem="t9Y-SL-hHc" secondAttribute="trailing" constant="8" id="6ya-tS-ZRn"/>
                 <constraint firstItem="Jlg-m7-PZq" firstAttribute="top" secondItem="t9Y-SL-hHc" secondAttribute="bottom" constant="15" id="841-dI-OSe"/>
-                <constraint firstItem="t9Y-SL-hHc" firstAttribute="top" secondItem="4PG-xu-JUk" secondAttribute="bottom" constant="8" id="8Fc-0Q-D9x"/>
                 <constraint firstAttribute="centerY" secondItem="Wmd-QH-puR" secondAttribute="centerY" constant="85.5" id="8sT-Ro-EG5"/>
-                <constraint firstItem="t9Y-SL-hHc" firstAttribute="top" secondItem="4PG-xu-JUk" secondAttribute="bottom" constant="8" id="A2d-Us-jqZ"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Jlg-m7-PZq" secondAttribute="bottom" constant="10" id="D8K-hT-M9F"/>
                 <constraint firstAttribute="centerX" secondItem="Jlg-m7-PZq" secondAttribute="centerX" constant="-0.5" id="FGQ-Q9-oVI"/>
-                <constraint firstItem="4PG-xu-JUk" firstAttribute="top" secondItem="NjH-NR-yld" secondAttribute="bottom" constant="8" id="GCg-OQ-xg4"/>
-                <constraint firstAttribute="trailing" secondItem="4PG-xu-JUk" secondAttribute="trailing" constant="8" id="LSg-je-nx4"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NjH-NR-yld" secondAttribute="trailing" constant="8" id="Nr9-5N-Obs"/>
                 <constraint firstAttribute="centerX" secondItem="Jlg-m7-PZq" secondAttribute="centerX" constant="-0.5" id="Qg5-xT-TF1"/>
                 <constraint firstAttribute="centerX" secondItem="Jlg-m7-PZq" secondAttribute="centerX" constant="-0.5" id="SPF-w9-DLI"/>
@@ -85,20 +73,14 @@
                 <constraint firstItem="Wmd-QH-puR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="cSs-J1-a0J"/>
                 <constraint firstItem="t9Y-SL-hHc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="cpc-pT-pg1"/>
                 <constraint firstItem="NjH-NR-yld" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="hcL-SC-WAX"/>
-                <constraint firstItem="NjH-NR-yld" firstAttribute="width" secondItem="4PG-xu-JUk" secondAttribute="width" id="jEI-EH-gok"/>
-                <constraint firstItem="4PG-xu-JUk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="kGI-bp-l2i"/>
                 <constraint firstAttribute="trailing" secondItem="NjH-NR-yld" secondAttribute="trailing" constant="8" id="nhO-6j-UOx"/>
                 <constraint firstAttribute="trailing" secondItem="Wmd-QH-puR" secondAttribute="trailing" constant="8" id="tjf-Q0-RWa"/>
                 <constraint firstItem="NjH-NR-yld" firstAttribute="top" secondItem="Wmd-QH-puR" secondAttribute="bottom" constant="15" id="w6K-0e-i9t"/>
-                <constraint firstItem="t9Y-SL-hHc" firstAttribute="width" secondItem="4PG-xu-JUk" secondAttribute="width" id="ylE-10-zgz"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="8sT-Ro-EG5"/>
                     <exclude reference="27V-HT-AzY"/>
-                    <exclude reference="jEI-EH-gok"/>
-                    <exclude reference="A2d-Us-jqZ"/>
-                    <exclude reference="ylE-10-zgz"/>
                     <exclude reference="FGQ-Q9-oVI"/>
                     <exclude reference="SPF-w9-DLI"/>
                 </mask>
