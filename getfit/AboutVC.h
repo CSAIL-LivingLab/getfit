@@ -1,5 +1,5 @@
 //
-//  InfoVCnew.h
+//  AboutVC.h
 //  GetFit
 //
 //  Created by Albert Carter on 1/23/15.
@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InfoVCnew : UIViewController
+@interface AboutVC : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 @end

@@ -11,10 +11,10 @@
 
 #import "IntroPageVC.h"
 
-//#import "PageVC.h"
+
+#import "AboutVC.h"
 #import "ExerciseVC.h"
 #import "GraphVC.h"
-#import "InfoVC.h"
 #import "TestVC.h"
 #import "MinuteTVC.h"
 
@@ -28,8 +28,8 @@
     [self loadMainViews];
     
     // load the intro view if the user's email isn't set
-//    if (![defaults stringForKey:@"email"]) {
-    if (YES) {
+    if (![defaults stringForKey:@"email"]) {
+//    if (YES) {
         // make sure the collector doesn't start right away
         [defaults setObject:[NSDate distantFuture] forKey:@"resumeSensorDate"];
         [defaults setObject:nil forKey:@"email"];
@@ -55,7 +55,7 @@
     
     ExerciseVC *exerciseVC = [[ExerciseVC alloc] init];
     GraphVC *graphVC = [[GraphVC alloc] init];
-    InfoVC *aboutVC = [[InfoVC alloc] init];
+    AboutVC *aboutVC = [[AboutVC alloc] init];
     TestVC *testVC = [[TestVC alloc] init];
     
     // add tabs

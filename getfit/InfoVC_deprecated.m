@@ -6,18 +6,18 @@
 //  Copyright (c) 2014 CSAIL Big Data Initiative. All rights reserved.
 //
 
-#import "InfoVC.h"
+#import "InfoVC_deprecated.h"
 #import "InfoView.h"
 #import "OpenSense.h"
 
-@interface InfoVC () {
+@interface InfoVC_deprecated () {
     UIPickerView *pausePicker;
     NSArray *pauseArr;
     UILabel *pauseText;
 }
 @end
 
-@implementation InfoVC
+@implementation InfoVC_deprecated
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

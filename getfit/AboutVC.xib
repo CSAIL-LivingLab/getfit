@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutVC">
+            <connections>
+                <outlet property="pauseButton" destination="6kr-4l-TeN" id="99g-KL-hTx"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About This App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfm-I5-TNA">
+                    <rect key="frame" x="243" y="12" width="115" height="19.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Nam libero tempore, cum soluta nobis " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmN-N4-Drd">
+                    <rect key="frame" x="8" y="39" width="584" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Nam libero tempore, cum soluta nobis " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkQ-3I-Drh">
+                    <rect key="frame" x="8" y="102" width="584" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Nam libero tempore, cum soluta nobis " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97Q-UV-kPg">
+                    <rect key="frame" x="8" y="189" width="584" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Nam libero tempore, cum soluta nobis " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zt-7X-uuo">
+                    <rect key="frame" x="8" y="126" width="584" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About DataHub" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtX-G6-Nd2">
+                    <rect key="frame" x="243" y="75" width="114.5" height="19.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Sensing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwh-gi-KAJ">
+                    <rect key="frame" x="246" y="162" width="109" height="19.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kr-4l-TeN">
+                    <rect key="frame" x="245" y="225" width="110" height="110"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="110" id="IMA-qm-1jB"/>
+                        <constraint firstAttribute="height" constant="110" id="YUF-QN-Utw"/>
+                    </constraints>
+                    <state key="normal" title="Button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="6Zt-7X-uuo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="1MF-9z-B7g"/>
+                <constraint firstItem="97Q-UV-kPg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="3Uo-BO-3KE"/>
+                <constraint firstItem="97Q-UV-kPg" firstAttribute="top" secondItem="rwh-gi-KAJ" secondAttribute="bottom" constant="7.5" id="5EP-dA-SML"/>
+                <constraint firstItem="mkQ-3I-Drh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="5YG-RF-kd3"/>
+                <constraint firstItem="UmN-N4-Drd" firstAttribute="top" secondItem="jfm-I5-TNA" secondAttribute="bottom" constant="8" id="B9W-Hf-Mea"/>
+                <constraint firstAttribute="trailing" secondItem="UmN-N4-Drd" secondAttribute="trailing" constant="8" id="BcE-T9-Wrp"/>
+                <constraint firstItem="UmN-N4-Drd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="JT5-EC-mJN"/>
+                <constraint firstItem="mkQ-3I-Drh" firstAttribute="top" secondItem="ZtX-G6-Nd2" secondAttribute="bottom" constant="7.5" id="M6h-Bk-nsJ"/>
+                <constraint firstItem="rwh-gi-KAJ" firstAttribute="top" secondItem="6Zt-7X-uuo" secondAttribute="bottom" constant="20" id="QZz-rP-yF8"/>
+                <constraint firstItem="jfm-I5-TNA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="Uok-FV-ttS"/>
+                <constraint firstAttribute="trailing" secondItem="97Q-UV-kPg" secondAttribute="trailing" constant="8" id="Vr9-Qw-2ZV"/>
+                <constraint firstItem="6kr-4l-TeN" firstAttribute="top" secondItem="97Q-UV-kPg" secondAttribute="bottom" constant="20" id="Zck-RM-tbd"/>
+                <constraint firstAttribute="centerX" secondItem="jfm-I5-TNA" secondAttribute="centerX" constant="-0.5" id="ent-hY-imE"/>
+                <constraint firstAttribute="trailing" secondItem="mkQ-3I-Drh" secondAttribute="trailing" constant="8" id="fbE-4b-YEF"/>
+                <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="UmN-N4-Drd" secondAttribute="bottom" constant="20" id="hKZ-2e-Ckg"/>
+                <constraint firstItem="6Zt-7X-uuo" firstAttribute="top" secondItem="mkQ-3I-Drh" secondAttribute="bottom" constant="8" id="iVp-cq-cZD"/>
+                <constraint firstAttribute="trailing" secondItem="6Zt-7X-uuo" secondAttribute="trailing" constant="8" id="kV9-Fy-zDh"/>
+                <constraint firstAttribute="centerX" secondItem="ZtX-G6-Nd2" secondAttribute="centerX" constant="-0.5" id="lqR-37-XGf"/>
+                <constraint firstAttribute="centerX" secondItem="97Q-UV-kPg" secondAttribute="centerX" id="nuI-lm-hlh"/>
+                <constraint firstAttribute="centerX" secondItem="rwh-gi-KAJ" secondAttribute="centerX" constant="-0.25" id="tCB-kF-XMc"/>
+                <constraint firstAttribute="centerX" secondItem="6kr-4l-TeN" secondAttribute="centerX" id="wGv-gW-qhE"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="nuI-lm-hlh"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>
