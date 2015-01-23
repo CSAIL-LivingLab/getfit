@@ -121,6 +121,10 @@
             continue;
         }
         
+        // do a bunch of things to prevent the random
+        
+        
+        
         NSInteger *endTimeInt = (NSInteger)roundf([me.endTime timeIntervalSince1970]);
         NSString *verified;
         
@@ -161,6 +165,7 @@
             [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
         }
         
+        NSLog(@"%@", statement);
         [self saveChanges];
         return YES;
     }
