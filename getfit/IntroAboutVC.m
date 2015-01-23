@@ -112,7 +112,9 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enable Location Sensing?" message:@"\nDonating sensor data requires your app location.\n\nYour data is anonomous, and you can stop data collection or delete your data at any time." delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
         [alert show];
     } else {
-        NSLog(@"switch off");
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:[NSDate distantFuture] forKey:@"resumeSensorDate"];
+        [defaults synchronize];
     }
     
 }
