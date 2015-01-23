@@ -16,6 +16,11 @@
 @implementation AboutVC {
     UIColor *blueColor;
     UIImage *pauseImage;
+    
+    UIPickerView *pausePicker;
+    NSArray *pauseArr;
+    UILabel *pauseText;
+
 }
 
 
@@ -43,6 +48,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
+    pauseArr = [[NSArray alloc] initWithObjects:@[@"Resume Data Donation", @0],
+                @[@"10 min", @10],
+                @[@"30 min", @30],
+                @[@"1 hr", @60],
+                @[@"2 hr", @120],
+                @[@"5 hr", @300],
+                @[@"10 hr", @600],
+                @[@"1 day", @1440],
+                @[@"1 week", @10080],
+                @[@"Forever", @999],
+                nil];
     
     // setup the pauseButton
     [_pauseButton setTitle:kPAUSE_TITLE forState:UIControlStateNormal];
@@ -53,17 +69,89 @@
     [_pauseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [[_pauseButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:15]];
     [_pauseButton.layer setBackgroundColor:[blueColor CGColor]];
-    [_pauseButton addTarget:self action:@selector(pauseButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_pauseButton addTarget:self action:@selector(addPicker:) forControlEvents:UIControlEventTouchUpInside];
     [self adjustButtonForImage:_pauseButton];
     _pauseButton.titleLabel.numberOfLines = 2;
     _pauseButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    
+    // setup picker
+    pausePicker= [[UIPickerView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
+    pausePicker.dataSource = self;
+    pausePicker.delegate = self;
+    [pausePicker setBackgroundColor:[UIColor blackColor]];
+    pausePicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    pausePicker.layer.borderWidth = 1;
+    [pausePicker reloadAllComponents];
+    
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker:)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [self.view addGestureRecognizer:tapBackground];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Picker
+- (void) addPicker:(id)sender {
+    [UIView beginAnimations:@"MoveIn" context:nil];
+    [self.view insertSubview:pausePicker aboveSubview:self.view];
+    [UIView commitAnimations];
 }
+
+- (void) dismissPicker:(id)sender {
+    [UIView beginAnimations:@"MoveOut" context:nil];
+    [pausePicker removeFromSuperview];
+    [UIView commitAnimations];
+}
+
+# pragma mark
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [pauseArr count];
+}
+
+- (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+# pragma mark
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [[pauseArr objectAtIndex:row] objectAtIndex:0];
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+
+    NSString *title = @"";
+
+    title = [[pauseArr objectAtIndex:row] objectAtIndex:0];
+    
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:kFONT_NAME}];
+    
+    return attString;
+}
+
+#pragma mark
+
+- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    NSNumber *minutes = [[pauseArr objectAtIndex:row] objectAtIndex:1];
+    NSDate *resumeDate;
+    
+    /// 999 means do not resume
+    if ([minutes isEqualToNumber:@999]) {
+        resumeDate = [NSDate distantFuture];
+    } else {
+        NSInteger intMins = [minutes integerValue];
+        resumeDate = [[NSDate date] dateByAddingTimeInterval:intMins*60];
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:resumeDate forKey:@"resumeSensorDate"];
+    [defaults synchronize];
+//    [self addPauseText];
+    
+}
+
+#pragma mark - button and image resizing
 
 //generate a new image of a different size
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
