@@ -8,7 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroAboutVC">
             <connections>
                 <outlet property="continueButton" destination="1gn-77-di9" id="g1Z-Po-xuR"/>
+                <outlet property="donateSensorLabel" destination="Y2n-RG-Ph4" id="gQY-RC-ucr"/>
                 <outlet property="donateSwitch" destination="1PR-Ub-xUx" id="VVS-lh-tz8"/>
+                <outlet property="noNetworkLabel" destination="v4C-zX-76H" id="jq3-EV-lRD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,7 +22,7 @@
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="eHs-PH-bZ7">
                     <rect key="frame" x="8" y="75" width="584" height="432"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
@@ -64,12 +66,21 @@
                         <action selector="tapToContinue:" destination="-1" eventType="touchUpInside" id="rYd-Hi-2M1"/>
                     </connections>
                 </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GetFit cannot set up without a network connection." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4C-zX-76H">
+                    <rect key="frame" x="8" y="571.5" width="584" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="bX0-4O-cu2" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="36" id="7Kj-Jo-tgL"/>
+                <constraint firstItem="v4C-zX-76H" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="7ch-MM-rT9"/>
                 <constraint firstItem="bX0-4O-cu2" firstAttribute="top" secondItem="1gn-77-di9" secondAttribute="bottom" constant="8" id="8xz-h1-wwd"/>
                 <constraint firstAttribute="centerX" secondItem="1gn-77-di9" secondAttribute="centerX" constant="-0.5" id="Abb-LP-eHe"/>
+                <constraint firstItem="eHs-PH-bZ7" firstAttribute="leading" secondItem="v4C-zX-76H" secondAttribute="trailing" constant="22" id="RMC-me-a2t"/>
+                <constraint firstAttribute="bottom" secondItem="v4C-zX-76H" secondAttribute="bottom" constant="8" id="T6k-cC-0l5"/>
                 <constraint firstAttribute="centerX" secondItem="bX0-4O-cu2" secondAttribute="centerX" id="YKA-Ig-oON"/>
                 <constraint firstItem="1gn-77-di9" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="8" id="a0N-bR-u74"/>
                 <constraint firstAttribute="bottom" secondItem="bX0-4O-cu2" secondAttribute="bottom" constant="8" id="c2w-XS-jSz"/>
@@ -79,11 +90,13 @@
                 <constraint firstItem="1gn-77-di9" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="-2" id="nS1-gz-H7c"/>
                 <constraint firstItem="1gn-77-di9" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="8" id="vFP-kz-uey"/>
                 <constraint firstAttribute="bottom" secondItem="1gn-77-di9" secondAttribute="bottom" constant="60" id="vve-4O-Xe7"/>
+                <constraint firstAttribute="trailing" secondItem="v4C-zX-76H" secondAttribute="trailing" constant="8" id="xnJ-tx-vMe"/>
                 <constraint firstItem="eHs-PH-bZ7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="yg4-Zd-BdR"/>
                 <constraint firstAttribute="trailing" secondItem="eHs-PH-bZ7" secondAttribute="trailing" constant="8" id="yte-BH-F7W"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="RMC-me-a2t"/>
                     <exclude reference="Abb-LP-eHe"/>
                     <exclude reference="a0N-bR-u74"/>
                     <exclude reference="vFP-kz-uey"/>
