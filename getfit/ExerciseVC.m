@@ -415,7 +415,10 @@
     
     // 0 is cancel
     if (buttonIndex == 0) {
-        return;
+        // set this up so that it will post to datahub, but not getfit
+        _minuteEntry.postedToDataHub = NO;
+        _minuteEntry.postedToGetFit = YES;
+        _minuteEntry.verified = NO;
     }
     
     MinuteStore *ms = [MinuteStore sharedStore];
@@ -424,6 +427,10 @@
 //     post minutes to DataHub
     [ms postToDataHub];
     
+    // don't attempt to post to GetFit
+    if (buttonIndex == 0) {
+        return;
+    }
     
     if ([ms checkForValidCookies] && [ms checkForValidTokens:_minuteEntry.endTime] ) {
         [ms postToGetFit];

@@ -111,7 +111,7 @@
     
     
     //format query
-    NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.minutes(activity, intensity, duration, endDate) values "];
+    NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.minutes(activity, intensity, duration, endDate, verified) values "];
     int numberOfMinutesToPost = 0;
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
@@ -122,7 +122,14 @@
         }
         
         NSInteger *endTimeInt = (NSInteger)roundf([me.endTime timeIntervalSince1970]);
-        NSString *insertStmt = [NSString stringWithFormat:@"('%@', '%@', %@, to_timestamp(%tu)),", me.activity, me.intensity, @(me.duration), endTimeInt];
+        NSString *verified;
+        
+        if (me.verified) {
+            verified = @"TRUE";
+        } else {
+            verified = @"FALSE";
+        }
+        NSString *insertStmt = [NSString stringWithFormat:@"('%@', '%@', %@, to_timestamp(%tu), %@),", me.activity, me.intensity, @(me.duration), endTimeInt, verified];
         
         
         [statement appendString:insertStmt];

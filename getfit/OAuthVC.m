@@ -49,6 +49,20 @@
     [alertView show];
 }
 
+- (void) dismissWithoutSaving {
+    if (!self.isViewLoaded || !self.view.window) {
+        return;
+    }
+    
+    if (self.minuteTVC !=nil) {
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        [self.minuteTVC dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
 
 
 #pragma mark - UI Setup
@@ -65,7 +79,7 @@
 
 - (void) makeCancelButton {
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                    style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
+                                                                    style:UIBarButtonItemStyleDone target:self action:@selector(dismissWithoutSaving)];
     self.navigationItem.leftBarButtonItem = leftButton;
 }
 

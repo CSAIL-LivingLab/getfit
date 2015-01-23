@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSDate *endTime;
 @property BOOL postedToGetFit;
 @property BOOL postedToDataHub;
+@property BOOL verified;
 
 
 
