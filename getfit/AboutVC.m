@@ -51,13 +51,10 @@
     _pauseButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     _pauseButton.layer.borderWidth = 2.0;
     [_pauseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [[_pauseButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:13]];
+    [[_pauseButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:15]];
     [_pauseButton.layer setBackgroundColor:[blueColor CGColor]];
     [_pauseButton addTarget:self action:@selector(pauseButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
     
-    CGSize s = [UIImage imageNamed:@"playpause.png"].size;
-    pauseImage =[self imageWithImage:[UIImage imageNamed:@"playpause.png"] scaledToSize:CGSizeMake(s.width/2.0, s.height/2.0)];
-    [_pauseButton setImage:pauseImage forState:UIControlStateNormal];
     [self adjustButtonForImage:_pauseButton];
     _pauseButton.titleLabel.numberOfLines = 2;
     _pauseButton.titleLabel.textAlignment = NSTextAlignmentCenter;
