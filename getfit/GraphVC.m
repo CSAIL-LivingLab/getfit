@@ -39,6 +39,18 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    
+    // load important keys
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    Secret *secret = [Secret sharedSecret];
+    NSString *app_id = secret.DHAppID;
+    NSString *app_token = secret.DHAppToken;
+    NSString *repo_base = [defaults stringForKey:@"username"];
+    
+    // update HTMl using keys and generate chart
+    self.script = [NSString stringWithFormat:@"var app_id = '%@'; var app_token = '%@'; var repo_base = '%@'; makeCharts();", app_id, app_token, repo_base];
+    NSLog(@"%@", self.script);
+    
     [self.webView stringByEvaluatingJavaScriptFromString:self.script];
 }
 
@@ -62,16 +74,6 @@
 //    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
 //    [self.webView loadHTMLString:htmlString baseURL:nil];
     
-    // load important keys
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    Secret *secret = [Secret sharedSecret];
-    NSString *app_id = secret.DHAppID;
-    NSString *app_token = secret.DHAppToken;
-    NSString *repo_base = [defaults stringForKey:@"username"];
-    
-    // update HTMl using keys and generate chart
-    self.script = [NSString stringWithFormat:@"var app_id = '%@'; var app_token = '%@'; var repo_base = '%@'; makeCharts();", app_id, app_token, repo_base];
-    NSLog(@"%@", self.script);
     
     [self.view addSubview:self.webView];
 }
