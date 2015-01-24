@@ -287,7 +287,7 @@
     // durationPicker
     else if (pickerPath.row == 3 && me.duration == 0) {
         cell.detailTextLabel.text = [Resources sharedResources].durations[0];
-        me.duration = [Resources sharedResources].durations[0];
+        me.duration = [self minutesFromString:[Resources sharedResources].durations[0]];
         [cell layoutSubviews];
     }
     // datePicker date is already set
