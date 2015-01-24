@@ -169,10 +169,13 @@
     NSString *bodyStr;
     if (pauseUntil !=nil && [pauseUntil compare:[NSDate date]] == NSOrderedAscending) {
         bodyStr = @"Sensors currently enabled.";
+        [_pauseButton setTitle:kPAUSE_TITLE forState:UIControlStateNormal];
     } else if ([pauseUntil compare:[NSDate distantFuture]] == NSOrderedSame) {
         bodyStr = @"Sensors colleciton currently disabled forever.";
+        [_pauseButton setTitle:kRESUME_TITLE forState:UIControlStateNormal];
     } else {
         bodyStr = [NSString stringWithFormat:@"Sensors resuming at %@", dateString];
+        [_pauseButton setTitle:kRESUME_TITLE forState:UIControlStateNormal];
     }
     
     // label
