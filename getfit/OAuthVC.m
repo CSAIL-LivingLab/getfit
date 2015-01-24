@@ -79,7 +79,7 @@
 
 - (void) makeCancelButton {
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                    style:UIBarButtonItemStyleDone target:self action:@selector(dismissWithoutSaving)];
+                                                                    style:UIBarButtonItemStylePlain target:self action:@selector(dismissWithoutSaving)];
     self.navigationItem.leftBarButtonItem = leftButton;
 }
 
