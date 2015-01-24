@@ -10,14 +10,18 @@
 
 @interface AboutVC : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
+
 // Getfit App
+@property (weak, nonatomic) IBOutlet UILabel *appTitle;
 @property (weak, nonatomic) IBOutlet UILabel *appLabel;
 
 // Datahub
+@property (weak, nonatomic) IBOutlet UILabel *datahubTitle;
 @property (weak, nonatomic) IBOutlet UILabel *datahubLabel;
 @property (weak, nonatomic) IBOutlet UILabel *credentialsLabel;
 
 // OpenSense
+@property (weak, nonatomic) IBOutlet UILabel *sensingTitle;
 @property (weak, nonatomic) IBOutlet UILabel *sensingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resumeLabel;
 
