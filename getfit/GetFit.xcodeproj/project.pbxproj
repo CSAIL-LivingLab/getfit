@@ -554,7 +554,6 @@
 				ORGANIZATIONNAME = "MIT CSAIL Living Lab";
 				TargetAttributes = {
 					3DDED6D0167D098B006DE4F8 = {
-						DevelopmentTeam = 4K8T4ETL5D;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 1;
