@@ -33,6 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self loadWebView];
     
 }
@@ -47,6 +48,7 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGRect frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height);
     self.webView = [[UIWebView alloc] initWithFrame:frame];
+    [self.webView setBackgroundColor:[UIColor blackColor]];
     [self.webView setDelegate:self];
     
     

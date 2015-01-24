@@ -93,6 +93,14 @@
     [_privateMinutes removeObject:minuteEntry];
 }
 
+- (void) removeAllMinutes {
+    for (MinuteEntry *me in _privateMinutes) {
+        [self removeMinuteEntry:me];
+    }
+}
+
+# pragma mark - posting
+
 - (BOOL) postToDataHub {
     
     if (![self isNetworkAvailable:@"datahub.csail.mit.edu"]) {
@@ -124,7 +132,7 @@
         // this indicates an invalid entry,
         // probably from an earlier version of GetFit
         // it should just be deleted
-        if (me.duration == NSIntegerMax || me.duration == 4459342576 || me.activity == nil) {
+        if (me.activity == nil) {
             [[MinuteStore sharedStore] removeMinuteEntry:me];
             i = i-1;
             continue;
@@ -165,7 +173,7 @@
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
     datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
     datahubConnection * con_app = [datahub_client open_connection:con_params_app];
-    NSLog(@"%@", statement);
+//    NSLog(@"%@", statement);
 
     // query
     @try {
@@ -246,9 +254,21 @@
         
         // get the form info
         NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-        NSString *form_token = [[defaults objectForKey:@"form_tokens"] objectAtIndex:dayIndex];
-        NSString *form_build_id = [[defaults objectForKey:@"form_build_ids"] objectAtIndex:dayIndex];
-        NSString *form_id = [[defaults objectForKey:@"form_ids"] objectAtIndex:dayIndex];
+        NSString *form_token;
+        NSString *form_build_id;
+        NSString *form_id;
+        
+        
+        // try to get the form info. If there's an out of bounds error, it means that the user isn't signed up for getfit
+        @try {
+            form_token = [[defaults objectForKey:@"form_tokens"] objectAtIndex:dayIndex];
+            form_build_id = [[defaults objectForKey:@"form_build_ids"] objectAtIndex:dayIndex];
+            form_id = [[defaults objectForKey:@"form_ids"] objectAtIndex:dayIndex];
+        }
+        @catch (NSException *exception) {
+            return NO;
+        }
+        
         
         // gather the cookies
         NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -280,6 +300,8 @@
     [self saveChanges];
     return YES;
 }
+
+# pragma mark - posting helpers
 
 - (NSInteger *) indexOfDayInWeekForMinuteEntry:(MinuteEntry *)me {
     NSDateFormatter *weekday = [[NSDateFormatter alloc] init];

@@ -20,6 +20,7 @@
     NSString *email;
     NSString *token;
     NSUserDefaults *defaults;
+    BOOL success;
 }
 
 - (void)viewDidLoad {
@@ -45,8 +46,14 @@
         
     // dismiss the view after the user clicks ok.
     // Uses UIAlertViewDelegate didDismissWithButtonIndex
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
-    [alertView show];
+    
+    if (success) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Getfit Error" message:@"Your minutes were not saved. Please make sure that you are a member of a getfit challenge team.\n\n http://getfit.mit.edu" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (void) dismissWithoutSaving {
@@ -140,7 +147,8 @@
     // once tokens are extracted, post to getFit and close the page
     MinuteStore *ms = [MinuteStore sharedStore];
     
-    [ms postToGetFit];
+    success = [ms postToGetFit];
+    success = NO;
     [self dismiss];
 }
 
