@@ -15,6 +15,7 @@
 
 @implementation AboutVC {
     UIColor *blueColor;
+    UIColor *greenColor;
     UIImage *pauseImage;
     
     UIPickerView *pausePicker;
@@ -45,6 +46,8 @@
     [super viewDidLoad];
     
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
+    greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
+    
     pauseArr = [[NSArray alloc] initWithObjects:@[@"Resume Data Donation", @0],
                 @[@"10 min", @10],
                 @[@"30 min", @30],
@@ -70,6 +73,18 @@
     [self adjustButtonForImage:_pauseButton];
     _pauseButton.titleLabel.numberOfLines = 2;
     _pauseButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    // setup credentialsLabel
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults objectForKey:@"username"];
+    NSString *password = [defaults objectForKey:@"password"];
+    NSString *credentialsText = [NSString stringWithFormat:@"username: %@\npassword: %@", username, password];
+    [_credentialsLabel setText:credentialsText];
+    
+    //setup title labels colors
+    [_appTitle setTextColor:greenColor];
+    [_datahubTitle setTextColor:greenColor];
+    [_sensingTitle setTextColor:greenColor];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
