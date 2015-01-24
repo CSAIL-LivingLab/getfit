@@ -33,35 +33,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor blackColor]];
 
-    [self loadWebView];
-    
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    
-    // load important keys
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    Secret *secret = [Secret sharedSecret];
-    NSString *app_id = secret.DHAppID;
-    NSString *app_token = secret.DHAppToken;
-    NSString *repo_base = [defaults stringForKey:@"username"];
-    
-    // update HTMl using keys and generate chart
-    self.script = [NSString stringWithFormat:@"var app_id = '%@'; var app_token = '%@'; var repo_base = '%@'; makeCharts();", app_id, app_token, repo_base];
-    NSLog(@"%@", self.script);
-    
-    [self.webView stringByEvaluatingJavaScriptFromString:self.script];
-}
-
-- (void) loadWebView {
-    
     //size and make webView
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGRect frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height);
     self.webView = [[UIWebView alloc] initWithFrame:frame];
     [self.webView setBackgroundColor:[UIColor blackColor]];
     [self.webView setDelegate:self];
+    [self loadWebView];
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    // lhas to happen here, because the web view needs to be resized
+    // If the user *just* created their datahub account, the webView script needs to be regenerated
+    // because it will initially be null
+    [self loadWebView];
+}
+
+- (void) loadWebView {
+    
     
     
     // this is dumb, but we have to convert the html to a string and then display that, because of Safari's XSS issues.
@@ -73,7 +66,17 @@
 //    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"datahubGraphs" ofType:@"html"];
 //    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
 //    [self.webView loadHTMLString:htmlString baseURL:nil];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    Secret *secret = [Secret sharedSecret];
+    NSString *app_id = secret.DHAppID;
+    NSString *app_token = secret.DHAppToken;
+    NSString *repo_base = [defaults stringForKey:@"username"];
     
+    // update HTMl using keys and generate chart
+    self.script = [NSString stringWithFormat:@"var app_id = '%@'; var app_token = '%@'; var repo_base = '%@'; makeCharts();", app_id, app_token, repo_base];
+    NSLog(@"%@", self.script);
+    
+    [self.webView stringByEvaluatingJavaScriptFromString:self.script];
     
     [self.view addSubview:self.webView];
 }
