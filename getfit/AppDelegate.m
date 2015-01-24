@@ -15,8 +15,11 @@
 #import "AboutVC.h"
 #import "ExerciseVC.h"
 #import "GraphVC.h"
-#import "TestVC.h"
 #import "MinuteTVC.h"
+#import "TestVC.h"
+
+#import "MinuteStore.h"
+#import "MinuteEntry.h"
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -37,7 +40,14 @@
         [defaults setObject:nil forKey:@"password"];
         [defaults synchronize];
         
-        [self loadIntroViews]; }
+        [self loadIntroViews];
+    }
+    
+    if (![defaults boolForKey:@"loaded_v.81"]) {
+        [[MinuteStore sharedStore] removeAllMinutes];
+        [defaults setBool:YES forKey:@"loaded_v.9"];
+        [defaults synchronize];
+    }
     
     // set default for cookie storage
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];

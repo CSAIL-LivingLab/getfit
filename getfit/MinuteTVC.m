@@ -135,9 +135,15 @@
     MinuteEntry *me = [minuteArr objectAtIndex:0];
     
     if ([ms checkForValidCookies] && [ms checkForValidTokens:me.endTime]) {
-        [ms postToGetFit];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
-        [alert show];
+
+        BOOL * success = [ms postToGetFit];
+        if (success) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+            [alert show];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Getfit Error" message:@"Your minutes were not saved. Please make sure that you are a member of a getfit challenge team.\n\n http://getfit.mit.edu" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+            [alert show];
+        }
         
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {

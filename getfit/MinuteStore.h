@@ -19,7 +19,10 @@
                          andEndTime:(NSDate *)endTime;
 
 - (void) addMinuteEntry: (MinuteEntry *) minuteEntry;
+- (void) removeAllMinuteEntriesIfPostedToDataHubAndGetFit;
+- (BOOL) removeMinuteEntryIfPostedToDataHubAndGetFit:(MinuteEntry *)minuteEntry;
 - (void) removeMinuteEntry:(MinuteEntry *)minuteEntry;
+- (void) removeAllMinutes;
 
 - (BOOL) postToGetFit;
 - (BOOL) postToDataHub;
@@ -28,7 +31,7 @@
 
 - (BOOL) isNetworkAvailable:(NSString *)hostname;
 
-- (BOOL) removeMinuteEntryIfPostedToDataHubAndGetFit:(MinuteEntry *)minuteEntry;
+
 - (BOOL) saveChanges;
 
 
