@@ -148,7 +148,6 @@
     MinuteStore *ms = [MinuteStore sharedStore];
     
     success = [ms postToGetFit];
-    success = NO;
     [self dismiss];
 }
 

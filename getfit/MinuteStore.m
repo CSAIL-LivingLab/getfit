@@ -77,6 +77,17 @@
     [_privateMinutes addObject:minuteEntry];
 }
 
+- (void) removeAllMinuteEntriesIfPostedToDataHubAndGetFit {
+    for (int i = 0; i<[_privateMinutes count]; i++) {
+        MinuteEntry *me = [_privateMinutes objectAtIndex:i];
+        BOOL *removed = [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
+        
+        if (removed) {
+            i = i-1;
+        }
+    }
+}
+
 - (BOOL) removeMinuteEntryIfPostedToDataHubAndGetFit:(MinuteEntry *) minuteEntry {
     if (minuteEntry.postedToGetFit && minuteEntry.postedToDataHub) {
         [self removeMinuteEntry:minuteEntry];
@@ -142,8 +153,6 @@
             me.intensity = @"medium";
         }
  
-        
-        
         NSInteger *endTimeInt = (NSInteger)roundf([me.endTime timeIntervalSince1970]);
         NSString *verified;
         
@@ -182,8 +191,9 @@
         // mark minutes as posted by DataHub, and remove if appropriate
         for (MinuteEntry *me in _privateMinutes){
             me.postedToDataHub = YES;
-            [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
         }
+        
+        [self removeAllMinuteEntriesIfPostedToDataHubAndGetFit];
         
         [self saveChanges];
         return YES;
@@ -294,9 +304,10 @@
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:nil];
         
         me.postedToGetFit = YES;
-        
-        [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
     }
+    
+    [self removeAllMinuteEntriesIfPostedToDataHubAndGetFit];
+    
     [self saveChanges];
     return YES;
 }

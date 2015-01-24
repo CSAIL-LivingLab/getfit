@@ -19,6 +19,7 @@
                          andEndTime:(NSDate *)endTime;
 
 - (void) addMinuteEntry: (MinuteEntry *) minuteEntry;
+- (void) removeAllMinuteEntriesIfPostedToDataHubAndGetFit;
 - (BOOL) removeMinuteEntryIfPostedToDataHubAndGetFit:(MinuteEntry *)minuteEntry;
 - (void) removeMinuteEntry:(MinuteEntry *)minuteEntry;
 - (void) removeAllMinutes;
