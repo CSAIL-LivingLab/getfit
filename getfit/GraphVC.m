@@ -54,8 +54,11 @@
     NSURL *url = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/datahubGraphs.html"];
     NSString *htmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
     [self.webView loadHTMLString:htmlString baseURL:nil];
+
     
-    
+//    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"datahubGraphs" ofType:@"html"];
+//    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+//    [self.webView loadHTMLString:htmlString baseURL:nil];
     
     // load important keys
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -78,7 +81,6 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.webView stringByEvaluatingJavaScriptFromString:self.script];
-    
 }
 
 /*
