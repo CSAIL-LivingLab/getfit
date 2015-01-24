@@ -28,6 +28,7 @@
 @property UIButton *intensityButton;
 @property UIButton *activityButton;
 @property UIButton *startButton;
+@property UIButton *plusButton;
 
 @property UIPickerView *activityPicker;
 @property UIPickerView *intensityPicker;
@@ -180,14 +181,13 @@
     // add plus button
     CGRect frame = [UIScreen mainScreen].bounds;
     CGRect rightFrame = CGRectMake(frame.size.width - 190, 10, 200, 40);
-    UIButton *plusButton = [[UIButton alloc] initWithFrame:rightFrame];
-    [plusButton setTitle:@"manual entry +" forState:UIControlStateNormal];
-    [plusButton setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    _plusButton = [[UIButton alloc] initWithFrame:rightFrame];
+    [_plusButton setTitle:@"manual entry +" forState:UIControlStateNormal];
+    [_plusButton setTitleColor:blueColor forState:UIControlStateNormal];
     AppDelegate *del = [[UIApplication sharedApplication] delegate];
-    [plusButton addTarget:del action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:plusButton];
+    [_plusButton addTarget:del action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_plusButton];
 }
-
 
 
 - (void) dismissPickers {
@@ -216,8 +216,10 @@
         [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             _intensityButton.backgroundColor = [UIColor clearColor];
             _activityButton.backgroundColor = [UIColor clearColor];
+            [_plusButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
             _stopwatch.textColor = textColor;
             _startButton.backgroundColor = [UIColor redColor];
+
 
             [self offsetViews:@[_stopwatch,_startButton] byY:-100];
             [self offsetViews:@[_intensityButton,_activityButton] byY:100];
@@ -227,6 +229,7 @@
             //some completition
             _intensityButton.hidden = TRUE;
             _activityButton.hidden = TRUE;
+            _plusButton.hidden = TRUE;
         }];
 
     } else {
@@ -235,11 +238,13 @@
 
         _intensityButton.hidden = FALSE;
         _activityButton.hidden = FALSE;
+        _plusButton.hidden = FALSE;
         _stopwatch.hidden = YES;
 
         [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             _intensityButton.backgroundColor = blueColor;
             _activityButton.backgroundColor = greenColor;
+            [_plusButton setTitleColor:blueColor forState:UIControlStateNormal];
             
             [self offsetViews:@[_stopwatch,_startButton] byY:100];
             //[self offsetViews:@[_intensityButton,_activityButton] byY:-100];
@@ -400,9 +405,9 @@
  
     
     // add an alert asking the user whether they want to post to GetFit
-    NSString *alertMessage = [NSString stringWithFormat:@"You exercised for %d minutes. Would you like save this activity?", min];
+    NSString *alertMessage = [NSString stringWithFormat:@"activity: %@\nintensity: %@\n duration: %d minutes.", _minuteEntry.activity, _minuteEntry.intensity, min];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save for GetFit?" message:alertMessage delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save to GetFit?" message:alertMessage delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"save", nil];
     [alert show];
     
     // add to the MinuteStore
@@ -415,7 +420,10 @@
     
     // 0 is cancel
     if (buttonIndex == 0) {
-        return;
+        // set this up so that it will post to datahub, but not getfit
+        _minuteEntry.postedToDataHub = NO;
+        _minuteEntry.postedToGetFit = YES;
+        _minuteEntry.verified = NO;
     }
     
     MinuteStore *ms = [MinuteStore sharedStore];
@@ -424,6 +432,10 @@
 //     post minutes to DataHub
     [ms postToDataHub];
     
+    // don't attempt to post to GetFit
+    if (buttonIndex == 0) {
+        return;
+    }
     
     if ([ms checkForValidCookies] && [ms checkForValidTokens:_minuteEntry.endTime] ) {
         [ms postToGetFit];
@@ -436,7 +448,9 @@
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentViewController:navController animated:YES completion:nil];
     }
-
+    
+    // create a new minuteEntry, for next time the user posts
+    _minuteEntry = [[MinuteEntry alloc] init];
     
 }
 

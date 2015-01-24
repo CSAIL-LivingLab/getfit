@@ -6,18 +6,18 @@
 //  Copyright (c) 2015 MIT CSAIL Living Lab. All rights reserved.
 //
 
-#import "IntroAboutVC.h"
+#import "IntroAboutVC_deprecated.h"
 #import "IntroPageVC.h"
 #import "IntroAuthorizationVC.h"
 #import "DataHubCreation.h"
 
-@interface IntroAboutVC ()
+@interface IntroAboutVC_deprecated ()
 @property (weak, nonatomic) IntroPageVC *introPageVC;
 @property BOOL ready;
 @end
 
-@implementation IntroAboutVC
-@synthesize nameTextField, emailTextField, ready, introPageVC, tapToContinue;
+@implementation IntroAboutVC_deprecated
+@synthesize emailTextField, ready, introPageVC, tapToContinue;
 
 // hack so that it's possible to access the parent PageVC's array of pages
 
@@ -32,13 +32,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    tapToContinue.alpha = 0;
-    tapToContinue.hidden = YES;
-    
-    [nameTextField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+    tapToContinue.hidden = NO;
     
     [emailTextField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
-    
 
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [tapBackground setNumberOfTapsRequired:1];
@@ -69,8 +65,10 @@
     DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
     
     NSString *email = [defaults objectForKey:@"email"];
-    NSString *password = [dhCreation createPassword];
-    NSString *username = [dhCreation createUsernameFromEmail:email];
+    NSString *password = [dhCreation createRandomAlphaNumericString];
+    
+    // use the createPassword line, since we're just generating a string, anyhow.
+    NSString *username = [dhCreation createRandomAlphaNumericString];
     
     [defaults setObject:password forKey:@"password"];
     [defaults setObject:username forKey:@"username"];
@@ -120,15 +118,6 @@
 
 #pragma mark - helpers
 
-- (void) checkForReady {
-    if ([nameTextField.text length] > 0 && [self NSStringIsValidEmail:emailTextField.text] ) {
-        ready = YES;
-    }
-    else {
-        ready = NO;
-    };
-}
-
 
 // should check for MIT email addresses.
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
@@ -145,33 +134,8 @@
 
 // fade in swipe button. Save user defaults accordingly.
 - (void) textChanged:(UITextField *)textField{
-    [self checkForReady];
-    
-    // if it's ready to go, add the detail view controller
-    if (ready) {
-        [introPageVC addIntroDetailVCToArr];
-    } else {
-        [introPageVC removeIntroDetailVCFromArr];
-    }
-    
-    // fade in button
-    if (ready && tapToContinue.alpha < 1.0) {
-        tapToContinue.hidden = NO;
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn
-                         animations:^{ tapToContinue.alpha = 1;}
-                         completion:nil];
-        [textField becomeFirstResponder];
-        
-    } else if (!ready && tapToContinue.alpha > 0) {
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{ tapToContinue.alpha = 0;}
-                         completion:nil];
-        tapToContinue.hidden = YES;
-    }
-    
     // save defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:nameTextField.text forKey:@"name"];
     [defaults setObject:emailTextField.text forKey:@"email"];
     [defaults synchronize];
 }
@@ -200,7 +164,6 @@
 }
 
 - (void)dismissKeyboard {
-    [nameTextField resignFirstResponder];
     [emailTextField resignFirstResponder];
 }
 

@@ -13,11 +13,10 @@
 - (id) initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor blackColor];
         [self addGetFitInfo];
         [self addDataHubInfo];
         [self addDataCollectionInfo];
-        
     }
     return self;
 }
@@ -27,6 +26,7 @@
     
     // title
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 320-40, 20)];
+    [title setTextColor:[UIColor whiteColor]];
     [title setText:@"GetFit"];
     [title setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
     [title setNumberOfLines:0];
@@ -35,6 +35,7 @@
     
     // Body
     UILabel *body = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 320-40, 100)];
+    [body setTextColor:[UIColor whiteColor]];
     [body setText:@"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed."];
     [body setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
     [body setNumberOfLines:0];
@@ -48,6 +49,7 @@
     
     // title
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(20, 160, 320-40, 20)];
+    [title setTextColor:[UIColor whiteColor]];
     [title setText:@"DataHub"];
     [title setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleHeadline]];
     [title setNumberOfLines:0];
@@ -60,6 +62,7 @@
     NSString *password = [defaults objectForKey:@"password"];
     
     UILabel *body = [[UILabel alloc] initWithFrame:CGRectMake(20, 180, 320-40, 100)];
+    [body setTextColor:[UIColor whiteColor]];
     NSString *bodyText = [NSString stringWithFormat:@"Sed ut perspiciatis unde omnis iste natus error sit voluptatem.\n\thttp://datahub.csail.mit.edu\n\tusername: %@\n\tpassword: %@", username, password];
     
     [body setText:bodyText];

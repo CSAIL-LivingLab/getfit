@@ -26,7 +26,7 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.topItem.title = @"Please Log In to GetFit";
     // make a bar button
-//    [self makeDoneButton];
+    [self makeCancelButton];
     
     // make the web view load
     [self setupWebView];
@@ -49,6 +49,20 @@
     [alertView show];
 }
 
+- (void) dismissWithoutSaving {
+    if (!self.isViewLoaded || !self.view.window) {
+        return;
+    }
+    
+    if (self.minuteTVC !=nil) {
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        [self.minuteTVC dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
 
 
 #pragma mark - UI Setup
@@ -63,10 +77,10 @@
         [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void) makeDoneButton {
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                    style:UIBarButtonItemStyleDone target:self action:@selector(dismiss)];
-    self.navigationItem.rightBarButtonItem = rightButton;
+- (void) makeCancelButton {
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                    style:UIBarButtonItemStylePlain target:self action:@selector(dismissWithoutSaving)];
+    self.navigationItem.leftBarButtonItem = leftButton;
 }
 
 - (void) setupWebView {

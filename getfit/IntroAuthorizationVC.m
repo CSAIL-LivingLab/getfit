@@ -42,7 +42,7 @@
     myWebView.delegate = self;
     
     // If the certs are good, go to GetFit. Otherwise, assume that the user will need to log in.
-    NSString *urlStr = [NSString stringWithFormat:@"http://datahub.csail.mit.edu/permissions/apps/allow_access/%@/%@?redirect_url=http://livinglab.mit.edu", appID, @"getfit"];
+    NSString *urlStr = [NSString stringWithFormat:@"http://datahub.csail.mit.edu/permissions/apps/allow_access/%@/%@?redirect_url=https://arcarter.scripts.mit.edu/getfit-html/datahubThankYou.html", appID, @"getfit"];
     
     NSURL *url = [NSURL URLWithString:urlStr];
     
@@ -57,18 +57,20 @@
 - (void) webViewDidFinishLoad:(UIWebView *)webView{
    
     NSString *url = [[webView.request URL] absoluteString];
+    NSString *theTitle=[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     
     
     // only two urls, the datahub one and the livinglab one
-    if (![url isEqualToString:@""] && [url rangeOfString:@"datahub"].location == NSNotFound) {
+    if (![url isEqualToString:@""] && [theTitle rangeOfString:@"Thank You"].location != NSNotFound) {
         
         // make sure the continue button target changes
-        [self.introAboutVC makeSchemaAndPushNextVC];
+//        [self.introAboutVC makeSchemaAndPushNextVC];
         
         // then dismiss self
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
+
 
 
 /*

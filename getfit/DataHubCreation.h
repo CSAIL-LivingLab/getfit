@@ -20,7 +20,8 @@
 - (BOOL) dropSchemaIfExistsForUser:(NSString *)username;
 - (BOOL) createSchemaForUser:(NSString *)username;
 - (NSString *) createUsernameFromEmail:(NSString *)email;
-- (NSString *) createPassword;
+- (NSString *) createRandomAlphaNumericString;
+- (NSString *) createRandomAlphaString;
 
 - (NSString *) extractUsernameFromErrorStr:(NSString *)errStr;
 - (NSString *) extractEmailFromErrorStr:(NSString *) errStr;

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface IntroAboutVC : UIViewController <UITextFieldDelegate>
+@interface IntroAboutVC_deprecated : UIViewController <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;

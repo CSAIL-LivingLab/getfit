@@ -38,10 +38,6 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-//    NSString *dumblog = [self.webView stringByEvaluatingJavaScriptFromString:@"(function() {return 'what'}());"];
-//    NSString *dumblog = [self.webView stringByEvaluatingJavaScriptFromString:@"(function() {return 'hello'}());"];
-//    NSLog(@"%@", dumblog);
-    
     [self.webView stringByEvaluatingJavaScriptFromString:self.script];
 }
 
@@ -54,15 +50,11 @@
     [self.webView setDelegate:self];
     
     
-//    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"datahubGraphs" ofType:@"html"];
-//    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
-//    [self.webView loadHTMLString:htmlString baseURL:nil];
-//    
-    
+    // this is dumb, but we have to convert the html to a string and then display that, because of Safari's XSS issues.
     NSURL *url = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/datahubGraphs.html"];
-//    NSURL *url = [NSURL URLWithString:@"http://google.com"];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:request];
+    NSString *htmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    [self.webView loadHTMLString:htmlString baseURL:nil];
+    
     
     
     // load important keys
@@ -73,7 +65,7 @@
     NSString *repo_base = [defaults stringForKey:@"username"];
     
     // update HTMl using keys and generate chart
-    self.script = [NSString stringWithFormat:@"app_id = '%@'; app_token = '%@'; repo_base = '%@'; makeCharts();", app_id, app_token, repo_base];
+    self.script = [NSString stringWithFormat:@"var app_id = '%@'; var app_token = '%@'; var repo_base = '%@'; makeCharts();", app_id, app_token, repo_base];
     NSLog(@"%@", self.script);
     
     [self.view addSubview:self.webView];
@@ -86,6 +78,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.webView stringByEvaluatingJavaScriptFromString:self.script];
+    
 }
 
 /*

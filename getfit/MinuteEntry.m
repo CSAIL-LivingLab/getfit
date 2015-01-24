@@ -21,6 +21,7 @@
         _endTime = [NSDate date];
         _postedToGetFit = NO;
         _postedToDataHub = NO;
+        _verified = YES;
     }
     return self;
 }
@@ -38,6 +39,7 @@
         _endTime = endTime;
         _postedToGetFit = NO;
         _postedToDataHub = NO;
+        _verified = YES;
     }
     
     return self;
@@ -49,7 +51,7 @@
         return NO;
     }
     
-    if (_duration == 0) {
+    if (_duration == 0 || _duration > 1440) {
         return NO;
     }
 
@@ -67,6 +69,7 @@
     [aCoder encodeInteger:_duration forKey:@"duration"];
     [aCoder encodeBool:_postedToGetFit forKey:@"postedToGetFit"];
     [aCoder encodeBool:_postedToDataHub forKey:@"postedToDataHub"];
+    [aCoder encodeBool:_verified forKey:@"verified"];
 }
 
 - (instancetype) initWithCoder:(NSCoder *)aDecoder {
@@ -81,6 +84,7 @@
         self.duration = [aDecoder decodeIntegerForKey:@"duration"];
         self.postedToGetFit = [aDecoder decodeBoolForKey:@"postedToGetFit"];
         self.postedToDataHub = [aDecoder decodeBoolForKey:@"postedToDataHub"];
+        self.verified = [aDecoder decodeBoolForKey:@"verified"];
     }
     return self;
 }

@@ -111,18 +111,40 @@
     
     
     //format query
-    NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.minutes(activity, intensity, duration, endDate) values "];
+    NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.minutes(activity, intensity, duration, endDate, verified) values "];
     int numberOfMinutesToPost = 0;
     for (int i=0; i< [_privateMinutes count]; i++) {
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
         
         // exclude the minutes that have already been posted to DataHub
         if (me.postedToDataHub) {
-            break;
+            continue;
         }
         
+        // this indicates an invalid entry,
+        // probably from an earlier version of GetFit
+        // it should just be deleted
+        if (me.duration == NSIntegerMax || me.duration == 4459342576 || me.activity == nil) {
+            [[MinuteStore sharedStore] removeMinuteEntry:me];
+            i = i-1;
+            continue;
+        }
+        
+        if (me.intensity == nil) {
+            me.intensity = @"medium";
+        }
+ 
+        
+        
         NSInteger *endTimeInt = (NSInteger)roundf([me.endTime timeIntervalSince1970]);
-        NSString *insertStmt = [NSString stringWithFormat:@"('%@', '%@', %@, to_timestamp(%tu)),", me.activity, me.intensity, @(me.duration), endTimeInt];
+        NSString *verified;
+        
+        if (me.verified) {
+            verified = @"TRUE";
+        } else {
+            verified = @"FALSE";
+        }
+        NSString *insertStmt = [NSString stringWithFormat:@"('%@', '%@', %@, to_timestamp(%tu), %@),", me.activity, me.intensity, @(me.duration), endTimeInt, verified];
         
         
         [statement appendString:insertStmt];
@@ -143,6 +165,7 @@
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
     datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
     datahubConnection * con_app = [datahub_client open_connection:con_params_app];
+    NSLog(@"%@", statement);
 
     // query
     @try {
@@ -180,27 +203,39 @@
     // duration must be >= 1
     // spaces for activities work
     for (int i=0; i< [_privateMinutes count]; i++) {
+        
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
         
         // exclude the minutes that have already been posted to DataHub
         if (me.postedToGetFit) {
-            break;
+            continue;
         }
         
         
-        NSString *activity = me.activity;
-        NSString *intensity = [me.intensity lowercaseString];
-        NSString *endDate = [dateFormatter stringFromDate:me.endTime];
-        NSString *duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
+        NSString *activity;
+        NSString *intensity;
+        NSString *endDate;
+        NSString *duration;
         
-        // default to a duration of 1, to make sure _something_ gets posted
-        if ([duration isEqualToString:@"0"]) {
-            duration = @"1";
+        if (me.activity != nil) {
+            activity = me.activity;
+        } else {
+            activity=@"undefined";
         }
         
-        if ([intensity isEqualToString:@""]) {
-            intensity = @"medium";
+        if (me.intensity !=nil){
+            intensity = me.intensity;
+        } else {
+            intensity=@"medium";
         }
+        
+        if (me.endTime != nil) {
+            endDate =[ dateFormatter stringFromDate:me.endTime];
+        } else {
+            endDate = [dateFormatter stringFromDate:[NSDate date]];
+        }
+        
+        duration = [NSString stringWithFormat: @"%ld", (long)me.duration];
         
         // update the activityPickerArr
         [[Resources sharedResources] setActivityAsFirst:activity];
