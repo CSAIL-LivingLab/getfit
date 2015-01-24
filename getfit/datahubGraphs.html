@@ -1,80 +1,252 @@
 <html>
-  <head>
-    <title>Sample DataHub HTML</title>
-    <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/jquery/jquery.min.js"></script> 
-    <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/thrift/thrift.js"></script>
-    <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/datahub/datahub_types.js"></script>
-    <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/datahub/DataHub.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart", "table", "timeline", "map"]});
-    </script>
-
-    <style>
-    h2 {
-      text-align: center;
-      margin-bottom: 0;
-      font-family: "Helvetica Neue";
-      font-weight: lighter;
-      color: gray;
-    },
-
-    #google-visulization-errors-0 {
-        display: none;
-    }
-
-
-    </style>
-  </head>
-  <body>
-  <div style="height:40px">
-  </div>
-  <div><h2>Minutes by Week</h2>
-    <div id="column-chart-div">
-    </div>
-  </div>
-  <div>
-    <h2>Activity Breakdown</h2>
-    <div id="pie-chart-div">
-    </div>
-  </div>
-  <div>
-    <h2>Your Activities</h2>
-    <div id="table-div">
-    </div>
-  </div>
-  <div style="height:100px">
-  </div>
     
-  </body>
+    <head>
+        <title>Sample DataHub HTML</title>
+        <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/thrift/thrift.js"></script>
+        <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/datahub/datahub_types.js"></script>
+        <script type="text/javascript" src="https://datahub.csail.mit.edu/static/lib/datahub/DataHub.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "1", {
+                        packages: ["corechart", "table", "timeline", "map"]
+                        });
+            </script>
+        
+        <style>
+            h2 {
+                text-align: center;
+                margin-bottom: 0;
+                font-family: "Helvetica Neue";
+                font-weight: lighter;
+                color: #d2d2d2;
+                /*1acc1a*/
+            }
+        #google-visulization-errors-0 {
+            display: none;
+        }
+        .placeholder {
+            font-family: "Helvetica Neue";
+            font-weight: lighter;
+            color: #d2d2d2;
+            text-align: center;
+        }
+        .header-row {
+            color: #d2d2d2;
+            background-color: black;
+            text-transform: capitalize;
+        }
+        .cell-format {
+            color: #d2d2d2;
+            background-color: black;
+            border: .75px dashed gray;
+        }
+        .bold-green-font {
+            font-weight: bold;
+            color: green;
+        }
+        .right-text {
+            text-align: right;
+        }
+        .header-border {
+            border: 1px dashed gray;
+        }
+        .orchid-background {
+            background-color: orchid;
+        }
+        .black-background {
+            background-color: #000000;
+        }
+        .almost-black-background {
+            background-color: #333333;
+        }
+        </style>
+    </head>
+    
+    <body bgcolor="000000">
+        <div style="height:40px">
+        </div>
+        <div>
+            <h2>Total Minutes by Week</h2>
+            <div class="graphc-div" id="column-chart-div">
+                <div class="placeholder" id="column-chart-placeholder"></div>
+            </div>
+        </div>
+        <div>
+            <h2>Activity Breakdown</h2>
+            <div class="graphc-div" id="pie-chart-div">
+                <div class="placeholder" id="pie-chart-placeholder"></div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h2>Recent Activities</h2>
+                <div class="graphc-div" id="recent-activities-div">
+                    <div class="placeholder" id="recent-activities-placeholder"></div>
+                </div>
+            </div>
+            <h2>Most Popular Activities</h2>
+            <div class="graphc-div" id="table-div">
+                <div class="placeholder" id="popular-activities-placeholder"></div>
+            </div>
+        </div>
+        <div style="height:100px">
+        </div>
+        
+    </body>
+    
 </html>
 
 
 <script type="text/javascript">
+    var chartBackgroundColor = '#000000';
+    var chartFontName = 'Helvetica Neue';
+    var chartLegendTextColor = '#d2d2d2';
+    
+    
+    
+    
+    var app_id = "";
+    var app_token = "";
+    var repo_base = "";
+    
+    var activity_results_arr = [];
+    var week_results_arr = [];
+    var recent_results_arr = [];
+    
+    function makeCharts() {
+        
+        transport = new Thrift.Transport("https://datahub.csail.mit.edu/service/json"),
+        protocol = new Thrift.Protocol(transport),
+        client = new DataHubClient(protocol),
+        con_params = new ConnectionParams({
+                                          'app_id': app_id,
+                                          'app_token': app_token,
+                                          'repo_base': repo_base
+                                          }),
+                                          
+                                          
+                                          con = client.open_connection(con_params);
+                                          makeActivityColumChart(con);
+                                          
+                                          // piechart and activitiesTable depend on the same sql query
+                                          makePieChart(con);
+                                          makeActivitiesTable(con);
+                                          
+                                          makeRecentActivitiesTable(con);
+                                          
+                                          return;
+    }
 
-var app_id = "";
-var app_token = "";
-var repo_base = "";
-
-function makeCharts () {
-    
-    transport = new Thrift.Transport("https://datahub.csail.mit.edu/service/json"),
-    protocol = new Thrift.Protocol(transport),
-    client = new DataHubClient(protocol),
-    con_params = new ConnectionParams({'app_id': app_id, 'app_token': app_token, 'repo_base': repo_base}),
-    
-    
-    con = client.open_connection(con_params),
-    
-    // popular activities
-    activity_res = client.execute_sql(con, 'select activity, sum(duration) from getfit.minutes GROUP BY activity order by sum desc');
-    
+function makeActivityColumChart(con) {
     // minutes by week
-    week_res = client.execute_sql(con, "select week_number, minutes from (SELECT sum(duration) as minutes, TRUNC(DATE_PART('day', '2015-02-02'::timestamp - enddate)/7) as week_number from getfit.minutes group by week_number) as numberedWeeks;");
+    var firstDateStr = '2015-01-11';
+    var weekQuery = "select week, minutes from (SELECT sum(duration) as minutes, TRUNC(DATE_PART('day', enddate - ' " + firstDateStr + "'::timestamp)/7) as week from getfit.minutes group by week) as numberedWeeks;"
+    week_res = client.execute_sql(con, weekQuery);
     
     
-    
-    var activity_results_arr = []
+    week_results_arr = [];
+    week_results_arr.push(week_res.field_names)
+    $.each(week_res.tuples, function(tuple_idx, tuple) {
+           var cell_arr = []
+           $.each(tuple.cells, function(cell_idx, cell) {
+                  var val = parseFloat(cell)
+                  cell_arr.push(isNaN(val) ? cell : val)
+                  });
+           week_results_arr.push(cell_arr)
+           });
+           
+           // fill week_results_arr with blank data, or it will show an error
+           if (week_results_arr.length == 1) {
+               week_results_arr = [
+                                   ["week_number", "minutes"],
+                                   [0, 0]
+                                   ];
+           };
+           
+           // Computations for the column chart
+           var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+           var date = new Date(firstDateStr);
+           
+           for (var i = 1; i < week_results_arr.length; i++) {
+               var month = monthNames[date.getMonth()];
+               var day = date.getDate();
+               
+               var newDateStr = month + " " + day;
+               week_results_arr[i][0] = newDateStr;
+               date.setDate(date.getDate() + 7);
+           };
+           
+           
+           
+           var column_chart = new google.visualization.ColumnChart(document.getElementById('column-chart-div'));
+           var column_count = week_results_arr.length - 1;
+           var column_chart_options = {
+               legend: {
+                   position: 'none'
+               },
+               hAxis: {
+                   title: 'Week',
+                   height: 400,
+                   titleTextStyle: {
+                       fontName: chartFontName,
+                       color: chartLegendTextColor,
+                   },
+                   gridlines: {
+                       count: column_count
+                   },
+                   format: 0,
+                   textStyle: {
+                       color: '#d2d2d2'
+                   },
+                   gridlines: {
+                       count: 0
+                   },
+                   
+               },
+               vAxis: {
+                   gridlines: {
+                       color: chartLegendTextColor,
+                       count: -1,
+                   },
+                   baselineColor: chartLegendTextColor,
+                   title: 'Minutes',
+                   titleTextStyle: {
+                       fontName: chartFontName,
+                       color: chartLegendTextColor,
+                   },
+                   textStyle: {
+                       color: chartLegendTextColor
+                   },
+               },
+               backgroundColor: chartBackgroundColor,
+               fontName: chartFontName,
+               annotations: {
+                   textStyle: {
+                       fontName: chartFontName,
+                       fontSize: 18,
+                       bold: true,
+                       italic: true,
+                       color: chartLegendTextColor, // The color of the text.
+                   }
+               },
+           }
+           
+           
+           // draw the column chart
+           if (week_results_arr.length == 2 && week_results_arr[1][1] == 0) {
+               document.getElementById('column-chart-placeholder').innerHTML = "No minutes logged"
+           } else {
+               week_data = google.visualization.arrayToDataTable(week_results_arr);
+               column_chart.draw(week_data, column_chart_options);
+           }
+           
+           return;
+}
+
+function makePieChart(con) {
+    activity_res = client.execute_sql(con, 'select activity, sum(duration) from getfit.minutes GROUP BY activity order by sum desc');
+    activity_results_arr = [];
     activity_results_arr.push(activity_res.field_names)
     $.each(activity_res.tuples, function(tuple_idx, tuple) {
            var cell_arr = []
@@ -85,51 +257,95 @@ function makeCharts () {
            activity_results_arr.push(cell_arr)
            });
            
+           options = {
+               backgroundColor: chartBackgroundColor,
+               legendTextStyle: {
+                   color: chartLegendTextColor
+               },
+               chart: {
+                   'backgroundColor': chartBackgroundColor
+               },
+               fontName: chartFontName,
+               pieSliceBorderColor: chartBackgroundColor
+           }
            
-           var week_results_arr = []
-           week_results_arr.push(week_res.field_names)
-           $.each(week_res.tuples, function(tuple_idx, tuple) {
-                  var cell_arr = []
-                  $.each(tuple.cells, function(cell_idx, cell) {
-                         var val = parseFloat(cell)
-                         cell_arr.push(isNaN(val) ? cell : val)
-                         });
-                  week_results_arr.push(cell_arr)
+           activity_data = google.visualization.arrayToDataTable(activity_results_arr);
+           if (activity_results_arr.length > 1) {
+               var pie_chart = new google.visualization.PieChart(document.getElementById('pie-chart-div'));
+               pie_chart.draw(activity_data, options);
+           } else {
+               document.getElementById('pie-chart-placeholder').innerHTML = "No activities logged"
+           };
+           
+           
+           return;
+}
+
+function makeActivitiesTable(con) {
+    var table = new google.visualization.Table(document.getElementById('table-div'));
+    
+    var cssClassNames = {
+        'headerRow': 'header-row',
+        'tableRow': 'black-background',
+        'oddTableRow': 'almost-black-background',
+        'hoverTableRow': '',
+        'headerCell': 'header-border',
+        'tableCell': 'cell-format',
+    };
+    var options = {
+        'showRowNumber': false,
+        'allowHtml': true,
+        'cssClassNames': cssClassNames
+    };
+    
+    
+    
+    if (activity_results_arr.length > 1) {
+        table.draw(activity_data, options);
+    } else {
+        document.getElementById('popular-activities-placeholder').innerHTML = "No activities logged"
+    };
+    
+    
+    return;
+}
+
+function makeRecentActivitiesTable(con) {
+    
+    recent_res = client.execute_sql(con, 'select to_char(enddate, \'Mon d\') as date, activity, intensity, duration from getfit.minutes order by enddate desc limit 5;');
+    recent_results_arr = [];
+    recent_results_arr.push(recent_res.field_names);
+    $.each(recent_res.tuples, function(tuple_idx, tuple) {
+           var cell_arr = []
+           $.each(tuple.cells, function(cell_idx, cell) {
+                  var val = parseFloat(cell)
+                  cell_arr.push(isNaN(val) ? cell : val)
                   });
-                  
-                  
-                  // fill week_results_arr with blank data, or it will show an error
-                  if (week_results_arr.length == 1) {
-                      week_results_arr = [["week_number", "minutes"], [0,0]];
-                  };
-                  
-                  
-                  activity_data = google.visualization.arrayToDataTable(activity_results_arr);
-                  week_data = google.visualization.arrayToDataTable(week_results_arr);
-                  
-                  
-                  var column_chart = new google.visualization.ColumnChart(document.getElementById('column-chart-div'));
-                  
-                  var column_chart_options = {
-                      legend: {position: 'none'},
-                      hAxis: {
-                          title: 'Week Number',
-                          gridlines: {count: 10},
-                          format: 0,
-                          
-                      },
-                      vAxis: {
-                          title: 'Minutes'
-                      }
-                  };
-                  
-                  column_chart.draw(week_data, column_chart_options);
-                  
-                  var pie_chart = new google.visualization.PieChart(document.getElementById('pie-chart-div'));
-                  pie_chart.draw(activity_data, {});
-                  
-                  var table = new google.visualization.Table(document.getElementById('table-div'));
-                  table.draw(activity_data);
- 
+           recent_results_arr.push(cell_arr)
+           });
+           
+           var cssClassNames = {
+               'headerRow': 'header-row',
+               'tableRow': 'black-background',
+               'oddTableRow': 'almost-black-background',
+               'hoverTableRow': '',
+               'headerCell': 'header-border',
+               'tableCell': 'cell-format',
+           };
+           var options = {
+               'showRowNumber': false,
+               'allowHtml': true,
+               'cssClassNames': cssClassNames
+           };
+           
+           if (recent_results_arr.length > 1) {
+               recent_activity_data = google.visualization.arrayToDataTable(recent_results_arr);
+               var recentResultsTable = new google.visualization.Table(document.getElementById('recent-activities-div'));
+               recentResultsTable.draw(recent_activity_data, options);
+           } else {
+               document.getElementById('recent-activities-placeholder').innerHTML = "No activities logged"
+           };
+           
+           return;
 }
 </script>
