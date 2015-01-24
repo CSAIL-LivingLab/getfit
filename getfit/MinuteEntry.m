@@ -51,7 +51,7 @@
         return NO;
     }
     
-    if (_duration == 0) {
+    if (_duration == 0 || _duration > 1440) {
         return NO;
     }
 

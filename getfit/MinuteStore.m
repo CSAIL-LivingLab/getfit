@@ -121,8 +121,19 @@
             continue;
         }
         
-        // do a bunch of things to prevent the random
+        // this indicates an invalid entry,
+        // probably from an earlier version of GetFit
+        // it should just be deleted
+        if (me.duration == NSIntegerMax || me.duration == 4459342576 || me.activity == nil) {
+            [[MinuteStore sharedStore] removeMinuteEntry:me];
+            i = i-1;
+            continue;
+        }
         
+        if (me.intensity == nil) {
+            me.intensity = @"medium";
+        }
+ 
         
         
         NSInteger *endTimeInt = (NSInteger)roundf([me.endTime timeIntervalSince1970]);
@@ -154,6 +165,7 @@
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
     datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
     datahubConnection * con_app = [datahub_client open_connection:con_params_app];
+    NSLog(@"%@", statement);
 
     // query
     @try {
@@ -165,7 +177,6 @@
             [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
         }
         
-        NSLog(@"%@", statement);
         [self saveChanges];
         return YES;
     }
