@@ -78,14 +78,17 @@
 }
 
 - (void) removeAllMinuteEntriesIfPostedToDataHubAndGetFit {
-    for (int i = 0; i<[_privateMinutes count]; i++) {
-        MinuteEntry *me = [_privateMinutes objectAtIndex:i];
-        BOOL *removed = [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
-        
-        if (removed) {
-            i = i-1;
-        }
+    
+    NSMutableArray *discardedMinuteEntries = [NSMutableArray array];
+    MinuteEntry *me;
+    
+    for (me in _privateMinutes) {
+        if (me.postedToDataHub && me.postedToGetFit){
+            [discardedMinuteEntries addObject:me];
     }
+        
+    [_privateMinutes removeObjectsInArray:discardedMinuteEntries];
+    
 }
 
 - (BOOL) removeMinuteEntryIfPostedToDataHubAndGetFit:(MinuteEntry *) minuteEntry {

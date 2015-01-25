@@ -131,9 +131,9 @@
     form_ids = [form_ids subarrayWithRange:NSMakeRange(indexInt, [form_ids count]-2)];
     form_build_ids = [form_build_ids subarrayWithRange:NSMakeRange(indexInt, [form_build_ids count]-2)];
     
-//    NSLog(@"%@", form_tokens);
-//    NSLog(@"%@", form_ids);
-//    NSLog(@"%@", form_build_ids);
+    NSLog(@"%@", form_tokens);
+    NSLog(@"%@", form_ids);
+    NSLog(@"%@", form_build_ids);
 
     
     
