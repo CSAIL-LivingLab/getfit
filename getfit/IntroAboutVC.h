@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *donateSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *donateSensorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *noNetworkLabel;
+@property (weak, nonatomic) IBOutlet UILabel *donateLabel;
 
 
 @end

@@ -23,7 +23,7 @@
 @end
 
 @implementation IntroAboutVC
-@synthesize introPageVC, continueButton, donateSwitch, noNetworkLabel, donateSensorLabel;
+@synthesize introPageVC, continueButton, donateSwitch, noNetworkLabel, donateSensorLabel, donateLabel;
 
 
 - (instancetype) initWithParentPageVC: (IntroPageVC *)parentPageVC {
@@ -41,13 +41,15 @@
         donateSwitch.hidden = YES;
         donateSwitch.hidden = YES;
         donateSensorLabel.hidden = YES;
+        donateLabel.hidden = YES;
+       
         
         UIColor *disabledBlue = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:0.2];
         [continueButton setTintColor:disabledBlue];
         [continueButton removeTarget:self action:@selector(tapToContinue:) forControlEvents:UIControlEventTouchUpInside];
 
         
-        noNetworkLabel.text = @"Getfit cannot set up without a connection to the internet.\nPlease try again later.";
+        noNetworkLabel.text = @"Getfit cannot set up without a connection to the internet. Please try again later.";
         noNetworkLabel.hidden = NO;
         
 
@@ -55,6 +57,7 @@
         donateSwitch.hidden = !YES;
         donateSwitch.hidden = !YES;
         donateSensorLabel.hidden = !YES;
+        donateLabel.hidden = !YES;
         
         UIColor *enabledBlue = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
         [continueButton setTintColor:enabledBlue];
@@ -63,6 +66,10 @@
         
         noNetworkLabel.hidden = !NO;
     }
+    
+    
+    NSString *donateLabelText = @"Donating sensor data requires your phone location.\nYour data is anonomous and it belongs to you. You can stop collection or delete your data at any time.";
+    [donateLabel setText:donateLabelText];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,6 +93,12 @@
 //    NSString *password = @"lizlees";
 //    NSString *email = @"gerjiowf@iow.riw";
     
+    // set resumeSensorDate to the present. Background sensing is now turned on.
+    if (donateSwitch.on) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:[NSDate date] forKey:@"resumeSensorDate"];
+        [defaults synchronize];
+    }
     
     @try {
         NSNumber * newDataHubAcct = [dhCreation createDataHubUserFromEmail:email andUsername:username andPassword:password];
