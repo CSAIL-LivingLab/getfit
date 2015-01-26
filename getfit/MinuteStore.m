@@ -286,7 +286,7 @@
         NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
   
         // format the post body
-        NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, activity, intensity, endDate, duration];
+        NSString *post = [NSString stringWithFormat:@"&form_token=%@&form_build_id=%@&form_id=%@&activity=%@&intensity=%@&date=%@&duration=%@", form_token, form_build_id, form_id, activity, [intensity lowercaseString], endDate, duration];
         post = [post stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
