@@ -109,7 +109,7 @@
     me2.postedToDataHub = NO;
     me2.postedToDataHub = NO;
     
-    MinuteEntry *me3 = [ms createMinuteEntryWithActivity:@"ptdh3" intensity:@"medium" duration:15 andEndTime:[NSDate date]];
+    MinuteEntry *me3 = [ms createMinuteEntryWithActivity:@"ptdh3" intensity:@"medium" duration:15 andEndTime:[NSDate dateWithTimeIntervalSinceNow:-86400.0]];
     me3.postedToDataHub = YES;
     me3.postedToDataHub = NO;
     
@@ -136,7 +136,7 @@
     me1.postedToDataHub = YES;
     me1.postedToGetFit = YES;
     
-    MinuteEntry *me2 = [ms createMinuteEntryWithActivity:@"ptdh2" intensity:@"medium" duration:10 andEndTime:[NSDate date]];
+    MinuteEntry *me2 = [ms createMinuteEntryWithActivity:@"ptdh2" intensity:@"medium" duration:10 andEndTime:NSDate dateWithTimeIntervalSinceNow:-86400.0]];
     me2.postedToDataHub = NO;
     me2.postedToDataHub = NO;
     
