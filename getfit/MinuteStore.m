@@ -85,10 +85,9 @@
     for (me in _privateMinutes) {
         if (me.postedToDataHub && me.postedToGetFit){
             [discardedMinuteEntries addObject:me];
+        }
     }
-        
     [_privateMinutes removeObjectsInArray:discardedMinuteEntries];
-    
 }
 
 - (BOOL) removeMinuteEntryIfPostedToDataHubAndGetFit:(MinuteEntry *) minuteEntry {

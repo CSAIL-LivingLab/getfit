@@ -96,12 +96,20 @@
     myWebView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, screenRect.size.width ,screenRect.size.height)];
     myWebView.delegate = self;
     
-    // If the certs are good, go to GetFit. Otherwise, assume that the user will need to log in.
+    // If the certs are good, go to GetFit. Otherwise, clear the user's cookies and
+    // prompt them to log in.
     NSURL *nsurl;
     MinuteStore *ms = [MinuteStore sharedStore];
     if ([ms checkForValidCookies]) {
         nsurl = [NSURL URLWithString: @"https://getfit-d7-dev.mit.edu/dashboard"];
     } else {
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
+        NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        for (NSHTTPCookie *cookie in [storage cookies]) {
+            [storage deleteCookie:cookie];
+        }
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         nsurl=[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/Shibboleth.sso/Login?target=https%3A%2F%2Fgetfit-d7-dev.mit.edu%2F%3Fq%3Dshib_login%2Ffront-page"];
     }
     
