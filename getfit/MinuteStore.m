@@ -107,9 +107,7 @@
 }
 
 - (void) removeAllMinutes {
-    for (MinuteEntry *me in _privateMinutes) {
-        [self removeMinuteEntry:me];
-    }
+    [_privateMinutes removeAllObjects];
 }
 
 # pragma mark - posting

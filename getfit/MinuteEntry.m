@@ -58,6 +58,10 @@
     return YES;
 }
 
+- (void) setIntensity:(NSString *)intensity {
+    _intensity = [intensity lowercaseString];
+}
+
 
 # pragma mark - NSUserDefaults encoding decoding
 

@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FA5-0T-jBJ">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FA5-0T-jBJ">
                     <rect key="frame" x="251" y="247" width="99" height="30"/>
                     <state key="normal" title="PushOAuthVC">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -24,7 +24,7 @@
                         <action selector="pushOAuthVC:" destination="-1" eventType="touchUpInside" id="U3O-GH-zdL"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pkc-SW-Ox0">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pkc-SW-Ox0">
                     <rect key="frame" x="197" y="209" width="207" height="30"/>
                     <state key="normal" title="Test [minuteStore saveMinute]">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -44,20 +44,43 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNv-XT-SQz">
-                    <rect key="frame" x="203" y="323" width="195" height="30"/>
-                    <state key="normal" title="minuteStore postToDataHub">
+                    <rect key="frame" x="247" y="323" width="107" height="30"/>
+                    <state key="normal" title="postToDataHub">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="postToDataHub:" destination="-1" eventType="touchUpInside" id="1TW-lR-v83"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Do-CL-LVt">
+                    <rect key="frame" x="233" y="361" width="133" height="30"/>
+                    <state key="normal" title="postToGetFit oAuth">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="postToGetFitoAuth:" destination="-1" eventType="touchUpInside" id="a2s-qB-St6"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mIc-WX-xUP">
+                    <rect key="frame" x="228" y="399" width="144" height="30"/>
+                    <state key="normal" title="postToGetFit NoAuth">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="postToGetFitNoAuth:" destination="-1" eventType="touchUpInside" id="3sR-QO-2nE"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="hQm-IH-7fT" firstAttribute="top" secondItem="FA5-0T-jBJ" secondAttribute="bottom" constant="8" symbolic="YES" id="0eE-Zc-Rj8"/>
                 <constraint firstAttribute="centerY" secondItem="hQm-IH-7fT" secondAttribute="centerY" id="8yo-Ut-fxR"/>
                 <constraint firstAttribute="centerX" secondItem="hQm-IH-7fT" secondAttribute="centerX" id="VHP-In-4U5"/>
+                <constraint firstAttribute="centerX" secondItem="mIc-WX-xUP" secondAttribute="centerX" id="Y94-PH-lLh"/>
+                <constraint firstItem="0Do-CL-LVt" firstAttribute="top" secondItem="WNv-XT-SQz" secondAttribute="bottom" constant="8" id="dFi-D4-F0r"/>
+                <constraint firstAttribute="centerX" secondItem="0Do-CL-LVt" secondAttribute="centerX" constant="0.5" id="feH-GS-sVQ"/>
                 <constraint firstItem="WNv-XT-SQz" firstAttribute="top" secondItem="hQm-IH-7fT" secondAttribute="bottom" constant="8" id="giP-py-dZe"/>
+                <constraint firstItem="mIc-WX-xUP" firstAttribute="top" secondItem="0Do-CL-LVt" secondAttribute="bottom" constant="8" id="jky-zc-K6c"/>
                 <constraint firstItem="FA5-0T-jBJ" firstAttribute="top" secondItem="Pkc-SW-Ox0" secondAttribute="bottom" constant="8" id="tep-7V-HJK"/>
                 <constraint firstAttribute="centerX" secondItem="Pkc-SW-Ox0" secondAttribute="centerX" constant="-0.5" id="uEQ-hU-chx"/>
                 <constraint firstAttribute="centerX" secondItem="WNv-XT-SQz" secondAttribute="centerX" constant="-0.5" id="xLo-Ob-VuR"/>
