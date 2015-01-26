@@ -78,14 +78,16 @@
 }
 
 - (void) removeAllMinuteEntriesIfPostedToDataHubAndGetFit {
-    for (int i = 0; i<[_privateMinutes count]; i++) {
-        MinuteEntry *me = [_privateMinutes objectAtIndex:i];
-        BOOL *removed = [self removeMinuteEntryIfPostedToDataHubAndGetFit:me];
-        
-        if (removed) {
-            i = i-1;
+    
+    NSMutableArray *discardedMinuteEntries = [NSMutableArray array];
+    MinuteEntry *me;
+    
+    for (me in _privateMinutes) {
+        if (me.postedToDataHub && me.postedToGetFit){
+            [discardedMinuteEntries addObject:me];
         }
     }
+    [_privateMinutes removeObjectsInArray:discardedMinuteEntries];
 }
 
 - (BOOL) removeMinuteEntryIfPostedToDataHubAndGetFit:(MinuteEntry *) minuteEntry {
@@ -105,9 +107,7 @@
 }
 
 - (void) removeAllMinutes {
-    for (MinuteEntry *me in _privateMinutes) {
-        [self removeMinuteEntry:me];
-    }
+    [_privateMinutes removeAllObjects];
 }
 
 # pragma mark - posting
@@ -165,18 +165,19 @@
         
         
         [statement appendString:insertStmt];
-        
-        if (i == [_privateMinutes count] -1) {
-            numberOfMinutesToPost++;
-            [statement deleteCharactersInRange:NSMakeRange([statement length]-1, 1)];
-            [statement appendString:@";"];
-        }
+        numberOfMinutesToPost ++;
+
     }
     
     // make sure that we're actually posting _something_ to datahub
     if (numberOfMinutesToPost < 1) {
         return NO;
     }
+    
+    // edit the statement to remove the last comma and add a semicolon
+    [statement deleteCharactersInRange:NSMakeRange([statement length]-1, 1)];
+    [statement appendString:@";"];
+
     
     // connect to server
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];

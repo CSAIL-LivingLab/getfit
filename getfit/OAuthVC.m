@@ -96,12 +96,20 @@
     myWebView=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, screenRect.size.width ,screenRect.size.height)];
     myWebView.delegate = self;
     
-    // If the certs are good, go to GetFit. Otherwise, assume that the user will need to log in.
+    // If the certs are good, go to GetFit. Otherwise, clear the user's cookies and
+    // prompt them to log in.
     NSURL *nsurl;
     MinuteStore *ms = [MinuteStore sharedStore];
     if ([ms checkForValidCookies]) {
         nsurl = [NSURL URLWithString: @"https://getfit-d7-dev.mit.edu/dashboard"];
     } else {
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
+        NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        for (NSHTTPCookie *cookie in [storage cookies]) {
+            [storage deleteCookie:cookie];
+        }
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         nsurl=[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/Shibboleth.sso/Login?target=https%3A%2F%2Fgetfit-d7-dev.mit.edu%2F%3Fq%3Dshib_login%2Ffront-page"];
     }
     
@@ -114,7 +122,11 @@
 # pragma mark - helper methods
 
 - (void) extractTokensAndSave {
-    [myWebView stringByEvaluatingJavaScriptFromString:@"function getTokens () {    var form_token_objects = document.getElementsByName('form_token');    var form_tokens = [];        for (var i =  0; i < form_token_objects.length; i++) {        var value = form_token_objects[i].value;        form_tokens.push(value);    };    return form_tokens;}function getBuildIds() {    var form_build_id_objects = document.getElementsByName('form_build_id');    var form_build_ids = [];    for (var i =  0; i < form_build_id_objects.length; i++) {        var value = form_build_id_objects[i].value;        form_build_ids.push(value);    };    return form_build_ids;}    function getFormIds() {    var form_id_objects = document.getElementsByName('form_id');    var form_ids = [];        for (var i =  0; i < form_id_objects.length; i++) {    var value = form_id_objects[i].value;    form_ids.push(value);    };    return form_ids;}function getStartIndex() {    var ids = getFormIds();    for (var i = 0; i < ids.length; i++) {        var id = ids[i];        if (id == 'getfit_minutes_single_form_1') {            return i;        };    };}"];
+    
+    NSURL *jsUrl = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/tokenExtraction.js"];
+    NSString *javascriptToRun = [NSString stringWithContentsOfURL:jsUrl encoding:NSUTF8StringEncoding error:nil];
+    
+    [myWebView stringByEvaluatingJavaScriptFromString:javascriptToRun];
     
     // parse tokens
     NSArray *form_tokens = [[myWebView stringByEvaluatingJavaScriptFromString:@"getTokens().toString();"] componentsSeparatedByString:@","];
@@ -134,8 +146,6 @@
 //    NSLog(@"%@", form_tokens);
 //    NSLog(@"%@", form_ids);
 //    NSLog(@"%@", form_build_ids);
-
-    
     
     // set save as defaults.
     [defaults setObject:form_tokens forKey:@"form_tokens"];

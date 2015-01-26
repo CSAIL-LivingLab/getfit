@@ -105,8 +105,6 @@
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker:)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
-    
-    NSLog(@"My view's frame is: %@", NSStringFromCGRect(self.view.frame));
 }
 
 #pragma mark - Picker

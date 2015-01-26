@@ -13,6 +13,8 @@
 - (IBAction)testSave:(id)sender;
 - (IBAction)regexExtractionTest:(id)sender;
 - (IBAction)postToDataHub:(id)sender;
+- (IBAction)postToGetFitoAuth:(id)sender;
+- (IBAction)postToGetFitNoAuth:(id)sender;
 
 
 @end

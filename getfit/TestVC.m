@@ -70,7 +70,90 @@
 
 - (IBAction)postToDataHub:(id)sender {
     MinuteStore *ms = [MinuteStore sharedStore];
+    [ms removeAllMinutes];
+    
+    MinuteEntry *me1 = [ms createMinuteEntryWithActivity:@"ptdh1" intensity:@"medium" duration:5 andEndTime:[NSDate date]];
+    me1.postedToDataHub = YES;
+    me1.postedToGetFit = YES;
+    
+    MinuteEntry *me2 = [ms createMinuteEntryWithActivity:@"ptdh2" intensity:@"medium" duration:10 andEndTime:[NSDate date]];
+    me2.postedToDataHub = NO;
+    me2.postedToDataHub = NO;
+    
+    MinuteEntry *me3 = [ms createMinuteEntryWithActivity:@"ptdh3" intensity:@"medium" duration:15 andEndTime:[NSDate date]];
+    me3.postedToDataHub = YES;
+    me3.postedToDataHub = NO;
+    
+    MinuteEntry *me4 = [ms createMinuteEntryWithActivity:@"ptdh4" intensity:@"medium" duration:20 andEndTime:[NSDate date]];
+    me4.postedToDataHub = NO;
+    me4.postedToGetFit = YES;
+    
+    MinuteEntry *me5 = [ms createMinuteEntryWithActivity:@"ptdh5" intensity:@"medium" duration:25 andEndTime:[NSDate date]];
+    me5.postedToDataHub = YES;
+    me5.postedToGetFit = YES;
+    
     BOOL *didPost = [ms postToDataHub];
+    NSLog(@"\n\nPosted To DataHub: ");
+    NSLog(didPost ? @"YES" : @"NO");
+}
+
+- (IBAction)postToGetFitoAuth:(id)sender {
+    MinuteStore *ms = [MinuteStore sharedStore];
+    [ms removeAllMinutes];
+    
+    MinuteEntry *me1 = [ms createMinuteEntryWithActivity:@"ptdh1" intensity:@"medium" duration:5 andEndTime:[NSDate date]];
+    me1.postedToDataHub = YES;
+    me1.postedToGetFit = YES;
+    
+    MinuteEntry *me2 = [ms createMinuteEntryWithActivity:@"ptdh2" intensity:@"medium" duration:10 andEndTime:[NSDate date]];
+    me2.postedToDataHub = NO;
+    me2.postedToDataHub = NO;
+    
+    MinuteEntry *me3 = [ms createMinuteEntryWithActivity:@"ptdh3" intensity:@"medium" duration:15 andEndTime:[NSDate dateWithTimeIntervalSinceNow:-86400.0]];
+    me3.postedToDataHub = YES;
+    me3.postedToDataHub = NO;
+    
+    MinuteEntry *me4 = [ms createMinuteEntryWithActivity:@"ptdh4" intensity:@"medium" duration:20 andEndTime:[NSDate date]];
+    me4.postedToDataHub = NO;
+    me4.postedToGetFit = YES;
+    
+    MinuteEntry *me5 = [ms createMinuteEntryWithActivity:@"ptdh5" intensity:@"medium" duration:25 andEndTime:[NSDate date]];
+    me5.postedToDataHub = YES;
+    me5.postedToGetFit = YES;
+    
+    OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:navController animated:YES completion:nil];
+    
+}
+
+- (IBAction)postToGetFitNoAuth:(id)sender {
+    MinuteStore *ms = [MinuteStore sharedStore];
+    [ms removeAllMinutes];
+    
+    MinuteEntry *me1 = [ms createMinuteEntryWithActivity:@"ptdh1" intensity:@"medium" duration:5 andEndTime:[NSDate date]];
+    me1.postedToDataHub = YES;
+    me1.postedToGetFit = YES;
+    
+    MinuteEntry *me2 = [ms createMinuteEntryWithActivity:@"ptdh2" intensity:@"medium" duration:10 andEndTime:[NSDate dateWithTimeIntervalSinceNow:-86400.0]];
+    me2.postedToDataHub = NO;
+    me2.postedToDataHub = NO;
+    
+    MinuteEntry *me3 = [ms createMinuteEntryWithActivity:@"ptdh3" intensity:@"medium" duration:15 andEndTime:[NSDate date]];
+    me3.postedToDataHub = YES;
+    me3.postedToDataHub = NO;
+    
+    MinuteEntry *me4 = [ms createMinuteEntryWithActivity:@"ptdh4" intensity:@"medium" duration:20 andEndTime:[NSDate date]];
+    me4.postedToDataHub = NO;
+    me4.postedToGetFit = YES;
+    
+    MinuteEntry *me5 = [ms createMinuteEntryWithActivity:@"ptdh5" intensity:@"medium" duration:25 andEndTime:[NSDate date]];
+    me5.postedToDataHub = YES;
+    me5.postedToGetFit = YES;
+    
+    BOOL *didPost = [ms postToGetFit];
+    NSLog(@"\n\nPosted To GetFit No Auth: ");
     NSLog(didPost ? @"YES" : @"NO");
 }
 
