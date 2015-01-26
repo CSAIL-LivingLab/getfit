@@ -165,18 +165,19 @@
         
         
         [statement appendString:insertStmt];
-        
-        if (i == [_privateMinutes count] -1) {
-            numberOfMinutesToPost++;
-            [statement deleteCharactersInRange:NSMakeRange([statement length]-1, 1)];
-            [statement appendString:@";"];
-        }
+        numberOfMinutesToPost ++;
+
     }
     
     // make sure that we're actually posting _something_ to datahub
     if (numberOfMinutesToPost < 1) {
         return NO;
     }
+    
+    // edit the statement to remove the last comma and add a semicolon
+    [statement deleteCharactersInRange:NSMakeRange([statement length]-1, 1)];
+    [statement appendString:@";"];
+
     
     // connect to server
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];

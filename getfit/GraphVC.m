@@ -7,6 +7,10 @@
 //
 
 #import "GraphVC.h"
+
+#include<unistd.h>
+#include<netdb.h>
+
 #import "Resources.h"
 #import "Secret.h"
 
@@ -47,10 +51,33 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
+    if ([self isNetworkAvailable:@"mit.edu"]) {
+        [self loadWebView];
+    } else {
+        [self loadBlackView];
+    }
     // lhas to happen here, because the web view needs to be resized
     // If the user *just* created their datahub account, the webView script needs to be regenerated
     // because it will initially be null
-    [self loadWebView];
+    
+}
+
+- (void) loadBlackView {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGRect frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height);
+
+    UIView *blackView = [[UIView alloc] initWithFrame:frame];
+    [blackView setBackgroundColor:[UIColor blackColor]];
+    
+    UILabel *noInternetLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, screenRect.size.width-40, 100)];
+    [noInternetLabel setText:@"Graphs will load when an internet connection becomes available."];
+    [noInternetLabel setNumberOfLines:0];
+    [noInternetLabel setTextAlignment:NSTextAlignmentCenter];
+    [noInternetLabel setTextColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0]];
+    
+    
+    [blackView addSubview:noInternetLabel];
+    [self.view addSubview:blackView];
 }
 
 - (void) loadWebView {
@@ -89,6 +116,23 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.webView stringByEvaluatingJavaScriptFromString:self.script];
 }
+
+-(BOOL)isNetworkAvailable:(NSString *)hostname
+{
+    const char *cHostname = [hostname UTF8String];
+    struct hostent *hostinfo;
+    hostinfo = gethostbyname (cHostname);
+    if (hostinfo == NULL){
+        NSLog(@"-> no connection!\n");
+        return NO;
+    }
+    else{
+        NSLog(@"-> connection established!\n");
+        return YES;
+    }
+}
+
+
 
 /*
 #pragma mark - Navigation

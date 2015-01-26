@@ -156,11 +156,9 @@
     struct hostent *hostinfo;
     hostinfo = gethostbyname (cHostname);
     if (hostinfo == NULL){
-        NSLog(@"-> no connection!\n");
         return NO;
     }
     else{
-        NSLog(@"-> connection established!\n");
         return YES;
     }
 }
