@@ -122,7 +122,11 @@
 # pragma mark - helper methods
 
 - (void) extractTokensAndSave {
-    [myWebView stringByEvaluatingJavaScriptFromString:@"function getTokens () {    var form_token_objects = document.getElementsByName('form_token');    var form_tokens = [];        for (var i =  0; i < form_token_objects.length; i++) {        var value = form_token_objects[i].value;        form_tokens.push(value);    };    return form_tokens;}function getBuildIds() {    var form_build_id_objects = document.getElementsByName('form_build_id');    var form_build_ids = [];    for (var i =  0; i < form_build_id_objects.length; i++) {        var value = form_build_id_objects[i].value;        form_build_ids.push(value);    };    return form_build_ids;}    function getFormIds() {    var form_id_objects = document.getElementsByName('form_id');    var form_ids = [];        for (var i =  0; i < form_id_objects.length; i++) {    var value = form_id_objects[i].value;    form_ids.push(value);    };    return form_ids;}function getStartIndex() {    var ids = getFormIds();    for (var i = 0; i < ids.length; i++) {        var id = ids[i];        if (id == 'getfit_minutes_single_form_1') {            return i;        };    };}"];
+    
+    NSURL *jsUrl = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/tokenExtraction.js"];
+    NSString *javascriptToRun = [NSString stringWithContentsOfURL:jsUrl encoding:NSUTF8StringEncoding error:nil];
+    
+    [myWebView stringByEvaluatingJavaScriptFromString:javascriptToRun];
     
     // parse tokens
     NSArray *form_tokens = [[myWebView stringByEvaluatingJavaScriptFromString:@"getTokens().toString();"] componentsSeparatedByString:@","];
@@ -139,11 +143,9 @@
     form_ids = [form_ids subarrayWithRange:NSMakeRange(indexInt, [form_ids count]-2)];
     form_build_ids = [form_build_ids subarrayWithRange:NSMakeRange(indexInt, [form_build_ids count]-2)];
     
-    NSLog(@"%@", form_tokens);
-    NSLog(@"%@", form_ids);
-    NSLog(@"%@", form_build_ids);
-
-    
+//    NSLog(@"%@", form_tokens);
+//    NSLog(@"%@", form_ids);
+//    NSLog(@"%@", form_build_ids);
     
     // set save as defaults.
     [defaults setObject:form_tokens forKey:@"form_tokens"];
