@@ -136,7 +136,7 @@
     me1.postedToDataHub = YES;
     me1.postedToGetFit = YES;
     
-    MinuteEntry *me2 = [ms createMinuteEntryWithActivity:@"ptdh2" intensity:@"medium" duration:10 andEndTime:NSDate dateWithTimeIntervalSinceNow:-86400.0]];
+    MinuteEntry *me2 = [ms createMinuteEntryWithActivity:@"ptdh2" intensity:@"medium" duration:10 andEndTime:[NSDate dateWithTimeIntervalSinceNow:-86400.0]];
     me2.postedToDataHub = NO;
     me2.postedToDataHub = NO;
     
