@@ -151,9 +151,8 @@
 
 #pragma mark - Picker view DataSource/Delegate Methods
 
+// what what each item in the pickerView will be. i.e. Aerobics, American Football...
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    
-    
     if (pickerView == activityPicker) {
         return [activities objectAtIndex:row];
     } else if (pickerView == intensityPicker) {
@@ -164,8 +163,8 @@
     return nil;
 }
 
+// count of the number of items that will be in a row
 - (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component {
-    
     if (thePickerView == activityPicker) {
         return [activities count];
     } else if (thePickerView == intensityPicker) {
@@ -176,11 +175,12 @@
     return 4;
 }
 
+// the user selected an item in teh picker
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
     NSIndexPath *cellPath;
     NSString *selection = [NSString alloc];
     
+    // find the cell above the picker, and the selection
     if (thePickerView == activityPicker) {
         cellPath = [NSIndexPath indexPathForRow:0 inSection:0];
         selection = [activities objectAtIndex:row];
@@ -218,9 +218,6 @@
     me.endTime = endTimePicker.date;
 }
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {
-    return 1;
-}
 
 #pragma mark - helper methods
 - (void) setPickerValueToInitial:(NSIndexPath *) indexPath {
