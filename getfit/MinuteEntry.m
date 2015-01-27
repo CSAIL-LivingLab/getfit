@@ -47,7 +47,11 @@
 
 
 - (BOOL) verifyEntry {
-    if ([_activity length] + [_intensity length] < 2) {
+    if (_activity == nil || [_activity isEqualToString:@""]) {
+        return NO;
+    }
+    
+    if (_intensity == nil || [_intensity isEqualToString:@""]) {
         return NO;
     }
     
