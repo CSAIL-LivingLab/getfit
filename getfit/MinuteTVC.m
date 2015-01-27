@@ -16,7 +16,7 @@
 #import "Resources.h"
 
 @interface MinuteTVC () {
-    NSMutableArray *minuteArr;
+    MinuteEntry *me;
     
     NSIndexPath *pickerPath;
     
@@ -73,9 +73,6 @@
     [intensityPicker setDelegate:self];
     [durationPicker setDelegate:self];
     
-    // create the minute Array
-    minuteArr = [[NSMutableArray alloc] init];
-
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -87,11 +84,9 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    
-    // add a single entry to the tempMinuteArr
+    // setup the load date, and add the minute entry
     dateAtLoad = [NSDate date];
-    MinuteEntry *minuteEntry = [[MinuteEntry alloc] initEntryWithActivity:@"" intensity:@"" duration:0 andEndTime:dateAtLoad];
-    [minuteArr addObject:minuteEntry];
+    me = [[MinuteEntry alloc] initEntryWithActivity:@"" intensity:@"" duration:0 andEndTime:dateAtLoad];
     
     // resetup the dateTimePicker, so it uses the most current date
     NSDate *previousSunday = [[Resources sharedResources] previousSundayForDate:[NSDate date]];
@@ -111,31 +106,26 @@
 - (void) save {
     MinuteStore *ms = [MinuteStore sharedStore];
     
-    // first, check to make sure everything is good
-    for (MinuteEntry *me in minuteArr) {
-        if (![me verifyEntry]) {
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:@"Check your minutes"
-                                        message:@"Please make sure that you have made all selections"
-                                        delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
-            [alert show];
-            return;
-        }
+    // If the minute entry isn't good, tell the user to fix it
+    if (![me verifyEntry]) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Check your minutes"
+                                    message:@"Please make sure that you have made all selections"
+                                    delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        return;
     }
-    
-    
-    for (MinuteEntry *me in minuteArr) {
-        [ms addMinuteEntry:me];
-    }
-    
+
+
+
+    // add to the minuteStore, and post things
+    [ms addMinuteEntry:me];
     [ms postToDataHub];
     [[Resources sharedResources] uploadOpenSenseData];
 
     
-    MinuteEntry *me = [minuteArr objectAtIndex:0];
-    
+    // decide whether to push the oAuthVC or just post directly
     if ([ms checkForValidCookies] && [ms checkForValidTokens:me.endTime]) {
-
         BOOL * success = [ms postToGetFit];
         if (success) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
@@ -189,21 +179,20 @@
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
     NSIndexPath *cellPath;
-    MinuteEntry * minuteEntry = [minuteArr objectAtIndex:pickerPath.section];
     NSString *selection = [NSString alloc];
     
     if (thePickerView == activityPicker) {
         cellPath = [NSIndexPath indexPathForRow:0 inSection:0];
         selection = [activities objectAtIndex:row];
-        minuteEntry.activity = selection;
+        me.activity = selection;
     } else if (thePickerView == intensityPicker) {
         cellPath = [NSIndexPath indexPathForRow:1 inSection:0];
         selection = [intensities objectAtIndex:row];
-        minuteEntry.intensity = selection;
+        me.intensity = selection;
     } else if (thePickerView == durationPicker) {
         cellPath = [NSIndexPath indexPathForRow:2 inSection:0];
         selection = [durations objectAtIndex:row];
-        minuteEntry.duration = [self minutesFromString:selection];
+        me.duration = [self minutesFromString:selection];
     } else {
         return;
     }
@@ -223,11 +212,10 @@
     // get the relevant cell and minuteEntry
     NSIndexPath *cellPath = [NSIndexPath indexPathForRow:pickerPath.row-1 inSection:pickerPath.section];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:cellPath];
-    MinuteEntry * minuteEntry = [minuteArr objectAtIndex:pickerPath.section];
     
     // update the cell and the relevant minuteEntry
     cell.detailTextLabel.text = dateStr;
-    minuteEntry.endTime = endTimePicker.date;
+    me.endTime = endTimePicker.date;
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {
@@ -238,7 +226,6 @@
 - (void) setPickerValueToInitial:(NSIndexPath *) indexPath {
     
     // check to see if the minuteEntry is empty, and update the cell if necessary
-    MinuteEntry *me = [minuteArr objectAtIndex:0];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     NSLog(@"-----");
@@ -404,7 +391,6 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.timeStyle = NSDateFormatterShortStyle;
         dateFormatter.dateStyle = NSDateFormatterShortStyle;
-        MinuteEntry *me = [minuteArr objectAtIndex:0];
         
         
         switch (indexPath.row) {
