@@ -172,7 +172,8 @@
     } else if (thePickerView == durationPicker) {
         return [durations count];
     }
-    return 4;
+    // this is just because _something_ has to be returned. If you see a picker with 0 rows, there's an error.
+    return 0;
 }
 
 // the user selected an item in teh picker
@@ -269,6 +270,9 @@
     }
 }
 
+// this should probably be factored out, and the
+// Resources.durations should be be a 2d array
+// [writtenDuration, minutes]
 - (NSInteger) minutesFromString:(NSString*)str {
     // method to computer the number of minutes from duration picker
     
@@ -278,7 +282,6 @@
     NSError *error = NULL;
     
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
-    
     NSArray *matches = [regex matchesInString:str
                                       options:0
                                         range:NSMakeRange(0, [str length])];
@@ -299,9 +302,6 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // activity, intensity, duration, end time
