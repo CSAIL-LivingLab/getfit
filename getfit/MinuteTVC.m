@@ -159,33 +159,6 @@
 
 
 
-- (void) newMinuteEntryForTable {
-    // create a new minuteEntry
-    MinuteEntry *minuteEntry = [[MinuteEntry alloc] init];
-    [minuteArr addObject:minuteEntry];
-    
-    // hide the picker and delete the related cell because having it open creates an infinite loop somewhere in the tableviewDelegate code
-    NSIndexPath * tempPickerPath = [NSIndexPath indexPathForRow:pickerPath.row inSection:pickerPath.section];
-    pickerPath = nil;
-    [self.tableView deleteRowsAtIndexPaths:@[tempPickerPath] withRowAnimation:UITableViewRowAnimationMiddle];
-    
-    // add the new section
-    NSUInteger numberOfSections = [minuteArr count] -1; //computing this within indexSetWithIndex crashes
-    [self.tableView insertSections:[NSIndexSet indexSetWithIndex:numberOfSections] withRowAnimation:UITableViewRowAnimationBottom];
-
-    // reload the previous section, which will delete its footer
-    NSUInteger oneLessThanNumberOfSections = numberOfSections - 1;
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:oneLessThanNumberOfSections] withRowAnimation:UITableViewRowAnimationNone];
-}
-
-- (void) removeMinuteEntryFromTable {
-    if ([minuteArr count] > 1) {
-        [minuteArr removeLastObject];
-    }
-    [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:[minuteArr count]-1] withRowAnimation:UITableViewRowAnimationFade];
-}
-
-
 #pragma mark - Picker view DataSource/Delegate Methods
 
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
@@ -343,8 +316,6 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // create a section for each entry
-//    return [minuteArr count];
     return 1;
 }
 
@@ -519,122 +490,5 @@
     }
 }
 
-# pragma mark - table sections and buttons
-
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    return 0;
-    
-        if (section == 0) {
-            return 0;
-        }
-    
-    return subHeaderHeight;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    // for the first section alone, this isn't necessary
-    if (section == 0) {
-        return nil;
-    }
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, subHeaderHeight)];
-    [view setBackgroundColor:[UIColor lightGrayColor]];
-    
-    UILabel *headerLabel = [[UILabel alloc] init];
-    headerLabel.frame = CGRectMake(15, 15, tableView.frame.size.width, subHeaderHeight/2);
-    headerLabel.text = @"Please add your minutes below:";
-    
-    [view addSubview:headerLabel];
-    
-    return view;
-    
-}
-
-# pragma mark
-/*
-- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
-    if (section == [minuteArr count]-1) {
-        return bottomFooterHeight;
-    }
-    return dividerFooterHeight;
-}
-
-- (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    
-    if (section == [minuteArr count]-1) {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, bottomFooterHeight)];
-        [view setBackgroundColor:[UIColor orangeColor]];
-        
-        // add section button
-        UIButton *additionalButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        additionalButton.frame = CGRectMake(tableView.frame.size.width/2+20, 0, 150, bottomFooterHeight);
-        [additionalButton setTitle:@"add more entries" forState:UIControlStateNormal];
-        [additionalButton setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-        [additionalButton addTarget:self action:@selector(newMinuteEntryForTable) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:additionalButton];
-        
-        // remove section
-        UIButton *fewerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        fewerButton.frame = CGRectMake(tableView.frame.size.width/2-120, 0, 120, bottomFooterHeight);
-        [fewerButton setTitle:@"remove entries" forState:UIControlStateNormal];
-        [fewerButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [fewerButton addTarget:self action:@selector(removeMinuteEntryFromTable) forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:fewerButton];
-    
-        return view;
-    }
-    return nil;
-
-}
-
-*/
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
