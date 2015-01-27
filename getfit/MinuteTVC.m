@@ -221,19 +221,25 @@
 
 
 #pragma mark - helper methods
-- (void) setPickerValueToInitial:(NSIndexPath *) indexPath {
+- (void) setPickerValueToInitial{
+    // this method assumes that the cell whose detailTextLabel is being set is
+    // one cell above the pickerPath.
+
+    if (pickerPath == nil) {
+        return;
+    }
     
-    // check to see if the minuteEntry is empty, and update the cell if necessary
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NSIndexPath *topCellIndexPath = [NSIndexPath indexPathForRow:pickerPath.row-1 inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:topCellIndexPath];
     
-    NSLog(@"-----");
-    NSLog(@"indexPath.row: %ld", (long)indexPath.row);
-    NSLog(@"pickerPath.row: %ld", (long)pickerPath.row);
-    NSLog(me.duration == 0 ? @"me.duration == 0" : @"me.duration != 0" );
-    NSLog(@"me.intensity: %@", me.intensity);
-    NSLog(@"me.activity: %@", me.activity);
-    NSLog(pickerPath.row == 2 && [me.intensity isEqualToString:@""] ? @"true" : @"false");
-    NSLog(@"-----");
+    
+//    NSLog(@"-----");
+//    NSLog(@"pickerPath.row: %ld", (long)pickerPath.row);
+//    NSLog(me.duration == 0 ? @"me.duration == 0" : @"me.duration != 0" );
+//    NSLog(@"me.intensity: %@", me.intensity);
+//    NSLog(@"me.activity: %@", me.activity);
+//    NSLog(pickerPath.row == 2 && [me.intensity isEqualToString:@""] ? @"true" : @"false");
+//    NSLog(@"-----");
 
     
     // activityPicker
@@ -304,16 +310,6 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // activity, intensity, duration, end time
-    NSLog(@"section: %ld", (long)section);
-    
-    // This is causing problems with adding new sections.
-//case: section 0, no picker, insert picker -> should return 5
-//case: section 0, no picker, insert section -> should return 4
-//case: section 1, no picker, insert picker -> should return 5
-    NSLog(@"indexPath .section: %ld", (long)section);
-    NSLog(@"pickerPath .row: %ld, .section: %ld", (long)pickerPath.row, (long)pickerPath.section);
-    
     // must check pickerPath for nil, because pickerPath.section isTypeOf NSInt, where 0 == NO;
     if (pickerPath !=nil && pickerPath.section == section) {
         return 5;
@@ -333,9 +329,9 @@
         [self.tableView insertRowsAtIndexPaths:@[pickerPath] withRowAnimation:UITableViewRowAnimationMiddle];
         [self.tableView endUpdates];
         
-        [self setPickerValueToInitial:indexPath];
+        [self setPickerValueToInitial];
         
-    } else if (pickerPath.section == indexPath.section && pickerPath.row -1 != indexPath.row){
+    } else if (pickerPath.row -1 != indexPath.row){
         // picker is open, and user has clicked a row not related to the picker
         
         // delete the old picker
@@ -353,7 +349,7 @@
         
         // make a new picker
         [self.tableView insertRowsAtIndexPaths:@[pickerPath] withRowAnimation:UITableViewRowAnimationMiddle];
-        [self setPickerValueToInitial:indexPath];
+        [self setPickerValueToInitial];
         
     } else {
         // picker was open. User is closing it.
@@ -377,13 +373,13 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    NSLog(@"--cellForRowAtIndexPath--");
-    NSLog(@"indexPath .row: %ld, .section: %ld", (long)indexPath.row, (long)indexPath.section);
-    NSLog(@"pickerPath .row: %ld, .section: %ld", (long)pickerPath.row, (long)pickerPath.section);
-    NSLog(@"--/ cellForRowAtIndexPath--");
-          
+//    NSLog(@"--cellForRowAtIndexPath--");
+//    NSLog(@"indexPath .row: %ld, .section: %ld", (long)indexPath.row, (long)indexPath.section);
+//    NSLog(@"pickerPath .row: %ld, .section: %ld", (long)pickerPath.row, (long)pickerPath.section);
+//    NSLog(@"--/ cellForRowAtIndexPath--");
+    
     // see [self setCellVisibilityAtIndexPath] for hiding/showing pickers
-    if (pickerPath == nil || pickerPath.section != indexPath.section) {
+    if (pickerPath == nil) {
         // work out the currentDate, since you it's not possible in a switch statement
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.timeStyle = NSDateFormatterShortStyle;
@@ -431,19 +427,19 @@
     } else {
         switch (indexPath.row) {
             case 1:
-                NSLog(@"activityPicker");
+//                NSLog(@"activityPicker");
                 cell.accessoryView = activityPicker;
                 break;
             case 2:
-                NSLog(@"intensityPicker");
+//                NSLog(@"intensityPicker");
                 cell.accessoryView = intensityPicker;
                 break;
             case 3:
-                NSLog(@"durationPicker");
+//                NSLog(@"durationPicker");
                 cell.accessoryView = durationPicker;
                 break;
             case 4:
-                NSLog(@"endTimePicker");
+//                NSLog(@"endTimePicker");
                 cell.accessoryView = endTimePicker;
                 break;
             default:
