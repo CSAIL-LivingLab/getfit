@@ -50,10 +50,13 @@
     
     
     // setup content text
-    [_appLabel setText:@"This app allows users to log activity data for the getfit@mit challenge.  The app allows users to record and submit activity data to getfit@mit and upload mobile activity data in their personal DataHub account."];
-    [_datahubLabel setText:@"DataHub is a unified data management and collaboration platform under development at MIT CSAIL. You can access your personal data at https://datahub.csail.mit.edu/"];
-    [_sensingLabel setText:@"Continuous Data Logging Mode allows users to gather mobile sensor data and upload to personal DataHub account. Enabling this mode allows you to donate continuous sensor data to MIT Big Data Living Lab project for research. \n\nSensor data includes:  motion sensors (gyroscope, accelerometer), activity info, position data, and basic device info.  It does not include call or text logs, audio, or video."];
-    [_livingLabLabel setText:@"The MIT Big Data Living Lab is building scalable data management tools and applications that enable researchers at MIT to demo new approaches to collecting, combining and using data on campus.\nhttp://livinglab.mit.edu/"];
+    [_appLabel setScrollEnabled:NO];
+    [_datahubLabel setScrollEnabled:NO];
+    [_datahubLabel setEditable:NO];
+    _datahubLabel.dataDetectorTypes = UIDataDetectorTypeLink;
+
+
+    
     
     //setup title labels colors
     [_appTitle setTextColor:greenColor];
@@ -102,6 +105,10 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    [_appLabel sizeToFit];
+    [_datahubLabel sizeToFit];
+    [_sensingLabel sizeToFit];
+    
     // inform the user of whether sensors are on or not
     [self adjustResumeLabelText];
 }

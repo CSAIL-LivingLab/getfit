@@ -13,16 +13,18 @@
 
 // Getfit App
 @property (weak, nonatomic) IBOutlet UILabel *appTitle;
-@property (weak, nonatomic) IBOutlet UILabel *appLabel;
+@property (weak, nonatomic) IBOutlet UITextView *appLabel;
+
 
 // Datahub
 @property (weak, nonatomic) IBOutlet UILabel *datahubTitle;
-@property (weak, nonatomic) IBOutlet UILabel *datahubLabel;
+@property (weak, nonatomic) IBOutlet UITextView *datahubLabel;
 @property (weak, nonatomic) IBOutlet UILabel *credentialsLabel;
 
 // OpenSense
 @property (weak, nonatomic) IBOutlet UILabel *sensingTitle;
-@property (weak, nonatomic) IBOutlet UILabel *sensingLabel;
+@property (weak, nonatomic) IBOutlet UITextView *sensingLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *resumeLabel;
 
 // OpenSense Button
@@ -30,7 +32,7 @@
 
 // LivingLab
 @property (weak, nonatomic) IBOutlet UILabel *livingLabTitle;
-@property (weak, nonatomic) IBOutlet UILabel *livingLabLabel;
+@property (weak, nonatomic) IBOutlet UITextView *livingLabLabel;
 
 
 @end

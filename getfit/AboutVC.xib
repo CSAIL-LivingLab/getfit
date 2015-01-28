@@ -7,16 +7,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutVC">
             <connections>
-                <outlet property="appLabel" destination="UmN-N4-Drd" id="d9M-AV-nk6"/>
+                <outlet property="appLabel" destination="52R-uS-RhZ" id="6UX-ot-NSa"/>
                 <outlet property="appTitle" destination="jfm-I5-TNA" id="FUO-aa-riX"/>
                 <outlet property="credentialsLabel" destination="6Zt-7X-uuo" id="sMD-6T-hDD"/>
-                <outlet property="datahubLabel" destination="mkQ-3I-Drh" id="kU8-Dk-s0v"/>
+                <outlet property="datahubLabel" destination="1ox-GT-4pt" id="cCh-v2-cq4"/>
                 <outlet property="datahubTitle" destination="ZtX-G6-Nd2" id="odq-pN-Z0j"/>
-                <outlet property="livingLabLabel" destination="dxb-CC-JJD" id="IUx-Mj-w04"/>
+                <outlet property="livingLabLabel" destination="vLQ-WL-ADh" id="R0C-9u-3Oz"/>
                 <outlet property="livingLabTitle" destination="6L0-bc-3wR" id="IL8-2a-m8i"/>
                 <outlet property="pauseButton" destination="6kr-4l-TeN" id="99g-KL-hTx"/>
                 <outlet property="resumeLabel" destination="rjw-WC-4fz" id="l29-ih-W8e"/>
-                <outlet property="sensingLabel" destination="97Q-UV-kPg" id="EfH-zl-uq3"/>
+                <outlet property="sensingLabel" destination="5EV-za-Xuy" id="4y2-2e-1lt"/>
                 <outlet property="sensingTitle" destination="rwh-gi-KAJ" id="gSC-hA-9Ca"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -32,110 +32,176 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
-                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Nam libero tempore, cum soluta nobis " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mkQ-3I-Drh">
-                    <rect key="frame" x="8" y="93" width="584" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sensing will resume in XXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjw-WC-4fz">
+                    <rect key="frame" x="215" y="234.5" width="170.5" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
-                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Nam libero tempore, cum soluta nobis " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97Q-UV-kPg">
-                    <rect key="frame" x="8" y="175" width="584" height="16"/>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Datahub User Credentials" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zt-7X-uuo">
+                    <rect key="frame" x="222" y="136" width="155" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sensing will resume in XXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjw-WC-4fz">
-                    <rect key="frame" x="8" y="199" width="584" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datahub User Credentials" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zt-7X-uuo">
-                    <rect key="frame" x="8" y="117" width="584" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About DataHub" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtX-G6-Nd2">
-                    <rect key="frame" x="243" y="66" width="114.5" height="19.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About DataHub" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtX-G6-Nd2">
+                    <rect key="frame" x="243" y="76" width="114.5" height="19.5"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Sensing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwh-gi-KAJ">
-                    <rect key="frame" x="246" y="148" width="109" height="19.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About Sensing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwh-gi-KAJ">
+                    <rect key="frame" x="246" y="167" width="109" height="19.5"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Living Lab" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L0-bc-3wR">
-                    <rect key="frame" x="237" y="348" width="126" height="19.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About Living Lab" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L0-bc-3wR">
+                    <rect key="frame" x="237" y="383.5" width="126" height="19.5"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kr-4l-TeN">
-                    <rect key="frame" x="245" y="223" width="110" height="110"/>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="52R-uS-RhZ">
+                    <rect key="frame" x="8" y="31" width="584" height="40"/>
+                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="110" id="IMA-qm-1jB"/>
-                        <constraint firstAttribute="height" constant="110" id="YUF-QN-Utw"/>
+                        <constraint firstAttribute="height" constant="40" id="8Uz-db-TjP"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Bl8-VS-wc6"/>
+                    </constraints>
+                    <string key="text">The app allows users to record and submit activity data to getfit@mit and upload mobile activity data in their personal DataHub account.</string>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="8Uz-db-TjP"/>
+                        </mask>
+                    </variation>
+                </textView>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1ox-GT-4pt">
+                    <rect key="frame" x="8" y="96" width="584" height="40"/>
+                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" none="YES" link="YES"/>
+                    </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="K4i-QI-1pp"/>
+                        <constraint firstAttribute="height" constant="40" id="LEa-fI-Aaz"/>
+                    </constraints>
+                    <string key="text">DataHub is a unified data management and collaboration platform under development at MIT CSAIL. You can access your personal data at https://www.datahub.csail.mit.edu</string>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="LEa-fI-Aaz"/>
+                        </mask>
+                    </variation>
+                </textView>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="5EV-za-Xuy">
+                    <rect key="frame" x="8" y="186.5" width="584" height="40"/>
+                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" none="YES" link="YES"/>
+                    </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="XyR-eD-XwS"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="cCX-gc-Ff0"/>
+                    </constraints>
+                    <string key="text">Continuous Data Logging Mode allows users to gather mobile sensor data and upload to personal DataHub account.  Enabling this mode allows you to donate continuous sensor data* to MIT Big Data Living Lab project for research.</string>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="XyR-eD-XwS"/>
+                        </mask>
+                    </variation>
+                </textView>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="vLQ-WL-ADh">
+                    <rect key="frame" x="8" y="403" width="584" height="40"/>
+                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <accessibilityTraits key="traits" none="YES" link="YES"/>
+                    </accessibility>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="JdG-fi-EZ4"/>
+                        <constraint firstAttribute="height" constant="40" id="OEN-Uo-L2N"/>
+                    </constraints>
+                    <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque congue lorem nec dapibus. Donec lacinia elit vitae luctus venenatis. Suspendisse neque justo, feugiat eu luctus eget, vulputate eget odio. Maecenas pretium lorem vel orci porttitor efficitur. Sed ullamcorper mi et risus placerat luctus. Morbi eget lacinia ipsum. Mauris dapibus molestie erat, a dictum massa ultrices et. Sed sit amet enim vel libero faucibus venenatis et a urna. Praesent magna sem, venenatis in imperdiet eu, dapibus a augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur nec nulla non risus vestibulum lobortis.
+
+</mutableString>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="OEN-Uo-L2N"/>
+                        </mask>
+                    </variation>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kr-4l-TeN">
+                    <rect key="frame" x="245" y="258.5" width="110" height="110"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="110" id="CE9-Io-H26"/>
+                        <constraint firstAttribute="height" constant="110" id="NvY-ay-0C7"/>
                     </constraints>
                     <state key="normal" title="Button">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Nam libero tempore, cum soluta nobis " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmN-N4-Drd">
-                    <rect key="frame" x="8" y="35" width="584" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Nam libero tempore, cum soluta nobis " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxb-CC-JJD">
-                    <rect key="frame" x="8" y="376" width="584" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="6Zt-7X-uuo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="1MF-9z-B7g"/>
-                <constraint firstItem="97Q-UV-kPg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="3Uo-BO-3KE"/>
-                <constraint firstAttribute="trailing" secondItem="rjw-WC-4fz" secondAttribute="trailing" constant="8" id="3nf-UC-XeF"/>
-                <constraint firstItem="97Q-UV-kPg" firstAttribute="top" secondItem="rwh-gi-KAJ" secondAttribute="bottom" constant="7.5" id="5EP-dA-SML"/>
-                <constraint firstItem="mkQ-3I-Drh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="5YG-RF-kd3"/>
-                <constraint firstItem="UmN-N4-Drd" firstAttribute="top" secondItem="jfm-I5-TNA" secondAttribute="bottom" constant="4" id="B9W-Hf-Mea"/>
-                <constraint firstAttribute="trailing" secondItem="UmN-N4-Drd" secondAttribute="trailing" constant="8" id="BcE-T9-Wrp"/>
-                <constraint firstItem="UmN-N4-Drd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="JT5-EC-mJN"/>
-                <constraint firstItem="mkQ-3I-Drh" firstAttribute="top" secondItem="ZtX-G6-Nd2" secondAttribute="bottom" constant="7.5" id="M6h-Bk-nsJ"/>
-                <constraint firstItem="rwh-gi-KAJ" firstAttribute="top" secondItem="6Zt-7X-uuo" secondAttribute="bottom" constant="15" id="QZz-rP-yF8"/>
-                <constraint firstItem="6kr-4l-TeN" firstAttribute="top" secondItem="rjw-WC-4fz" secondAttribute="bottom" constant="8" id="TZg-TL-lYs"/>
-                <constraint firstItem="jfm-I5-TNA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="Uok-FV-ttS"/>
-                <constraint firstItem="rjw-WC-4fz" firstAttribute="top" secondItem="97Q-UV-kPg" secondAttribute="bottom" constant="8" id="Vjy-Yu-GIl"/>
-                <constraint firstAttribute="trailing" secondItem="97Q-UV-kPg" secondAttribute="trailing" constant="8" id="Vr9-Qw-2ZV"/>
-                <constraint firstAttribute="centerX" secondItem="6L0-bc-3wR" secondAttribute="centerX" id="YlR-k7-iqz"/>
-                <constraint firstItem="6kr-4l-TeN" firstAttribute="top" secondItem="97Q-UV-kPg" secondAttribute="bottom" constant="20" id="Zck-RM-tbd"/>
-                <constraint firstItem="dxb-CC-JJD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="asO-Xg-6Oz"/>
-                <constraint firstAttribute="centerX" secondItem="jfm-I5-TNA" secondAttribute="centerX" constant="-0.5" id="ent-hY-imE"/>
-                <constraint firstAttribute="trailing" secondItem="mkQ-3I-Drh" secondAttribute="trailing" constant="8" id="fbE-4b-YEF"/>
-                <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="UmN-N4-Drd" secondAttribute="bottom" constant="15" id="hKZ-2e-Ckg"/>
-                <constraint firstItem="6Zt-7X-uuo" firstAttribute="top" secondItem="mkQ-3I-Drh" secondAttribute="bottom" constant="8" id="iVp-cq-cZD"/>
-                <constraint firstAttribute="trailing" secondItem="dxb-CC-JJD" secondAttribute="trailing" constant="8" id="ivp-d1-XY5"/>
-                <constraint firstAttribute="trailing" secondItem="6Zt-7X-uuo" secondAttribute="trailing" constant="8" id="kV9-Fy-zDh"/>
-                <constraint firstAttribute="centerX" secondItem="ZtX-G6-Nd2" secondAttribute="centerX" constant="-0.5" id="lqR-37-XGf"/>
-                <constraint firstItem="dxb-CC-JJD" firstAttribute="top" secondItem="6L0-bc-3wR" secondAttribute="bottom" constant="8" id="m1d-hY-hb2"/>
-                <constraint firstAttribute="centerX" secondItem="97Q-UV-kPg" secondAttribute="centerX" id="nuI-lm-hlh"/>
-                <constraint firstItem="6L0-bc-3wR" firstAttribute="top" secondItem="6kr-4l-TeN" secondAttribute="bottom" constant="15" id="sAg-Sh-PwM"/>
-                <constraint firstAttribute="centerX" secondItem="rwh-gi-KAJ" secondAttribute="centerX" constant="-0.25" id="tCB-kF-XMc"/>
-                <constraint firstItem="rjw-WC-4fz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="v6p-aG-tG3"/>
-                <constraint firstAttribute="centerX" secondItem="6kr-4l-TeN" secondAttribute="centerX" id="wGv-gW-qhE"/>
+                <constraint firstItem="jfm-I5-TNA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="0wk-aH-ROT"/>
+                <constraint firstItem="52R-uS-RhZ" firstAttribute="top" secondItem="jfm-I5-TNA" secondAttribute="bottom" id="2Ye-FD-SVC"/>
+                <constraint firstAttribute="centerX" secondItem="ZtX-G6-Nd2" secondAttribute="centerX" constant="-0.5" id="8dV-zO-dMS"/>
+                <constraint firstItem="6Zt-7X-uuo" firstAttribute="top" secondItem="1ox-GT-4pt" secondAttribute="bottom" id="9Wb-jt-Liy"/>
+                <constraint firstItem="vLQ-WL-ADh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="FnK-Qc-QFK"/>
+                <constraint firstItem="1ox-GT-4pt" firstAttribute="top" secondItem="ZtX-G6-Nd2" secondAttribute="bottom" id="JdL-Sf-fkz"/>
+                <constraint firstAttribute="trailing" secondItem="52R-uS-RhZ" secondAttribute="trailing" constant="8" id="KuI-bB-ekU"/>
+                <constraint firstAttribute="trailing" secondItem="52R-uS-RhZ" secondAttribute="trailing" constant="8" id="OT3-24-SIu"/>
+                <constraint firstItem="52R-uS-RhZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Ret-Kh-5Ab"/>
+                <constraint firstItem="vLQ-WL-ADh" firstAttribute="top" secondItem="6L0-bc-3wR" secondAttribute="bottom" id="S2X-97-vKk"/>
+                <constraint firstAttribute="centerX" secondItem="rjw-WC-4fz" secondAttribute="centerX" id="V01-z0-vpu"/>
+                <constraint firstItem="5EV-za-Xuy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="XNC-ql-x9X"/>
+                <constraint firstItem="rjw-WC-4fz" firstAttribute="top" secondItem="5EV-za-Xuy" secondAttribute="bottom" constant="8" id="XyI-co-AhX"/>
+                <constraint firstAttribute="trailing" secondItem="vLQ-WL-ADh" secondAttribute="trailing" constant="8" id="Y1W-X6-LsS"/>
+                <constraint firstAttribute="centerX" secondItem="6kr-4l-TeN" secondAttribute="centerX" id="cdz-1w-AOK"/>
+                <constraint firstAttribute="centerX" secondItem="6L0-bc-3wR" secondAttribute="centerX" id="dNj-IU-lUu"/>
+                <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="52R-uS-RhZ" secondAttribute="bottom" constant="5" id="dPN-Ri-ZnM"/>
+                <constraint firstItem="1ox-GT-4pt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="eur-EP-RMx"/>
+                <constraint firstItem="52R-uS-RhZ" firstAttribute="top" secondItem="jfm-I5-TNA" secondAttribute="bottom" id="flh-uw-hWz"/>
+                <constraint firstItem="6L0-bc-3wR" firstAttribute="top" secondItem="6kr-4l-TeN" secondAttribute="bottom" constant="15" id="ikY-kJ-NX2"/>
+                <constraint firstAttribute="trailing" secondItem="5EV-za-Xuy" secondAttribute="trailing" constant="8" id="jUB-sc-x7W"/>
+                <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="52R-uS-RhZ" secondAttribute="bottom" constant="5" id="jsm-wK-ztU"/>
+                <constraint firstAttribute="centerX" secondItem="rwh-gi-KAJ" secondAttribute="centerX" constant="-0.5" id="mJ9-U7-kUz"/>
+                <constraint firstItem="6kr-4l-TeN" firstAttribute="top" secondItem="rjw-WC-4fz" secondAttribute="bottom" constant="8" id="qQY-iB-n5Q"/>
+                <constraint firstAttribute="trailing" secondItem="1ox-GT-4pt" secondAttribute="trailing" constant="8" id="seu-Zv-oqo"/>
+                <constraint firstItem="rwh-gi-KAJ" firstAttribute="top" secondItem="6Zt-7X-uuo" secondAttribute="bottom" constant="15" id="tVD-DK-O8I"/>
+                <constraint firstItem="52R-uS-RhZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="thw-Wy-ZAu"/>
+                <constraint firstAttribute="centerX" secondItem="6Zt-7X-uuo" secondAttribute="centerX" id="udq-JK-RQz"/>
+                <constraint firstAttribute="centerX" secondItem="jfm-I5-TNA" secondAttribute="centerX" constant="-0.5" id="vah-qJ-44S"/>
+                <constraint firstItem="5EV-za-Xuy" firstAttribute="top" secondItem="rwh-gi-KAJ" secondAttribute="bottom" id="vet-Ar-HiU"/>
+                <constraint firstItem="52R-uS-RhZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ySK-bo-4jM"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="nuI-lm-hlh"/>
-                    <exclude reference="Zck-RM-tbd"/>
+                    <exclude reference="2Ye-FD-SVC"/>
+                    <exclude reference="OT3-24-SIu"/>
+                    <exclude reference="thw-Wy-ZAu"/>
+                    <exclude reference="ySK-bo-4jM"/>
+                    <exclude reference="dPN-Ri-ZnM"/>
                 </mask>
             </variation>
+            <point key="canvasLocation" x="139" y="154"/>
         </view>
     </objects>
 </document>
