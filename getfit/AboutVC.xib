@@ -32,42 +32,42 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sensing will resume in XXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjw-WC-4fz">
-                    <rect key="frame" x="215" y="234.5" width="170.5" height="16"/>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sensing will resume in XXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjw-WC-4fz">
+                    <rect key="frame" x="215" y="259.5" width="170.5" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Datahub User Credentials" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zt-7X-uuo">
-                    <rect key="frame" x="222" y="136" width="155" height="16"/>
+                    <rect key="frame" x="222" y="141" width="155" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About DataHub" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtX-G6-Nd2">
-                    <rect key="frame" x="243" y="76" width="114.5" height="19.5"/>
+                    <rect key="frame" x="243" y="81" width="114.5" height="19.5"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About Sensing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwh-gi-KAJ">
-                    <rect key="frame" x="246" y="167" width="109" height="19.5"/>
+                    <rect key="frame" x="246" y="172" width="109" height="19.5"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About Living Lab" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L0-bc-3wR">
-                    <rect key="frame" x="237" y="383.5" width="126" height="19.5"/>
+                    <rect key="frame" x="237" y="408.5" width="126" height="19.5"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="52R-uS-RhZ">
-                    <rect key="frame" x="8" y="31" width="584" height="40"/>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="52R-uS-RhZ">
+                    <rect key="frame" x="8" y="31" width="584" height="45"/>
                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="8Uz-db-TjP"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Bl8-VS-wc6"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="Bl8-VS-wc6"/>
                     </constraints>
                     <string key="text">The app allows users to record and submit activity data to getfit@mit and upload mobile activity data in their personal DataHub account.</string>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -80,8 +80,8 @@
                         </mask>
                     </variation>
                 </textView>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1ox-GT-4pt">
-                    <rect key="frame" x="8" y="96" width="584" height="40"/>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1ox-GT-4pt">
+                    <rect key="frame" x="8" y="101" width="584" height="40"/>
                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" none="YES" link="YES"/>
@@ -101,15 +101,15 @@
                         </mask>
                     </variation>
                 </textView>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="5EV-za-Xuy">
-                    <rect key="frame" x="8" y="186.5" width="584" height="40"/>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="5EV-za-Xuy">
+                    <rect key="frame" x="8" y="191.5" width="584" height="60"/>
                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" none="YES" link="YES"/>
                     </accessibility>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="XyR-eD-XwS"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="cCX-gc-Ff0"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="cCX-gc-Ff0"/>
                     </constraints>
                     <string key="text">Continuous Data Logging Mode allows users to gather mobile sensor data and upload to personal DataHub account.  Enabling this mode allows you to donate continuous sensor data* to MIT Big Data Living Lab project for research.</string>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -122,8 +122,8 @@
                         </mask>
                     </variation>
                 </textView>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="vLQ-WL-ADh">
-                    <rect key="frame" x="8" y="403" width="584" height="40"/>
+                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="vLQ-WL-ADh">
+                    <rect key="frame" x="8" y="428" width="584" height="40"/>
                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" none="YES" link="YES"/>
@@ -132,9 +132,7 @@
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="JdG-fi-EZ4"/>
                         <constraint firstAttribute="height" constant="40" id="OEN-Uo-L2N"/>
                     </constraints>
-                    <mutableString key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque congue lorem nec dapibus. Donec lacinia elit vitae luctus venenatis. Suspendisse neque justo, feugiat eu luctus eget, vulputate eget odio. Maecenas pretium lorem vel orci porttitor efficitur. Sed ullamcorper mi et risus placerat luctus. Morbi eget lacinia ipsum. Mauris dapibus molestie erat, a dictum massa ultrices et. Sed sit amet enim vel libero faucibus venenatis et a urna. Praesent magna sem, venenatis in imperdiet eu, dapibus a augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur nec nulla non risus vestibulum lobortis.
-
-</mutableString>
+                    <string key="text">The MIT Big Data Living Lab is building scalable data management tools and applications that enable researchers at MIT to demo new approaches to collecting, combining and using data on campus.  www.livinglab.mit.edu</string>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -146,7 +144,7 @@
                     </variation>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kr-4l-TeN">
-                    <rect key="frame" x="245" y="258.5" width="110" height="110"/>
+                    <rect key="frame" x="245" y="283.5" width="110" height="110"/>
                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="CE9-Io-H26"/>
@@ -162,7 +160,7 @@
             <constraints>
                 <constraint firstItem="jfm-I5-TNA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="0wk-aH-ROT"/>
                 <constraint firstItem="52R-uS-RhZ" firstAttribute="top" secondItem="jfm-I5-TNA" secondAttribute="bottom" id="2Ye-FD-SVC"/>
-                <constraint firstAttribute="centerX" secondItem="ZtX-G6-Nd2" secondAttribute="centerX" constant="-0.5" id="8dV-zO-dMS"/>
+                <constraint firstAttribute="centerX" secondItem="ZtX-G6-Nd2" secondAttribute="centerX" id="8dV-zO-dMS"/>
                 <constraint firstItem="6Zt-7X-uuo" firstAttribute="top" secondItem="1ox-GT-4pt" secondAttribute="bottom" id="9Wb-jt-Liy"/>
                 <constraint firstItem="vLQ-WL-ADh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="FnK-Qc-QFK"/>
                 <constraint firstItem="1ox-GT-4pt" firstAttribute="top" secondItem="ZtX-G6-Nd2" secondAttribute="bottom" id="JdL-Sf-fkz"/>
@@ -182,7 +180,7 @@
                 <constraint firstItem="6L0-bc-3wR" firstAttribute="top" secondItem="6kr-4l-TeN" secondAttribute="bottom" constant="15" id="ikY-kJ-NX2"/>
                 <constraint firstAttribute="trailing" secondItem="5EV-za-Xuy" secondAttribute="trailing" constant="8" id="jUB-sc-x7W"/>
                 <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="52R-uS-RhZ" secondAttribute="bottom" constant="5" id="jsm-wK-ztU"/>
-                <constraint firstAttribute="centerX" secondItem="rwh-gi-KAJ" secondAttribute="centerX" constant="-0.5" id="mJ9-U7-kUz"/>
+                <constraint firstAttribute="centerX" secondItem="rwh-gi-KAJ" secondAttribute="centerX" id="mJ9-U7-kUz"/>
                 <constraint firstItem="6kr-4l-TeN" firstAttribute="top" secondItem="rjw-WC-4fz" secondAttribute="bottom" constant="8" id="qQY-iB-n5Q"/>
                 <constraint firstAttribute="trailing" secondItem="1ox-GT-4pt" secondAttribute="trailing" constant="8" id="seu-Zv-oqo"/>
                 <constraint firstItem="rwh-gi-KAJ" firstAttribute="top" secondItem="6Zt-7X-uuo" secondAttribute="bottom" constant="15" id="tVD-DK-O8I"/>

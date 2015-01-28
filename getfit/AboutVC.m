@@ -49,14 +49,8 @@
     greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
     
     
-    // setup content text
-    [_appLabel setScrollEnabled:NO];
-    [_datahubLabel setScrollEnabled:NO];
-    [_datahubLabel setEditable:NO];
-    _datahubLabel.dataDetectorTypes = UIDataDetectorTypeLink;
-
-
     
+
     
     //setup title labels colors
     [_appTitle setTextColor:greenColor];
@@ -105,9 +99,29 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    // setup content text
+    [_appLabel setScrollEnabled:NO];
+    [_appLabel setEditable:NO];
     [_appLabel sizeToFit];
+    
+    
+    [_datahubLabel setScrollEnabled:NO];
+    [_datahubLabel setEditable:NO];
     [_datahubLabel sizeToFit];
+    _datahubLabel.dataDetectorTypes = UIDataDetectorTypeLink;
+    [_datahubLabel setTintColor:greenColor];
+
+    
+    [_sensingLabel setScrollEnabled:NO];
+    [_sensingLabel setEditable:NO];
     [_sensingLabel sizeToFit];
+    
+    
+    [_livingLabLabel setScrollEnabled:NO];
+    [_livingLabLabel setEditable:NO];
+    [_livingLabLabel sizeToFit];
+    _livingLabLabel.dataDetectorTypes = UIDataDetectorTypeLink;
+    [_livingLabLabel setTintColor:greenColor];
     
     // inform the user of whether sensors are on or not
     [self adjustResumeLabelText];

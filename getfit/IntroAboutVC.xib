@@ -12,6 +12,7 @@
                 <outlet property="donateLabel" destination="bNk-EY-ODH" id="ToJ-AV-8c2"/>
                 <outlet property="donateSensorLabel" destination="Y2n-RG-Ph4" id="gQY-RC-ucr"/>
                 <outlet property="donateSwitch" destination="1PR-Ub-xUx" id="VVS-lh-tz8"/>
+                <outlet property="introTextView" destination="eHs-PH-bZ7" id="98k-hD-o4W"/>
                 <outlet property="noNetworkLabel" destination="O19-fV-7wp" id="wXP-N2-xTL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,11 +23,29 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="eHs-PH-bZ7">
-                    <rect key="frame" x="8" y="75" width="584" height="397"/>
+                    <rect key="frame" x="8" y="75" width="584" height="370"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <string key="text">A DataHub account will be automatically created for you.  To access DataHub login using the username and password found on “Info/About” tab. 
+
+Logging Activities
+
+Users can “record” activity data using the Activity Tracking Timer.  User selects Activity and Intensity (optional), and hits Start in order to begin recording activity data.   Whenever possible users should keep phone on them during workout in order to log mobile sensor data.   When activity is complete, press Stop and data will be saved and uploaded to getfit@mit [activityname; intensity; duration] and DataHub [activityname; intensity; duration; and sensor data]
+
+Sensor data includes: motion sensors (gyroscope, accelerometer), activity info, position data and basic device info.  It does not include call logs, audio, or video. 
+
+Users can record activity data using “manual entry” mode which allows user to submit  [activityname; intensity; duration] to getfit@mit and to DataHub.  In “manual entry” mode no sensor data is logged or stored.
+
+Data
+
+This app will send your data to getfit@mit for the purposes of the Challenge and to DataHub for research.   Data is stored in a secure database at MIT.  Users will be able to login, access and edit their own personal data via their DataHub account.  By using this app, users consent to sharing the data with the MIT Living Lab team.  For research purposes, your data will be de-identified and combined with other user data for analysis.  You can view or export your data any time you want.  You can enable, pause or disable Continuous Data Logging Mode at any time.  You may withdraw your consent and discontinue participation at any time.
+
+Consent
+
+By entering your name and date then tapping Agree you consent to participate in the study and share your data.
+</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
                 </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bX0-4O-cu2">
                     <rect key="frame" x="160" y="487" width="280" height="49"/>
@@ -62,12 +81,12 @@
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gn-77-di9">
-                    <rect key="frame" x="236" y="453" width="128" height="34"/>
+                    <rect key="frame" x="271" y="453" width="57" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="meg-Q3-Bvd"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <state key="normal" title="Tap to Continue">
+                    <state key="normal" title="I Agree">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="default">
@@ -126,6 +145,7 @@
                 <constraint firstItem="1gn-77-di9" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="2" id="nS1-gz-H7c"/>
                 <constraint firstAttribute="centerX" secondItem="1gn-77-di9" secondAttribute="centerX" id="npW-li-9ca"/>
                 <constraint firstAttribute="bottom" secondItem="bNk-EY-ODH" secondAttribute="bottom" id="uTD-XY-t3W"/>
+                <constraint firstItem="1gn-77-di9" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="8" id="v1u-Ks-6aY"/>
                 <constraint firstItem="1gn-77-di9" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="8" id="vFP-kz-uey"/>
                 <constraint firstAttribute="bottom" secondItem="1gn-77-di9" secondAttribute="bottom" constant="60" id="vve-4O-Xe7"/>
                 <constraint firstAttribute="trailing" secondItem="O19-fV-7wp" secondAttribute="trailing" constant="8" id="yPD-bF-60M"/>
@@ -148,6 +168,7 @@
                     <exclude reference="YKA-Ig-oON"/>
                     <exclude reference="c2w-XS-jSz"/>
                     <exclude reference="iVi-Vp-2IO"/>
+                    <exclude reference="l9O-47-sVF"/>
                     <exclude reference="Gxn-m9-8BA"/>
                     <exclude reference="KYG-U6-o9Q"/>
                     <exclude reference="RNa-fR-Wtp"/>
