@@ -27,4 +27,10 @@
 
 // OpenSense Button
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
+
+// LivingLab
+@property (weak, nonatomic) IBOutlet UILabel *livingLabTitle;
+@property (weak, nonatomic) IBOutlet UILabel *livingLabLabel;
+
+
 @end

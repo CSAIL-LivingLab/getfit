@@ -48,17 +48,27 @@
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
     
-    pauseArr = [[NSArray alloc] initWithObjects:@[@"Resume Data Donation", @0],
-                @[@"10 min", @10],
-                @[@"30 min", @30],
-                @[@"1 hr", @60],
-                @[@"2 hr", @120],
-                @[@"5 hr", @300],
-                @[@"10 hr", @600],
-                @[@"1 day", @1440],
-                @[@"1 week", @10080],
-                @[@"Forever", @999],
-                nil];
+    
+    // setup content text
+    [_appLabel setText:@"This app allows users to log activity data for the getfit@mit challenge.  The app allows users to record and submit activity data to getfit@mit and upload mobile activity data in their personal DataHub account."];
+    [_datahubLabel setText:@"DataHub is a unified data management and collaboration platform under development at MIT CSAIL. You can access your personal data at https://datahub.csail.mit.edu/"];
+    [_sensingLabel setText:@"Continuous Data Logging Mode allows users to gather mobile sensor data and upload to personal DataHub account. Enabling this mode allows you to donate continuous sensor data to MIT Big Data Living Lab project for research. \n\nSensor data includes:  motion sensors (gyroscope, accelerometer), activity info, position data, and basic device info.  It does not include call or text logs, audio, or video."];
+    [_livingLabLabel setText:@"The MIT Big Data Living Lab is building scalable data management tools and applications that enable researchers at MIT to demo new approaches to collecting, combining and using data on campus.\nhttp://livinglab.mit.edu/"];
+    
+    //setup title labels colors
+    [_appTitle setTextColor:greenColor];
+    [_datahubTitle setTextColor:greenColor];
+    [_sensingTitle setTextColor:greenColor];
+    [_livingLabTitle setTextColor:greenColor];
+    
+    // setup credentialsLabel
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults objectForKey:@"username"];
+    NSString *password = [defaults objectForKey:@"password"];
+    NSString *credentialsText = [NSString stringWithFormat:@"username: %@\npassword: %@", username, password];
+    [_credentialsLabel setText:credentialsText];
+    
+    
     
     // setup the pauseButton
     [_pauseButton setTitle:kPAUSE_TITLE forState:UIControlStateNormal];
@@ -74,17 +84,21 @@
     _pauseButton.titleLabel.numberOfLines = 2;
     _pauseButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
-    // setup credentialsLabel
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *username = [defaults objectForKey:@"username"];
-    NSString *password = [defaults objectForKey:@"password"];
-    NSString *credentialsText = [NSString stringWithFormat:@"username: %@\npassword: %@", username, password];
-    [_credentialsLabel setText:credentialsText];
+
     
-    //setup title labels colors
-    [_appTitle setTextColor:greenColor];
-    [_datahubTitle setTextColor:greenColor];
-    [_sensingTitle setTextColor:greenColor];
+    // setup the pause Array
+    pauseArr = [[NSArray alloc] initWithObjects:@[@"Resume Data Donation", @0],
+                @[@"10 min", @10],
+                @[@"30 min", @30],
+                @[@"1 hr", @60],
+                @[@"2 hr", @120],
+                @[@"5 hr", @300],
+                @[@"10 hr", @600],
+                @[@"1 day", @1440],
+                @[@"1 week", @10080],
+                @[@"Forever", @999],
+                nil];
+
 }
 
 - (void) viewWillAppear:(BOOL)animated {
