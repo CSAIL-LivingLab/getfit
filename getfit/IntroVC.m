@@ -36,9 +36,11 @@
     UIView *secondView;
     UILabel *thankYouLabel;
     UILabel *setupLabel;
+    UILabel *usernameInfoLabel;
     UILabel *usernameLabel;
+    UILabel *passwordInfoLabel;
     UILabel *passwordLabel;
-    UILabel *noNeedToWriteLabel;
+    UITextView *explanationView;
     
     UISwitch *donateSwitch;
     UILabel *donateSwitchLabel;
@@ -55,7 +57,8 @@
     bounds = [UIScreen mainScreen].bounds.size;
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     
-    [self loadFirstPage];
+//    [self loadFirstPage];
+    [self loadSecondPage];
 }
 
 - (void)viewDidLoad {
@@ -119,7 +122,75 @@
 }
 
 - (void) loadSecondPage{
-    NSLog(@"loadSecondPage hit");
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults objectForKey:@"username"];
+    NSString *email = [defaults objectForKey:@"email"];
+    
+    // view
+    secondView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
+    [secondView setBackgroundColor:[UIColor whiteColor]];
+    
+    // thank you label
+    thankYouLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 90, bounds.width-16, 20)];
+    thankYouLabel.numberOfLines = 0;
+    [thankYouLabel setText:@"Thank you for agreeing to participate!"];
+    [thankYouLabel setTextAlignment:NSTextAlignmentCenter];
+    [secondView addSubview:thankYouLabel];
+    
+    // setup label
+    setupLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 120, bounds.width-16, 60)];
+    setupLabel.numberOfLines = 0;
+    [setupLabel setText:@"We've set up your GetFit DataHub account:"];
+    [setupLabel setTextAlignment:NSTextAlignmentCenter];
+    [secondView addSubview:setupLabel];
+    
+    CGFloat topLabelOffset = thankYouLabel.bounds.size.height + setupLabel.bounds.size.height + 80;
+    
+    // username/password info labels
+    usernameInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2-75, topLabelOffset +20, 70, 15)];
+//    [usernameInfoLabel setBackgroundColor:[UIColor redColor]];
+    [usernameInfoLabel setTextAlignment:NSTextAlignmentRight];
+    [usernameInfoLabel setFont:[UIFont systemFontOfSize:14]];
+    [usernameInfoLabel setText:@"username:"];
+    [secondView addSubview:usernameInfoLabel];
+    
+    passwordInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2-75, topLabelOffset +20 +20, 70, 15)];
+//    [passwordInfoLabel setBackgroundColor:[UIColor redColor]];
+    [passwordInfoLabel setTextAlignment:NSTextAlignmentRight];
+    [passwordInfoLabel setFont:[UIFont systemFontOfSize:14]];
+    [passwordInfoLabel setText:@"password:"];
+    [secondView addSubview:passwordInfoLabel];
+
+    // actual username and password
+    usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20, 65, 15)];
+//    [usernameLabel setBackgroundColor:[UIColor redColor]];
+    [usernameLabel setTextAlignment:NSTextAlignmentLeft];
+    [usernameLabel setFont:[UIFont systemFontOfSize:14]];
+//    [usernameLabel setText:username];
+    [usernameLabel setText:@"bdoijewf"];
+    [secondView addSubview:usernameLabel];
+
+    passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20 +20, 66, 15)];
+//    [passwordLabel setBackgroundColor:[UIColor redColor]];
+    [passwordLabel setTextAlignment:NSTextAlignmentLeft];
+    [passwordLabel setFont:[UIFont systemFontOfSize:14]];
+    //    [usernameLabel setText:username];
+    [passwordLabel setText:@"bdoijewf"];
+    [secondView addSubview:passwordLabel];
+    
+    CGFloat usernamePasswordOffset = 200;
+    
+    // explanationlabel
+    explanationView = [[UITextView alloc] initWithFrame:CGRectMake(8, usernamePasswordOffset+30, bounds.width-16, 140)];
+    [explanationView setFont:[UIFont systemFontOfSize:14]];
+    [explanationView setText:@"Use it to view your data at\nhttps://www.datahub.csail.mit.edu.\n\nYou may want to write your username and password down. You can view them from ths app, but because the app is anonomous, we can't reset your password if it's lost."];
+    [explanationView setEditable:NO];
+    [explanationView setTextAlignment:NSTextAlignmentCenter];
+    [explanationView setDataDetectorTypes:UIDataDetectorTypeAll];
+    [secondView addSubview:explanationView];
+
+    
+    self.view = secondView;
 }
 
 - (void) loadWorkingPage{
