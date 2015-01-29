@@ -133,15 +133,34 @@
     NSArray *form_build_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getBuildIds().toString();"]componentsSeparatedByString:@","];
     NSArray *form_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getFormIds().toString();"] componentsSeparatedByString:@","];
     
+
     NSString *indexStr = [myWebView stringByEvaluatingJavaScriptFromString:@"getStartIndex().toString();"];
-    NSInteger indexInt = [indexStr integerValue];
     
+    // sanity check
+    // if the indexString = nil, just set it to 0
+    // so that the app doesn't crash
+    NSInteger indexInt;
+    @try {
+        indexInt = [indexStr integerValue];
+    }
+    @catch (NSException *exception) {
+        indexInt = 0;
+    }
     
     // strip the arrays up to the index
     // save the array
-    form_tokens = [form_tokens subarrayWithRange:NSMakeRange(indexInt, [form_tokens count]-2)];
-    form_ids = [form_ids subarrayWithRange:NSMakeRange(indexInt, [form_ids count]-2)];
-    form_build_ids = [form_build_ids subarrayWithRange:NSMakeRange(indexInt, [form_build_ids count]-2)];
+    // if the arrays are out of bounds
+    // just fill them with blanks
+    @try {
+        form_tokens = [form_tokens subarrayWithRange:NSMakeRange(indexInt, [form_tokens count]-2)];
+        form_ids = [form_ids subarrayWithRange:NSMakeRange(indexInt, [form_ids count]-2)];
+        form_build_ids = [form_build_ids subarrayWithRange:NSMakeRange(indexInt, [form_build_ids count]-2)];
+    }
+    @catch (NSException *exception) {
+        form_tokens = @['0','0','0','0','0','0','0'];
+        form_ids = @['0','0','0','0','0','0','0'];
+        form_build_ids = @['0','0','0','0','0','0','0'];
+    }
     
 //    NSLog(@"%@", form_tokens);
 //    NSLog(@"%@", form_ids);
