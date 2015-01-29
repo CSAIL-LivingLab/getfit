@@ -10,6 +10,7 @@
 
 @interface AboutVC : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 
 // Getfit App
 @property (weak, nonatomic) IBOutlet UILabel *appTitle;
@@ -33,6 +34,8 @@
 // LivingLab
 @property (weak, nonatomic) IBOutlet UILabel *livingLabTitle;
 @property (weak, nonatomic) IBOutlet UITextView *livingLabLabel;
+
+
 
 
 @end
