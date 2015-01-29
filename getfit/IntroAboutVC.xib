@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="94" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="eHs-PH-bZ7">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="eHs-PH-bZ7">
                     <rect key="frame" x="8" y="59" width="584" height="386"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <string key="text">A DataHub account will be automatically created for you.  To access DataHub login using the username and password found on “Info/About” tab. 
