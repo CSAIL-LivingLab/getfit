@@ -43,9 +43,9 @@
         [self loadIntroViews];
     }
     
-    if (![defaults boolForKey:@"loaded_v.83"]) {
+    if (![defaults boolForKey:@"loaded_v.84"]) {
         [[MinuteStore sharedStore] removeAllMinutes];
-        [defaults setBool:YES forKey:@"loaded_v.83"];
+        [defaults setBool:YES forKey:@"loaded_v.84"];
         [defaults synchronize];
     }
     

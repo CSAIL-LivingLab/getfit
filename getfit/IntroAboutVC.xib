@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -12,21 +12,40 @@
                 <outlet property="donateLabel" destination="bNk-EY-ODH" id="ToJ-AV-8c2"/>
                 <outlet property="donateSensorLabel" destination="Y2n-RG-Ph4" id="gQY-RC-ucr"/>
                 <outlet property="donateSwitch" destination="1PR-Ub-xUx" id="VVS-lh-tz8"/>
+                <outlet property="introTextView" destination="eHs-PH-bZ7" id="98k-hD-o4W"/>
                 <outlet property="noNetworkLabel" destination="O19-fV-7wp" id="wXP-N2-xTL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="94" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="eHs-PH-bZ7">
-                    <rect key="frame" x="8" y="75" width="584" height="397"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="eHs-PH-bZ7">
+                    <rect key="frame" x="8" y="59" width="584" height="386"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <string key="text">A DataHub account will be automatically created for you.  To access DataHub login using the username and password found on “Info/About” tab. 
+
+Logging Activities
+
+Users can “record” activity data using the Activity Tracking Timer.  User selects Activity and Intensity (optional), and hits Start in order to begin recording activity data.   Whenever possible users should keep phone on them during workout in order to log mobile sensor data.   When activity is complete, press Stop and data will be saved and uploaded to getfit@mit [activityname; intensity; duration] and DataHub [activityname; intensity; duration; and sensor data]
+
+Sensor data includes: motion sensors (gyroscope, accelerometer), activity info, position data and basic device info.  It does not include call logs, audio, or video. 
+
+Users can record activity data using “manual entry” mode which allows user to submit  [activityname; intensity; duration] to getfit@mit and to DataHub.  In “manual entry” mode no sensor data is logged or stored.
+
+Data
+
+This app will send your data to getfit@mit for the purposes of the Challenge and to DataHub for research.   Data is stored in a secure database at MIT.  Users will be able to login, access and edit their own personal data via their DataHub account.  By using this app, users consent to sharing the data with the MIT Living Lab team.  For research purposes, your data will be de-identified and combined with other user data for analysis.  You can view or export your data any time you want.  You can enable, pause or disable Continuous Data Logging Mode at any time.  You may withdraw your consent and discontinue participation at any time.
+
+Consent
+
+By entering your name and date then tapping Agree you consent to participate in the study and share your data.
+</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
                 </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bX0-4O-cu2">
                     <rect key="frame" x="160" y="487" width="280" height="49"/>
@@ -62,12 +81,12 @@
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gn-77-di9">
-                    <rect key="frame" x="236" y="453" width="128" height="34"/>
+                    <rect key="frame" x="271" y="453" width="57" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="meg-Q3-Bvd"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <state key="normal" title="Tap to Continue">
+                    <state key="normal" title="I Agree">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="default">
@@ -88,12 +107,12 @@
                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Network Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O19-fV-7wp">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Network Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O19-fV-7wp">
                     <rect key="frame" x="8" y="495" width="584" height="41"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="41" id="MZk-zp-bZh"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -104,27 +123,28 @@
                 <constraint firstItem="O19-fV-7wp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="315-wh-1a3"/>
                 <constraint firstItem="bX0-4O-cu2" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="36" id="7Kj-Jo-tgL"/>
                 <constraint firstAttribute="centerX" secondItem="1gn-77-di9" secondAttribute="centerX" constant="-0.5" id="Abb-LP-eHe"/>
-                <constraint firstItem="bNk-EY-ODH" firstAttribute="leading" secondItem="eHs-PH-bZ7" secondAttribute="leading" id="BCl-w8-Fno"/>
+                <constraint firstItem="eHs-PH-bZ7" firstAttribute="leading" secondItem="O19-fV-7wp" secondAttribute="leading" id="Fsy-7G-y5a"/>
                 <constraint firstItem="bNk-EY-ODH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Gxn-m9-8BA"/>
                 <constraint firstItem="bNk-EY-ODH" firstAttribute="top" secondItem="O19-fV-7wp" secondAttribute="bottom" constant="4" id="IhF-PC-eAU"/>
                 <constraint firstItem="bNk-EY-ODH" firstAttribute="top" secondItem="bX0-4O-cu2" secondAttribute="bottom" constant="4" id="KYG-U6-o9Q"/>
-                <constraint firstItem="eHs-PH-bZ7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="LS0-Oc-WAF"/>
                 <constraint firstAttribute="trailing" secondItem="bNk-EY-ODH" secondAttribute="trailing" constant="8" id="RNa-fR-Wtp"/>
+                <constraint firstItem="1gn-77-di9" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="8" symbolic="YES" id="Vru-iB-Dor"/>
                 <constraint firstAttribute="centerX" secondItem="bX0-4O-cu2" secondAttribute="centerX" id="YKA-Ig-oON"/>
                 <constraint firstItem="bNk-EY-ODH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="ZKm-eq-x2e"/>
                 <constraint firstItem="bX0-4O-cu2" firstAttribute="top" secondItem="1gn-77-di9" secondAttribute="bottom" id="ZWt-y5-530"/>
                 <constraint firstItem="1gn-77-di9" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="8" id="a0N-bR-u74"/>
                 <constraint firstAttribute="bottom" secondItem="bX0-4O-cu2" secondAttribute="bottom" constant="25" id="c2w-XS-jSz"/>
+                <constraint firstItem="eHs-PH-bZ7" firstAttribute="trailing" secondItem="O19-fV-7wp" secondAttribute="trailing" id="d15-rf-iBz"/>
                 <constraint firstItem="eHs-PH-bZ7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="h4l-F1-48S"/>
                 <constraint firstAttribute="centerX" secondItem="1gn-77-di9" secondAttribute="centerX" id="hUm-UY-Wgc"/>
                 <constraint firstItem="bX0-4O-cu2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="154" id="iVi-Vp-2IO"/>
                 <constraint firstAttribute="bottom" secondItem="bNk-EY-ODH" secondAttribute="bottom" id="j7C-Ze-V76"/>
                 <constraint firstItem="bNk-EY-ODH" firstAttribute="top" secondItem="bX0-4O-cu2" secondAttribute="bottom" constant="4" id="jE2-Ck-stq"/>
-                <constraint firstItem="bNk-EY-ODH" firstAttribute="trailing" secondItem="eHs-PH-bZ7" secondAttribute="trailing" id="jdi-Wd-e2Q"/>
                 <constraint firstItem="bX0-4O-cu2" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="15" id="l9O-47-sVF"/>
                 <constraint firstItem="bNk-EY-ODH" firstAttribute="centerX" secondItem="bX0-4O-cu2" secondAttribute="centerX" id="mts-BI-z1T"/>
                 <constraint firstItem="1gn-77-di9" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="2" id="nS1-gz-H7c"/>
                 <constraint firstAttribute="centerX" secondItem="1gn-77-di9" secondAttribute="centerX" id="npW-li-9ca"/>
+                <constraint firstItem="eHs-PH-bZ7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="59" id="p5c-AP-7av"/>
                 <constraint firstAttribute="bottom" secondItem="bNk-EY-ODH" secondAttribute="bottom" id="uTD-XY-t3W"/>
                 <constraint firstItem="1gn-77-di9" firstAttribute="top" secondItem="eHs-PH-bZ7" secondAttribute="bottom" constant="8" id="vFP-kz-uey"/>
                 <constraint firstAttribute="bottom" secondItem="1gn-77-di9" secondAttribute="bottom" constant="60" id="vve-4O-Xe7"/>
@@ -138,16 +158,17 @@
                     <exclude reference="h4l-F1-48S"/>
                     <exclude reference="yg4-Zd-BdR"/>
                     <exclude reference="yte-BH-F7W"/>
+                    <exclude reference="7Kj-Jo-tgL"/>
+                    <exclude reference="YKA-Ig-oON"/>
+                    <exclude reference="c2w-XS-jSz"/>
+                    <exclude reference="iVi-Vp-2IO"/>
+                    <exclude reference="l9O-47-sVF"/>
                     <exclude reference="Abb-LP-eHe"/>
                     <exclude reference="a0N-bR-u74"/>
                     <exclude reference="hUm-UY-Wgc"/>
                     <exclude reference="nS1-gz-H7c"/>
                     <exclude reference="vFP-kz-uey"/>
                     <exclude reference="vve-4O-Xe7"/>
-                    <exclude reference="7Kj-Jo-tgL"/>
-                    <exclude reference="YKA-Ig-oON"/>
-                    <exclude reference="c2w-XS-jSz"/>
-                    <exclude reference="iVi-Vp-2IO"/>
                     <exclude reference="Gxn-m9-8BA"/>
                     <exclude reference="KYG-U6-o9Q"/>
                     <exclude reference="RNa-fR-Wtp"/>
@@ -155,7 +176,7 @@
                     <exclude reference="z9a-lu-nXu"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="186" y="183"/>
+            <point key="canvasLocation" x="186" y="138"/>
         </view>
     </objects>
 </document>

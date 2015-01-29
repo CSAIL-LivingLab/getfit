@@ -19,6 +19,7 @@
 - (IBAction)donateChange:(id)sender;
 
 
+@property (weak, nonatomic) IBOutlet UITextView *introTextView;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UISwitch *donateSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *donateSensorLabel;

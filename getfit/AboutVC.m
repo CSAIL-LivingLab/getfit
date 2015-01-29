@@ -44,21 +44,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.mainScrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    //self.mainScrollView.contentSize = CGSizeMake(320, 900);
+    //[self.mainScrollView setNeedsLayout];
+
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
     
-    pauseArr = [[NSArray alloc] initWithObjects:@[@"Resume Data Donation", @0],
-                @[@"10 min", @10],
-                @[@"30 min", @30],
-                @[@"1 hr", @60],
-                @[@"2 hr", @120],
-                @[@"5 hr", @300],
-                @[@"10 hr", @600],
-                @[@"1 day", @1440],
-                @[@"1 week", @10080],
-                @[@"Forever", @999],
-                nil];
+    
+    
+
+    
+    //setup title labels colors
+    [_appTitle setTextColor:greenColor];
+    [_datahubTitle setTextColor:greenColor];
+    [_sensingTitle setTextColor:greenColor];
+    [_livingLabTitle setTextColor:greenColor];
+    
+    // setup credentialsLabel
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username = [defaults objectForKey:@"username"];
+    NSString *password = [defaults objectForKey:@"password"];
+    NSString *credentialsText = [NSString stringWithFormat:@"username: %@\npassword: %@", username, password];
+    [_credentialsLabel setText:credentialsText];
+    
+    
     
     // setup the pauseButton
     [_pauseButton setTitle:kPAUSE_TITLE forState:UIControlStateNormal];
@@ -74,20 +84,48 @@
     _pauseButton.titleLabel.numberOfLines = 2;
     _pauseButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
-    // setup credentialsLabel
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *username = [defaults objectForKey:@"username"];
-    NSString *password = [defaults objectForKey:@"password"];
-    NSString *credentialsText = [NSString stringWithFormat:@"username: %@\npassword: %@", username, password];
-    [_credentialsLabel setText:credentialsText];
+
     
-    //setup title labels colors
-    [_appTitle setTextColor:greenColor];
-    [_datahubTitle setTextColor:greenColor];
-    [_sensingTitle setTextColor:greenColor];
+    // setup the pause Array
+    pauseArr = [[NSArray alloc] initWithObjects:@[@"Resume Data Donation", @0],
+                @[@"10 min", @10],
+                @[@"30 min", @30],
+                @[@"1 hr", @60],
+                @[@"2 hr", @120],
+                @[@"5 hr", @300],
+                @[@"10 hr", @600],
+                @[@"1 day", @1440],
+                @[@"1 week", @10080],
+                @[@"Forever", @999],
+                nil];
+
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    // setup content text
+    [_appLabel setScrollEnabled:NO];
+    [_appLabel setEditable:NO];
+    [_appLabel sizeToFit];
+    
+    
+    [_datahubLabel setScrollEnabled:NO];
+    [_datahubLabel setEditable:NO];
+    [_datahubLabel sizeToFit];
+    _datahubLabel.dataDetectorTypes = UIDataDetectorTypeLink;
+    [_datahubLabel setTintColor:greenColor];
+
+    
+    [_sensingLabel setScrollEnabled:NO];
+    [_sensingLabel setEditable:NO];
+    [_sensingLabel sizeToFit];
+    
+    
+    [_livingLabLabel setScrollEnabled:NO];
+    [_livingLabLabel setEditable:NO];
+    [_livingLabLabel sizeToFit];
+    _livingLabLabel.dataDetectorTypes = UIDataDetectorTypeLink;
+    [_livingLabLabel setTintColor:greenColor];
+    
     // inform the user of whether sensors are on or not
     [self adjustResumeLabelText];
 }
@@ -184,7 +222,7 @@
         bodyStr = @"Sensors currently enabled.";
         [_pauseButton setTitle:kPAUSE_TITLE forState:UIControlStateNormal];
     } else if ([pauseUntil compare:[NSDate distantFuture]] == NSOrderedSame) {
-        bodyStr = @"Sensors colleciton currently disabled forever.";
+        bodyStr = @"Sensor collection currently disabled forever.";
         [_pauseButton setTitle:kRESUME_TITLE forState:UIControlStateNormal];
     } else {
         bodyStr = [NSString stringWithFormat:@"Sensors resuming at %@", dateString];
