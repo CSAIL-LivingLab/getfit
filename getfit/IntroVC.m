@@ -188,6 +188,8 @@
     [explanationView setTextAlignment:NSTextAlignmentCenter];
     [explanationView setDataDetectorTypes:UIDataDetectorTypeAll];
     [secondView addSubview:explanationView];
+    
+    // 
 
     
     self.view = secondView;
