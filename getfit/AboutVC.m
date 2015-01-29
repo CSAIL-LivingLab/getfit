@@ -45,7 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.mainScrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.mainScrollView.contentSize = CGSizeMake(320, 640);
+    //self.mainScrollView.contentSize = CGSizeMake(320, 900);
     //[self.mainScrollView setNeedsLayout];
 
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
