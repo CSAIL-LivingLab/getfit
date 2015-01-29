@@ -56,7 +56,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.tabBarItem.title = @"Timer";
+        self.tabBarItem.title = @"Logger";
         UIImage *image = [UIImage imageNamed:@"clock.png"];
         self.tabBarItem.image = image;
     }
