@@ -44,7 +44,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.mainScrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.mainScrollView.contentSize = CGSizeMake(320, 640);
+    //[self.mainScrollView setNeedsLayout];
+
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
     
@@ -219,7 +222,7 @@
         bodyStr = @"Sensors currently enabled.";
         [_pauseButton setTitle:kPAUSE_TITLE forState:UIControlStateNormal];
     } else if ([pauseUntil compare:[NSDate distantFuture]] == NSOrderedSame) {
-        bodyStr = @"Sensors colleciton currently disabled forever.";
+        bodyStr = @"Sensor collection currently disabled forever.";
         [_pauseButton setTitle:kRESUME_TITLE forState:UIControlStateNormal];
     } else {
         bodyStr = [NSString stringWithFormat:@"Sensors resuming at %@", dateString];

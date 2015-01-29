@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -13,6 +13,7 @@
                 <outlet property="datahubTitle" destination="ZtX-G6-Nd2" id="odq-pN-Z0j"/>
                 <outlet property="livingLabLabel" destination="vLQ-WL-ADh" id="R0C-9u-3Oz"/>
                 <outlet property="livingLabTitle" destination="6L0-bc-3wR" id="IL8-2a-m8i"/>
+                <outlet property="mainScrollView" destination="lht-Ux-go8" id="RuU-cq-pwf"/>
                 <outlet property="pauseButton" destination="6kr-4l-TeN" id="99g-KL-hTx"/>
                 <outlet property="resumeLabel" destination="rjw-WC-4fz" id="l29-ih-W8e"/>
                 <outlet property="sensingLabel" destination="5EV-za-Xuy" id="4y2-2e-1lt"/>
@@ -25,180 +26,233 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About This App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfm-I5-TNA">
-                    <rect key="frame" x="243" y="12" width="115" height="19.5"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </label>
-                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sensing will resume in XXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjw-WC-4fz">
-                    <rect key="frame" x="215" y="259.5" width="170.5" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                </label>
-                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Datahub User Credentials" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zt-7X-uuo">
-                    <rect key="frame" x="222" y="141" width="155" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About DataHub" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtX-G6-Nd2">
-                    <rect key="frame" x="243" y="81" width="114.5" height="19.5"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About Sensing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwh-gi-KAJ">
-                    <rect key="frame" x="246" y="172" width="109" height="19.5"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About Living Lab" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L0-bc-3wR">
-                    <rect key="frame" x="237" y="408.5" width="126" height="19.5"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="52R-uS-RhZ">
-                    <rect key="frame" x="8" y="31" width="584" height="45"/>
-                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lht-Ux-go8">
+                    <rect key="frame" x="0.0" y="20" width="320" height="564"/>
+                    <subviews>
+                        <view clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CwA-my-h4I">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="900"/>
+                            <subviews>
+                                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="vLQ-WL-ADh">
+                                    <rect key="frame" x="7" y="499" width="305" height="40"/>
+                                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <accessibilityTraits key="traits" none="YES" link="YES"/>
+                                    </accessibility>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="JdG-fi-EZ4"/>
+                                        <constraint firstAttribute="height" constant="40" id="OEN-Uo-L2N"/>
+                                        <constraint firstAttribute="width" constant="305" id="sKy-TC-Tqa"/>
+                                        <constraint firstAttribute="height" constant="40" id="vWH-RQ-wXA"/>
+                                    </constraints>
+                                    <string key="text">The MIT Big Data Living Lab is building scalable data management tools and applications that enable researchers at MIT to demo new approaches to collecting, combining and using data on campus.  www.livinglab.mit.edu</string>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="OEN-Uo-L2N"/>
+                                            <exclude reference="vWH-RQ-wXA"/>
+                                        </mask>
+                                    </variation>
+                                </textView>
+                                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="5EV-za-Xuy">
+                                    <rect key="frame" x="7" y="235" width="305" height="100"/>
+                                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <accessibilityTraits key="traits" none="YES" link="YES"/>
+                                    </accessibility>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="XyR-eD-XwS"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="cCX-gc-Ff0"/>
+                                        <constraint firstAttribute="width" constant="305" id="owP-AH-ZVz"/>
+                                    </constraints>
+                                    <string key="text">Continuous Data Logging Mode allows users to gather mobile sensor data and upload to personal DataHub account.  Enabling this mode allows you to donate continuous sensor data* to MIT Big Data Living Lab project for research.</string>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="XyR-eD-XwS"/>
+                                        </mask>
+                                    </variation>
+                                </textView>
+                                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1ox-GT-4pt">
+                                    <rect key="frame" x="7" y="115" width="305" height="60"/>
+                                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <accessibilityTraits key="traits" none="YES" link="YES"/>
+                                    </accessibility>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="305" id="AQi-P4-Ae1"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="K4i-QI-1pp"/>
+                                        <constraint firstAttribute="height" constant="40" id="LEa-fI-Aaz"/>
+                                    </constraints>
+                                    <string key="text">DataHub is a unified data management and collaboration platform under development at MIT CSAIL. You can access your personal data at https://www.datahub.csail.mit.edu</string>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="LEa-fI-Aaz"/>
+                                        </mask>
+                                    </variation>
+                                </textView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="About This App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfm-I5-TNA">
+                                    <rect key="frame" x="102" y="0.0" width="115" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="OIK-0x-QIS"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="52R-uS-RhZ">
+                                    <rect key="frame" x="7" y="22" width="305" height="60"/>
+                                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="8Uz-db-TjP"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="Bl8-VS-wc6"/>
+                                        <constraint firstAttribute="width" constant="305" id="G4s-pV-OHN"/>
+                                    </constraints>
+                                    <string key="text">The app allows users to record and submit activity data to getfit@mit and upload mobile activity data in their personal DataHub account.</string>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="8Uz-db-TjP"/>
+                                        </mask>
+                                    </variation>
+                                </textView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="About DataHub" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtX-G6-Nd2">
+                                    <rect key="frame" x="95" y="92" width="130" height="19.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="130" id="SzG-pq-YoL"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Datahub User Credentials" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zt-7X-uuo">
+                                    <rect key="frame" x="83" y="177.5" width="155" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="About Sensing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwh-gi-KAJ">
+                                    <rect key="frame" x="106" y="208.5" width="109" height="19.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Sensing will resume in XXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjw-WC-4fz">
+                                    <rect key="frame" x="0.0" y="326" width="320" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="320" id="xEE-yG-clW"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kr-4l-TeN">
+                                    <rect key="frame" x="105" y="350" width="110" height="110"/>
+                                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="110" id="CE9-Io-H26"/>
+                                        <constraint firstAttribute="height" constant="110" id="NvY-ay-0C7"/>
+                                    </constraints>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="About Living Lab" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L0-bc-3wR">
+                                    <rect key="frame" x="97" y="472" width="126" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="ate-t4-KLa"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="centerX" secondItem="rjw-WC-4fz" secondAttribute="centerX" id="3z7-x9-GwY"/>
+                                <constraint firstAttribute="centerX" secondItem="52R-uS-RhZ" secondAttribute="centerX" id="9I5-PO-OBa"/>
+                                <constraint firstItem="6kr-4l-TeN" firstAttribute="top" secondItem="rjw-WC-4fz" secondAttribute="bottom" constant="8" id="A1p-yp-DKB"/>
+                                <constraint firstAttribute="centerX" secondItem="jfm-I5-TNA" secondAttribute="centerX" id="FnC-A4-ibL"/>
+                                <constraint firstAttribute="bottom" secondItem="vLQ-WL-ADh" secondAttribute="bottom" constant="430" id="Fya-AT-irj"/>
+                                <constraint firstAttribute="centerX" secondItem="rwh-gi-KAJ" secondAttribute="centerX" id="Hce-2a-2fg"/>
+                                <constraint firstItem="6kr-4l-TeN" firstAttribute="top" secondItem="5EV-za-Xuy" secondAttribute="bottom" constant="15" id="Hx5-ua-lp7"/>
+                                <constraint firstItem="1ox-GT-4pt" firstAttribute="top" secondItem="ZtX-G6-Nd2" secondAttribute="bottom" constant="3" id="Lml-9e-0st"/>
+                                <constraint firstAttribute="centerX" secondItem="6L0-bc-3wR" secondAttribute="centerX" id="MM9-Ee-C2N"/>
+                                <constraint firstAttribute="centerX" secondItem="1ox-GT-4pt" secondAttribute="centerX" id="MaI-nG-PCD"/>
+                                <constraint firstItem="6L0-bc-3wR" firstAttribute="top" secondItem="6kr-4l-TeN" secondAttribute="bottom" constant="12" id="RBq-Qc-gWm"/>
+                                <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="52R-uS-RhZ" secondAttribute="bottom" constant="10" id="RCr-Ht-TgF"/>
+                                <constraint firstItem="vLQ-WL-ADh" firstAttribute="top" secondItem="6L0-bc-3wR" secondAttribute="bottom" constant="7" id="RED-9a-zOB"/>
+                                <constraint firstItem="jfm-I5-TNA" firstAttribute="top" secondItem="CwA-my-h4I" secondAttribute="top" id="Url-XY-8vS"/>
+                                <constraint firstAttribute="height" constant="600" id="VXL-7y-2CV"/>
+                                <constraint firstAttribute="centerX" secondItem="ZtX-G6-Nd2" secondAttribute="centerX" id="Xtj-H6-r95"/>
+                                <constraint firstAttribute="centerX" secondItem="6kr-4l-TeN" secondAttribute="centerX" id="YG6-1L-AF5"/>
+                                <constraint firstAttribute="centerX" secondItem="vLQ-WL-ADh" secondAttribute="centerX" id="ci5-fd-DYk"/>
+                                <constraint firstItem="6Zt-7X-uuo" firstAttribute="top" secondItem="1ox-GT-4pt" secondAttribute="bottom" constant="3" id="mcf-ku-SW7"/>
+                                <constraint firstItem="52R-uS-RhZ" firstAttribute="top" secondItem="jfm-I5-TNA" secondAttribute="bottom" constant="2" id="nVW-pc-2jx"/>
+                                <constraint firstItem="5EV-za-Xuy" firstAttribute="top" secondItem="rwh-gi-KAJ" secondAttribute="bottom" constant="7" id="oM9-FT-bbg"/>
+                                <constraint firstAttribute="width" constant="320" id="r9v-bV-v2g"/>
+                                <constraint firstAttribute="centerX" secondItem="6Zt-7X-uuo" secondAttribute="centerX" id="x3d-um-ae1"/>
+                                <constraint firstAttribute="centerX" secondItem="5EV-za-Xuy" secondAttribute="centerX" id="xQb-MH-hTc"/>
+                                <constraint firstItem="rwh-gi-KAJ" firstAttribute="top" secondItem="6Zt-7X-uuo" secondAttribute="bottom" constant="15" id="yan-tm-gNn"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="r9v-bV-v2g"/>
+                                    <exclude reference="Fya-AT-irj"/>
+                                </mask>
+                            </variation>
+                        </view>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="8Uz-db-TjP"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="Bl8-VS-wc6"/>
+                        <constraint firstItem="CwA-my-h4I" firstAttribute="leading" secondItem="lht-Ux-go8" secondAttribute="leading" id="2nQ-Hg-fJq"/>
+                        <constraint firstAttribute="centerX" secondItem="CwA-my-h4I" secondAttribute="centerX" id="86i-fF-lEW"/>
+                        <constraint firstItem="CwA-my-h4I" firstAttribute="leading" secondItem="lht-Ux-go8" secondAttribute="leading" id="Cdi-F3-qDj"/>
+                        <constraint firstAttribute="width" constant="320" id="DMo-tl-7y6"/>
+                        <constraint firstItem="CwA-my-h4I" firstAttribute="leading" secondItem="lht-Ux-go8" secondAttribute="leading" id="YOW-Yl-ilK"/>
+                        <constraint firstItem="CwA-my-h4I" firstAttribute="top" secondItem="lht-Ux-go8" secondAttribute="top" id="df3-vc-9xx"/>
+                        <constraint firstItem="CwA-my-h4I" firstAttribute="top" secondItem="lht-Ux-go8" secondAttribute="top" id="feA-m6-cLc"/>
+                        <constraint firstItem="CwA-my-h4I" firstAttribute="top" secondItem="lht-Ux-go8" secondAttribute="top" id="nnu-XT-BG9"/>
+                        <constraint firstAttribute="height" constant="564" id="o9N-GM-6tb"/>
                     </constraints>
-                    <string key="text">The app allows users to record and submit activity data to getfit@mit and upload mobile activity data in their personal DataHub account.</string>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="8Uz-db-TjP"/>
+                            <exclude reference="DMo-tl-7y6"/>
+                            <exclude reference="o9N-GM-6tb"/>
+                            <exclude reference="2nQ-Hg-fJq"/>
+                            <exclude reference="YOW-Yl-ilK"/>
+                            <exclude reference="df3-vc-9xx"/>
+                            <exclude reference="nnu-XT-BG9"/>
                         </mask>
                     </variation>
-                </textView>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1ox-GT-4pt">
-                    <rect key="frame" x="8" y="101" width="584" height="40"/>
-                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                    <accessibility key="accessibilityConfiguration">
-                        <accessibilityTraits key="traits" none="YES" link="YES"/>
-                    </accessibility>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="K4i-QI-1pp"/>
-                        <constraint firstAttribute="height" constant="40" id="LEa-fI-Aaz"/>
-                    </constraints>
-                    <string key="text">DataHub is a unified data management and collaboration platform under development at MIT CSAIL. You can access your personal data at https://www.datahub.csail.mit.edu</string>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="LEa-fI-Aaz"/>
-                        </mask>
-                    </variation>
-                </textView>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="5EV-za-Xuy">
-                    <rect key="frame" x="8" y="191.5" width="584" height="60"/>
-                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                    <accessibility key="accessibilityConfiguration">
-                        <accessibilityTraits key="traits" none="YES" link="YES"/>
-                    </accessibility>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="XyR-eD-XwS"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="cCX-gc-Ff0"/>
-                    </constraints>
-                    <string key="text">Continuous Data Logging Mode allows users to gather mobile sensor data and upload to personal DataHub account.  Enabling this mode allows you to donate continuous sensor data* to MIT Big Data Living Lab project for research.</string>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="XyR-eD-XwS"/>
-                        </mask>
-                    </variation>
-                </textView>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="vLQ-WL-ADh">
-                    <rect key="frame" x="8" y="428" width="584" height="40"/>
-                    <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                    <accessibility key="accessibilityConfiguration">
-                        <accessibilityTraits key="traits" none="YES" link="YES"/>
-                    </accessibility>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="JdG-fi-EZ4"/>
-                        <constraint firstAttribute="height" constant="40" id="OEN-Uo-L2N"/>
-                    </constraints>
-                    <string key="text">The MIT Big Data Living Lab is building scalable data management tools and applications that enable researchers at MIT to demo new approaches to collecting, combining and using data on campus.  www.livinglab.mit.edu</string>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="OEN-Uo-L2N"/>
-                        </mask>
-                    </variation>
-                </textView>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kr-4l-TeN">
-                    <rect key="frame" x="245" y="283.5" width="110" height="110"/>
-                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="110" id="CE9-Io-H26"/>
-                        <constraint firstAttribute="height" constant="110" id="NvY-ay-0C7"/>
-                    </constraints>
-                    <state key="normal" title="Button">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="jfm-I5-TNA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="12" id="0wk-aH-ROT"/>
-                <constraint firstItem="52R-uS-RhZ" firstAttribute="top" secondItem="jfm-I5-TNA" secondAttribute="bottom" id="2Ye-FD-SVC"/>
-                <constraint firstAttribute="centerX" secondItem="ZtX-G6-Nd2" secondAttribute="centerX" id="8dV-zO-dMS"/>
-                <constraint firstItem="6Zt-7X-uuo" firstAttribute="top" secondItem="1ox-GT-4pt" secondAttribute="bottom" id="9Wb-jt-Liy"/>
-                <constraint firstItem="vLQ-WL-ADh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="FnK-Qc-QFK"/>
-                <constraint firstItem="1ox-GT-4pt" firstAttribute="top" secondItem="ZtX-G6-Nd2" secondAttribute="bottom" id="JdL-Sf-fkz"/>
-                <constraint firstAttribute="trailing" secondItem="52R-uS-RhZ" secondAttribute="trailing" constant="8" id="KuI-bB-ekU"/>
-                <constraint firstAttribute="trailing" secondItem="52R-uS-RhZ" secondAttribute="trailing" constant="8" id="OT3-24-SIu"/>
-                <constraint firstItem="52R-uS-RhZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Ret-Kh-5Ab"/>
-                <constraint firstItem="vLQ-WL-ADh" firstAttribute="top" secondItem="6L0-bc-3wR" secondAttribute="bottom" id="S2X-97-vKk"/>
-                <constraint firstAttribute="centerX" secondItem="rjw-WC-4fz" secondAttribute="centerX" id="V01-z0-vpu"/>
-                <constraint firstItem="5EV-za-Xuy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="XNC-ql-x9X"/>
-                <constraint firstItem="rjw-WC-4fz" firstAttribute="top" secondItem="5EV-za-Xuy" secondAttribute="bottom" constant="8" id="XyI-co-AhX"/>
-                <constraint firstAttribute="trailing" secondItem="vLQ-WL-ADh" secondAttribute="trailing" constant="8" id="Y1W-X6-LsS"/>
-                <constraint firstAttribute="centerX" secondItem="6kr-4l-TeN" secondAttribute="centerX" id="cdz-1w-AOK"/>
-                <constraint firstAttribute="centerX" secondItem="6L0-bc-3wR" secondAttribute="centerX" id="dNj-IU-lUu"/>
-                <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="52R-uS-RhZ" secondAttribute="bottom" constant="5" id="dPN-Ri-ZnM"/>
-                <constraint firstItem="1ox-GT-4pt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="eur-EP-RMx"/>
-                <constraint firstItem="52R-uS-RhZ" firstAttribute="top" secondItem="jfm-I5-TNA" secondAttribute="bottom" id="flh-uw-hWz"/>
-                <constraint firstItem="6L0-bc-3wR" firstAttribute="top" secondItem="6kr-4l-TeN" secondAttribute="bottom" constant="15" id="ikY-kJ-NX2"/>
-                <constraint firstAttribute="trailing" secondItem="5EV-za-Xuy" secondAttribute="trailing" constant="8" id="jUB-sc-x7W"/>
-                <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="52R-uS-RhZ" secondAttribute="bottom" constant="5" id="jsm-wK-ztU"/>
-                <constraint firstAttribute="centerX" secondItem="rwh-gi-KAJ" secondAttribute="centerX" id="mJ9-U7-kUz"/>
-                <constraint firstItem="6kr-4l-TeN" firstAttribute="top" secondItem="rjw-WC-4fz" secondAttribute="bottom" constant="8" id="qQY-iB-n5Q"/>
-                <constraint firstAttribute="trailing" secondItem="1ox-GT-4pt" secondAttribute="trailing" constant="8" id="seu-Zv-oqo"/>
-                <constraint firstItem="rwh-gi-KAJ" firstAttribute="top" secondItem="6Zt-7X-uuo" secondAttribute="bottom" constant="15" id="tVD-DK-O8I"/>
-                <constraint firstItem="52R-uS-RhZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="thw-Wy-ZAu"/>
-                <constraint firstAttribute="centerX" secondItem="6Zt-7X-uuo" secondAttribute="centerX" id="udq-JK-RQz"/>
-                <constraint firstAttribute="centerX" secondItem="jfm-I5-TNA" secondAttribute="centerX" constant="-0.5" id="vah-qJ-44S"/>
-                <constraint firstItem="5EV-za-Xuy" firstAttribute="top" secondItem="rwh-gi-KAJ" secondAttribute="bottom" id="vet-Ar-HiU"/>
-                <constraint firstItem="52R-uS-RhZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ySK-bo-4jM"/>
+                <constraint firstItem="lht-Ux-go8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="DMQ-hy-ynZ"/>
+                <constraint firstAttribute="bottom" secondItem="lht-Ux-go8" secondAttribute="bottom" constant="16" id="FEX-WX-FVQ"/>
+                <constraint firstItem="lht-Ux-go8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KfY-QZ-UfP"/>
+                <constraint firstAttribute="centerX" secondItem="lht-Ux-go8" secondAttribute="centerX" id="cGu-80-aXX"/>
+                <constraint firstItem="lht-Ux-go8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vH8-Hs-ImW"/>
+                <constraint firstAttribute="trailing" secondItem="lht-Ux-go8" secondAttribute="trailing" id="xYM-Iu-jnt"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="2Ye-FD-SVC"/>
-                    <exclude reference="OT3-24-SIu"/>
-                    <exclude reference="thw-Wy-ZAu"/>
-                    <exclude reference="ySK-bo-4jM"/>
-                    <exclude reference="dPN-Ri-ZnM"/>
+                    <exclude reference="vH8-Hs-ImW"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="139" y="154"/>
+            <point key="canvasLocation" x="103" y="158"/>
         </view>
     </objects>
 </document>
