@@ -187,9 +187,22 @@
     [explanationView setEditable:NO];
     [explanationView setTextAlignment:NSTextAlignmentCenter];
     [explanationView setDataDetectorTypes:UIDataDetectorTypeAll];
+    [explanationView sizeToFit];
     [secondView addSubview:explanationView];
     
-    // 
+    CGFloat explanationOffset =explanationView.frame.origin.y + explanationView.bounds.size.height;
+    
+    // donate
+    donateSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(30, explanationOffset + 20, 60, 40)];
+    [secondView addSubview:donateSwitch];
+    
+    donateSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, explanationOffset + 15, 330, 40)];
+    [donateSwitchLabel setText:@"Donate Data to Living Labs"];
+    [donateSwitchLabel setFont:[UIFont systemFontOfSize:15]];
+    [secondView addSubview:donateSwitchLabel];
+//    donateSwitchLabel;
+//    donateExplanationLabel;
+    
 
     
     self.view = secondView;
