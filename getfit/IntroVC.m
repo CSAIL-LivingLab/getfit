@@ -192,14 +192,47 @@
     
     CGFloat explanationOffset =explanationView.frame.origin.y + explanationView.bounds.size.height;
     
-    // donate
-    donateSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(30, explanationOffset + 20, 60, 40)];
+    // button
+    goToGetFit = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-50, explanationOffset + 5, 100, 100)];
+    goToGetFit.layer.cornerRadius = goToGetFit.bounds.size.width/2;
+    goToGetFit.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    goToGetFit.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [goToGetFit.layer setBackgroundColor:[blueColor CGColor]];
+    [goToGetFit setTitle:@"Go to GetFit" forState:UIControlStateNormal];
+    [goToGetFit.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    
+//    _pauseButton.layer.cornerRadius = _pauseButton.bounds.size.width/2;
+//    _pauseButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+//    _pauseButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+//    _pauseButton.layer.borderWidth = 2.0;
+//    [_pauseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [[_pauseButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:15]];
+//    [_pauseButton.layer setBackgroundColor:[blueColor CGColor]];
+
+    
+    
+    [goToGetFit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [secondView addSubview:goToGetFit];
+    
+    // donate things are bottom alligned
+    donateSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(30, bounds.height - 100, 60, 40)];
+    donateSwitch.on = YES;
     [secondView addSubview:donateSwitch];
     
-    donateSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, explanationOffset + 15, 330, 40)];
+    donateSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, bounds.height - 105 , 330, 40)];
     [donateSwitchLabel setText:@"Donate Data to Living Labs"];
     [donateSwitchLabel setFont:[UIFont systemFontOfSize:15]];
     [secondView addSubview:donateSwitchLabel];
+    
+    donateExplanationLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, bounds.height - 65, bounds.width-16, 60)];
+    donateExplanationLabel.numberOfLines = 0;
+    [donateExplanationLabel setText:@"Donating sensor data requires your phone location.\nYour data belongs to you. At any time, you can stop collection from the phone, or delete your data from datahub, where it is stored."];
+    [donateExplanationLabel setTextColor:[UIColor darkGrayColor]];
+    [donateExplanationLabel setTextAlignment:NSTextAlignmentCenter];
+    [donateExplanationLabel setFont:[UIFont systemFontOfSize:12]];
+    [secondView addSubview:donateExplanationLabel];
+    
+    
 //    donateSwitchLabel;
 //    donateExplanationLabel;
     
