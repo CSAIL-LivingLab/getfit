@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "OpenSense.h"
-#import "TestFlight.h"
 
 #import "IntroVC.h"
 
@@ -25,8 +24,6 @@
     NSUserDefaults *defaults;
 }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    [TestFlight takeOff:@"a802e6b6-f8c2-4f7e-ba38-234190dd2506"];
     
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
