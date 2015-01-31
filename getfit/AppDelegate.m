@@ -32,8 +32,8 @@
     [self loadMainViews];
     
     // load the intro view if the user's email isn't set
-//    if (![defaults stringForKey:@"email"]) {
-    if (YES) {
+    if (![defaults stringForKey:@"email"]) {
+//    if (YES) {
         // make sure the collector doesn't start right away
         [defaults setObject:[NSDate distantFuture] forKey:@"resumeSensorDate"];
         [defaults setObject:nil forKey:@"email"];

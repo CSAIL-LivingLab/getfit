@@ -110,7 +110,7 @@
         }
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        nsurl=[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/Shibboleth.sso/Login?target=https%3A%2F%2Fgetfit-d7-dev.mit.edu%2F%3Fq%3Dshib_login%2Ffront-page"];
+        nsurl=[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/Shibboleth.sso/Login?target=https%3A%2F%2Fgetfit-d7-dev.mit.edu%2F%3Fq%3Dshib_login%2Fdashboard"];
     }
     
     NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
