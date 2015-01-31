@@ -21,13 +21,15 @@
 #import "MinuteStore.h"
 #import "MinuteEntry.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    NSUserDefaults *defaults;
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // load intro screens on first launch
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     defaults = [NSUserDefaults standardUserDefaults];
     [self loadMainViews];
     
     // load the intro view if the user's email isn't set
@@ -53,9 +55,14 @@
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     
     // set up the location manager
-    [self setupLocationManager];
-    [NSThread sleepForTimeInterval:.5];
+    // don't do this on the first load, because on the iPhone5, it's the first thing the user will see.
+    if ([defaults stringForKey:@"email"]) {
+        [self setupLocationManager];
+        [NSThread sleepForTimeInterval:.5];
 
+    }
+    
+    
     // show
     [self.window makeKeyAndVisible];
     return YES;
@@ -117,7 +124,7 @@
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    defaults = [NSUserDefaults standardUserDefaults];
     NSDate *resumeSensorDate = [defaults objectForKey:@"resumeSensorDate"];
     
     // do nothing if it's not time to resume tracking

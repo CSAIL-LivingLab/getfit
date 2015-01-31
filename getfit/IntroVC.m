@@ -8,6 +8,8 @@
 
 #import "IntroVC.h"
 
+// only use the appDelegate for starting the location manager
+#import "AppDelegate.h"
 #include<unistd.h>
 #include<netdb.h>
 
@@ -20,6 +22,7 @@
 @implementation IntroVC {
     UIColor *blueColor;
     CGSize bounds;
+    
     
     // first view
     UIView *firstView;
@@ -53,12 +56,13 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self setTitle:@"Welcome to GetFit for iOS"];
     
     bounds = [UIScreen mainScreen].bounds.size;
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     
-//    [self loadFirstPage];
-    [self loadSecondPage];
+    [self loadFirstPage];
+//    [self loadSecondPage];
 }
 
 - (void)viewDidLoad {
@@ -80,20 +84,29 @@
     NSString *htmlString = @"<style>* {font-family: \"Helvetica Neue\"; text-align:justify;}</style><h2>Intro</h2><p>This app allows you to record your activity data on your phone and submit this activity data to getfit@mit and upload it to your personal DataHub account. You must have a getfit@mit account and a DataHub account for the app to work.</p><p>Register for getfit@mit account at <a href=\"http://getfit.mit.edu/\">getfit.mit.edu</a></p><p>A DataHub account will be automatically created for you. To access DataHub login using the username and password found on “Info/About” tab.</p><h2>Logging Activities</h2><p>Users can “record” activity data using the Activity Tracking Timer. User selects Activity and Intensity (optional), and hits Start in order to begin recording activity data. Whenever possible users should keep phone on them during workout in order to log mobile sensor data. When activity is complete, press Stop and data will be saved and uploaded to getfit@mit [activityname; intensity; duration] and DataHub [activityname; intensity; duration; and sensor data]</p><p>Sensor data includes: motion sensors (gyroscope, accelerometer), activity info, position data and basic device info. It does not include call logs, audio, or video. </p><p>Users can record activity data using “manual entry” mode which allows user to submit [activityname; intensity; duration] to getfit@mit and to DataHub. In “manual entry” mode, sensors are not activated.</p><h2>Data</h2><p>This app will send your data to getfit@mit for the purposes of the Challenge and to DataHub for research. Data is stored in a secure database at MIT. Users will be able to login, access and edit their own personal data via their DataHub account. By using this app, users consent to sharing the data with the MIT Living Lab team. For research purposes, your data will be de-identified and combined with other user data for analysis. You can view or export your data any time you want. You can enable, pause or disable Continuous Data Logging Mode at any time. You may withdraw your consent and discontinue participation at any time.</p><h2>Consent</h2><p>By entering your name and date then tapping I Agree you consent to participate in the study and share your data. </p>";
     NSData *htmlData = [htmlString dataUsingEncoding:NSUnicodeStringEncoding];
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:htmlData options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-    legalText = [[UITextView alloc] initWithFrame:CGRectMake(8, 70, bounds.width-16, bounds.height-150)];
+    legalText = [[UITextView alloc] initWithFrame:CGRectMake(8, 70, bounds.width-16, bounds.height-140)];
     legalText.editable = NO;
     legalText.attributedText = attributedString;
     [legalText setContentOffset:CGPointMake(0, -200) animated:YES];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [firstView addSubview:legalText];
     
-    CGFloat legalTextOffset = legalText.bounds.size.height + 55;
+    CGFloat legalTextOffset = legalText.frame.size.height + legalText.frame.origin.y;
     
     // accept button
-    acceptButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-60, legalTextOffset + 30, 120, 30)];
+    acceptButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-35, legalTextOffset, 70, 70)];
+    acceptButton.layer.cornerRadius = acceptButton.bounds.size.width/2;
+    acceptButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    acceptButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [acceptButton.layer setBackgroundColor:[blueColor CGColor]];
+
+//    [acceptButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [acceptButton setTitle:@"I Accept" forState:UIControlStateNormal];
-    [acceptButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [acceptButton setTitleColor:blueColor forState:UIControlStateNormal];
+    [acceptButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [acceptButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    
+    
     [firstView addSubview:acceptButton];
     
     
@@ -124,7 +137,7 @@
 - (void) loadSecondPage{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"username"];
-    NSString *email = [defaults objectForKey:@"email"];
+    NSString *password = [defaults objectForKey:@"password"];
     
     // view
     secondView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
@@ -162,20 +175,20 @@
     [secondView addSubview:passwordInfoLabel];
 
     // actual username and password
-    usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20, 65, 15)];
+    usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20, 75, 15)];
 //    [usernameLabel setBackgroundColor:[UIColor redColor]];
     [usernameLabel setTextAlignment:NSTextAlignmentLeft];
     [usernameLabel setFont:[UIFont systemFontOfSize:14]];
-//    [usernameLabel setText:username];
-    [usernameLabel setText:@"bdoijewf"];
+    [usernameLabel setText:username];
+//    [usernameLabel setText:@"bdoijewf"];
     [secondView addSubview:usernameLabel];
 
-    passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20 +20, 66, 15)];
+    passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20 +20, 75, 15)];
 //    [passwordLabel setBackgroundColor:[UIColor redColor]];
     [passwordLabel setTextAlignment:NSTextAlignmentLeft];
     [passwordLabel setFont:[UIFont systemFontOfSize:14]];
-    //    [usernameLabel setText:username];
-    [passwordLabel setText:@"bdoijewf"];
+        [passwordLabel setText:password];
+//    [passwordLabel setText:@"bdoijewf"];
     [secondView addSubview:passwordLabel];
     
     CGFloat usernamePasswordOffset = 200;
@@ -193,7 +206,7 @@
     CGFloat explanationOffset =explanationView.frame.origin.y + explanationView.bounds.size.height;
     
     // button
-    goToGetFit = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-50, explanationOffset + 5, 100, 100)];
+    goToGetFit = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-50, explanationOffset, 100, 100)];
     goToGetFit.layer.cornerRadius = goToGetFit.bounds.size.width/2;
     goToGetFit.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     goToGetFit.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -212,6 +225,7 @@
     
     
     [goToGetFit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [goToGetFit addTarget:self action:@selector(goToGetFit:) forControlEvents:UIControlEventTouchUpInside];
     [secondView addSubview:goToGetFit];
     
     // donate things are bottom alligned
@@ -231,13 +245,8 @@
     [donateExplanationLabel setTextAlignment:NSTextAlignmentCenter];
     [donateExplanationLabel setFont:[UIFont systemFontOfSize:12]];
     [secondView addSubview:donateExplanationLabel];
-    
-    
-//    donateSwitchLabel;
-//    donateExplanationLabel;
-    
 
-    
+    // finally make the second view the view
     self.view = secondView;
 }
 
@@ -258,10 +267,29 @@
     [workingView addSubview:workingSpinner];
     
     self.view = workingView;
-    
 }
 
+# pragma mark - user interaction
 
+- (void) goToGetFit:(id) sender{
+    // set the sensor resume date, etc
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (donateSwitch.isOn) {
+        [defaults setObject:[NSDate date] forKey:@"resumeSensorDate"];
+        [defaults synchronize];
+        
+        // initialize this here, because otherwise, significantLocationChange won't
+
+//        [del setupLocationManager];
+        
+    } else {
+        [defaults setObject:[NSDate distantFuture] forKey:@"resumeSensorDate"];
+        [defaults synchronize];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 # pragma mark - setup
 - (void) accept:(id) sender {
