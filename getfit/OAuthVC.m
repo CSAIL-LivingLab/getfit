@@ -157,9 +157,9 @@
         form_build_ids = [form_build_ids subarrayWithRange:NSMakeRange(indexInt, [form_build_ids count]-2)];
     }
     @catch (NSException *exception) {
-        form_tokens = @['0','0','0','0','0','0','0'];
-        form_ids = @['0','0','0','0','0','0','0'];
-        form_build_ids = @['0','0','0','0','0','0','0'];
+        form_tokens = @[@'0',@'0',@'0',@'0',@'0',@'0',@'0'];
+        form_ids = @[@'0',@'0',@'0',@'0',@'0',@'0',@'0'];
+        form_build_ids = @[@'0',@'0',@'0',@'0',@'0',@'0',@'0'];
     }
     
 //    NSLog(@"%@", form_tokens);

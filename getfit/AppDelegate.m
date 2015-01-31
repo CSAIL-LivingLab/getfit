@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "OpenSense.h"
 
-#import "IntroPageVC.h"
 #import "IntroVC.h"
 
 #import "AboutVC.h"

@@ -7,7 +7,7 @@
 //
 
 #import "IntroAuthorizationVC.h"
-#import "IntroAboutVC.h"
+//#import "IntroAboutVC.h"
 #import "Secret.h"
 
 @interface IntroAuthorizationVC () {

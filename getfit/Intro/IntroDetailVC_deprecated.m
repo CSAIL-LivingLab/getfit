@@ -6,10 +6,9 @@
 //  Copyright (c) 2015 MIT CSAIL Living Lab. All rights reserved.
 //
 
-#import "IntroDetailVC.h"
+#import "IntroDetailVC_deprecated.h"
 #import "Secret.h"
 #import "DataHubCreation.h"
-#import "IntroPageVC.h"
 
 #import "datahub.h"
 #import "account.h"
@@ -18,7 +17,7 @@
 
 #import "Resources.h"
 
-@interface IntroDetailVC ()
+@interface IntroDetailVC_deprecated ()
 @property NSString * appID;
 @property NSString *appToken;
 @property NSString *username;
@@ -28,7 +27,7 @@
 
 @end
 
-@implementation IntroDetailVC
+@implementation IntroDetailVC_deprecated
 @synthesize usernameLabel, passwordLabel, detailTextArea, getfitButton, appID, appToken, username, password, email;
 
 - (void)viewDidLoad {

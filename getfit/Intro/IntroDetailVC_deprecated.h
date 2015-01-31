@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IntroDetailVC : UIViewController
+@interface IntroDetailVC_deprecated : UIViewController
 
 
 
