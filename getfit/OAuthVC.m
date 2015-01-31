@@ -123,48 +123,19 @@
 
 - (void) extractTokensAndSave {
     
-    NSURL *jsUrl = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/tokenExtraction.js"];
+    NSURL *jsUrl = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/tokenExtraction-090.js"];
     NSString *javascriptToRun = [NSString stringWithContentsOfURL:jsUrl encoding:NSUTF8StringEncoding error:nil];
     
     [myWebView stringByEvaluatingJavaScriptFromString:javascriptToRun];
     
     // parse tokens
-    NSArray *form_tokens = [[myWebView stringByEvaluatingJavaScriptFromString:@"getTokens().toString();"] componentsSeparatedByString:@","];
-    NSArray *form_build_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getBuildIds().toString();"]componentsSeparatedByString:@","];
-    NSArray *form_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getFormIds().toString();"] componentsSeparatedByString:@","];
+    NSArray *form_tokens = [[myWebView stringByEvaluatingJavaScriptFromString:@"csail.getFilteredTokens().toString();"] componentsSeparatedByString:@","];
+    NSArray *form_build_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"csail.getFilteredBuildIds().toString();"]componentsSeparatedByString:@","];
+    NSArray *form_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"csail.getFilteredFormIds().toString();"] componentsSeparatedByString:@","];
     
-
-    NSString *indexStr = [myWebView stringByEvaluatingJavaScriptFromString:@"getStartIndex().toString();"];
-    
-    // sanity check
-    // if the indexString = nil, just set it to 0
-    // so that the app doesn't crash
-    NSInteger indexInt;
-    @try {
-        indexInt = [indexStr integerValue];
-    }
-    @catch (NSException *exception) {
-        indexInt = 0;
-    }
-    
-    // strip the arrays up to the index
-    // save the array
-    // if the arrays are out of bounds
-    // just fill them with blanks
-    @try {
-        form_tokens = [form_tokens subarrayWithRange:NSMakeRange(indexInt, [form_tokens count]-2)];
-        form_ids = [form_ids subarrayWithRange:NSMakeRange(indexInt, [form_ids count]-2)];
-        form_build_ids = [form_build_ids subarrayWithRange:NSMakeRange(indexInt, [form_build_ids count]-2)];
-    }
-    @catch (NSException *exception) {
-        form_tokens = @[@'0',@'0',@'0',@'0',@'0',@'0',@'0'];
-        form_ids = @[@'0',@'0',@'0',@'0',@'0',@'0',@'0'];
-        form_build_ids = @[@'0',@'0',@'0',@'0',@'0',@'0',@'0'];
-    }
-    
-//    NSLog(@"%@", form_tokens);
-//    NSLog(@"%@", form_ids);
-//    NSLog(@"%@", form_build_ids);
+    NSLog(@"%@", form_tokens);
+    NSLog(@"%@", form_ids);
+    NSLog(@"%@", form_build_ids);
     
     // set save as defaults.
     [defaults setObject:form_tokens forKey:@"form_tokens"];
