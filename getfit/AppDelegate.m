@@ -10,7 +10,7 @@
 #import "OpenSense.h"
 
 #import "IntroPageVC.h"
-
+#import "IntroVC.h"
 
 #import "AboutVC.h"
 #import "ExerciseVC.h"
@@ -21,18 +21,20 @@
 #import "MinuteStore.h"
 #import "MinuteEntry.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    NSUserDefaults *defaults;
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // load intro screens on first launch
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     defaults = [NSUserDefaults standardUserDefaults];
     [self loadMainViews];
     
     // load the intro view if the user's email isn't set
-    if (![defaults stringForKey:@"email"]) {
-//    if (YES) {
+//    if (![defaults stringForKey:@"email"]) {
+    if (YES) {
         // make sure the collector doesn't start right away
         [defaults setObject:[NSDate distantFuture] forKey:@"resumeSensorDate"];
         [defaults setObject:nil forKey:@"email"];
@@ -53,9 +55,14 @@
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     
     // set up the location manager
-    [self setupLocationManager];
-    [NSThread sleepForTimeInterval:.5];
+    // don't do this on the first load, because on the iPhone5, it's the first thing the user will see.
+    if ([defaults stringForKey:@"email"]) {
+        [self setupLocationManager];
+        [NSThread sleepForTimeInterval:.5];
 
+    }
+    
+    
     // show
     [self.window makeKeyAndVisible];
     return YES;
@@ -80,17 +87,22 @@
 
 - (void) loadIntroViews{
     
-    IntroPageVC *introPageVC = [[IntroPageVC alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:NULL];
+    IntroVC *introVC = [[IntroVC alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introVC];
+    [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
+    
+    
+//    IntroPageVC *introPageVC = [[IntroPageVC alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:NULL];
     
     // sneakily make sure the UiPageViewController is called again whenever anything is added to its array of objects
-    UIPageControl *pageControl = [UIPageControl appearance];
-    pageControl.pageIndicatorTintColor = [UIColor clearColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor clearColor];
+//    UIPageControl *pageControl = [UIPageControl appearance];
+//    pageControl.pageIndicatorTintColor = [UIColor clearColor];
+//    pageControl.currentPageIndicatorTintColor = [UIColor clearColor];
 
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introPageVC];
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introPageVC];
 
 
-    [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
+//    [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
 }
 
 
@@ -112,7 +124,7 @@
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    defaults = [NSUserDefaults standardUserDefaults];
     NSDate *resumeSensorDate = [defaults objectForKey:@"resumeSensorDate"];
     
     // do nothing if it's not time to resume tracking

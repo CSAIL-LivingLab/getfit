@@ -65,6 +65,7 @@
 		946E4FE01A72F11600E881F1 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 946E4FDE1A72F11600E881F1 /* AboutVC.m */; };
 		946E4FE11A72F11600E881F1 /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946E4FDF1A72F11600E881F1 /* AboutVC.xib */; };
 		946E4FE31A7303FC00E881F1 /* playpause.png in Resources */ = {isa = PBXBuildFile; fileRef = 946E4FE21A7303FC00E881F1 /* playpause.png */; };
+		947BAF591A79E63E003AD67D /* IntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BAF581A79E63E003AD67D /* IntroVC.m */; };
 		94AAABD21A5B21E7005E92D6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AAABD11A5B21E7005E92D6 /* CFNetwork.framework */; };
 		94B01BE81A5AEF890079F8A1 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B01BE71A5AEF890079F8A1 /* config.json */; };
 		94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */; };
@@ -202,6 +203,8 @@
 		946E4FDE1A72F11600E881F1 /* AboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
 		946E4FDF1A72F11600E881F1 /* AboutVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutVC.xib; sourceTree = "<group>"; };
 		946E4FE21A7303FC00E881F1 /* playpause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playpause.png; sourceTree = "<group>"; };
+		947BAF571A79E63E003AD67D /* IntroVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroVC.h; sourceTree = "<group>"; };
+		947BAF581A79E63E003AD67D /* IntroVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroVC.m; sourceTree = "<group>"; };
 		94AAABD11A5B21E7005E92D6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		94B01BE71A5AEF890079F8A1 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		94B01BE91A5AEFD40079F8A1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -401,6 +404,8 @@
 				94EA56161A6C76450045EA4E /* DataHubCreation.m */,
 				94EA56191A6CA6D40045EA4E /* IntroAuthorizationVC.h */,
 				94EA561A1A6CA6D40045EA4E /* IntroAuthorizationVC.m */,
+				947BAF571A79E63E003AD67D /* IntroVC.h */,
+				947BAF581A79E63E003AD67D /* IntroVC.m */,
 			);
 			name = Intro;
 			sourceTree = "<group>";
@@ -659,6 +664,7 @@
 				9469493B1A71F09C006E1DE2 /* TSharedProcessorFactory.m in Sources */,
 				9469492E1A71F09C006E1DE2 /* TProtocolUtil.m in Sources */,
 				9469493A1A71F09C006E1DE2 /* TTransportException.m in Sources */,
+				947BAF591A79E63E003AD67D /* IntroVC.m in Sources */,
 				946949351A71F09C006E1DE2 /* TNSFileHandleTransport.m in Sources */,
 				941896131A59EBAD00B5BC15 /* MinuteEntry.m in Sources */,
 				94EA56171A6C76450045EA4E /* DataHubCreation.m in Sources */,
