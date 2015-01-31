@@ -110,7 +110,7 @@
         }
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        nsurl=[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/Shibboleth.sso/Login?target=https%3A%2F%2Fgetfit-d7-dev.mit.edu%2F%3Fq%3Dshib_login%2Ffront-page"];
+        nsurl=[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/Shibboleth.sso/Login?target=https%3A%2F%2Fgetfit-d7-dev.mit.edu%2F%3Fq%3Dshib_login%2Fdashboard"];
     }
     
     NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
@@ -123,29 +123,19 @@
 
 - (void) extractTokensAndSave {
     
-    NSURL *jsUrl = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/tokenExtraction.js"];
+    NSURL *jsUrl = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/tokenExtraction-090.js"];
     NSString *javascriptToRun = [NSString stringWithContentsOfURL:jsUrl encoding:NSUTF8StringEncoding error:nil];
     
     [myWebView stringByEvaluatingJavaScriptFromString:javascriptToRun];
     
     // parse tokens
-    NSArray *form_tokens = [[myWebView stringByEvaluatingJavaScriptFromString:@"getTokens().toString();"] componentsSeparatedByString:@","];
-    NSArray *form_build_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getBuildIds().toString();"]componentsSeparatedByString:@","];
-    NSArray *form_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"getFormIds().toString();"] componentsSeparatedByString:@","];
+    NSArray *form_tokens = [[myWebView stringByEvaluatingJavaScriptFromString:@"csail.getFilteredTokens().toString();"] componentsSeparatedByString:@","];
+    NSArray *form_build_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"csail.getFilteredBuildIds().toString();"]componentsSeparatedByString:@","];
+    NSArray *form_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"csail.getFilteredFormIds().toString();"] componentsSeparatedByString:@","];
     
-    NSString *indexStr = [myWebView stringByEvaluatingJavaScriptFromString:@"getStartIndex().toString();"];
-    NSInteger indexInt = [indexStr integerValue];
-    
-    
-    // strip the arrays up to the index
-    // save the array
-    form_tokens = [form_tokens subarrayWithRange:NSMakeRange(indexInt, [form_tokens count]-2)];
-    form_ids = [form_ids subarrayWithRange:NSMakeRange(indexInt, [form_ids count]-2)];
-    form_build_ids = [form_build_ids subarrayWithRange:NSMakeRange(indexInt, [form_build_ids count]-2)];
-    
-//    NSLog(@"%@", form_tokens);
-//    NSLog(@"%@", form_ids);
-//    NSLog(@"%@", form_build_ids);
+    NSLog(@"%@", form_tokens);
+    NSLog(@"%@", form_ids);
+    NSLog(@"%@", form_build_ids);
     
     // set save as defaults.
     [defaults setObject:form_tokens forKey:@"form_tokens"];

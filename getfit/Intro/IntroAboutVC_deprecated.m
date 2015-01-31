@@ -7,7 +7,7 @@
 //
 
 #import "IntroAboutVC_deprecated.h"
-#import "IntroPageVC.h"
+//#import "IntroPageVC.h"
 #import "IntroAuthorizationVC.h"
 #import "DataHubCreation.h"
 
@@ -45,7 +45,7 @@
 - (void) makeSchemaAndPushNextVC{
     // method for IntroAuthorizationVC to access
     [self setupDataHubSchema];
-    [self.introPageVC pushDetailVC];
+//    [self.introPageVC pushDetailVC];
 }
 
 
@@ -81,7 +81,7 @@
     
     if ([newDataHubAcct isEqualToNumber:@1]) {
         [self setupDataHubSchema];
-        [introPageVC pushDetailVC];
+//        [introPageVC pushDetailVC];
     } else if ([newDataHubAcct isEqualToNumber:@2]){
         NSLog(@"duplicate user/email");
         

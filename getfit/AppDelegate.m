@@ -9,8 +9,7 @@
 #import "AppDelegate.h"
 #import "OpenSense.h"
 
-#import "IntroPageVC.h"
-
+#import "IntroVC.h"
 
 #import "AboutVC.h"
 #import "ExerciseVC.h"
@@ -21,13 +20,15 @@
 #import "MinuteStore.h"
 #import "MinuteEntry.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    NSUserDefaults *defaults;
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // load intro screens on first launch
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     defaults = [NSUserDefaults standardUserDefaults];
     [self loadMainViews];
     
     // load the intro view if the user's email isn't set
@@ -43,9 +44,9 @@
         [self loadIntroViews];
     }
     
-    if (![defaults boolForKey:@"loaded_v.84"]) {
+    if (![defaults boolForKey:@"loaded_v.90"]) {
         [[MinuteStore sharedStore] removeAllMinutes];
-        [defaults setBool:YES forKey:@"loaded_v.84"];
+        [defaults setBool:YES forKey:@"loaded_v.90"];
         [defaults synchronize];
     }
     
@@ -53,9 +54,14 @@
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     
     // set up the location manager
-    [self setupLocationManager];
-    [NSThread sleepForTimeInterval:.5];
+    // don't do this on the first load, because on the iPhone5, it's the first thing the user will see.
+    if ([defaults stringForKey:@"email"]) {
+        [self setupLocationManager];
+        [NSThread sleepForTimeInterval:.5];
 
+    }
+    
+    
     // show
     [self.window makeKeyAndVisible];
     return YES;
@@ -78,16 +84,8 @@
 
 - (void) loadIntroViews{
     
-    IntroPageVC *introPageVC = [[IntroPageVC alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:NULL];
-    
-    // sneakily make sure the UiPageViewController is called again whenever anything is added to its array of objects
-    UIPageControl *pageControl = [UIPageControl appearance];
-    pageControl.pageIndicatorTintColor = [UIColor clearColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor clearColor];
-
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introPageVC];
-
-
+    IntroVC *introVC = [[IntroVC alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introVC];
     [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
 }
 
@@ -102,6 +100,15 @@
     [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
 }
 
+// do this to resume significant location tracking after user re-opens the app, after they've gone through the introduction screens
+- (void) applicationDidBecomeActive:(UIApplication *)application {
+    if ([defaults stringForKey:@"email"]) {
+        [self setupLocationManager];
+        [NSThread sleepForTimeInterval:.5];
+        
+    }
+}
+
 - (void) setupLocationManager{
     _locationManager = [[CLLocationManager alloc] init];
     [_locationManager startMonitoringSignificantLocationChanges];
@@ -110,7 +117,7 @@
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    defaults = [NSUserDefaults standardUserDefaults];
     NSDate *resumeSensorDate = [defaults objectForKey:@"resumeSensorDate"];
     
     // do nothing if it's not time to resume tracking
