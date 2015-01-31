@@ -89,19 +89,6 @@
     IntroVC *introVC = [[IntroVC alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introVC];
     [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
-    
-    
-//    IntroPageVC *introPageVC = [[IntroPageVC alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:NULL];
-    
-    // sneakily make sure the UiPageViewController is called again whenever anything is added to its array of objects
-//    UIPageControl *pageControl = [UIPageControl appearance];
-//    pageControl.pageIndicatorTintColor = [UIColor clearColor];
-//    pageControl.currentPageIndicatorTintColor = [UIColor clearColor];
-
-//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introPageVC];
-
-
-//    [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
 }
 
 
@@ -113,6 +100,15 @@
 
     
     [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
+}
+
+// do this to resume significant location tracking after user re-opens the app, after they've gone through the introduction screens
+- (void) applicationDidBecomeActive:(UIApplication *)application {
+    if ([defaults stringForKey:@"email"]) {
+        [self setupLocationManager];
+        [NSThread sleepForTimeInterval:.5];
+        
+    }
 }
 
 - (void) setupLocationManager{
