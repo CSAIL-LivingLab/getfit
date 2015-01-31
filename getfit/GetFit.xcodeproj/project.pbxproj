@@ -28,7 +28,6 @@
 		941895EC1A59EA6B00B5BC15 /* Resources.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895EB1A59EA6B00B5BC15 /* Resources.m */; };
 		941895F71A59EACB00B5BC15 /* GraphVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895F41A59EACB00B5BC15 /* GraphVC.m */; };
 		941895FC1A59EAEA00B5BC15 /* ExerciseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895FB1A59EAEA00B5BC15 /* ExerciseVC.m */; };
-		941896031A59EB0200B5BC15 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 941896011A59EB0200B5BC15 /* InfoView.m */; };
 		941896071A59EB2300B5BC15 /* OAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941896061A59EB2300B5BC15 /* OAuthVC.m */; };
 		941896111A59EBAD00B5BC15 /* MinuteTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960A1A59EBAD00B5BC15 /* MinuteTVC.m */; };
 		941896121A59EBAD00B5BC15 /* ActivityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960C1A59EBAD00B5BC15 /* ActivityPickerView.m */; };
@@ -65,12 +64,12 @@
 		946E4FE11A72F11600E881F1 /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946E4FDF1A72F11600E881F1 /* AboutVC.xib */; };
 		946E4FE31A7303FC00E881F1 /* playpause.png in Resources */ = {isa = PBXBuildFile; fileRef = 946E4FE21A7303FC00E881F1 /* playpause.png */; };
 		947BAF591A79E63E003AD67D /* IntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BAF581A79E63E003AD67D /* IntroVC.m */; };
+		947BAF721A7C8AE5003AD67D /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 947BAF711A7C8AE5003AD67D /* libTestFlight.a */; };
 		94AAABD21A5B21E7005E92D6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AAABD11A5B21E7005E92D6 /* CFNetwork.framework */; };
 		94B01BE81A5AEF890079F8A1 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B01BE71A5AEF890079F8A1 /* config.json */; };
 		94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */; };
 		94CECD9E1A64565200DBE4C1 /* TestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CECD9C1A64565200DBE4C1 /* TestVC.m */; };
 		94CECD9F1A64565200DBE4C1 /* TestVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94CECD9D1A64565200DBE4C1 /* TestVC.xib */; };
-		94CECDA61A66F8F400DBE4C1 /* datahubGraphs.html in Resources */ = {isa = PBXBuildFile; fileRef = 94CECDA51A66F8F400DBE4C1 /* datahubGraphs.html */; };
 		94EA56171A6C76450045EA4E /* DataHubCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA56161A6C76450045EA4E /* DataHubCreation.m */; };
 		94EA561B1A6CA6D40045EA4E /* IntroAuthorizationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA561A1A6CA6D40045EA4E /* IntroAuthorizationVC.m */; };
 		DB6680C71A69B65D0080560E /* runner.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680C61A69B65D0080560E /* runner.png */; };
@@ -125,8 +124,6 @@
 		941895F41A59EACB00B5BC15 /* GraphVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphVC.m; sourceTree = "<group>"; };
 		941895FA1A59EAEA00B5BC15 /* ExerciseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExerciseVC.h; sourceTree = "<group>"; };
 		941895FB1A59EAEA00B5BC15 /* ExerciseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExerciseVC.m; sourceTree = "<group>"; };
-		941896001A59EB0200B5BC15 /* InfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoView.h; sourceTree = "<group>"; };
-		941896011A59EB0200B5BC15 /* InfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoView.m; sourceTree = "<group>"; };
 		941896051A59EB2300B5BC15 /* OAuthVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthVC.h; sourceTree = "<group>"; };
 		941896061A59EB2300B5BC15 /* OAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthVC.m; sourceTree = "<group>"; };
 		941896091A59EBAD00B5BC15 /* MinuteTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteTVC.h; sourceTree = "<group>"; };
@@ -200,6 +197,10 @@
 		946E4FE21A7303FC00E881F1 /* playpause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playpause.png; sourceTree = "<group>"; };
 		947BAF571A79E63E003AD67D /* IntroVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroVC.h; sourceTree = "<group>"; };
 		947BAF581A79E63E003AD67D /* IntroVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroVC.m; sourceTree = "<group>"; };
+		947BAF6E1A7C8AB2003AD67D /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		947BAF6F1A7C8AB2003AD67D /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		947BAF701A7C8AB2003AD67D /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		947BAF711A7C8AE5003AD67D /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		94AAABD11A5B21E7005E92D6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		94B01BE71A5AEF890079F8A1 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		94B01BE91A5AEFD40079F8A1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -207,7 +208,6 @@
 		94CECD9B1A64565200DBE4C1 /* TestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestVC.h; sourceTree = "<group>"; };
 		94CECD9C1A64565200DBE4C1 /* TestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestVC.m; sourceTree = "<group>"; };
 		94CECD9D1A64565200DBE4C1 /* TestVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestVC.xib; sourceTree = "<group>"; };
-		94CECDA51A66F8F400DBE4C1 /* datahubGraphs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = datahubGraphs.html; sourceTree = "<group>"; };
 		94EA56151A6C76450045EA4E /* DataHubCreation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataHubCreation.h; sourceTree = "<group>"; };
 		94EA56161A6C76450045EA4E /* DataHubCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataHubCreation.m; sourceTree = "<group>"; };
 		94EA56191A6CA6D40045EA4E /* IntroAuthorizationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroAuthorizationVC.h; sourceTree = "<group>"; };
@@ -229,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94AAABD21A5B21E7005E92D6 /* CFNetwork.framework in Frameworks */,
+				947BAF721A7C8AE5003AD67D /* libTestFlight.a in Frameworks */,
 				3D98CA8516AF4C230009F3C4 /* Security.framework in Frameworks */,
 				3D7FA2D616E5A0B1001ED0FA /* libz.dylib in Frameworks */,
 				3DB69F0316B1D750009570F3 /* CoreMotion.framework in Frameworks */,
@@ -258,12 +259,6 @@
 		3DDED6C6167D098B006DE4F8 = {
 			isa = PBXGroup;
 			children = (
-				946E4FDD1A72F11600E881F1 /* AboutVC.h */,
-				946E4FDE1A72F11600E881F1 /* AboutVC.m */,
-				946E4FDF1A72F11600E881F1 /* AboutVC.xib */,
-				94CECD9B1A64565200DBE4C1 /* TestVC.h */,
-				94CECD9C1A64565200DBE4C1 /* TestVC.m */,
-				94CECD9D1A64565200DBE4C1 /* TestVC.xib */,
 				3D35C2B61694C720000ADA14 /* OpenSense.xcodeproj */,
 				941895E11A59E9A900B5BC15 /* GetFit */,
 				3DDED6D2167D098B006DE4F8 /* Products */,
@@ -302,6 +297,10 @@
 		941895E11A59E9A900B5BC15 /* GetFit */ = {
 			isa = PBXGroup;
 			children = (
+				947BAF6D1A7C8A9F003AD67D /* TestFlight */,
+				94CECD9B1A64565200DBE4C1 /* TestVC.h */,
+				94CECD9C1A64565200DBE4C1 /* TestVC.m */,
+				94CECD9D1A64565200DBE4C1 /* TestVC.xib */,
 				DB6680CB1A69F31A0080560E /* Launch */,
 				9431EE871A5CC4CC00B7EC36 /* Intro */,
 				94B01BEC1A5AF0000079F8A1 /* Common */,
@@ -317,7 +316,7 @@
 				DBAD5E431A695DFB000F9692 /* Secret.m */,
 				941895F91A59EADF00B5BC15 /* Exercise */,
 				941895F21A59EABB00B5BC15 /* Graph */,
-				941895FD1A59EAF400B5BC15 /* Info */,
+				941895FD1A59EAF400B5BC15 /* About */,
 				941896041A59EB1600B5BC15 /* OAuth */,
 				941896081A59EB9D00B5BC15 /* Minute */,
 				946948F31A71F09C006E1DE2 /* thrift */,
@@ -330,7 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				941895F31A59EACB00B5BC15 /* GraphVC.h */,
-				94CECDA51A66F8F400DBE4C1 /* datahubGraphs.html */,
+				941895F41A59EACB00B5BC15 /* GraphVC.m */,
 			);
 			name = Graph;
 			sourceTree = "<group>";
@@ -344,14 +343,14 @@
 			name = Exercise;
 			sourceTree = "<group>";
 		};
-		941895FD1A59EAF400B5BC15 /* Info */ = {
+		941895FD1A59EAF400B5BC15 /* About */ = {
 			isa = PBXGroup;
 			children = (
-				941896001A59EB0200B5BC15 /* InfoView.h */,
-				941896011A59EB0200B5BC15 /* InfoView.m */,
-				941895F41A59EACB00B5BC15 /* GraphVC.m */,
+				946E4FDD1A72F11600E881F1 /* AboutVC.h */,
+				946E4FDE1A72F11600E881F1 /* AboutVC.m */,
+				946E4FDF1A72F11600E881F1 /* AboutVC.xib */,
 			);
-			name = Info;
+			name = About;
 			sourceTree = "<group>";
 		};
 		941896041A59EB1600B5BC15 /* OAuth */ = {
@@ -484,6 +483,17 @@
 			path = transport;
 			sourceTree = "<group>";
 		};
+		947BAF6D1A7C8A9F003AD67D /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				947BAF711A7C8AE5003AD67D /* libTestFlight.a */,
+				947BAF6E1A7C8AB2003AD67D /* TestFlight.h */,
+				947BAF6F1A7C8AB2003AD67D /* TestFlight+AsyncLogging.h */,
+				947BAF701A7C8AB2003AD67D /* TestFlight+ManualSessions.h */,
+			);
+			name = TestFlight;
+			sourceTree = "<group>";
+		};
 		94B01BEC1A5AF0000079F8A1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,7 +616,6 @@
 				94B01BE81A5AEF890079F8A1 /* config.json in Resources */,
 				9416456B1A59F17300B9B2CD /* MainStoryboard.storyboard in Resources */,
 				DB6680CA1A69B8780080560E /* intensity.png in Resources */,
-				94CECDA61A66F8F400DBE4C1 /* datahubGraphs.html in Resources */,
 				9431EE951A5CC54900B7EC36 /* IntroDetailVC_deprecated.xib in Resources */,
 				946E4FE11A72F11600E881F1 /* AboutVC.xib in Resources */,
 				946BD8801A5F18B500735DEE /* info.png in Resources */,
@@ -639,7 +648,6 @@
 				94CECD9E1A64565200DBE4C1 /* TestVC.m in Sources */,
 				941896071A59EB2300B5BC15 /* OAuthVC.m in Sources */,
 				946949361A71F09C006E1DE2 /* TNSStreamTransport.m in Sources */,
-				941896031A59EB0200B5BC15 /* InfoView.m in Sources */,
 				946949391A71F09C006E1DE2 /* TSSLSocketException.m in Sources */,
 				946949281A71F09C006E1DE2 /* account.m in Sources */,
 				941896121A59EBAD00B5BC15 /* ActivityPickerView.m in Sources */,
@@ -747,7 +755,10 @@
 				GCC_PREFIX_HEADER = "Common/GetFit-Prefix.pch";
 				INFOPLIST_FILE = "Common/GetFit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -769,7 +780,10 @@
 				GCC_PREFIX_HEADER = "Common/GetFit-Prefix.pch";
 				INFOPLIST_FILE = "Common/GetFit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",

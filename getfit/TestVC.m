@@ -94,7 +94,7 @@
     
     BOOL *didPost = [ms postToDataHub];
     NSLog(@"\n\nPosted To DataHub: ");
-    NSLog(didPost ? @"YES" : @"NO");
+//    NSLog(didPost ? @"YES" : @"NO");
 }
 
 - (IBAction)postToGetFitoAuth:(id)sender {
@@ -154,7 +154,7 @@
     
     BOOL *didPost = [ms postToGetFit];
     NSLog(@"\n\nPosted To GetFit No Auth: ");
-    NSLog(didPost ? @"YES" : @"NO");
+//    NSLog(didPost ? @"YES" : @"NO");
 }
 
 @end
