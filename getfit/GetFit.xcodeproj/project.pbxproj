@@ -64,7 +64,6 @@
 		946E4FE11A72F11600E881F1 /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946E4FDF1A72F11600E881F1 /* AboutVC.xib */; };
 		946E4FE31A7303FC00E881F1 /* playpause.png in Resources */ = {isa = PBXBuildFile; fileRef = 946E4FE21A7303FC00E881F1 /* playpause.png */; };
 		947BAF591A79E63E003AD67D /* IntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BAF581A79E63E003AD67D /* IntroVC.m */; };
-		947BAF721A7C8AE5003AD67D /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 947BAF711A7C8AE5003AD67D /* libTestFlight.a */; };
 		94AAABD21A5B21E7005E92D6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AAABD11A5B21E7005E92D6 /* CFNetwork.framework */; };
 		94B01BE81A5AEF890079F8A1 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B01BE71A5AEF890079F8A1 /* config.json */; };
 		94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */; };
@@ -197,10 +196,6 @@
 		946E4FE21A7303FC00E881F1 /* playpause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playpause.png; sourceTree = "<group>"; };
 		947BAF571A79E63E003AD67D /* IntroVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroVC.h; sourceTree = "<group>"; };
 		947BAF581A79E63E003AD67D /* IntroVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroVC.m; sourceTree = "<group>"; };
-		947BAF6E1A7C8AB2003AD67D /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
-		947BAF6F1A7C8AB2003AD67D /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		947BAF701A7C8AB2003AD67D /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		947BAF711A7C8AE5003AD67D /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		94AAABD11A5B21E7005E92D6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		94B01BE71A5AEF890079F8A1 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		94B01BE91A5AEFD40079F8A1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -229,7 +224,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				94AAABD21A5B21E7005E92D6 /* CFNetwork.framework in Frameworks */,
-				947BAF721A7C8AE5003AD67D /* libTestFlight.a in Frameworks */,
 				3D98CA8516AF4C230009F3C4 /* Security.framework in Frameworks */,
 				3D7FA2D616E5A0B1001ED0FA /* libz.dylib in Frameworks */,
 				3DB69F0316B1D750009570F3 /* CoreMotion.framework in Frameworks */,
@@ -297,7 +291,6 @@
 		941895E11A59E9A900B5BC15 /* GetFit */ = {
 			isa = PBXGroup;
 			children = (
-				947BAF6D1A7C8A9F003AD67D /* TestFlight */,
 				94CECD9B1A64565200DBE4C1 /* TestVC.h */,
 				94CECD9C1A64565200DBE4C1 /* TestVC.m */,
 				94CECD9D1A64565200DBE4C1 /* TestVC.xib */,
@@ -481,17 +474,6 @@
 				946949251A71F09C006E1DE2 /* TTransportException.m */,
 			);
 			path = transport;
-			sourceTree = "<group>";
-		};
-		947BAF6D1A7C8A9F003AD67D /* TestFlight */ = {
-			isa = PBXGroup;
-			children = (
-				947BAF711A7C8AE5003AD67D /* libTestFlight.a */,
-				947BAF6E1A7C8AB2003AD67D /* TestFlight.h */,
-				947BAF6F1A7C8AB2003AD67D /* TestFlight+AsyncLogging.h */,
-				947BAF701A7C8AB2003AD67D /* TestFlight+ManualSessions.h */,
-			);
-			name = TestFlight;
 			sourceTree = "<group>";
 		};
 		94B01BEC1A5AF0000079F8A1 /* Common */ = {
