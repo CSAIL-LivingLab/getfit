@@ -15,7 +15,6 @@
 
 @optional
 - (void) didFinishFetchingBatches:(NSString *)batches;
-
 @end
 
 @interface OpenSense : NSObject {

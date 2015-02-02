@@ -210,7 +210,6 @@
 }
 
 
-
 - (BOOL) deleteAllBatches {
     // find the path to the opensense data directory
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
