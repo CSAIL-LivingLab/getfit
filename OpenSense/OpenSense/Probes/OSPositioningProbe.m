@@ -64,11 +64,11 @@
     NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                                  [NSNumber numberWithDouble:lastLocation.coordinate.latitude], @"lat",
                                  [NSNumber numberWithDouble:lastLocation.coordinate.longitude], @"lon",
-                                 [NSNumber numberWithDouble:lastLocation.altitude], @"altitude",
-                                 [NSNumber numberWithDouble:lastLocation.speed], @"speed", // m/s
-                                 [NSNumber numberWithDouble:lastLocation.horizontalAccuracy], @"horizontal_accuracy",
-                                 [NSNumber numberWithDouble:lastLocation.verticalAccuracy], @"vertical_accuracy",
-                                 [NSNumber numberWithDouble:lastLocation.course], @"course", // 0 - 359.9 degrees
+                                 [NSNumber numberWithDouble:lastLocation.altitude], @"alt",
+                                 [NSNumber numberWithDouble:lastLocation.speed], @"spd", // m/s
+                                 [NSNumber numberWithDouble:lastLocation.horizontalAccuracy], @"hor_acc",
+                                 [NSNumber numberWithDouble:lastLocation.verticalAccuracy], @"vert_acc",
+                                 [NSNumber numberWithDouble:lastLocation.course], @"crs", // 0 - 359.9 degrees
                                  nil];
     
     return data;

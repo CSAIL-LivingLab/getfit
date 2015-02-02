@@ -92,7 +92,7 @@
     me5.postedToDataHub = YES;
     me5.postedToGetFit = YES;
     
-    BOOL *didPost = [ms postToDataHub];
+//    BOOL *didPost = [ms postToDataHub];
     NSLog(@"\n\nPosted To DataHub: ");
 //    NSLog(didPost ? @"YES" : @"NO");
 }
@@ -152,9 +152,15 @@
     me5.postedToDataHub = YES;
     me5.postedToGetFit = YES;
     
-    BOOL *didPost = [ms postToGetFit];
+//    BOOL *didPost = [ms postToGetFit];
     NSLog(@"\n\nPosted To GetFit No Auth: ");
 //    NSLog(didPost ? @"YES" : @"NO");
+}
+
+- (IBAction)postToOpenSense:(id)sender {
+    Resources *resources = [Resources sharedResources];
+    [resources uploadOpenSenseData];
+    
 }
 
 @end

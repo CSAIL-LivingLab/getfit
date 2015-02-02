@@ -118,7 +118,13 @@
         
         NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.opensense(data) values ('"];
         
-        batches = [[NSString stringWithFormat:@"%@", batches] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        NSString *batchesUnfiltered = [batches copy];
+//        batchesUnfiltered = [NSString stringWithFormat:@"%@%@');", statement, batchesUnfiltered];
+//        NSLog(@"%@", batchesUnfiltered);
+
+        
+//        batches = [[NSString stringWithFormat:@"%@", batches] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
         
         [statement appendString:batches];
         [statement appendString:@"');"];
