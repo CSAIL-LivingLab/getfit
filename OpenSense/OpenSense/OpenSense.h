@@ -41,6 +41,6 @@
 - (void) stopCollectorAndUploadData;
 
 - (void) fetchAllBatches;
-- (void) deleteAllBatches;
+- (BOOL) deleteAllBatches;
 
 @end

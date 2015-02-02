@@ -16,5 +16,5 @@
 - (void)saveBatch:(NSDictionary*)batch fromProbe:(NSString*)probeIdentifier;
 - (void)fetchBatches:(void (^)(NSArray *batches))success;
 - (void)fetchBatchesForProbe:(NSString*)probeIdentifier skipCurrent:(BOOL)skipCurrent parseJSON:(BOOL)parseJSON success:(void (^)(NSArray *batches))success;
-
+- (BOOL)deleteAllBatches;
 @end

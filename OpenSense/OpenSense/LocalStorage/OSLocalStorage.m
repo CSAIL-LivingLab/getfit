@@ -11,6 +11,8 @@
 #import "OSConfiguration.h"
 #import "NSData+AESCrypt.h"
 
+#define kDIRECTORY_NAME @"OpenSenseData"
+
 @implementation OSLocalStorage
 
 + (OSLocalStorage*)sharedInstance
@@ -68,7 +70,7 @@
 {
     // Create data dir ifneedbe
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *dataPath = [documentsPath stringByAppendingPathComponent:@"data"];
+    NSString *dataPath = [documentsPath stringByAppendingPathComponent:kDIRECTORY_NAME];
     NSString *currentFile = [dataPath stringByAppendingPathComponent:@"probedata"];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath]) {
@@ -114,7 +116,7 @@
         
         // Determine file path
         NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *dataPath = [documentsPath stringByAppendingPathComponent:@"data"];
+        NSString *dataPath = [documentsPath stringByAppendingPathComponent:kDIRECTORY_NAME];
         NSString *currentFile = [dataPath stringByAppendingPathComponent:@"probedata"];
         
         NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:currentFile];
@@ -152,7 +154,7 @@
         
         // Determine file path
         NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *dataPath = [documentsPath stringByAppendingPathComponent:@"data"];
+        NSString *dataPath = [documentsPath stringByAppendingPathComponent:kDIRECTORY_NAME];
         
         // Find files in data directory
         NSArray *probeDataFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dataPath error:NULL];
@@ -206,5 +208,26 @@
         });
     });
 }
+
+
+
+- (BOOL) deleteAllBatches {
+    // find the path to the opensense data directory
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *dataPath = [documentsPath stringByAppendingPathComponent:kDIRECTORY_NAME];
+    
+    // remove the whole directory, so that [OSLocalStorage logrotate] will create a new one
+    NSError *error;
+    BOOL success = [[NSFileManager defaultManager] removeItemAtPath:dataPath error:&error]; // Delete file
+    if (!success) {
+        NSLog(@"Error removing file %@", error);
+    } else {
+        NSLog(@"Successfully deleted all OpenSense Batches");
+    }
+    
+    return success;
+}
+
+
 
 @end

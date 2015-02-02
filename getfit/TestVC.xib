@@ -79,10 +79,21 @@
                         <action selector="postToOpenSense:" destination="-1" eventType="touchUpInside" id="utn-4h-gDv"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FMe-lI-nq5">
+                    <rect key="frame" x="211" y="133" width="178" height="30"/>
+                    <state key="normal" title="deleteOpenSenseBatches">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="deleteOpenSenseBatches:" destination="-1" eventType="touchUpInside" id="Hgj-Lj-1NK"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="centerX" secondItem="FMe-lI-nq5" secondAttribute="centerX" id="0Pa-Tq-Bs8"/>
                 <constraint firstItem="hQm-IH-7fT" firstAttribute="top" secondItem="FA5-0T-jBJ" secondAttribute="bottom" constant="8" symbolic="YES" id="0eE-Zc-Rj8"/>
+                <constraint firstItem="wdP-Et-dax" firstAttribute="top" secondItem="FMe-lI-nq5" secondAttribute="bottom" constant="8" id="4ky-7R-zZA"/>
                 <constraint firstItem="Pkc-SW-Ox0" firstAttribute="top" secondItem="wdP-Et-dax" secondAttribute="bottom" constant="8" id="70O-aU-guV"/>
                 <constraint firstAttribute="centerY" secondItem="hQm-IH-7fT" secondAttribute="centerY" id="8yo-Ut-fxR"/>
                 <constraint firstAttribute="centerX" secondItem="hQm-IH-7fT" secondAttribute="centerX" id="VHP-In-4U5"/>

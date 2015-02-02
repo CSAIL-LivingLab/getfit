@@ -284,19 +284,9 @@
      ];
 }
 
-- (void) deleteAllBatches {
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *dataPath = [documentsPath stringByAppendingPathComponent:@"data"];
-    
-    // Find files in data directory
-    NSArray *probeDataFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:dataPath error:NULL];
-    for (NSString *file in probeDataFiles) {
-        if ([file hasPrefix:@"probedata"])
-//            && ![file isEqualToString:@"probedata"])
-        {
-            [[NSFileManager defaultManager] removeItemAtPath:file error:nil]; // Delete file
-        }
-    }
+- (BOOL) deleteAllBatches {
+    BOOL success = [[OSLocalStorage sharedInstance] deleteAllBatches];
+    return success;
 }
 
 - (void)refreshConfig:(id)sender

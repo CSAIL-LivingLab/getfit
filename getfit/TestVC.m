@@ -163,4 +163,8 @@
     
 }
 
+- (IBAction)deleteOpenSenseBatches:(id)sender {
+    [[OpenSense sharedInstance] deleteAllBatches];
+}
+
 @end
