@@ -7,11 +7,13 @@
 //
 
 #import "IntroAuthorizationVC.h"
-//#import "IntroAboutVC.h"
+#import "IntroVC.h"
 #import "Secret.h"
+#import "DataHubCreation.h"
 
 @interface IntroAuthorizationVC () {
     UIWebView *myWebView;
+    
     }
 
 @end
@@ -20,8 +22,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.topItem.title = @"Please authorize this app on DataHub";
+    self.navigationController.navigationBar.topItem.title = @"Please Authorize Getfit";
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                   style:UIBarButtonItemStylePlain target:self action:@selector(dismiss)];
+    self.navigationItem.leftBarButtonItem = leftButton;
+    
     [self setupWebView];
+}
+
+- (void) dismiss{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,7 +44,7 @@
     Secret *secret = [Secret sharedSecret];
     NSString *appID = secret.DHAppID;
     
-    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+//    NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
     // layout view
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -64,7 +74,11 @@
     if (![url isEqualToString:@""] && [theTitle rangeOfString:@"Thank You"].location != NSNotFound) {
         
         // make sure the continue button target changes
-//        [self.introAboutVC makeSchemaAndPushNextVC];
+        DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [dhCreation createSchemaForUser:[defaults objectForKey:@"username"]];
+        [self.introVC loadFinalView];
+        
         
         // then dismiss self
         [self dismissViewControllerAnimated:YES completion:nil];

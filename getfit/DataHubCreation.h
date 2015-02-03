@@ -21,7 +21,7 @@
 - (BOOL) createSchemaForUser:(NSString *)username;
 - (NSString *) createUsernameFromEmail:(NSString *)email;
 - (NSString *) createRandomAlphaNumericString;
-- (NSString *) createRandomAlphaString;
+- (NSString *) createRandomAlphaStringOfLength:(NSInteger)length;
 
 - (NSString *) extractUsernameFromErrorStr:(NSString *)errStr;
 - (NSString *) extractEmailFromErrorStr:(NSString *) errStr;

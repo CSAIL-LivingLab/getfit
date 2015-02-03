@@ -147,9 +147,9 @@
     return randomString;
 }
 
-- (NSString *) createRandomAlphaString{
+- (NSString *) createRandomAlphaStringOfLength:(NSInteger)length{
     NSString *letters = @"abcdefghijkmnopqrstuvwxyz";
-    int len = 8;
+    int len = length;
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
     
     for (int i=0; i<len; i++) {

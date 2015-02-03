@@ -10,5 +10,8 @@
 
 @interface IntroVC : UIViewController
 
+// method available so that it can be called by the introAuthorizationVC
+- (void) loadFinalView;
+
 
 @end

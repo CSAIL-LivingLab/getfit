@@ -13,6 +13,7 @@
 #include<unistd.h>
 #include<netdb.h>
 
+#import "IntroAuthorizationVC.h"
 #import "DataHubCreation.h"
 
 @interface IntroVC ()
@@ -23,7 +24,7 @@
     UIColor *blueColor;
     UIColor *greenColor;
     CGSize bounds;
-    
+    BOOL *randomAcct;
     
     // first view
     UIView *firstView;
@@ -41,7 +42,7 @@
     UIButton *anonomousButton;
     UIButton *emailButton;
     UITextField *emailTextField;
-    UILabel *explanationLabel;
+    UILabel *datahubAcctExplanationLabel;
     UIButton *cancelButton;
     UIButton *createButton;
     
@@ -177,20 +178,11 @@
     [choiceView addSubview:emailButton];
 
     /* Fields that will appear after tapping one of the above buttons. 
-     These start as hidden with clearColor */
-    
-    // explanation of account type
-    explanationLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, fieldsOffsetY, bounds.width-16, 40)];
-    explanationLabel.hidden = YES;
-    explanationLabel.alpha = 0;
-    explanationLabel.numberOfLines = 0;
-    [explanationLabel setText:@"Some text goes here"];
-    [explanationLabel setTextAlignment:NSTextAlignmentCenter];
-    [explanationLabel setBackgroundColor:[UIColor clearColor]];
-    [choiceView addSubview:explanationLabel];
+     These start as hidden with clearColor or alpha = 0 */
+
     
     // field that email goes into
-    emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, fieldsOffsetY + explanationLabel.frame.size.height + 15, bounds.width - 30, 40)];
+    emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, fieldsOffsetY + 15, bounds.width - 30, 40)];
     emailTextField.hidden = YES;
 //    [emailTextField setTextColor:[UIColor clearColor]];
     emailTextField.alpha = 0;
@@ -231,6 +223,16 @@
     [createButton addTarget:self action:@selector(createButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
     [choiceView addSubview:createButton];
 
+    // explanation of account type
+    datahubAcctExplanationLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, bounds.height-100, bounds.width-16, 40)];
+//    datahubAcctExplanationLabel.hidden = YES;
+//    datahubAcctExplanationLabel.alpha = 0;
+
+    [datahubAcctExplanationLabel setText:@"Some text goes here. This is placeholder text to test line breaks."];
+    datahubAcctExplanationLabel.numberOfLines = 0;
+    [datahubAcctExplanationLabel setTextAlignment:NSTextAlignmentCenter];
+    [datahubAcctExplanationLabel setBackgroundColor:[UIColor clearColor]];
+    [choiceView addSubview:datahubAcctExplanationLabel];
     
     self.view = choiceView;
 }
@@ -365,14 +367,18 @@
 # pragma mark - user interaction
 
 - (void) emailButtonTouched:(id) sender{
-    NSLog(@"email button touched");
-}
-
-- (void) anonomousButtonTouched:(id) sender{
+    // will be creating an account with an email address
+    randomAcct = NO;
+    
+    // set the explanitory text
+    [datahubAcctExplanationLabel setText:@"This will create a DataHub account using your email address. Your email will be visible to LivingLab researchers. Later, you will be able to log into your datahub account and edit your data."];
+    datahubAcctExplanationLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    [datahubAcctExplanationLabel setNumberOfLines:0];
+    
     cancelButton.hidden = NO;
     createButton.hidden = NO;
     emailTextField.hidden = NO;
-    explanationLabel.hidden = NO;
+    datahubAcctExplanationLabel.hidden = NO;
     
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         // hide the two big buttons
@@ -383,7 +389,7 @@
         [cancelButton setBackgroundColor:[UIColor grayColor]];
         [createButton setBackgroundColor:[UIColor redColor]];
         [emailTextField setAlpha:1];
-        [explanationLabel setAlpha:1];
+        [datahubAcctExplanationLabel setAlpha:1];
         
         [self offsetViews:@[anonomousButton, emailButton] byY:-100];
         
@@ -393,17 +399,84 @@
         anonomousButton.hidden = TRUE;
         emailButton.hidden = TRUE;
     }];
-    
-    
+
 }
 
+- (void) anonomousButtonTouched:(id) sender{
+    // will be creating a random account
+    randomAcct = YES;
+    
+    // set the explanitory text
+    [datahubAcctExplanationLabel setText:@"This will create a datahub account with a random username and password. Your data will be entirely anonomous. Later, you will be able to log into your datahub account and edit your data."];
+    
+    cancelButton.hidden = NO;
+    createButton.hidden = NO;
+    emailTextField.hidden = YES;
+    datahubAcctExplanationLabel.hidden = NO;
+    
+    [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        // hide the two big buttons
+        anonomousButton.backgroundColor = [UIColor clearColor];
+        emailButton.backgroundColor = [UIColor clearColor];
+        
+        // show the other stuff
+        [cancelButton setBackgroundColor:[UIColor grayColor]];
+        [createButton setBackgroundColor:[UIColor redColor]];
+        [datahubAcctExplanationLabel setAlpha:1];
+        
+        [self offsetViews:@[anonomousButton, emailButton] byY:-100];
+        
+        
+    }completion:^(BOOL done){
+        //some completition
+        anonomousButton.hidden = TRUE;
+        emailButton.hidden = TRUE;
+    }];
+}
+# pragma mark
+
 - (void) createButtonTouched:(id) sender{
-    [self offsetViews:@[anonomousButton, emailButton, emailTextField, explanationLabel, cancelButton, createButton] byY:-100];
+    if (randomAcct) {
+        // create a random account
+        [self setupDataHubRandomUser];
+    } else if ([self NSStringIsValidEmail:emailTextField.text])  {
+        // if the email is valid, setup a new datahub user
+        [self setupDataHubNewUser];
+    } else {
+        // the email isn't valid
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Bad Email" message:@"Please check your email address and try again." delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (void) cancelButtonTouched:(id) sender{
+    anonomousButton.hidden = NO;
+    emailButton.hidden = NO;
     
+    [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        // show the buttons
+        anonomousButton.backgroundColor = blueColor;
+        emailButton.backgroundColor = greenColor;
+        
+        // hide the other stuff
+        [cancelButton setBackgroundColor:[UIColor clearColor]];
+        [createButton setBackgroundColor:[UIColor clearColor]];
+        [emailTextField setAlpha:0];
+        [datahubAcctExplanationLabel setAlpha:0];
+        
+        [self offsetViews:@[anonomousButton, emailButton] byY:100];
+        
+        
+    }completion:^(BOOL done){
+        //some completition
+        cancelButton.hidden = YES;
+        createButton.hidden = YES;
+        datahubAcctExplanationLabel.hidden = YES;
+        emailTextField.hidden = YES;
+    }];
 }
+
+# pragma mark
 
 -(void)offsetViews:(NSArray *)views byY:(int)yoff {
     for (UIView *v in views) {
@@ -417,6 +490,7 @@
 - (void) dismissKeyboard {
     [emailTextField resignFirstResponder];
 }
+# pragma mark
 
 - (void) goToGetFit:(id) sender{
     // set the sensor resume date, etc
@@ -441,17 +515,53 @@
 # pragma mark - setup
 - (void) accept:(id) sender {
     [self loadChoiceView];
-//    [self setupDataHub];
+
 }
 
-- (void) setupDataHub{
+- (void) setupDataHubNewUser{
+    DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    NSString *password = [dhCreation createRandomAlphaNumericString];
+    NSString *email = emailTextField.text;
+    NSString *username = [dhCreation createUsernameFromEmail:email];
+    
+    NSNumber * newDataHubAcct = [dhCreation createDataHubUserFromEmail:email andUsername:username andPassword:password];
+    
+    if ([newDataHubAcct isEqualToNumber:@1]) {
+        // user is created
+        [dhCreation createSchemaForUser:username];
+        
+    } else if ([newDataHubAcct isEqualToNumber:@2]){
+        // duplicate user/email
+        IntroAuthorizationVC *introAuth = [[IntroAuthorizationVC alloc]  init];
+        introAuth.introVC = self;
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introAuth];
+        navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        
+        [self presentViewController:navController animated:YES completion:nil];
+        
+    } else {
+        // unknown error
+        
+        [defaults setObject:nil forKey:@"password"];
+        [defaults setObject:nil forKey:@"email"];
+        [defaults setObject:nil forKey:@"username"];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Creating Account" message:@"There was an error creating your account. Please try again later." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [self loadChoiceView];
+        [alert show];
+    }
+}
+
+- (void) setupDataHubRandomUser{
     // make a username, password, and datahub account
     // record the results
     // put them into
     DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-    NSString *username = [dhCreation createRandomAlphaString];
+    NSString *username = [dhCreation createRandomAlphaStringOfLength:6];
     NSString *password = [dhCreation createRandomAlphaNumericString];
     NSString *email = [NSString stringWithFormat:@"albert.r.carter.mit+%@@gmail.com", username];
     
@@ -477,6 +587,16 @@
 }
 
 # pragma mark - helpers
+
+-(BOOL) NSStringIsValidEmail:(NSString *)checkString
+{
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}";
+    NSString *laxString = @".+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:checkString];
+}
 
 -(BOOL)isNetworkAvailable:(NSString *)hostname
 {
