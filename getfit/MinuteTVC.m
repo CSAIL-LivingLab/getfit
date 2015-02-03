@@ -185,6 +185,10 @@
     return 0;
 }
 
+- (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
 // the user selected an item in teh picker
 - (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     NSIndexPath *cellPath;
