@@ -42,7 +42,7 @@
     UIButton *anonomousButton;
     UIButton *emailButton;
     UITextField *emailTextField;
-    UILabel *datahubAcctExplanationLabel;
+    UITextView *datahubAcctExplanationTextView;
     UIButton *cancelButton;
     UIButton *createButton;
     
@@ -155,7 +155,9 @@
     anonomousButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     anonomousButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [anonomousButton setBackgroundColor:blueColor];
-    [anonomousButton setTitle:@"Create anonomous account" forState:UIControlStateNormal];
+    [anonomousButton setTitle:@"Create an anonomous account" forState:UIControlStateNormal];
+    [anonomousButton.titleLabel setNumberOfLines:0];
+    [anonomousButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [anonomousButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [anonomousButton addTarget:self action:@selector(anonomousButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
     [choiceView addSubview:anonomousButton];
@@ -166,7 +168,9 @@
     emailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     emailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [emailButton setBackgroundColor:greenColor];
-    [emailButton setTitle:@"Connect Email" forState:UIControlStateNormal];
+    [emailButton setTitle:@"Create an\naccount using\nyour email" forState:UIControlStateNormal];
+    [emailButton.titleLabel setNumberOfLines:0];
+    [emailButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [emailButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [emailButton addTarget:self action:@selector(emailButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
     [choiceView addSubview:emailButton];
@@ -218,15 +222,13 @@
     [choiceView addSubview:createButton];
 
     // explanation of account type
-    datahubAcctExplanationLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, bounds.height-100, bounds.width-16, 40)];
-//    datahubAcctExplanationLabel.hidden = YES;
-//    datahubAcctExplanationLabel.alpha = 0;
-
-    [datahubAcctExplanationLabel setText:@"Some text goes here. This is placeholder text to test line breaks."];
-    datahubAcctExplanationLabel.numberOfLines = 0;
-    [datahubAcctExplanationLabel setTextAlignment:NSTextAlignmentCenter];
-    [datahubAcctExplanationLabel setBackgroundColor:[UIColor clearColor]];
-    [choiceView addSubview:datahubAcctExplanationLabel];
+    datahubAcctExplanationTextView = [[UITextView alloc] initWithFrame:CGRectMake(8, bounds.height-170, bounds.width-16, 170)];
+    datahubAcctExplanationTextView.hidden = YES;
+    datahubAcctExplanationTextView.alpha = 0;
+    [datahubAcctExplanationTextView setTextAlignment:NSTextAlignmentCenter];
+    [datahubAcctExplanationTextView setFont:[UIFont systemFontOfSize:15]];
+    [datahubAcctExplanationTextView setBackgroundColor:[UIColor clearColor]];
+    [choiceView addSubview:datahubAcctExplanationTextView];
     
     self.view = choiceView;
 }
@@ -363,14 +365,12 @@
     randomAcct = NO;
     
     // set the explanitory text
-    [datahubAcctExplanationLabel setText:@"This will create a DataHub account using your email address. Your email will be visible to LivingLab researchers. Later, you will be able to log into your datahub account and edit your data."];
-    datahubAcctExplanationLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    [datahubAcctExplanationLabel setNumberOfLines:0];
+    [datahubAcctExplanationTextView setText:@"This will create a DataHub account using your email address.\n\nYour email and username will be visible to LivingLab researchers.\n\nLater, you will be able to log into your datahub account and edit your data."];
     
     cancelButton.hidden = NO;
     createButton.hidden = NO;
     emailTextField.hidden = NO;
-    datahubAcctExplanationLabel.hidden = NO;
+    datahubAcctExplanationTextView.hidden = NO;
     
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         // hide the two big buttons
@@ -381,7 +381,7 @@
         [cancelButton setBackgroundColor:[UIColor grayColor]];
         [createButton setBackgroundColor:[UIColor redColor]];
         [emailTextField setAlpha:1];
-        [datahubAcctExplanationLabel setAlpha:1];
+        [datahubAcctExplanationTextView setAlpha:1];
         
         [self offsetViews:@[anonomousButton, emailButton] byY:-100];
         
@@ -399,12 +399,12 @@
     randomAcct = YES;
     
     // set the explanitory text
-    [datahubAcctExplanationLabel setText:@"This will create a datahub account with a random username and password. Your data will be entirely anonomous. Later, you will be able to log into your datahub account and edit your data."];
+    [datahubAcctExplanationTextView setText:@"This will create a datahub account with a random username and password.\n\nYour data will be entirely anonomous.\n\nLater, you will be able to log into your datahub account and edit your data."];
     
     cancelButton.hidden = NO;
     createButton.hidden = NO;
     emailTextField.hidden = YES;
-    datahubAcctExplanationLabel.hidden = NO;
+    datahubAcctExplanationTextView.hidden = NO;
     
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         // hide the two big buttons
@@ -414,7 +414,7 @@
         // show the other stuff
         [cancelButton setBackgroundColor:[UIColor grayColor]];
         [createButton setBackgroundColor:[UIColor redColor]];
-        [datahubAcctExplanationLabel setAlpha:1];
+        [datahubAcctExplanationTextView setAlpha:1];
         
         [self offsetViews:@[anonomousButton, emailButton] byY:-100];
         
@@ -454,7 +454,7 @@
         [cancelButton setBackgroundColor:[UIColor clearColor]];
         [createButton setBackgroundColor:[UIColor clearColor]];
         [emailTextField setAlpha:0];
-        [datahubAcctExplanationLabel setAlpha:0];
+        [datahubAcctExplanationTextView setAlpha:0];
         
         [self offsetViews:@[anonomousButton, emailButton] byY:100];
         
@@ -463,7 +463,7 @@
         //some completition
         cancelButton.hidden = YES;
         createButton.hidden = YES;
-        datahubAcctExplanationLabel.hidden = YES;
+        datahubAcctExplanationTextView.hidden = YES;
         emailTextField.hidden = YES;
     }];
 }
@@ -556,19 +556,24 @@
     NSString *password = [dhCreation createRandomAlphaNumericString];
     NSString *email = [NSString stringWithFormat:@"albert.r.carter.mit+%@@gmail.com", username];
     
-    @try {
-        NSNumber * newDataHubAcct = [dhCreation createDataHubUserFromEmail:email andUsername:username andPassword:password];
-        NSLog(@"newDataHubAcct: %@", newDataHubAcct);
-        [dhCreation createSchemaForUser:username];
-        
-        [defaults setObject:email forKey:@"email"];
-        [defaults setObject:password forKey:@"password"];
-        [defaults setObject:username forKey:@"username"];
-        [defaults synchronize];
-        
+    [self loadWorkingView];
+    
+    
+    // create the account
+    NSNumber * newDataHubAcct = [dhCreation createDataHubUserFromEmail:email andUsername:username andPassword:password];
+    [dhCreation createSchemaForUser:username];
+    
+    [defaults setObject:email forKey:@"email"];
+    [defaults setObject:password forKey:@"password"];
+    [defaults setObject:username forKey:@"username"];
+    [defaults synchronize];
+    
+    
+    if ([newDataHubAcct isEqualToNumber:@1]) {
+        // success
         [self loadFinalView];
-    }
-    @catch (NSException *exception) {
+    } else {
+        // duplicate acct, network down, or dh problems
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Creating Account" message:@"There was an error creating your account. Please try again later." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [self loadFirstView];
         [alert show];
