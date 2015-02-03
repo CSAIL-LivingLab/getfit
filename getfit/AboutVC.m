@@ -21,6 +21,8 @@
     UIPickerView *pausePicker;
     NSArray *pauseArr;
     UILabel *pauseText;
+    
+    NSUserDefaults *defaults;
 
 }
 
@@ -45,15 +47,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.mainScrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    //self.mainScrollView.contentSize = CGSizeMake(320, 900);
-    //[self.mainScrollView setNeedsLayout];
 
+    defaults = [NSUserDefaults standardUserDefaults];
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
     
-    
-    
-
+    // adjust the postToGetFIt switch for posting to getfit or not
+    BOOL postToGetFit = [defaults boolForKey:@"postToGetFit"];
+    if (postToGetFit) {
+        [_appSwitch setOn:YES];
+    } else {
+        [_appSwitch setOn:NO];
+    }
     
     //setup title labels colors
     [_appTitle setTextColor:greenColor];
@@ -62,12 +67,10 @@
     [_livingLabTitle setTextColor:greenColor];
     
     // setup credentialsLabel
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"username"];
     NSString *password = [defaults objectForKey:@"password"];
     NSString *credentialsText = [NSString stringWithFormat:@"username: %@\npassword: %@", username, password];
     [_credentialsLabel setText:credentialsText];
-    
     
     
     // setup the pauseButton
@@ -102,11 +105,11 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    
     // setup content text
     [_appLabel setScrollEnabled:NO];
     [_appLabel setEditable:NO];
     [_appLabel sizeToFit];
-    
     
     [_datahubLabel setScrollEnabled:NO];
     [_datahubLabel setEditable:NO];
@@ -118,7 +121,6 @@
     [_sensingLabel setScrollEnabled:NO];
     [_sensingLabel setEditable:NO];
     [_sensingLabel sizeToFit];
-    
     
     [_livingLabLabel setScrollEnabled:NO];
     [_livingLabLabel setEditable:NO];
@@ -143,6 +145,16 @@
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker:)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
+}
+#pragma mark - Switch
+- (IBAction)appSwitchChanged:(id)sender {
+    // change the defaults determining whether or not to post to getfit
+    if (_appSwitch.isOn) {
+        [defaults setBool:YES forKey:@"postToGetFit"];
+    } else {
+        [defaults setBool:NO forKey:@"postToGetFit"];
+    }
+    [defaults synchronize];
 }
 
 #pragma mark - Picker
@@ -200,7 +212,7 @@
         resumeDate = [[NSDate date] dateByAddingTimeInterval:intMins*60];
     }
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     [defaults setObject:resumeDate forKey:@"resumeSensorDate"];
     [defaults synchronize];
     [self adjustResumeLabelText];
@@ -211,7 +223,6 @@
 // adjust the label informing the user of when data collection will resume
 - (void) adjustResumeLabelText {
     //
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDate *pauseUntil = [defaults objectForKey:@"resumeSensorDate"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MMM dd, hh:mm a"];
@@ -263,5 +274,4 @@
     
     button.imageEdgeInsets = UIEdgeInsetsMake(- (titleSize.height + spacing), 0.0, 0.0, - titleSize.width);
 }
-
 @end

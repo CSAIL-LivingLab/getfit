@@ -208,11 +208,20 @@
 }
 
 - (BOOL) postToGetFit {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+
+    // if posting to getfit is disabled
+    if (![defaults boolForKey:@"postToGetFit"]) {
+        return NO;
+    }
     
+    // if the getfit website isn't available
     if (![self isNetworkAvailable:@"getfit.mit.edu"]) {
         [self saveChanges];
         return NO;
     }
+    
+    
     
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -264,7 +273,6 @@
         
         
         // get the form info
-        NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
         NSString *form_token;
         NSString *form_build_id;
         NSString *form_id;

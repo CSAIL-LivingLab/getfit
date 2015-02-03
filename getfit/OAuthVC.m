@@ -38,7 +38,7 @@
 }
 
 
-- (void)dismiss {
+- (void)dismissFollowingAlert {
     // check to make sure the view is actually visible. The interval timer might cause alerts to be called, otherwise
     if (!self.isViewLoaded || !self.view.window) {
         return;
@@ -148,7 +148,7 @@
     MinuteStore *ms = [MinuteStore sharedStore];
     
     success = [ms postToGetFit];
-    [self dismiss];
+    [self dismissFollowingAlert];
 }
 
 - (void) hideWebViewAndShowSpinnerView {
@@ -180,7 +180,7 @@
     
     // make sure the view eventually dissapears, even if the web view doesn't load
     NSTimeInterval delay = 15;
-    [self performSelector:@selector(dismiss) withObject:nil afterDelay:delay];
+    [self performSelector:@selector(dismissFollowingAlert) withObject:nil afterDelay:delay];
 }
 
 

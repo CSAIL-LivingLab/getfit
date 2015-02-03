@@ -40,6 +40,7 @@
         [defaults setObject:nil forKey:@"email"];
         [defaults setObject:nil forKey:@"username"];
         [defaults setObject:nil forKey:@"password"];
+        [defaults setBool:YES forKey:@"postToGetFit"];
         [defaults synchronize];
         
         [self loadIntroViews];

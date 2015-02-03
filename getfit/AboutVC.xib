@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutVC">
             <connections>
                 <outlet property="appLabel" destination="52R-uS-RhZ" id="6UX-ot-NSa"/>
+                <outlet property="appSwitch" destination="5I8-La-Yi0" id="Uts-ND-yOg"/>
                 <outlet property="appTitle" destination="jfm-I5-TNA" id="FUO-aa-riX"/>
                 <outlet property="credentialsLabel" destination="6Zt-7X-uuo" id="sMD-6T-hDD"/>
                 <outlet property="datahubLabel" destination="1ox-GT-4pt" id="cCh-v2-cq4"/>
@@ -33,7 +35,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="600" height="720"/>
                             <subviews>
                                 <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="vLQ-WL-ADh">
-                                    <rect key="frame" x="147" y="499" width="305" height="40"/>
+                                    <rect key="frame" x="147" y="535" width="305" height="40"/>
                                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <accessibilityTraits key="traits" none="YES" link="YES"/>
@@ -57,7 +59,7 @@
                                     </variation>
                                 </textView>
                                 <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="5EV-za-Xuy">
-                                    <rect key="frame" x="147" y="235" width="305" height="100"/>
+                                    <rect key="frame" x="147" y="271" width="305" height="100"/>
                                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <accessibilityTraits key="traits" none="YES" link="YES"/>
@@ -67,7 +69,7 @@
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="cCX-gc-Ff0"/>
                                         <constraint firstAttribute="width" constant="305" id="owP-AH-ZVz"/>
                                     </constraints>
-                                    <string key="text">Continuous Data Logging Mode allows users to gather mobile sensor data and upload to personal DataHub account.  Enabling this mode allows you to donate continuous sensor data* to MIT Big Data Living Lab project for research.</string>
+                                    <string key="text">Continuous data logging allows you to gather mobile sensor data and upload it to a personal DataHub account. Enabling this mode allows you to donate continuous sensor data to the MIT Big Data Living Lab project for research.</string>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -79,7 +81,7 @@
                                     </variation>
                                 </textView>
                                 <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1ox-GT-4pt">
-                                    <rect key="frame" x="147" y="115" width="305" height="60"/>
+                                    <rect key="frame" x="147" y="149.5" width="305" height="60"/>
                                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <accessibilityTraits key="traits" none="YES" link="YES"/>
@@ -129,7 +131,7 @@
                                     </variation>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About DataHub" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtX-G6-Nd2">
-                                    <rect key="frame" x="235" y="92" width="130" height="19.5"/>
+                                    <rect key="frame" x="235" y="127" width="130" height="19.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="130" id="SzG-pq-YoL"/>
                                     </constraints>
@@ -138,19 +140,19 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Datahub User Credentials" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zt-7X-uuo">
-                                    <rect key="frame" x="223" y="177.5" width="155" height="16"/>
+                                    <rect key="frame" x="223" y="213.5" width="155" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About Sensing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwh-gi-KAJ">
-                                    <rect key="frame" x="246" y="208.5" width="109" height="19.5"/>
+                                    <rect key="frame" x="246" y="244.5" width="109" height="19.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sensing will resume in XXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjw-WC-4fz">
-                                    <rect key="frame" x="140" y="326" width="320" height="16"/>
+                                    <rect key="frame" x="140" y="362" width="320" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="320" id="xEE-yG-clW"/>
                                     </constraints>
@@ -159,7 +161,7 @@
                                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kr-4l-TeN">
-                                    <rect key="frame" x="245" y="350" width="110" height="110"/>
+                                    <rect key="frame" x="245" y="386" width="110" height="110"/>
                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="110" id="CE9-Io-H26"/>
@@ -171,7 +173,7 @@
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About Living Lab" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L0-bc-3wR">
-                                    <rect key="frame" x="237" y="472" width="126" height="20"/>
+                                    <rect key="frame" x="237" y="508" width="126" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="ate-t4-KLa"/>
                                     </constraints>
@@ -179,6 +181,32 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Od-aK-ZFs" userLabel="Getfit Switch View">
+                                    <rect key="frame" x="155" y="80" width="305" height="43.5"/>
+                                    <subviews>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5I8-La-Yi0">
+                                            <rect key="frame" x="0.0" y="5" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="appSwitchChanged:" destination="-1" eventType="valueChanged" id="wjP-TO-Ipt"/>
+                                            </connections>
+                                        </switch>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Post to GetFit Website (requires MIT ID)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozF-AE-1mm">
+                                            <rect key="frame" x="57" y="11" width="240" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="5I8-La-Yi0" secondAttribute="centerY" constant="1.25" id="5WV-si-p1G"/>
+                                        <constraint firstAttribute="trailing" secondItem="ozF-AE-1mm" secondAttribute="trailing" constant="8" id="CZQ-6R-PZV"/>
+                                        <constraint firstAttribute="centerY" secondItem="ozF-AE-1mm" secondAttribute="centerY" constant="0.25" id="Jsc-Lj-27b"/>
+                                        <constraint firstAttribute="height" constant="43.5" id="YCu-PQ-pZR"/>
+                                        <constraint firstItem="5I8-La-Yi0" firstAttribute="leading" secondItem="9Od-aK-ZFs" secondAttribute="leading" id="YDq-S2-uf3"/>
+                                        <constraint firstAttribute="width" constant="305" id="zd5-RF-hxt"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="centerX" secondItem="rjw-WC-4fz" secondAttribute="centerX" id="3z7-x9-GwY"/>
@@ -188,18 +216,21 @@
                                 <constraint firstAttribute="bottom" secondItem="vLQ-WL-ADh" secondAttribute="bottom" constant="430" id="Fya-AT-irj"/>
                                 <constraint firstAttribute="centerX" secondItem="rwh-gi-KAJ" secondAttribute="centerX" id="Hce-2a-2fg"/>
                                 <constraint firstItem="6kr-4l-TeN" firstAttribute="top" secondItem="5EV-za-Xuy" secondAttribute="bottom" constant="15" id="Hx5-ua-lp7"/>
+                                <constraint firstAttribute="centerX" secondItem="9Od-aK-ZFs" secondAttribute="centerX" constant="-7.5" id="IG8-KB-ztS"/>
                                 <constraint firstItem="1ox-GT-4pt" firstAttribute="top" secondItem="ZtX-G6-Nd2" secondAttribute="bottom" constant="3" id="Lml-9e-0st"/>
                                 <constraint firstAttribute="centerX" secondItem="6L0-bc-3wR" secondAttribute="centerX" id="MM9-Ee-C2N"/>
                                 <constraint firstAttribute="centerX" secondItem="1ox-GT-4pt" secondAttribute="centerX" id="MaI-nG-PCD"/>
                                 <constraint firstItem="6L0-bc-3wR" firstAttribute="top" secondItem="6kr-4l-TeN" secondAttribute="bottom" constant="12" id="RBq-Qc-gWm"/>
-                                <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="52R-uS-RhZ" secondAttribute="bottom" constant="10" id="RCr-Ht-TgF"/>
+                                <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="52R-uS-RhZ" secondAttribute="bottom" constant="45" id="RCr-Ht-TgF"/>
                                 <constraint firstItem="vLQ-WL-ADh" firstAttribute="top" secondItem="6L0-bc-3wR" secondAttribute="bottom" constant="7" id="RED-9a-zOB"/>
+                                <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="9Od-aK-ZFs" secondAttribute="bottom" constant="3.5" id="Rsu-4Y-Qd3"/>
                                 <constraint firstItem="jfm-I5-TNA" firstAttribute="top" secondItem="CwA-my-h4I" secondAttribute="top" id="Url-XY-8vS"/>
                                 <constraint firstAttribute="height" constant="720" id="VXL-7y-2CV"/>
                                 <constraint firstAttribute="centerX" secondItem="ZtX-G6-Nd2" secondAttribute="centerX" id="Xtj-H6-r95"/>
                                 <constraint firstAttribute="centerX" secondItem="6kr-4l-TeN" secondAttribute="centerX" id="YG6-1L-AF5"/>
                                 <constraint firstAttribute="centerX" secondItem="vLQ-WL-ADh" secondAttribute="centerX" id="ci5-fd-DYk"/>
-                                <constraint firstItem="6Zt-7X-uuo" firstAttribute="top" secondItem="1ox-GT-4pt" secondAttribute="bottom" constant="3" id="mcf-ku-SW7"/>
+                                <constraint firstItem="9Od-aK-ZFs" firstAttribute="top" secondItem="52R-uS-RhZ" secondAttribute="bottom" constant="-2" id="ftD-1s-er1"/>
+                                <constraint firstItem="6Zt-7X-uuo" firstAttribute="top" secondItem="1ox-GT-4pt" secondAttribute="bottom" constant="4" id="mcf-ku-SW7"/>
                                 <constraint firstItem="52R-uS-RhZ" firstAttribute="top" secondItem="jfm-I5-TNA" secondAttribute="bottom" constant="2" id="nVW-pc-2jx"/>
                                 <constraint firstItem="5EV-za-Xuy" firstAttribute="top" secondItem="rwh-gi-KAJ" secondAttribute="bottom" constant="7" id="oM9-FT-bbg"/>
                                 <constraint firstAttribute="width" constant="320" id="r9v-bV-v2g"/>
@@ -210,6 +241,7 @@
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="r9v-bV-v2g"/>
+                                    <exclude reference="RCr-Ht-TgF"/>
                                     <exclude reference="Fya-AT-irj"/>
                                 </mask>
                             </variation>
