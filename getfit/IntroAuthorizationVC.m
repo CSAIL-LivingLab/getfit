@@ -77,8 +77,8 @@
         DataHubCreation *dhCreation = [[DataHubCreation alloc] init];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [dhCreation createSchemaForUser:[defaults objectForKey:@"username"]];
-        [self.introVC loadFinalView];
         
+        [self.introVC loadFinalView];
         
         // then dismiss self
         [self dismissViewControllerAnimated:YES completion:nil];

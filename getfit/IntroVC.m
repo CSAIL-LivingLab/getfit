@@ -61,25 +61,19 @@
     UILabel *donateExplanationLabel;
     
     UIButton *goToGetFit;
-
-    
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     [self setTitle:@"Welcome to GetFit for iOS"];
     
     bounds = [UIScreen mainScreen].bounds.size;
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
     
-//    [self loadFirstView];
-    [self loadChoiceView];
-
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+    [self loadFirstView];
+//    [self loadChoiceView];
     // Do any additional setup after loading the view.
 }
 
@@ -237,8 +231,6 @@
     self.view = choiceView;
 }
 
-
-
 - (void) loadFinalView{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"username"];
@@ -345,7 +337,7 @@
     self.view = finalView;
 }
 
-- (void) loadWorkingPage{
+- (void) loadWorkingView{
     workingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
     [workingView setBackgroundColor:[UIColor whiteColor]];
     
@@ -484,7 +476,6 @@
         frame.origin.y += yoff;
         v.frame = frame;
     }
-    
 }
 
 - (void) dismissKeyboard {
