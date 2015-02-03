@@ -520,7 +520,7 @@
     
 }
 
-//move all views by specified yoff
+//move all views by specified y offset
 -(void)offsetViews:(NSArray *)views byY:(int)yoff {
     for (UIView *v in views) {
         CGRect frame = v.frame;

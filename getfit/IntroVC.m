@@ -21,6 +21,7 @@
 
 @implementation IntroVC {
     UIColor *blueColor;
+    UIColor *greenColor;
     CGSize bounds;
     
     
@@ -35,8 +36,17 @@
     UILabel *workingLabel;
     UIActivityIndicatorView *workingSpinner;
     
-    // second view
-    UIView *secondView;
+    // choice View
+    UIView *choiceView;
+    UIButton *anonomousButton;
+    UIButton *emailButton;
+    UITextField *emailTextField;
+    UILabel *explanationLabel;
+    UIButton *cancelButton;
+    UIButton *createButton;
+    
+    // final view
+    UIView *finalView;
     UILabel *thankYouLabel;
     UILabel *setupLabel;
     UILabel *usernameInfoLabel;
@@ -60,9 +70,11 @@
     
     bounds = [UIScreen mainScreen].bounds.size;
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
+    greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
     
-    [self loadFirstPage];
-//    [self loadSecondPage];
+//    [self loadFirstView];
+    [self loadChoiceView];
+
 }
 
 - (void)viewDidLoad {
@@ -75,7 +87,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) loadFirstPage {
+- (void) loadFirstView {
     
     firstView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
     [self.view addSubview:firstView];
@@ -94,7 +106,7 @@
     CGFloat legalTextOffset = legalText.frame.size.height + legalText.frame.origin.y;
     
     // accept button
-    acceptButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-35, legalTextOffset, 70, 70)];
+    acceptButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-35, legalTextOffset+2, 65, 65)];
     acceptButton.layer.cornerRadius = acceptButton.bounds.size.width/2;
     acceptButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     acceptButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -130,32 +142,123 @@
         [acceptButton addTarget:self action:@selector(accept:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-                    
-    
 }
 
-- (void) loadSecondPage{
+- (void) loadChoiceView{
+    choiceView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
+    [choiceView setBackgroundColor:[UIColor whiteColor]];
+    
+    CGFloat largeButtonWidth = 140;
+    CGFloat smallButtonWidth = 60;
+    
+    CGFloat buttonOffsetY = 150;
+    CGFloat fieldsOffsetY = 170;
+    
+    // select anonomous account
+    anonomousButton = [[UIButton alloc] initWithFrame:CGRectMake(10, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
+    anonomousButton.layer.cornerRadius = largeButtonWidth/2;
+    anonomousButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    anonomousButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [anonomousButton setBackgroundColor:blueColor];
+    [anonomousButton setTitle:@"Create anonomous account" forState:UIControlStateNormal];
+    [anonomousButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [anonomousButton addTarget:self action:@selector(anonomousButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [choiceView addSubview:anonomousButton];
+    
+    // select account using email
+    emailButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width-10-largeButtonWidth, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
+    emailButton.layer.cornerRadius = largeButtonWidth/2;
+    emailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    emailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [emailButton setBackgroundColor:greenColor];
+    [emailButton setTitle:@"Connect Email" forState:UIControlStateNormal];
+    [emailButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [emailButton addTarget:self action:@selector(emailButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [choiceView addSubview:emailButton];
+
+    /* Fields that will appear after tapping one of the above buttons. 
+     These start as hidden with clearColor */
+    
+    // explanation of account type
+    explanationLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, fieldsOffsetY, bounds.width-16, 40)];
+    explanationLabel.hidden = YES;
+    explanationLabel.alpha = 0;
+    explanationLabel.numberOfLines = 0;
+    [explanationLabel setText:@"Some text goes here"];
+    [explanationLabel setTextAlignment:NSTextAlignmentCenter];
+    [explanationLabel setBackgroundColor:[UIColor clearColor]];
+    [choiceView addSubview:explanationLabel];
+    
+    // field that email goes into
+    emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, fieldsOffsetY + explanationLabel.frame.size.height + 15, bounds.width - 30, 40)];
+    emailTextField.hidden = YES;
+//    [emailTextField setTextColor:[UIColor clearColor]];
+    emailTextField.alpha = 0;
+    [emailTextField setKeyboardType:UIKeyboardTypeEmailAddress];
+    [emailTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [emailTextField setTextAlignment:NSTextAlignmentCenter];
+    [emailTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [emailTextField setPlaceholder:@"your email"];
+    [choiceView addSubview:emailTextField];
+    
+    // dismiss the keybord on tap background
+    UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [tapBackground setNumberOfTapsRequired:1];
+    [choiceView addGestureRecognizer:tapBackground];
+
+    CGFloat emailTextFieldOffset = emailTextField.frame.origin.y + emailTextField.frame.size.height;
+    
+    cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(25, emailTextFieldOffset + 5, smallButtonWidth, smallButtonWidth)];
+    cancelButton.layer.cornerRadius = smallButtonWidth/2;
+    cancelButton.hidden = YES;
+    cancelButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    cancelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [cancelButton setBackgroundColor:[UIColor clearColor]];
+    [cancelButton setTitle:@"cancel" forState:UIControlStateNormal];
+    [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [cancelButton addTarget:self action:@selector(cancelButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [choiceView addSubview:cancelButton];
+
+    
+    createButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width - 25 - smallButtonWidth, emailTextFieldOffset + 5, smallButtonWidth, smallButtonWidth)];
+    createButton.layer.cornerRadius = smallButtonWidth/2;
+    createButton.hidden = YES;
+    createButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    createButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [createButton setBackgroundColor:[UIColor clearColor]];
+    [createButton setTitle:@"create" forState:UIControlStateNormal];
+    [createButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [createButton addTarget:self action:@selector(createButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [choiceView addSubview:createButton];
+
+    
+    self.view = choiceView;
+}
+
+
+
+- (void) loadFinalView{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"username"];
     NSString *password = [defaults objectForKey:@"password"];
     
     // view
-    secondView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
-    [secondView setBackgroundColor:[UIColor whiteColor]];
+    finalView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
+    [finalView setBackgroundColor:[UIColor whiteColor]];
     
     // thank you label
     thankYouLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 90, bounds.width-16, 20)];
     thankYouLabel.numberOfLines = 0;
     [thankYouLabel setText:@"Thank you for agreeing to participate!"];
     [thankYouLabel setTextAlignment:NSTextAlignmentCenter];
-    [secondView addSubview:thankYouLabel];
+    [finalView addSubview:thankYouLabel];
     
     // setup label
     setupLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 120, bounds.width-16, 60)];
     setupLabel.numberOfLines = 0;
     [setupLabel setText:@"We've set up your GetFit DataHub account:"];
     [setupLabel setTextAlignment:NSTextAlignmentCenter];
-    [secondView addSubview:setupLabel];
+    [finalView addSubview:setupLabel];
     
     CGFloat topLabelOffset = thankYouLabel.bounds.size.height + setupLabel.bounds.size.height + 80;
     
@@ -165,14 +268,14 @@
     [usernameInfoLabel setTextAlignment:NSTextAlignmentRight];
     [usernameInfoLabel setFont:[UIFont systemFontOfSize:14]];
     [usernameInfoLabel setText:@"username:"];
-    [secondView addSubview:usernameInfoLabel];
+    [finalView addSubview:usernameInfoLabel];
     
     passwordInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2-75, topLabelOffset +20 +20, 70, 15)];
 //    [passwordInfoLabel setBackgroundColor:[UIColor redColor]];
     [passwordInfoLabel setTextAlignment:NSTextAlignmentRight];
     [passwordInfoLabel setFont:[UIFont systemFontOfSize:14]];
     [passwordInfoLabel setText:@"password:"];
-    [secondView addSubview:passwordInfoLabel];
+    [finalView addSubview:passwordInfoLabel];
 
     // actual username and password
     usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20, 75, 15)];
@@ -181,7 +284,7 @@
     [usernameLabel setFont:[UIFont systemFontOfSize:14]];
     [usernameLabel setText:username];
 //    [usernameLabel setText:@"bdoijewf"];
-    [secondView addSubview:usernameLabel];
+    [finalView addSubview:usernameLabel];
 
     passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20 +20, 75, 15)];
 //    [passwordLabel setBackgroundColor:[UIColor redColor]];
@@ -189,7 +292,7 @@
     [passwordLabel setFont:[UIFont systemFontOfSize:14]];
         [passwordLabel setText:password];
 //    [passwordLabel setText:@"bdoijewf"];
-    [secondView addSubview:passwordLabel];
+    [finalView addSubview:passwordLabel];
     
     CGFloat usernamePasswordOffset = 200;
     
@@ -201,7 +304,7 @@
     [explanationView setTextAlignment:NSTextAlignmentCenter];
     [explanationView setDataDetectorTypes:UIDataDetectorTypeAll];
     [explanationView sizeToFit];
-    [secondView addSubview:explanationView];
+    [finalView addSubview:explanationView];
     
     CGFloat explanationOffset =explanationView.frame.origin.y + explanationView.bounds.size.height;
     
@@ -214,29 +317,19 @@
     [goToGetFit setTitle:@"Go to GetFit" forState:UIControlStateNormal];
     [goToGetFit.titleLabel setFont:[UIFont systemFontOfSize:15]];
     
-//    _pauseButton.layer.cornerRadius = _pauseButton.bounds.size.width/2;
-//    _pauseButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-//    _pauseButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-//    _pauseButton.layer.borderWidth = 2.0;
-//    [_pauseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [[_pauseButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:15]];
-//    [_pauseButton.layer setBackgroundColor:[blueColor CGColor]];
-
-    
-    
     [goToGetFit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [goToGetFit addTarget:self action:@selector(goToGetFit:) forControlEvents:UIControlEventTouchUpInside];
-    [secondView addSubview:goToGetFit];
+    [finalView addSubview:goToGetFit];
     
     // donate things are bottom alligned
     donateSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(30, bounds.height - 100, 60, 40)];
     donateSwitch.on = YES;
-    [secondView addSubview:donateSwitch];
+    [finalView addSubview:donateSwitch];
     
     donateSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, bounds.height - 105 , 330, 40)];
     [donateSwitchLabel setText:@"Donate Data to Living Labs"];
     [donateSwitchLabel setFont:[UIFont systemFontOfSize:15]];
-    [secondView addSubview:donateSwitchLabel];
+    [finalView addSubview:donateSwitchLabel];
     
     donateExplanationLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, bounds.height - 65, bounds.width-16, 60)];
     donateExplanationLabel.numberOfLines = 0;
@@ -244,10 +337,10 @@
     [donateExplanationLabel setTextColor:[UIColor darkGrayColor]];
     [donateExplanationLabel setTextAlignment:NSTextAlignmentCenter];
     [donateExplanationLabel setFont:[UIFont systemFontOfSize:12]];
-    [secondView addSubview:donateExplanationLabel];
+    [finalView addSubview:donateExplanationLabel];
 
     // finally make the second view the view
-    self.view = secondView;
+    self.view = finalView;
 }
 
 - (void) loadWorkingPage{
@@ -271,6 +364,60 @@
 
 # pragma mark - user interaction
 
+- (void) emailButtonTouched:(id) sender{
+    NSLog(@"email button touched");
+}
+
+- (void) anonomousButtonTouched:(id) sender{
+    cancelButton.hidden = NO;
+    createButton.hidden = NO;
+    emailTextField.hidden = NO;
+    explanationLabel.hidden = NO;
+    
+    [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        // hide the two big buttons
+        anonomousButton.backgroundColor = [UIColor clearColor];
+        emailButton.backgroundColor = [UIColor clearColor];
+        
+        // show the other stuff
+        [cancelButton setBackgroundColor:[UIColor grayColor]];
+        [createButton setBackgroundColor:[UIColor redColor]];
+        [emailTextField setAlpha:1];
+        [explanationLabel setAlpha:1];
+        
+        [self offsetViews:@[anonomousButton, emailButton] byY:-100];
+        
+        
+    }completion:^(BOOL done){
+        //some completition
+        anonomousButton.hidden = TRUE;
+        emailButton.hidden = TRUE;
+    }];
+    
+    
+}
+
+- (void) createButtonTouched:(id) sender{
+    [self offsetViews:@[anonomousButton, emailButton, emailTextField, explanationLabel, cancelButton, createButton] byY:-100];
+}
+
+- (void) cancelButtonTouched:(id) sender{
+    
+}
+
+-(void)offsetViews:(NSArray *)views byY:(int)yoff {
+    for (UIView *v in views) {
+        CGRect frame = v.frame;
+        frame.origin.y += yoff;
+        v.frame = frame;
+    }
+    
+}
+
+- (void) dismissKeyboard {
+    [emailTextField resignFirstResponder];
+}
+
 - (void) goToGetFit:(id) sender{
     // set the sensor resume date, etc
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -293,8 +440,8 @@
 
 # pragma mark - setup
 - (void) accept:(id) sender {
-    [self loadWorkingPage];
-    [self setupDataHub];
+    [self loadChoiceView];
+//    [self setupDataHub];
 }
 
 - (void) setupDataHub{
@@ -318,11 +465,11 @@
         [defaults setObject:username forKey:@"username"];
         [defaults synchronize];
         
-        [self loadSecondPage];
+        [self loadFinalView];
     }
     @catch (NSException *exception) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Creating Account" message:@"There was an error creating your account. Please try again later." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
-        [self loadFirstPage];
+        [self loadFirstView];
         [alert show];
     }
 
