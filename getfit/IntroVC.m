@@ -546,7 +546,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     NSString *password = [dhCreation createRandomAlphaNumericString];
-    NSString *email = emailTextField.text;
+    NSString *email = [emailTextField.text lowercaseString];
     NSString *username = [dhCreation createUsernameFromEmail:email];
     
     NSNumber * newDataHubAcct = [dhCreation createDataHubUserFromEmail:email andUsername:username andPassword:password];
