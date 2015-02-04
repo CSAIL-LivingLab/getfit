@@ -67,7 +67,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTitle:@"Welcome to GetFit for iOS"];
     
     bounds = [UIScreen mainScreen].bounds.size;
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
@@ -84,8 +83,10 @@
 }
 
 - (void) loadFirstView {
-    
+    [self setTitle:@"Welcome to GetFit for iOS"];
+
     firstView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
+    [firstView setBackgroundColor:[UIColor blackColor]];
     [self.view addSubview:firstView];
     
     // legal text
@@ -97,6 +98,8 @@
     legalText.attributedText = attributedString;
     [legalText setContentOffset:CGPointMake(0, -200) animated:YES];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [legalText setBackgroundColor:[UIColor clearColor]];
+    [legalText setTextColor:[UIColor whiteColor]];
     [firstView addSubview:legalText];
     
     CGFloat legalTextOffset = legalText.frame.size.height + legalText.frame.origin.y;
@@ -141,8 +144,9 @@
 }
 
 - (void) loadChoiceView{
+    [self setTitle:@"Please Select an Account Type"];
     choiceView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
-    [choiceView setBackgroundColor:[UIColor whiteColor]];
+    [choiceView setBackgroundColor:[UIColor blackColor]];
     
     CGFloat largeButtonWidth = 140;
     CGFloat smallButtonWidth = 140;
@@ -231,24 +235,28 @@
     [datahubAcctExplanationTextView setTextAlignment:NSTextAlignmentCenter];
     [datahubAcctExplanationTextView setFont:[UIFont systemFontOfSize:15]];
     [datahubAcctExplanationTextView setBackgroundColor:[UIColor clearColor]];
+    [datahubAcctExplanationTextView setTextColor:[UIColor whiteColor]];
     [choiceView addSubview:datahubAcctExplanationTextView];
     
     self.view = choiceView;
 }
 
 - (void) loadFinalView{
+    [self setTitle:@"You're Done With Set Up!"];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [defaults objectForKey:@"username"];
     NSString *password = [defaults objectForKey:@"password"];
     
     // view
     finalView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
-    [finalView setBackgroundColor:[UIColor whiteColor]];
+    [finalView setBackgroundColor:[UIColor blackColor]];
     
     // thank you label
     thankYouLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 90, bounds.width-16, 20)];
     thankYouLabel.numberOfLines = 0;
     [thankYouLabel setText:@"Thank you for agreeing to participate!"];
+    [thankYouLabel setTextColor:[UIColor whiteColor]];
     [thankYouLabel setTextAlignment:NSTextAlignmentCenter];
     [finalView addSubview:thankYouLabel];
     
@@ -256,6 +264,7 @@
     setupLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 120, bounds.width-16, 60)];
     setupLabel.numberOfLines = 0;
     [setupLabel setText:@"We've set up your GetFit DataHub account:"];
+    [setupLabel setTextColor:[UIColor whiteColor]];
     [setupLabel setTextAlignment:NSTextAlignmentCenter];
     [finalView addSubview:setupLabel];
     
@@ -263,14 +272,14 @@
     
     // username/password info labels
     usernameInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2-75, topLabelOffset +20, 70, 15)];
-//    [usernameInfoLabel setBackgroundColor:[UIColor redColor]];
+    [usernameInfoLabel setTextColor:[UIColor whiteColor]];
     [usernameInfoLabel setTextAlignment:NSTextAlignmentRight];
     [usernameInfoLabel setFont:[UIFont systemFontOfSize:14]];
     [usernameInfoLabel setText:@"username:"];
     [finalView addSubview:usernameInfoLabel];
     
     passwordInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2-75, topLabelOffset +20 +20, 70, 15)];
-//    [passwordInfoLabel setBackgroundColor:[UIColor redColor]];
+    [passwordInfoLabel setTextColor:[UIColor whiteColor]];
     [passwordInfoLabel setTextAlignment:NSTextAlignmentRight];
     [passwordInfoLabel setFont:[UIFont systemFontOfSize:14]];
     [passwordInfoLabel setText:@"password:"];
@@ -278,7 +287,7 @@
 
     // actual username and password
     usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20, 75, 15)];
-//    [usernameLabel setBackgroundColor:[UIColor redColor]];
+    [usernameLabel setTextColor:[UIColor whiteColor]];
     [usernameLabel setTextAlignment:NSTextAlignmentLeft];
     [usernameLabel setFont:[UIFont systemFontOfSize:14]];
     [usernameLabel setText:username];
@@ -286,7 +295,7 @@
     [finalView addSubview:usernameLabel];
 
     passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20 +20, 75, 15)];
-//    [passwordLabel setBackgroundColor:[UIColor redColor]];
+    [passwordLabel setTextColor:[UIColor whiteColor]];
     [passwordLabel setTextAlignment:NSTextAlignmentLeft];
     [passwordLabel setFont:[UIFont systemFontOfSize:14]];
         [passwordLabel setText:password];
@@ -298,7 +307,9 @@
     // explanationlabel
     explanationView = [[UITextView alloc] initWithFrame:CGRectMake(8, usernamePasswordOffset+30, bounds.width-16, 140)];
     [explanationView setFont:[UIFont systemFontOfSize:14]];
-    [explanationView setText:@"Use it to view your data at\nhttps://www.datahub.csail.mit.edu.\n\nYou may want to write your username and password down. You can view them from ths app, but because the app is anonomous, we can't reset your password if it's lost."];
+    [explanationView setText:@"Use it to view your data at\nhttps://www.datahub.csail.mit.edu\n\nYou may want to write your username and password down. You can view them from ths app, but because the app is anonomous, we can't reset your password if it's lost."];
+    [explanationView setTextColor:[UIColor whiteColor]];
+    [explanationView setBackgroundColor:[UIColor clearColor]];
     [explanationView setEditable:NO];
     [explanationView setTextAlignment:NSTextAlignmentCenter];
     [explanationView setDataDetectorTypes:UIDataDetectorTypeAll];
@@ -327,13 +338,14 @@
     
     donateSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, bounds.height - 105 , 330, 40)];
     [donateSwitchLabel setText:@"Donate Data to Living Labs"];
+    [donateSwitchLabel setTextColor:[UIColor whiteColor]];
     [donateSwitchLabel setFont:[UIFont systemFontOfSize:15]];
     [finalView addSubview:donateSwitchLabel];
     
     donateExplanationLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, bounds.height - 65, bounds.width-16, 60)];
     donateExplanationLabel.numberOfLines = 0;
     [donateExplanationLabel setText:@"Donating sensor data requires your phone location.\nYour data belongs to you. At any time, you can stop collection from the phone, or delete your data from datahub, where it is stored."];
-    [donateExplanationLabel setTextColor:[UIColor darkGrayColor]];
+    [donateExplanationLabel setTextColor:[UIColor lightGrayColor]];
     [donateExplanationLabel setTextAlignment:NSTextAlignmentCenter];
     [donateExplanationLabel setFont:[UIFont systemFontOfSize:12]];
     [finalView addSubview:donateExplanationLabel];
@@ -366,6 +378,8 @@
 - (void) emailButtonTouched:(id) sender{
     // will be creating an account with an email address
     randomAcct = NO;
+    
+    [self setTitle:@"Create an Account With Your Email"];
     
     // set the explanitory text
     [datahubAcctExplanationTextView setText:@"This will create a DataHub account using your email address.\n\nYour email and username will be visible to LivingLab researchers.\n\nLater, you will be able to log into your datahub account and edit your data."];
@@ -400,6 +414,8 @@
 - (void) anonomousButtonTouched:(id) sender{
     // will be creating a random account
     randomAcct = YES;
+    
+    [self setTitle:@"Create an Anonomous Account"];
     
     // set the explanitory text
     [datahubAcctExplanationTextView setText:@"This will create a datahub account with a random username and password.\n\nYour data will be entirely anonomous.\n\nLater, you will be able to log into your datahub account and edit your data."];
@@ -445,6 +461,7 @@
 }
 
 - (void) cancelButtonTouched:(id) sender{
+    [self setTitle:@"Please Select an Account Type"];
     anonomousButton.hidden = NO;
     emailButton.hidden = NO;
     

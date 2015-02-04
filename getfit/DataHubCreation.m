@@ -31,10 +31,16 @@
 #pragma mark - datahub
 
 - (NSNumber *) createDataHubUserFromEmail:(NSString *)email andUsername:(NSString *)username andPassword:(NSString *)password {
+    // creates the user and saves their username/email/password
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     @try {
         // setup for DH accountClient
         datahub_accountAccountServiceClient *account_client = [[Resources sharedResources] createDataHubAccountClient];
         [account_client create_account:username email:email password:password repo_name:@"getfit" app_id:appID app_token:appToken];
+        [defaults setObject:username forKey:@"username"];
+        [defaults setObject:password forKey:@"password"];
+        [defaults setObject:email forKey:@"email"];
         return @1;
     } @catch (NSException *exception) {
         NSString *errorTitle;
@@ -44,7 +50,7 @@
             datahub_accountAccountException *acctException = (datahub_accountAccountException*) exception;
             
             // get and set the username/email
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            
             if ([acctException.message rangeOfString:@"Duplicate email"].location!=NSNotFound) {
                 NSString *tempUsername = [self extractUsernameFromErrorStr:acctException.message];
                 [defaults setObject:tempUsername forKey:@"username"];
@@ -111,7 +117,6 @@
 // add a random string after the user's email, reducing collision risk.
 - (NSString *) createUsernameFromEmail:(NSString *)email {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    email = [defaults objectForKey:@"email"];
     
     // strip the email of its extra characters
     NSRange range = [email rangeOfString:@"@"];
