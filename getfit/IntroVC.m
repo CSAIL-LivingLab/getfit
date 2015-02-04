@@ -8,7 +8,7 @@
 
 #import "IntroVC.h"
 
-// only use the appDelegate for starting the location manager
+#import <QuartzCore/QuartzCore.h>
 #include<unistd.h>
 #include<netdb.h>
 
@@ -187,13 +187,22 @@
     emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, fieldsOffsetY, bounds.width - 30, 40)];
     emailTextField.hidden = YES;
 //    [emailTextField setTextColor:[UIColor clearColor]];
-//    [emailTextField setBackgroundColor:[UIColor clear]]
     emailTextField.alpha = 0;
     [emailTextField setKeyboardType:UIKeyboardTypeEmailAddress];
     [emailTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [emailTextField setBackgroundColor:[UIColor colorWithRed:0.173 green:0.243 blue:0.314 alpha:1]];
     [emailTextField setTextAlignment:NSTextAlignmentCenter];
     [emailTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
-    [emailTextField setPlaceholder:@"your email"];
+    [emailTextField setTextColor:[UIColor whiteColor]];
+    // border
+    emailTextField.layer.cornerRadius=8.0f;
+    emailTextField.layer.masksToBounds=YES;
+    emailTextField.layer.borderColor=[blueColor CGColor];
+    emailTextField.layer.borderWidth= 1.5f;
+    emailTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"your email" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    
+    
+    
     [choiceView addSubview:emailTextField];
     
     // dismiss the keybord on tap background

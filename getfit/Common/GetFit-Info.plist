@@ -38,7 +38,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>After authorizing, you can disable this feature at any time. Location data is used to track exercise. It is stored in DataHub, where you can edit and delete your information.</string>
+	<string>After authorizing, you can disable this feature at any time. Location data is used to track exercise. It is securely stored in DataHub, where you can edit and delete your information.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
