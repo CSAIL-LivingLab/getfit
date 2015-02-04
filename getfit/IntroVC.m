@@ -9,12 +9,12 @@
 #import "IntroVC.h"
 
 // only use the appDelegate for starting the location manager
-#import "AppDelegate.h"
 #include<unistd.h>
 #include<netdb.h>
 
 #import "IntroAuthorizationVC.h"
 #import "DataHubCreation.h"
+#import "OpenSense.h"
 
 @interface IntroVC ()
 
@@ -25,6 +25,7 @@
     UIColor *greenColor;
     CGSize bounds;
     BOOL *randomAcct;
+    CLLocationManager *locManager;
     
     // first view
     UIView *firstView;
@@ -72,7 +73,7 @@
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
     
-    [self loadFirstView];
+    [self loadFinalView];
 //    [self loadChoiceView];
     // Do any additional setup after loading the view.
 }
@@ -152,7 +153,7 @@
     CGFloat smallButtonWidth = 140;
     
     CGFloat buttonOffsetY = bounds.height/2-largeButtonWidth/2;
-    CGFloat fieldsOffsetY = 145;
+    CGFloat fieldsOffsetY = 100;
     
     // select anonomous account
     anonomousButton = [[UIButton alloc] initWithFrame:CGRectMake(10, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
@@ -185,9 +186,10 @@
 
     
     // field that email goes into
-    emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, fieldsOffsetY + 15, bounds.width - 30, 40)];
+    emailTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, fieldsOffsetY, bounds.width - 30, 40)];
     emailTextField.hidden = YES;
 //    [emailTextField setTextColor:[UIColor clearColor]];
+//    [emailTextField setBackgroundColor:[UIColor clear]]
     emailTextField.alpha = 0;
     [emailTextField setKeyboardType:UIKeyboardTypeEmailAddress];
     [emailTextField setBorderStyle:UITextBorderStyleRoundedRect];
@@ -203,7 +205,7 @@
 
     CGFloat emailTextFieldOffset = emailTextField.frame.origin.y + emailTextField.frame.size.height;
     
-    cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(10, emailTextFieldOffset + 15, smallButtonWidth, smallButtonWidth)];
+    cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(10, emailTextFieldOffset + 50, smallButtonWidth, smallButtonWidth)];
     cancelButton.layer.cornerRadius = smallButtonWidth/2;
     cancelButton.hidden = YES;
     cancelButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -215,7 +217,7 @@
     [choiceView addSubview:cancelButton];
 
     
-    createButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width - 10 - smallButtonWidth, emailTextFieldOffset + 15, smallButtonWidth, smallButtonWidth)];
+    createButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width - 10 - smallButtonWidth, emailTextFieldOffset + 50, smallButtonWidth, smallButtonWidth)];
     createButton.layer.cornerRadius = smallButtonWidth/2;
     createButton.hidden = YES;
     createButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -511,16 +513,15 @@
         [defaults setObject:[NSDate date] forKey:@"resumeSensorDate"];
         [defaults synchronize];
         
-        // initialize this here, because otherwise, significantLocationChange won't
-
-//        [del setupLocationManager];
-        
+        // [CLLocationmanager didChangeAuthorizationStatus]
+        // will change the app delegate
+        [self requestLocPermissions];
     } else {
         [defaults setObject:[NSDate distantFuture] forKey:@"resumeSensorDate"];
         [defaults synchronize];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 # pragma mark - setup
@@ -662,6 +663,35 @@
     }
 }
 
+# pragma mark - CLLocationManagerDelegate
 
+
+-(void)requestLocPermissions {
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+        locManager = [[CLLocationManager alloc] init];
+        locManager.delegate = self;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+        int authStatus = [CLLocationManager authorizationStatus];
+//        NSLog(@"authStatus = %d", authStatus);
+        if (authStatus == kCLAuthorizationStatusNotDetermined && floor(kCFCoreFoundationVersionNumber) > kCFCoreFoundationVersionNumber_iOS_7_1) {
+            [locManager requestAlwaysAuthorization];
+        } else
+#endif
+        [locManager startMonitoringSignificantLocationChanges];
+    }
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    
+    // if the status is determined
+    // stop location tracking from the IntroVC
+    // dismiss the view controller
+    if (status!=kCLAuthorizationStatusNotDetermined) {
+        [manager stopMonitoringSignificantLocationChanges];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+}
 
 @end
