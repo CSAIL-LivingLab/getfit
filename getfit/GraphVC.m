@@ -38,15 +38,12 @@
         self.tabBarItem.title = @"Progress";
                 UIImage *image = [UIImage imageNamed:@"chart.png"];
                 self.tabBarItem.image = image;
-        [self.view setBackgroundColor:[UIColor whiteColor]];
-        
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor blackColor]];
 
     //size and make webView
     bounds = [UIScreen mainScreen].bounds.size;
@@ -58,7 +55,13 @@
    }
 
 - (void) viewWillAppear:(BOOL)animated {
-    [self refreshWebViewData];
+    
+    if ([self isNetworkAvailable:@"datahug.mit.edu"]) {
+        [self refreshWebViewData];
+    } else {
+        [self loadBlackView];
+    }
+
 }
 
 - (void) loadBlackView {
@@ -70,23 +73,22 @@
     // label
     UILabel *blackViewLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 150, bounds.width-8, 40)];
     [blackViewLabel setNumberOfLines:0];
+    [blackViewLabel setFont:[UIFont systemFontOfSize:20]];
     [blackViewLabel setTextAlignment:NSTextAlignmentCenter];
     [blackViewLabel setTextColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0]];
 
     if ([self isNetworkAvailable:@"mit.edu"]) {
-        [blackViewLabel setText:@"Graphs are loading."];
+        [blackViewLabel setText:@"Graphs are loading"];
     } else {
         [blackViewLabel setText:@"Graphs will load when an internet connection becomes available."];
     }
     [blackView addSubview:blackViewLabel];
     
-    
     // working spinner
-    workingSpinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(bounds.width/2-30, 180, 60, 60)];
+    workingSpinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(bounds.width/2-40, 180, 80, 80)];
     workingSpinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
     [workingSpinner startAnimating];
     [blackView addSubview:workingSpinner];
-
     
     [self setView:blackView];
 }
@@ -96,7 +98,6 @@
     webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, bounds.height, bounds.width)];
     [webView setBackgroundColor:[UIColor blackColor]];
     [webView setDelegate:self];
-
     
     // this is dumb, but we have to convert the html to a string and then display that, because of Safari's XSS issues.
     NSURL *url = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/datahubGraphs.html"];
@@ -122,6 +123,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)localWebView {
+    webView.frame = CGRectMake(0, 0, bounds.width, bounds.height);
     [self refreshWebViewData];
     [self fadeInNewView:webView];
 }
@@ -163,7 +165,7 @@
     [self setView:newView];
     
     // fade out the image
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         
         [imageView setAlpha:0];
         

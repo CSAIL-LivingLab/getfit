@@ -623,7 +623,7 @@
     [self setView:newView];
     
     // fade out the image
-    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:0.7 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         
         [imageView setAlpha:0];
         
