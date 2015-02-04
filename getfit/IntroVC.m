@@ -237,8 +237,8 @@
     [datahubAcctExplanationTextView setBackgroundColor:[UIColor clearColor]];
     [datahubAcctExplanationTextView setTextColor:[UIColor whiteColor]];
     [choiceView addSubview:datahubAcctExplanationTextView];
-    
-    self.view = choiceView;
+  
+    [self fadeInNewView:choiceView];
 }
 
 - (void) loadFinalView{
@@ -351,26 +351,26 @@
     [finalView addSubview:donateExplanationLabel];
 
     // finally make the second view the view
-    self.view = finalView;
+    [self fadeInNewView:finalView];
 }
 
 - (void) loadWorkingView{
     workingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
-    [workingView setBackgroundColor:[UIColor whiteColor]];
+    [workingView setBackgroundColor:[UIColor blackColor]];
     
     workingLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, bounds.height/2-30, bounds.width-16, 60)];
     workingLabel.numberOfLines = 0;
     [workingLabel setText:@"Setting up your DataHub account."];
-    [workingLabel setTextColor:[UIColor grayColor]];
+    [workingLabel setTextColor:[UIColor lightGrayColor]];
     [workingLabel setTextAlignment:NSTextAlignmentCenter];
     [workingView addSubview:workingLabel];
     
     workingSpinner = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(bounds.width/2-30, bounds.height/2+30, 60, 60)];
-    workingSpinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    workingSpinner.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
     [workingSpinner startAnimating];
     [workingView addSubview:workingSpinner];
     
-    self.view = workingView;
+    [self fadeInNewView:workingView];
 }
 
 # pragma mark - user interaction
@@ -603,6 +603,41 @@
 }
 
 # pragma mark - helpers
+
+- (void) fadeInNewView:(UIView *) newView{
+    // fade a new view in from an old one
+    
+    // take a picture of the old view
+    CGRect rect = [self.view bounds];
+    UIGraphicsBeginImageContextWithOptions(rect.size,YES,0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.view.layer renderInContext:context];
+    UIImage *capturedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // add the picture the top of the new view
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
+    [imageView setImage:capturedImage];
+    [newView addSubview:imageView];
+    
+    // make the new view the root view
+    [self setView:newView];
+    
+    // fade out the image
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        
+        [imageView setAlpha:0];
+        
+    }completion:^(BOOL done){
+        // remove it from superview to avoid memory leaks
+        imageView.hidden = YES;
+        [imageView removeFromSuperview];
+    }];
+
+    
+    
+    
+}
 
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
 {
