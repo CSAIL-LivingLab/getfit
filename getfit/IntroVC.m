@@ -105,15 +105,17 @@
     CGFloat legalTextOffset = legalText.frame.size.height + legalText.frame.origin.y;
     
     // accept button
-    acceptButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-35, bounds.height - 65, 65, 65)];
+    acceptButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-40, bounds.height - 80, 80, 80)];
     acceptButton.layer.cornerRadius = acceptButton.bounds.size.width/2;
+    [acceptButton setTitle:@"Scroll Down" forState:UIControlStateNormal];
+    [acceptButton.titleLabel setNumberOfLines:0];
+
     acceptButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     acceptButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [acceptButton.layer setBackgroundColor:[blueColor CGColor]];
-    acceptButton.hidden = YES;
-    acceptButton.alpha = 0;
-
-    [acceptButton setTitle:@"I Accept" forState:UIControlStateNormal];
+    acceptButton.userInteractionEnabled = NO;
+    acceptButton.alpha = .5;
+    
     [acceptButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [acceptButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
@@ -671,13 +673,15 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     // if this is the legal text, show the acceptButton
     
-    acceptButton.hidden = NO;
     if (scrollView == legalText) {
         [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             
             [acceptButton setAlpha:1];
             
-        }completion:nil];
+        }completion:^(BOOL done){
+            [acceptButton setTitle:@"I Accept" forState:UIControlStateNormal];
+            acceptButton.userInteractionEnabled = YES;
+        }];
     }
 }
 
