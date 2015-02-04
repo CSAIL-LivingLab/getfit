@@ -124,8 +124,10 @@
     [[Resources sharedResources] uploadOpenSenseData];
 
     
-    // decide whether to push the oAuthVC or just post directly
-    if ([ms checkForValidCookies] && [ms checkForValidTokens:me.endTime]) {
+    // decide whether to push the oAuthVC, post directly, or not post at all
+    // check the [ExerciseVC postToGetFit] inside - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex { for additional doc
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"postToGetFit"] && [ms checkForValidCookies] && [ms checkForValidTokens:me.endTime]) {
         BOOL * success = [ms postToGetFit];
         if (success) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
@@ -136,13 +138,20 @@
         }
         
         [self dismissViewControllerAnimated:YES completion:nil];
-    } else {
+    } else if ([defaults boolForKey:@"postToGetFit"]){
         // the oAuthVC will post the minutes
         OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentViewController:navController animated:YES completion:nil];
         oAuthVC.minuteTVC = self;
+    } else {
+        // set this to yes, because the user doesn't want these posted.
+        // setting to yes will let [ms postToDataHub] to destroy the entry later
+        me.postedToGetFit = YES;
+        
+        // dismiss the view
+        [self dismiss];
     }
     
 }
@@ -174,6 +183,10 @@
     }
     // this is just because _something_ has to be returned. If you see a picker with 0 rows, there's an error.
     return 0;
+}
+
+- (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
 }
 
 // the user selected an item in teh picker

@@ -8,6 +8,7 @@
 @class datahubDataHubClient;
 @class datahub_accountAccountServiceClient;
 #import "OpenSense.h"
+#import "OSLocalStorage.h"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 

@@ -123,21 +123,21 @@
     
     
     NSDictionary *data = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                 attitude_roll, @"attitude_roll",
-                                 attitude_pitch, @"attitude_pitch",
-                                 attitude_yaw, @"attitude_yaw",
+                                 attitude_roll, @"aR",
+                                 attitude_pitch, @"aP",
+                                 attitude_yaw, @"aY",
                                  
-                                 rotationRate_x, @"rotationRate_x",
-                                 rotationRate_y, @"rotationRate_y",
-                                 rotationRate_z, @"rotationRate_z",
+                                 rotationRate_x, @"rX",
+                                 rotationRate_y, @"rY",
+                                 rotationRate_z, @"rZ",
                                  
-                                 gravity_x, @"gravity_x",
-                                 gravity_y, @"gravity_y",
-                                 gravity_z, @"gravity_z",
+                                 gravity_x, @"gX",
+                                 gravity_y, @"gY",
+                                 gravity_z, @"gZ",
                                  
-                                 userAcceleration_x, @"userAcceleration_x",
-                                 userAcceleration_y, @"userAcceleration_y",
-                                 userAcceleration_z, @"userAcceleration_z",
+                                 userAcceleration_x, @"uaX",
+                                 userAcceleration_y, @"uaY",
+                                 userAcceleration_z, @"uaZ",
                                  
                                  nil];
     

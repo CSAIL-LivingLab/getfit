@@ -116,25 +116,25 @@
                 endDate = [NSDate date];
             }
             
-            NSString *activityString = @"unknown";
-            if (a.running) activityString = @"running";
-            else if (a.walking) activityString = @"walking";
-            else if (a.automotive) activityString = @"automotive";
-            else if (a.stationary) activityString = @"stationary";
+            NSString *activityString = @"unk";
+            if (a.running) activityString = @"runn";
+            else if (a.walking) activityString = @"walk";
+            else if (a.automotive) activityString = @"auto";
+            else if (a.stationary) activityString = @"stat";
             
             NSString *confidenceString = @"low";
-            if (a.confidence == CMMotionActivityConfidenceMedium) confidenceString = @"medium";
-            else if (a.confidence == CMMotionActivityConfidenceHigh) confidenceString = @"high";
+            if (a.confidence == CMMotionActivityConfidenceMedium) confidenceString = @"med";
+            else if (a.confidence == CMMotionActivityConfidenceHigh) confidenceString = @"hig";
         
             // find stepCounts for that activity
             [sc queryStepCountStartingFrom:startDate to:endDate toQueue:activityQueue withHandler:^(NSInteger numberOfSteps, NSError *error) {
                 NSNumber *steps = [[NSNumber alloc] initWithInteger:numberOfSteps];
                 point = [[NSDictionary alloc ] initWithObjectsAndKeys:
-                                       activityString, @"activity",
-                                       confidenceString, @"confidence",
-                                       steps, @"steps",
-                                       startDate, @"startDate",
-                                       endDate, @"endDate",
+                                       activityString, @"act",
+                                       confidenceString, @"conf",
+                                       steps, @"step",
+                                       startDate, @"start",
+                                       endDate, @"end",
                                        nil];
                 [arr addObject:point];
             }];

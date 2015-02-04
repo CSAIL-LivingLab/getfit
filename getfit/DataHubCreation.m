@@ -31,10 +31,16 @@
 #pragma mark - datahub
 
 - (NSNumber *) createDataHubUserFromEmail:(NSString *)email andUsername:(NSString *)username andPassword:(NSString *)password {
+    // creates the user and saves their username/email/password
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     @try {
         // setup for DH accountClient
         datahub_accountAccountServiceClient *account_client = [[Resources sharedResources] createDataHubAccountClient];
         [account_client create_account:username email:email password:password repo_name:@"getfit" app_id:appID app_token:appToken];
+        [defaults setObject:username forKey:@"username"];
+        [defaults setObject:password forKey:@"password"];
+        [defaults setObject:email forKey:@"email"];
         return @1;
     } @catch (NSException *exception) {
         NSString *errorTitle;
@@ -44,7 +50,7 @@
             datahub_accountAccountException *acctException = (datahub_accountAccountException*) exception;
             
             // get and set the username/email
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            
             if ([acctException.message rangeOfString:@"Duplicate email"].location!=NSNotFound) {
                 NSString *tempUsername = [self extractUsernameFromErrorStr:acctException.message];
                 [defaults setObject:tempUsername forKey:@"username"];
@@ -90,7 +96,7 @@
 }
 
 - (BOOL) createSchemaForUser:(NSString *)username {
-    NSString *creationScript = @"create table getfit.device(    device_id varchar(50) primary key NOT NULL,    createdate timestamp default LOCALTIMESTAMP); create table getfit.battery(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    level integer,    state varchar(20));create table getfit.deviceinfo(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    brightness decimal,    country varchar(20),    language varchar(20),    system_version varchar(20));create table getfit.motion(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    attitude_pitch decimal,    attitude_roll decimal,    attitude_yaw decimal,    gravity_x decimal,    gravity_y decimal,    gravity_z decimal,    rotationRate_x decimal,    rotationRate_y decimal,    rotationRate_z decimal,    userAcceleration_x decimal,    userAcceleration_y decimal,    userAcceleration_z decimal);create table getfit.positioning(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    horizontal_accuracy decimal,    lat decimal,    lon decimal,    speed decimal,    course decimal,    altitude decimal,    vertical_accuracy decimal);create table getfit.proximity(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    state boolean);create table getfit.activity(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp NOT NULL,    activity varchar(50),    confidence varchar(50),    steps integer,    startDate timestamp NOT NULL,    endDate timestamp NOT NULL); create table getfit.minutes( minute_id SERIAL primary key, activity varchar(50), intensity varchar(20), duration integer, endDate timestamp, verified boolean default true); create table getfit.opensense ( id SERIAL primary key, data bytea);";
+    NSString *creationScript = @"create table getfit.device(    device_id varchar(50) primary key NOT NULL,    createdate timestamp default LOCALTIMESTAMP); create table getfit.battery(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    level integer,    state varchar(20));create table getfit.deviceinfo(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    brightness decimal,    country varchar(20),    language varchar(20),    system_version varchar(20));create table getfit.motion(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    attitude_pitch decimal,    attitude_roll decimal,    attitude_yaw decimal,    gravity_x decimal,    gravity_y decimal,    gravity_z decimal,    rotationRate_x decimal,    rotationRate_y decimal,    rotationRate_z decimal,    userAcceleration_x decimal,    userAcceleration_y decimal,    userAcceleration_z decimal);create table getfit.positioning(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    horizontal_accuracy decimal,    lat decimal,    lon decimal,    speed decimal,    course decimal,    altitude decimal,    vertical_accuracy decimal);create table getfit.proximity(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp not null,    state boolean);create table getfit.activity(    device_id_fk varchar(50) references getfit.device(device_id) NOT NULL,    datetime timestamp NOT NULL,    activity varchar(50),    confidence varchar(50),    steps integer,    startDate timestamp NOT NULL,    endDate timestamp NOT NULL); create table getfit.minutes( minute_id SERIAL primary key, activity varchar(50), intensity varchar(20), duration integer, endDate timestamp, verified boolean default true); create table getfit.opensense ( id SERIAL primary key, data json);";
     
     datahubDataHubClient *datahub_client = [[Resources sharedResources] createDataHubClient];
     datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
@@ -110,8 +116,9 @@
 #pragma mark - username and password
 // add a random string after the user's email, reducing collision risk.
 - (NSString *) createUsernameFromEmail:(NSString *)email {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    email = [defaults objectForKey:@"email"];
+    // take an email, strip off the domain, and append _XXX random characters.
+    // usernames must be lowercase, or datahub will thrown an error during
+    // account creation
     
     // strip the email of its extra characters
     NSRange range = [email rangeOfString:@"@"];
@@ -133,6 +140,7 @@
     
     // append the string
     NSString *username = [NSString stringWithFormat:@"%@_%@", email, randomString];
+    username = [username lowercaseString];
     return username;
 }
 
@@ -147,9 +155,9 @@
     return randomString;
 }
 
-- (NSString *) createRandomAlphaString{
+- (NSString *) createRandomAlphaStringOfLength:(NSInteger)length{
     NSString *letters = @"abcdefghijkmnopqrstuvwxyz";
-    int len = 8;
+    int len = length;
     NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
     
     for (int i=0; i<len; i++) {

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class IntroAboutVC;
+@class IntroVC;
 
 @interface IntroAuthorizationVC : UIViewController <UIWebViewDelegate>
 
-@property (weak, nonatomic) IntroAboutVC *introAboutVC;
+@property (weak, nonatomic) IntroVC *introVC;
 
 @end

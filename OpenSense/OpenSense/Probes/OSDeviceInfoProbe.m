@@ -82,11 +82,11 @@
     NSNumber *brightness = [NSNumber numberWithFloat:bright];
     
     NSMutableDictionary *data = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                 model, @"device_model",
-                                 systemVersion, @"system_version",
-                                 language, @"language",
+                                 model, @"model",
+                                 systemVersion, @"version",
+                                 language, @"lang",
                                  country, @"country",
-                                 brightness, @"brightness",
+                                 brightness, @"bright",
                                 nil];
     
     return data;

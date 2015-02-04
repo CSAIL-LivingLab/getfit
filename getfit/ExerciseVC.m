@@ -63,8 +63,6 @@
     return self;
 }
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -407,11 +405,17 @@
     // add an alert asking the user whether they want to post to GetFit
     NSString *alertMessage = [NSString stringWithFormat:@"activity: %@\nintensity: %@\n duration: %d minutes.", _minuteEntry.activity, _minuteEntry.intensity, min];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save to GetFit?" message:alertMessage delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"save", nil];
-    [alert show];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"postToGetFit"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save to GetFit?" message:alertMessage delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"save", nil];
+        [alert show];
+    } else {
+        _minuteEntry.postedToGetFit = YES;
+    }
+    
     
     // add to the MinuteStore
-    }
+}
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -437,7 +441,12 @@
         return;
     }
     
-    if ([ms checkForValidCookies] && [ms checkForValidTokens:_minuteEntry.endTime] ) {
+    
+    // only post right away if the user has allowed us to post to getfit
+    // if the cookies are valid
+    // and if tokens are valid
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"postToGetFit"] && [ms checkForValidCookies] && [ms checkForValidTokens:_minuteEntry.endTime] ) {
         BOOL * success = [ms postToGetFit];
         
         
@@ -449,12 +458,16 @@
             [alert show];
         }
         
-    } else{
+    } else if ([defaults boolForKey:@"postToGetFit"]){
         // the oAuthVC will post the minutes
         OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentViewController:navController animated:YES completion:nil];
+    } else {
+        // set the minuteEntry.postedToGetFit to yes, because the user doesn't want postings, anyhow
+        // this will make sure the minuteEntry is deletable later
+        _minuteEntry.postedToGetFit = YES;
     }
     
     // create a new minuteEntry, for next time the user posts
@@ -505,7 +518,7 @@
     
 }
 
-//move all views by specified yoff
+//move all views by specified y offset
 -(void)offsetViews:(NSArray *)views byY:(int)yoff {
     for (UIView *v in views) {
         CGRect frame = v.frame;

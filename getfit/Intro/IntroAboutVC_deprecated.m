@@ -88,7 +88,7 @@
         IntroAuthorizationVC *introAuth = [[IntroAuthorizationVC alloc]  init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introAuth];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        introAuth.introAboutVC = self;
+//        introAuth.introAboutVC = self;
         
         [self presentViewController:navController animated:YES completion:nil];
         

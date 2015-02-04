@@ -1,13 +1,14 @@
 //
 //  AppDelegate.m
-//  OpenSense Collector
+//  GetFit
 //
-//  Created by Mathias Hansen on 1/2/13.
-//  Copyright (c) 2013 Mathias Hansen. All rights reserved.
+//  Created by Albert Carter on 12/01/14.
+//  Copyright (c) 2014 MIT CSAIL Living Lab. All rights reserved.
 //
 
 #import "AppDelegate.h"
 #import "OpenSense.h"
+#import "LocationObject.h"
 
 #import "IntroVC.h"
 
@@ -18,18 +19,21 @@
 #import "TestVC.h"
 
 #import "MinuteStore.h"
-#import "MinuteEntry.h"
+
 
 @implementation AppDelegate {
     NSUserDefaults *defaults;
+    LocationObject *locationObj;
 }
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // load intro screens on first launch
-     defaults = [NSUserDefaults standardUserDefaults];
+    defaults = [NSUserDefaults standardUserDefaults];
+    locationObj = [LocationObject sharedLocationObject];
     [self loadMainViews];
     
     // load the intro view if the user's email isn't set
@@ -40,14 +44,15 @@
         [defaults setObject:nil forKey:@"email"];
         [defaults setObject:nil forKey:@"username"];
         [defaults setObject:nil forKey:@"password"];
+        [defaults setBool:YES forKey:@"postToGetFit"];
         [defaults synchronize];
         
         [self loadIntroViews];
     }
     
-    if (![defaults boolForKey:@"loaded_v.90"]) {
+    if (![defaults boolForKey:@"loaded_v.91"]) {
         [[MinuteStore sharedStore] removeAllMinutes];
-        [defaults setBool:YES forKey:@"loaded_v.90"];
+        [defaults setBool:YES forKey:@"loaded_v.91"];
         [defaults synchronize];
     }
     
@@ -55,9 +60,11 @@
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     
     // set up the location manager
-    // don't do this on the first load, because on the iPhone5, it's the first thing the user will see.
+    // don't do this on the first load, because on the 5s,
+    // the "allow location tracking"
+    // alert will then be the first thing the user will see.
     if ([defaults stringForKey:@"email"]) {
-        [self setupLocationManager];
+        [locationObj setupLocationManager];
         [NSThread sleepForTimeInterval:.5];
 
     }
@@ -104,34 +111,13 @@
 // do this to resume significant location tracking after user re-opens the app, after they've gone through the introduction screens
 - (void) applicationDidBecomeActive:(UIApplication *)application {
     if ([defaults stringForKey:@"email"]) {
-        [self setupLocationManager];
+        [locationObj setupLocationManager];
         [NSThread sleepForTimeInterval:.5];
-        
     }
 }
 
-- (void) setupLocationManager{
-    _locationManager = [[CLLocationManager alloc] init];
-    [_locationManager startMonitoringSignificantLocationChanges];
-    _locationManager.delegate = self;
-}
 
-- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-    defaults = [NSUserDefaults standardUserDefaults];
-    NSDate *resumeSensorDate = [defaults objectForKey:@"resumeSensorDate"];
-    
-    // do nothing if it's not time to resume tracking
-    if (resumeSensorDate !=nil && [resumeSensorDate compare:[NSDate date]] == NSOrderedDescending) {
-        return;
-    }
-    
-    // start gathering data, and then turn the collector off after 30 seconds
-    NSLog(@"\n\n----SIGNIFICANTLOCATIONCHANGE-----\n\n");
-    OpenSense *opensense = [OpenSense sharedInstance];
-    [opensense startCollector];
-    [NSTimer scheduledTimerWithTimeInterval:5 target:[OpenSense sharedInstance] selector:@selector(stopCollector) userInfo:nil repeats:NO];
-}
+
 
 @end
 

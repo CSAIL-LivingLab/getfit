@@ -15,6 +15,8 @@
 // Getfit App
 @property (weak, nonatomic) IBOutlet UILabel *appTitle;
 @property (weak, nonatomic) IBOutlet UITextView *appLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *appSwitch;
+- (IBAction)appSwitchChanged:(id)sender;
 
 
 // Datahub

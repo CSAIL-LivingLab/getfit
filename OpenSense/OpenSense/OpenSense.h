@@ -15,7 +15,6 @@
 
 @optional
 - (void) didFinishFetchingBatches:(NSString *)batches;
-
 @end
 
 @interface OpenSense : NSObject {
@@ -41,6 +40,6 @@
 - (void) stopCollectorAndUploadData;
 
 - (void) fetchAllBatches;
-- (void) deleteAllBatches;
+- (BOOL) deleteAllBatches;
 
 @end

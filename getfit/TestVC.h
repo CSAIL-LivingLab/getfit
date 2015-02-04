@@ -15,6 +15,8 @@
 - (IBAction)postToDataHub:(id)sender;
 - (IBAction)postToGetFitoAuth:(id)sender;
 - (IBAction)postToGetFitNoAuth:(id)sender;
+- (IBAction)postToOpenSense:(id)sender;
+- (IBAction)deleteOpenSenseBatches:(id)sender;
 
 
 @end

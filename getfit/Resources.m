@@ -117,9 +117,7 @@
         datahubConnection * con_app = [datahub_client open_connection:con_params_app];
         
         NSMutableString *statement = [[NSMutableString alloc] initWithString:@"insert into getfit.opensense(data) values ('"];
-        
-        batches = [[NSString stringWithFormat:@"%@", batches] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
+                
         [statement appendString:batches];
         [statement appendString:@"');"];
     
