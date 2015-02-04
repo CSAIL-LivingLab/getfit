@@ -632,10 +632,6 @@
         imageView.hidden = YES;
         [imageView removeFromSuperview];
     }];
-
-    
-    
-    
 }
 
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
