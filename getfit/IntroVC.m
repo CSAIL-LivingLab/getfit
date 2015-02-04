@@ -554,7 +554,6 @@
         
     } else {
         // unknown error
-        
         [defaults setObject:nil forKey:@"password"];
         [defaults setObject:nil forKey:@"email"];
         [defaults setObject:nil forKey:@"username"];
