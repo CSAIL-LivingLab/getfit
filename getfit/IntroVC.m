@@ -43,6 +43,7 @@
     UIButton *emailButton;
     UITextField *emailTextField;
     UITextView *datahubAcctExplanationTextView;
+    NSString *explanationText;
     UIButton *cancelButton;
     UIButton *createButton;
     
@@ -144,10 +145,10 @@
     [choiceView setBackgroundColor:[UIColor whiteColor]];
     
     CGFloat largeButtonWidth = 140;
-    CGFloat smallButtonWidth = 60;
+    CGFloat smallButtonWidth = 140;
     
-    CGFloat buttonOffsetY = 150;
-    CGFloat fieldsOffsetY = 170;
+    CGFloat buttonOffsetY = bounds.height/2-largeButtonWidth/2;
+    CGFloat fieldsOffsetY = 145;
     
     // select anonomous account
     anonomousButton = [[UIButton alloc] initWithFrame:CGRectMake(10, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
@@ -198,7 +199,7 @@
 
     CGFloat emailTextFieldOffset = emailTextField.frame.origin.y + emailTextField.frame.size.height;
     
-    cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(25, emailTextFieldOffset + 5, smallButtonWidth, smallButtonWidth)];
+    cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(10, emailTextFieldOffset + 15, smallButtonWidth, smallButtonWidth)];
     cancelButton.layer.cornerRadius = smallButtonWidth/2;
     cancelButton.hidden = YES;
     cancelButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -210,7 +211,7 @@
     [choiceView addSubview:cancelButton];
 
     
-    createButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width - 25 - smallButtonWidth, emailTextFieldOffset + 5, smallButtonWidth, smallButtonWidth)];
+    createButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width - 10 - smallButtonWidth, emailTextFieldOffset + 15, smallButtonWidth, smallButtonWidth)];
     createButton.layer.cornerRadius = smallButtonWidth/2;
     createButton.hidden = YES;
     createButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -222,9 +223,11 @@
     [choiceView addSubview:createButton];
 
     // explanation of account type
+    explanationText = @"Tap on each button for more information.\n\nYou will have an opportunity to go back to view other options.";
     datahubAcctExplanationTextView = [[UITextView alloc] initWithFrame:CGRectMake(8, bounds.height-170, bounds.width-16, 170)];
-    datahubAcctExplanationTextView.hidden = YES;
-    datahubAcctExplanationTextView.alpha = 0;
+    datahubAcctExplanationTextView.hidden = NO;
+    datahubAcctExplanationTextView.alpha = 1;
+    [datahubAcctExplanationTextView setText:explanationText];
     [datahubAcctExplanationTextView setTextAlignment:NSTextAlignmentCenter];
     [datahubAcctExplanationTextView setFont:[UIFont systemFontOfSize:15]];
     [datahubAcctExplanationTextView setBackgroundColor:[UIColor clearColor]];
@@ -454,7 +457,7 @@
         [cancelButton setBackgroundColor:[UIColor clearColor]];
         [createButton setBackgroundColor:[UIColor clearColor]];
         [emailTextField setAlpha:0];
-        [datahubAcctExplanationTextView setAlpha:0];
+//        [datahubAcctExplanationTextView setAlpha:0];
         
         [self offsetViews:@[anonomousButton, emailButton] byY:100];
         
@@ -463,8 +466,8 @@
         //some completition
         cancelButton.hidden = YES;
         createButton.hidden = YES;
-        datahubAcctExplanationTextView.hidden = YES;
         emailTextField.hidden = YES;
+        [datahubAcctExplanationTextView setText:explanationText];
     }];
 }
 
