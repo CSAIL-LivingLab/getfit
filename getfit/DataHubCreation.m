@@ -116,7 +116,9 @@
 #pragma mark - username and password
 // add a random string after the user's email, reducing collision risk.
 - (NSString *) createUsernameFromEmail:(NSString *)email {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // take an email, strip off the domain, and append _XXX random characters.
+    // usernames must be lowercase, or datahub will thrown an error during
+    // account creation
     
     // strip the email of its extra characters
     NSRange range = [email rangeOfString:@"@"];
@@ -138,6 +140,7 @@
     
     // append the string
     NSString *username = [NSString stringWithFormat:@"%@_%@", email, randomString];
+    username = [username lowercaseString];
     return username;
 }
 

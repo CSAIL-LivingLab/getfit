@@ -542,7 +542,7 @@
     if ([newDataHubAcct isEqualToNumber:@1]) {
         // user is created
         [dhCreation createSchemaForUser:username];
-        
+        [self loadFinalView];
     } else if ([newDataHubAcct isEqualToNumber:@2]){
         // duplicate user/email
         IntroAuthorizationVC *introAuth = [[IntroAuthorizationVC alloc]  init];
