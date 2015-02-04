@@ -63,13 +63,6 @@
     return self;
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    // turn on the location manager when the user loads this screen
-    AppDelegate *del = [[UIApplication sharedApplication] delegate];
-    [del setupLocationManager];
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     

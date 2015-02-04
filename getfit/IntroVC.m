@@ -14,7 +14,8 @@
 
 #import "IntroAuthorizationVC.h"
 #import "DataHubCreation.h"
-#import "OpenSense.h"
+#import "LocationObject.h"
+
 
 @interface IntroVC ()
 
@@ -684,9 +685,11 @@
     
     // if the status is determined
     // stop location tracking from the IntroVC
+    // start using the locationObject
     // dismiss the view controller
     if (status!=kCLAuthorizationStatusNotDetermined) {
         [manager stopMonitoringSignificantLocationChanges];
+        [[LocationObject sharedLocationObject] setupLocationManager];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
