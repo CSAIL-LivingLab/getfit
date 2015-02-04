@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface IntroVC : UIViewController <CLLocationManagerDelegate>
+@interface IntroVC : UIViewController <CLLocationManagerDelegate, UITextViewDelegate>
 
 // method available so that it can be called by the introAuthorizationVC
 - (void) loadFinalView;

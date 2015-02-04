@@ -99,6 +99,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [legalText setBackgroundColor:[UIColor clearColor]];
     [legalText setTextColor:[UIColor whiteColor]];
+    [legalText setDelegate:self];
     [firstView addSubview:legalText];
     
     CGFloat legalTextOffset = legalText.frame.size.height + legalText.frame.origin.y;
@@ -109,8 +110,9 @@
     acceptButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     acceptButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [acceptButton.layer setBackgroundColor:[blueColor CGColor]];
+    acceptButton.hidden = YES;
+    acceptButton.alpha = 0;
 
-//    [acceptButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [acceptButton setTitle:@"I Accept" forState:UIControlStateNormal];
     [acceptButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [acceptButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -664,9 +666,22 @@
         return YES;
     }
 }
+# pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    // if this is the legal text, show the acceptButton
+    
+    acceptButton.hidden = NO;
+    if (scrollView == legalText) {
+        [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            
+            [acceptButton setAlpha:1];
+            
+        }completion:nil];
+    }
+}
 
 # pragma mark - CLLocationManagerDelegate
-
 
 -(void)requestLocPermissions {
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
