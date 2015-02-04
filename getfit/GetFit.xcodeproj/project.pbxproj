@@ -23,7 +23,6 @@
 		3DDED6E8167D098B006DE4F8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6E7167D098B006DE4F8 /* Default.png */; };
 		3DDED6EA167D098B006DE4F8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6E9167D098B006DE4F8 /* Default@2x.png */; };
 		3DDED6EC167D098B006DE4F8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6EB167D098B006DE4F8 /* Default-568h@2x.png */; };
-		941645631A59F01F00B9B2CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941645621A59F01F00B9B2CD /* ViewController.m */; };
 		9416456B1A59F17300B9B2CD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9416456D1A59F17300B9B2CD /* MainStoryboard.storyboard */; };
 		941895EC1A59EA6B00B5BC15 /* Resources.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895EB1A59EA6B00B5BC15 /* Resources.m */; };
 		941895F71A59EACB00B5BC15 /* GraphVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895F41A59EACB00B5BC15 /* GraphVC.m */; };
@@ -114,8 +113,6 @@
 		3DDED6E9167D098B006DE4F8 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3DDED6EB167D098B006DE4F8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3DDED704167D098B006DE4F8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		941645611A59F01F00B9B2CD /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		941645621A59F01F00B9B2CD /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9416456C1A59F17300B9B2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		941895EA1A59EA6B00B5BC15 /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resources.h; sourceTree = "<group>"; };
 		941895EB1A59EA6B00B5BC15 /* Resources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resources.m; sourceTree = "<group>"; };
@@ -301,8 +298,6 @@
 				94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */,
 				9416456D1A59F17300B9B2CD /* MainStoryboard.storyboard */,
 				94B01BE71A5AEF890079F8A1 /* config.json */,
-				941645611A59F01F00B9B2CD /* ViewController.h */,
-				941645621A59F01F00B9B2CD /* ViewController.m */,
 				941895EA1A59EA6B00B5BC15 /* Resources.h */,
 				941895EB1A59EA6B00B5BC15 /* Resources.m */,
 				DBAD5E421A695DFB000F9692 /* Secret.h */,
@@ -646,7 +641,6 @@
 				94EA56171A6C76450045EA4E /* DataHubCreation.m in Sources */,
 				9469492D1A71F09C006E1DE2 /* TProtocolException.m in Sources */,
 				9469492B1A71F09C006E1DE2 /* TMultiplexedProtocol.m in Sources */,
-				941645631A59F01F00B9B2CD /* ViewController.m in Sources */,
 				9431EE941A5CC54900B7EC36 /* IntroDetailVC_deprecated.m in Sources */,
 				DBAD5E441A695DFB000F9692 /* Secret.m in Sources */,
 				94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */,
