@@ -17,6 +17,7 @@
 - (IBAction)postToGetFitNoAuth:(id)sender;
 - (IBAction)postToOpenSense:(id)sender;
 - (IBAction)deleteOpenSenseBatches:(id)sender;
+- (IBAction)previousOrCurrentMonday:(id)sender;
 
 
 @end

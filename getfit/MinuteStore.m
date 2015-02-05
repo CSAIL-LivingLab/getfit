@@ -235,6 +235,8 @@
         
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
         
+        NSLog(@"\n\nPosting Entry to GetFit.\n\tactivity: %@\n\tintensity: %@ \n\tduration: %@", me.activity, me.intensity, @(me.duration));
+        
         // exclude the minutes that have already been posted to DataHub
         if (me.postedToGetFit) {
             continue;

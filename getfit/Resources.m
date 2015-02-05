@@ -134,40 +134,50 @@
 # pragma mark - date utilities
 // subclassing NSCalendar isn't easily possible
 
--(NSDate *)previousSundayForDate:(NSDate *)date
+-(NSDate *)previousMondayForDate:(NSDate *)date
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    static NSUInteger SUNDAY = 1;
+    // This is fucking infuriating. Why hasn't Apple figured out how to make date manipulation not totally suck?
+    // this array is used to map days to their proper offsets
+    
+    
+    // sunday = 1.
+    // if 1, subtract 6 from the days, to find the past monday
+    // the [0,0] is just in there for padding.
+    
+    // likewise, monday = 2. If it's monday, just return today at midnight
+    NSArray *dayMapping = @[
+                            @[@0, @0],
+                            @[@1, @6],
+                            @[@2, @0],
+                            @[@3, @1],
+                            @[@4, @2],
+                            @[@5, @3],
+                            @[@6, @4],
+                            @[@7, @5]
+                            ];
+    
+    NSDate *today = [NSDate date];
+    int currentDOW = [[[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:today] weekday];
+    
+    
+    // get the date exactly 7 days ago (including timestamp stuff)
+    NSNumber *numberOfDaysToSubtract = [[dayMapping objectAtIndex:currentDOW] objectAtIndex:1];
+    NSTimeInterval timeIntervalToSubtract = -24*60*60*[numberOfDaysToSubtract intValue];
+    NSDate *lastMondayWithTime = [today dateByAddingTimeInterval:timeIntervalToSubtract];
+    
+    
+    // convert that to the time at midnight
+    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
+    NSUInteger preservedComponents = (NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit);
+    NSDate *lastMondayWithouTime = [calendar dateFromComponents:[calendar components:preservedComponents fromDate:lastMondayWithTime]];
+//    NSLog(@"%@", lastMondayWithouTime);
+    
+    return lastMondayWithouTime;
 
-    NSDate *startOfWeek;
-    [calendar rangeOfUnit:NSWeekCalendarUnit
-            startDate:&startOfWeek
-             interval:NULL
-              forDate:date];
-
-    if(calendar.firstWeekday == SUNDAY){
-
-        NSDate *beginningOfDate;
-        [calendar rangeOfUnit:NSDayCalendarUnit
-                startDate:&beginningOfDate
-                 interval:NULL forDate:date];
-        if ([startOfWeek isEqualToDate:beginningOfDate]) {
-            startOfWeek = [calendar dateByAddingComponents:(
-                                                        {
-                                                            NSDateComponents *comps = [[NSDateComponents alloc] init];
-                                                            comps.day = -7;
-                                                            comps;
-                                                        })
-                                                toDate:startOfWeek
-                                               options:0];
-        }
-        return startOfWeek;
-    }
-    return nil;
 }
 
 - (NSDate *) nextSundayFromDate:(NSDate *)date {
-    NSDate *previousSunday = [self previousSundayForDate:date];
+    NSDate *previousSunday = [self previousMondayForDate:date];
     NSDate *nextSunday = [previousSunday dateByAddingTimeInterval:60*60*24*7];
     return nextSunday;
 }

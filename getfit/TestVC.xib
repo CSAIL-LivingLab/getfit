@@ -88,11 +88,21 @@
                         <action selector="deleteOpenSenseBatches:" destination="-1" eventType="touchUpInside" id="Hgj-Lj-1NK"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yDe-Ye-LBm">
+                    <rect key="frame" x="203" y="95" width="193" height="30"/>
+                    <state key="normal" title="Previous or Current Monday">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="previousOrCurrentMonday:" destination="-1" eventType="touchUpInside" id="Nvc-0s-Uyt"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="FMe-lI-nq5" secondAttribute="centerX" id="0Pa-Tq-Bs8"/>
                 <constraint firstItem="hQm-IH-7fT" firstAttribute="top" secondItem="FA5-0T-jBJ" secondAttribute="bottom" constant="8" symbolic="YES" id="0eE-Zc-Rj8"/>
+                <constraint firstItem="FMe-lI-nq5" firstAttribute="top" secondItem="yDe-Ye-LBm" secondAttribute="bottom" constant="8" id="175-OU-kde"/>
                 <constraint firstItem="wdP-Et-dax" firstAttribute="top" secondItem="FMe-lI-nq5" secondAttribute="bottom" constant="8" id="4ky-7R-zZA"/>
                 <constraint firstItem="Pkc-SW-Ox0" firstAttribute="top" secondItem="wdP-Et-dax" secondAttribute="bottom" constant="8" id="70O-aU-guV"/>
                 <constraint firstAttribute="centerY" secondItem="hQm-IH-7fT" secondAttribute="centerY" id="8yo-Ut-fxR"/>
@@ -106,6 +116,7 @@
                 <constraint firstItem="FA5-0T-jBJ" firstAttribute="top" secondItem="Pkc-SW-Ox0" secondAttribute="bottom" constant="8" id="tep-7V-HJK"/>
                 <constraint firstAttribute="centerX" secondItem="Pkc-SW-Ox0" secondAttribute="centerX" constant="-0.5" id="uEQ-hU-chx"/>
                 <constraint firstAttribute="centerX" secondItem="WNv-XT-SQz" secondAttribute="centerX" constant="-0.5" id="xLo-Ob-VuR"/>
+                <constraint firstAttribute="centerX" secondItem="yDe-Ye-LBm" secondAttribute="centerX" constant="0.5" id="xVK-So-mmA"/>
                 <constraint firstAttribute="centerX" secondItem="FA5-0T-jBJ" secondAttribute="centerX" constant="-0.5" id="zOY-VH-SeI"/>
             </constraints>
         </view>
