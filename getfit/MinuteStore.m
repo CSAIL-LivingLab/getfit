@@ -161,6 +161,7 @@
         } else {
             verified = @"FALSE";
         }
+        
         NSString *insertStmt = [NSString stringWithFormat:@"('%@', '%@', %@, to_timestamp(%tu), %@),", me.activity, me.intensity, @(me.duration), endTimeInt, verified];
         
         
@@ -169,7 +170,7 @@
 
     }
     
-    // make sure that we're actually posting _something_ to datahub
+    // make sure that we're actualfly posting _something_ to datahub
     if (numberOfMinutesToPost < 1) {
         return NO;
     }

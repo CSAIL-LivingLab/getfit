@@ -107,14 +107,14 @@
     // accept button
     acceptButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-40, bounds.height - 80, 80, 80)];
     acceptButton.layer.cornerRadius = acceptButton.bounds.size.width/2;
-    [acceptButton setTitle:@"Scroll Down" forState:UIControlStateNormal];
+    [acceptButton setTitle:@"scroll down" forState:UIControlStateNormal];
     [acceptButton.titleLabel setNumberOfLines:0];
 
     acceptButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     acceptButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [acceptButton.layer setBackgroundColor:[blueColor CGColor]];
     acceptButton.userInteractionEnabled = NO;
-    acceptButton.alpha = .5;
+    acceptButton.alpha = .55;
     
     [acceptButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [acceptButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -194,6 +194,7 @@
     emailTextField.alpha = 0;
     [emailTextField setKeyboardType:UIKeyboardTypeEmailAddress];
     [emailTextField setBorderStyle:UITextBorderStyleRoundedRect];
+    [emailTextField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     [emailTextField setBackgroundColor:[UIColor colorWithRed:0.173 green:0.243 blue:0.314 alpha:1]];
     [emailTextField setTextAlignment:NSTextAlignmentCenter];
     [emailTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
@@ -299,7 +300,7 @@
     [finalView addSubview:passwordInfoLabel];
 
     // actual username and password
-    usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20, 75, 15)];
+    usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20, 150, 15)];
     [usernameLabel setTextColor:[UIColor whiteColor]];
     [usernameLabel setTextAlignment:NSTextAlignmentLeft];
     [usernameLabel setFont:[UIFont systemFontOfSize:14]];
@@ -307,7 +308,7 @@
 //    [usernameLabel setText:@"bdoijewf"];
     [finalView addSubview:usernameLabel];
 
-    passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20 +20, 75, 15)];
+    passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20 +20, 150, 15)];
     [passwordLabel setTextColor:[UIColor whiteColor]];
     [passwordLabel setTextAlignment:NSTextAlignmentLeft];
     [passwordLabel setFont:[UIFont systemFontOfSize:14]];
