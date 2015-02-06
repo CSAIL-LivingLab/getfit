@@ -251,35 +251,39 @@
 
 - (void) fetchAllBatches {
     BOOL * skipCurrent = [OpenSense sharedInstance].isRunning;
-    NSMutableString *allJsonData = [NSMutableString stringWithString:@""];
+    NSMutableString *allJsonData = [NSMutableString stringWithString:@"["];
     
     [[OSLocalStorage sharedInstance] fetchBatchesForProbe:nil skipCurrent:skipCurrent parseJSON:NO success:^(NSArray *batches) {
         
         OSLog(@"Constructing JSON document with %lu batches", (unsigned long)[batches count]);
         
         // Construct JSON document by comma-separating indvidual data batches
-        NSString *jsonFile = [[NSString alloc] init];
+        NSMutableString *jsonFile = [NSMutableString stringWithString:@"["];
         for (NSData *lineData in batches) {
             NSString *lineStr = [[NSString alloc] initWithData:lineData encoding:NSUTF8StringEncoding];
             
             if (lineStr) {
-                jsonFile = [jsonFile stringByAppendingFormat:@"%@,", lineStr];
+                [jsonFile appendFormat:@"%@,", lineStr];
+//                jsonFile = [jsonFile stringByAppendingFormat:@"%@,", lineStr];
             }
         }
         
         // We don't need to append anything if no valid data was found
-        if ([jsonFile length] <= 0) {
+        if ([jsonFile length] <= 1) {
             return;
         }
         
         // Remove the last comma
-        jsonFile = [jsonFile substringToIndex:[jsonFile length] - 1];
+        [jsonFile deleteCharactersInRange:NSMakeRange([jsonFile length]-1, 1)];
+//        jsonFile = [jsonFile substringToIndex:[jsonFile length] - 1];
         
         // ...and add array brackets
-        jsonFile = [NSString stringWithFormat:@"[%@]", jsonFile];
-        [allJsonData appendString:jsonFile];
+        [jsonFile appendString:@"]"];
+//        jsonFile = [NSString stringWithFormat:@"[%@]", jsonFile];
+//        [allJsonData appendString:jsonFile];
         
-        [_delegate didFinishFetchingBatches:allJsonData];
+        [_delegate didFinishFetchingBatches:jsonFile];
+//        [_delegate didFinishFetchingBatches:allJsonData];
     }
      ];
 }
