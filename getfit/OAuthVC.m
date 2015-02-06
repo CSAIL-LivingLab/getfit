@@ -157,11 +157,12 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     
     // white view
-    UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height)];
+    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height)];
+    [backgroundView setBackgroundColor:[UIColor blackColor]];
     
     // activity indicator
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(screenRect.size.width/2-30, screenRect.size.height/2-30, 60, 60)];
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
     [activityIndicator startAnimating];
     
     
@@ -174,9 +175,10 @@
     
     
     // add the views
-    [whiteView addSubview:activityIndicator];
-    [whiteView addSubview:message];
-    [self.view addSubview:whiteView];
+    [backgroundView addSubview:activityIndicator];
+    [backgroundView addSubview:message];
+    [self fadeInNewView:backgroundView];
+//    [self.view addSubview:backgroundView];
     
     // make sure the view eventually dissapears, even if the web view doesn't load
     NSTimeInterval delay = 15;
@@ -228,11 +230,36 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) fadeInNewView:(UIView *) newView{
+    // fade a new view in from an old one
+    
+    // take a picture of the old view
+    CGRect rect = [self.view bounds];
+    UIGraphicsBeginImageContextWithOptions(rect.size,YES,0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.view.layer renderInContext:context];
+    UIImage *capturedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // add the picture the top of the new view
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
+    [imageView setImage:capturedImage];
+    [newView addSubview:imageView];
+    
+    // add this view to the top of the other
+    // this is different from most fadeInNewView methods, since the root view is preserved
+    [self.view addSubview:newView];
+    
+    // fade out the image
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        
+        [imageView setAlpha:0];
+        
+    }completion:^(BOOL done){
+        // remove it from superview to avoid memory leaks
+        imageView.hidden = YES;
+        [imageView removeFromSuperview];
+    }];
 }
-
-
 
 @end
