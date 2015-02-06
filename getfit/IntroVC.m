@@ -162,7 +162,7 @@
     anonymousButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     anonymousButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [anonymousButton setBackgroundColor:blueColor];
-    [anonymousButton setTitle:@"Create an Anonymous Account" forState:UIControlStateNormal];
+    [anonymousButton setTitle:@"Anonymous Account" forState:UIControlStateNormal];
     [anonymousButton.titleLabel setNumberOfLines:0];
     [anonymousButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [anonymousButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
@@ -175,7 +175,7 @@
     emailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     emailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [emailButton setBackgroundColor:greenColor];
-    [emailButton setTitle:@"Create an\nAccount Using\nYour Email" forState:UIControlStateNormal];
+    [emailButton setTitle:@"Linked\nto Email" forState:UIControlStateNormal];
     [emailButton.titleLabel setNumberOfLines:0];
     [emailButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [emailButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
@@ -421,7 +421,7 @@
     // will be creating a random account
     randomAcct = YES;
     
-    [self setTitle:@"Create an Anonymous Account"];
+    [self setTitle:@"Create Anonymous Account"];
     
     // set the explanitory text
     [datahubAcctExplanationTextView setText:@"This will create a datahub account with a random username and password.\n\nYour data will be entirely anonymous.\n\nLater, you will be able to log into your datahub account and edit your data."];

@@ -8,6 +8,7 @@
 
 #import "LocationObject.h"
 #import "OpenSense.h"
+#import "Resources.h"
 
 
 @implementation LocationObject {
@@ -42,7 +43,6 @@
 
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     NSDate *resumeSensorDate = [defaults objectForKey:@"resumeSensorDate"];
     
@@ -55,7 +55,7 @@
     NSLog(@"\n\n----SIGNIFICANTLOCATIONCHANGE-----\n\n");
     OpenSense *opensense = [OpenSense sharedInstance];
     [opensense startCollector];
-    [NSTimer scheduledTimerWithTimeInterval:5 target:[OpenSense sharedInstance] selector:@selector(stopCollector) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:10 target:[Resources sharedResources] selector:@selector(uploadOpenSenseData) userInfo:nil repeats:NO];
 }
 
 @end

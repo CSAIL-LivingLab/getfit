@@ -205,21 +205,10 @@
     NSLog(@"%@", lastMondayWithouTime);
 
     
-    
-    
-//    
-//    if (currentDOW == 2) {
-//        // monday
-//        // return midnight today (before the next day)
-//        
-//        NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
-//        NSUInteger preservedComponents = (NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit);
-//        today = [calendar dateFromComponents:[calendar components:preservedComponents fromDate:today]];
-//        NSLog(@"%@", today);
-//        
-//    } else {
-//        // get the previous monday
-//    }
+}
+
+- (IBAction)startOpenSenseProbes:(id)sender {
+    [[OpenSense sharedInstance] startCollector];
     
 }
 
