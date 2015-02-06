@@ -41,7 +41,7 @@
     
     // choice View
     UIView *choiceView;
-    UIButton *anonomousButton;
+    UIButton *anonymousButton;
     UIButton *emailButton;
     UITextField *emailTextField;
     UITextView *datahubAcctExplanationTextView;
@@ -107,14 +107,15 @@
     // accept button
     acceptButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-40, bounds.height - 80, 80, 80)];
     acceptButton.layer.cornerRadius = acceptButton.bounds.size.width/2;
-    [acceptButton setTitle:@"scroll down" forState:UIControlStateNormal];
+    [acceptButton setTitle:@"scroll\ndown" forState:UIControlStateNormal];
     [acceptButton.titleLabel setNumberOfLines:0];
+    
 
     acceptButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     acceptButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [acceptButton.layer setBackgroundColor:[blueColor CGColor]];
     acceptButton.userInteractionEnabled = NO;
-    acceptButton.alpha = .55;
+    acceptButton.alpha = .8;
     
     [acceptButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [acceptButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -157,18 +158,18 @@
     CGFloat buttonOffsetY = bounds.height/2-largeButtonWidth/2;
     CGFloat fieldsOffsetY = 100;
     
-    // select anonomous account
-    anonomousButton = [[UIButton alloc] initWithFrame:CGRectMake(10, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
-    anonomousButton.layer.cornerRadius = largeButtonWidth/2;
-    anonomousButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    anonomousButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    [anonomousButton setBackgroundColor:blueColor];
-    [anonomousButton setTitle:@"Create an anonomous account" forState:UIControlStateNormal];
-    [anonomousButton.titleLabel setNumberOfLines:0];
-    [anonomousButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [anonomousButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
-    [anonomousButton addTarget:self action:@selector(anonomousButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
-    [choiceView addSubview:anonomousButton];
+    // select anonymous account
+    anonymousButton = [[UIButton alloc] initWithFrame:CGRectMake(10, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
+    anonymousButton.layer.cornerRadius = largeButtonWidth/2;
+    anonymousButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    anonymousButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [anonymousButton setBackgroundColor:blueColor];
+    [anonymousButton setTitle:@"Create an Anonymous Account" forState:UIControlStateNormal];
+    [anonymousButton.titleLabel setNumberOfLines:0];
+    [anonymousButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [anonymousButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [anonymousButton addTarget:self action:@selector(anonymousButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [choiceView addSubview:anonymousButton];
     
     // select account using email
     emailButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width-10-largeButtonWidth, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
@@ -176,7 +177,7 @@
     emailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     emailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [emailButton setBackgroundColor:greenColor];
-    [emailButton setTitle:@"Create an\naccount using\nyour email" forState:UIControlStateNormal];
+    [emailButton setTitle:@"Create an\nAccount Using\nYour Email" forState:UIControlStateNormal];
     [emailButton.titleLabel setNumberOfLines:0];
     [emailButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [emailButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
@@ -321,7 +322,7 @@
     // explanationlabel
     explanationView = [[UITextView alloc] initWithFrame:CGRectMake(8, usernamePasswordOffset+30, bounds.width-16, 140)];
     [explanationView setFont:[UIFont systemFontOfSize:14]];
-    [explanationView setText:@"Use it to view your data at\nhttps://www.datahub.csail.mit.edu\n\nYou may want to write your username and password down. You can view them from ths app, but because the app is anonomous, we can't reset your password if it's lost."];
+    [explanationView setText:@"Use it to view your data at\nhttps://www.datahub.csail.mit.edu\n\nYou may want to write your username and password down. You can view them from ths app, but because the app is anonymous, we can't reset your password if it's lost."];
     [explanationView setTextColor:[UIColor whiteColor]];
     [explanationView setBackgroundColor:[UIColor clearColor]];
     [explanationView setEditable:NO];
@@ -338,7 +339,7 @@
     goToGetFit.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     goToGetFit.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [goToGetFit.layer setBackgroundColor:[blueColor CGColor]];
-    [goToGetFit setTitle:@"Go to GetFit" forState:UIControlStateNormal];
+    [goToGetFit setTitle:@"Start Getting Fit" forState:UIControlStateNormal];
     [goToGetFit.titleLabel setFont:[UIFont systemFontOfSize:15]];
     
     [goToGetFit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -405,7 +406,7 @@
     
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         // hide the two big buttons
-        anonomousButton.backgroundColor = [UIColor clearColor];
+        anonymousButton.backgroundColor = [UIColor clearColor];
         emailButton.backgroundColor = [UIColor clearColor];
         
         // show the other stuff
@@ -414,25 +415,25 @@
         [emailTextField setAlpha:1];
         [datahubAcctExplanationTextView setAlpha:1];
         
-        [self offsetViews:@[anonomousButton, emailButton] byY:-100];
+        [self offsetViews:@[anonymousButton, emailButton] byY:-100];
         
         
     }completion:^(BOOL done){
         //some completition
-        anonomousButton.hidden = TRUE;
+        anonymousButton.hidden = TRUE;
         emailButton.hidden = TRUE;
     }];
 
 }
 
-- (void) anonomousButtonTouched:(id) sender{
+- (void) anonymousButtonTouched:(id) sender{
     // will be creating a random account
     randomAcct = YES;
     
-    [self setTitle:@"Create an Anonomous Account"];
+    [self setTitle:@"Create an Anonymous Account"];
     
     // set the explanitory text
-    [datahubAcctExplanationTextView setText:@"This will create a datahub account with a random username and password.\n\nYour data will be entirely anonomous.\n\nLater, you will be able to log into your datahub account and edit your data."];
+    [datahubAcctExplanationTextView setText:@"This will create a datahub account with a random username and password.\n\nYour data will be entirely anonymous.\n\nLater, you will be able to log into your datahub account and edit your data."];
     
     cancelButton.hidden = NO;
     createButton.hidden = NO;
@@ -441,7 +442,7 @@
     
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         // hide the two big buttons
-        anonomousButton.backgroundColor = [UIColor clearColor];
+        anonymousButton.backgroundColor = [UIColor clearColor];
         emailButton.backgroundColor = [UIColor clearColor];
         
         // show the other stuff
@@ -449,12 +450,12 @@
         [createButton setBackgroundColor:[UIColor redColor]];
         [datahubAcctExplanationTextView setAlpha:1];
         
-        [self offsetViews:@[anonomousButton, emailButton] byY:-100];
+        [self offsetViews:@[anonymousButton, emailButton] byY:-100];
         
         
     }completion:^(BOOL done){
         //some completition
-        anonomousButton.hidden = TRUE;
+        anonymousButton.hidden = TRUE;
         emailButton.hidden = TRUE;
     }];
 }
@@ -476,12 +477,12 @@
 
 - (void) cancelButtonTouched:(id) sender{
     [self setTitle:@"Please Select an Account Type"];
-    anonomousButton.hidden = NO;
+    anonymousButton.hidden = NO;
     emailButton.hidden = NO;
     
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         // show the buttons
-        anonomousButton.backgroundColor = blueColor;
+        anonymousButton.backgroundColor = blueColor;
         emailButton.backgroundColor = greenColor;
         
         // hide the other stuff
@@ -490,7 +491,7 @@
         [emailTextField setAlpha:0];
 //        [datahubAcctExplanationTextView setAlpha:0];
         
-        [self offsetViews:@[anonomousButton, emailButton] byY:100];
+        [self offsetViews:@[anonymousButton, emailButton] byY:100];
         
         
     }completion:^(BOOL done){
