@@ -51,7 +51,6 @@
     
     // final view
     UIView *finalView;
-    UILabel *thankYouLabel;
     UILabel *setupLabel;
     UILabel *usernameInfoLabel;
     UILabel *usernameLabel;
@@ -74,7 +73,8 @@
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
     
-    [self loadFirstView];
+//    [self loadFirstView];
+    [self loadFinalView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,8 +109,6 @@
     acceptButton.layer.cornerRadius = acceptButton.bounds.size.width/2;
     [acceptButton setTitle:@"scroll\ndown" forState:UIControlStateNormal];
     [acceptButton.titleLabel setNumberOfLines:0];
-    
-
     acceptButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     acceptButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [acceptButton.layer setBackgroundColor:[blueColor CGColor]];
@@ -267,33 +265,25 @@
     finalView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
     [finalView setBackgroundColor:[UIColor blackColor]];
     
-    // thank you label
-    thankYouLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 90, bounds.width-16, 20)];
-    thankYouLabel.numberOfLines = 0;
-    [thankYouLabel setText:@"Thank you for agreeing to participate!"];
-    [thankYouLabel setTextColor:[UIColor whiteColor]];
-    [thankYouLabel setTextAlignment:NSTextAlignmentCenter];
-    [finalView addSubview:thankYouLabel];
-    
     // setup label
-    setupLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 120, bounds.width-16, 60)];
+    setupLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, 75, bounds.width-16, 60)];
     setupLabel.numberOfLines = 0;
     [setupLabel setText:@"We've set up your GetFit DataHub account:"];
     [setupLabel setTextColor:[UIColor whiteColor]];
     [setupLabel setTextAlignment:NSTextAlignmentCenter];
     [finalView addSubview:setupLabel];
     
-    CGFloat topLabelOffset = thankYouLabel.bounds.size.height + setupLabel.bounds.size.height + 80;
+    CGFloat topLabelOffset = setupLabel.frame.origin.y + setupLabel.frame.size.height;
     
     // username/password info labels
-    usernameInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2-75, topLabelOffset +20, 70, 15)];
+    usernameInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2-75, topLabelOffset +8, 70, 15)];
     [usernameInfoLabel setTextColor:[UIColor whiteColor]];
     [usernameInfoLabel setTextAlignment:NSTextAlignmentRight];
     [usernameInfoLabel setFont:[UIFont systemFontOfSize:14]];
     [usernameInfoLabel setText:@"username:"];
     [finalView addSubview:usernameInfoLabel];
     
-    passwordInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2-75, topLabelOffset +20 +20, 70, 15)];
+    passwordInfoLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2-75, topLabelOffset +8 +20, 70, 15)];
     [passwordInfoLabel setTextColor:[UIColor whiteColor]];
     [passwordInfoLabel setTextAlignment:NSTextAlignmentRight];
     [passwordInfoLabel setFont:[UIFont systemFontOfSize:14]];
@@ -301,7 +291,7 @@
     [finalView addSubview:passwordInfoLabel];
 
     // actual username and password
-    usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20, 150, 15)];
+    usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset + 8, 150, 15)];
     [usernameLabel setTextColor:[UIColor whiteColor]];
     [usernameLabel setTextAlignment:NSTextAlignmentLeft];
     [usernameLabel setFont:[UIFont systemFontOfSize:14]];
@@ -309,7 +299,7 @@
 //    [usernameLabel setText:@"bdoijewf"];
     [finalView addSubview:usernameLabel];
 
-    passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset +20 +20, 150, 15)];
+    passwordLabel = [[UILabel alloc] initWithFrame:CGRectMake(bounds.width/2 +5, topLabelOffset + 8 +20, 150, 15)];
     [passwordLabel setTextColor:[UIColor whiteColor]];
     [passwordLabel setTextAlignment:NSTextAlignmentLeft];
     [passwordLabel setFont:[UIFont systemFontOfSize:14]];
@@ -317,10 +307,9 @@
 //    [passwordLabel setText:@"bdoijewf"];
     [finalView addSubview:passwordLabel];
     
-    CGFloat usernamePasswordOffset = 200;
     
     // explanationlabel
-    explanationView = [[UITextView alloc] initWithFrame:CGRectMake(8, usernamePasswordOffset+30, bounds.width-16, 140)];
+    explanationView = [[UITextView alloc] initWithFrame:CGRectMake(8, passwordLabel.frame.origin.y + 15, bounds.width-16, 140)];
     [explanationView setFont:[UIFont systemFontOfSize:14]];
     [explanationView setText:@"Use it to view your data at\nhttps://www.datahub.csail.mit.edu\n\nYou may want to write your username and password down. You can view them from ths app, but because the app is anonymous, we can't reset your password if it's lost."];
     [explanationView setTextColor:[UIColor whiteColor]];
@@ -331,16 +320,18 @@
     [explanationView sizeToFit];
     [finalView addSubview:explanationView];
     
-    CGFloat explanationOffset =explanationView.frame.origin.y + explanationView.bounds.size.height;
+    CGFloat explanationOffset =explanationView.frame.origin.y + explanationView.frame.size.height;
     
     // button
-    goToGetFit = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-50, explanationOffset, 100, 100)];
+    goToGetFit = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-65, explanationOffset + 10, 130, 130)];
     goToGetFit.layer.cornerRadius = goToGetFit.bounds.size.width/2;
-    goToGetFit.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    goToGetFit.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [goToGetFit.layer setBackgroundColor:[blueColor CGColor]];
     [goToGetFit setTitle:@"Start Getting Fit" forState:UIControlStateNormal];
     [goToGetFit.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [goToGetFit.titleLabel setNumberOfLines:0];
+    goToGetFit.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    goToGetFit.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    
     
     [goToGetFit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [goToGetFit addTarget:self action:@selector(goToGetFit:) forControlEvents:UIControlEventTouchUpInside];
@@ -676,7 +667,7 @@
     // if this is the legal text, show the acceptButton
     
     if (scrollView == legalText) {
-        [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             
             [acceptButton setAlpha:1];
             
