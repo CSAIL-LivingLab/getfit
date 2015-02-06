@@ -101,7 +101,7 @@
     NSURL *nsurl;
     MinuteStore *ms = [MinuteStore sharedStore];
     if ([ms checkForValidCookies]) {
-        nsurl = [NSURL URLWithString: @"https://getfit-d7-dev.mit.edu/dashboard"];
+        nsurl = [NSURL URLWithString: @"https://getfit.mit.edu/dashboard"];
     } else {
         [[NSURLCache sharedURLCache] removeAllCachedResponses];
         NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -110,7 +110,7 @@
         }
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-        nsurl=[NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/Shibboleth.sso/Login?target=https%3A%2F%2Fgetfit-d7-dev.mit.edu%2F%3Fq%3Dshib_login%2Fdashboard"];
+        nsurl=[NSURL URLWithString:@"https://getfit.mit.edu/Shibboleth.sso/WAYF?target=https%3A%2F%2Fgetfit.mit.edu%2F%3Fq%3Dshib_login%2Fdashboard"];
     }
     
     NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
@@ -189,11 +189,11 @@
 
 - (void) webViewDidStartLoad:(UIWebView *)webView {
     NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
-//    NSLog(@"\n\nURL: %@", url);
+    NSLog(@"\n\nURL: %@", url);
     
     // detect the redirect url (https://idp.mit.edu/idp/profile/SAML2/Redirect/SSO)
     // because the dashboard url will only show in webViewDidFinishLoad
-    if ([url rangeOfString:@"SAML2/Redirect"].location != NSNotFound) {
+    if ([url rangeOfString:@"Authn/MIT"].location != NSNotFound) {
         [self hideWebViewAndShowSpinnerView];
     }
     

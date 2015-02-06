@@ -30,6 +30,10 @@
     self = [super init];
     
     if (self) {
+        // register for memory warning notifications
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(dumpOpenSenseData) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+        
        // do some initialization stuff here
     }
     return self;
@@ -56,6 +60,14 @@
     OpenSense *opensense = [OpenSense sharedInstance];
     [opensense startCollector];
     [NSTimer scheduledTimerWithTimeInterval:10 target:[Resources sharedResources] selector:@selector(uploadOpenSenseData) userInfo:nil repeats:NO];
+}
+
+- (void) dumpOpenSenseData{
+    // called when the object receives a memory warning
+    // just dumps the batches
+    NSLog(@"didReceiveMemory warning called. LocationObject heard it.");
+    [[OpenSense sharedInstance] stopCollector];
+    [[OpenSense sharedInstance] deleteAllBatches];
 }
 
 @end
