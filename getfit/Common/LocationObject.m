@@ -8,6 +8,7 @@
 
 #import "LocationObject.h"
 #import "OpenSense.h"
+#import "Resources.h"
 
 
 @implementation LocationObject {
@@ -29,6 +30,10 @@
     self = [super init];
     
     if (self) {
+        // register for memory warning notifications
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(dumpOpenSenseData) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+        
        // do some initialization stuff here
     }
     return self;
@@ -42,7 +47,6 @@
 
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     NSDate *resumeSensorDate = [defaults objectForKey:@"resumeSensorDate"];
     
@@ -55,7 +59,15 @@
     NSLog(@"\n\n----SIGNIFICANTLOCATIONCHANGE-----\n\n");
     OpenSense *opensense = [OpenSense sharedInstance];
     [opensense startCollector];
-    [NSTimer scheduledTimerWithTimeInterval:5 target:[OpenSense sharedInstance] selector:@selector(stopCollector) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:10 target:[Resources sharedResources] selector:@selector(uploadOpenSenseData) userInfo:nil repeats:NO];
+}
+
+- (void) dumpOpenSenseData{
+    // called when the object receives a memory warning
+    // just dumps the batches
+    NSLog(@"didReceiveMemory warning called. LocationObject heard it.");
+    [[OpenSense sharedInstance] stopCollector];
+    [[OpenSense sharedInstance] deleteAllBatches];
 }
 
 @end

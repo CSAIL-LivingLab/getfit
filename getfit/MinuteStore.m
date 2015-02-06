@@ -161,6 +161,7 @@
         } else {
             verified = @"FALSE";
         }
+        
         NSString *insertStmt = [NSString stringWithFormat:@"('%@', '%@', %@, to_timestamp(%tu), %@),", me.activity, me.intensity, @(me.duration), endTimeInt, verified];
         
         
@@ -169,7 +170,7 @@
 
     }
     
-    // make sure that we're actually posting _something_ to datahub
+    // make sure that we're actualfly posting _something_ to datahub
     if (numberOfMinutesToPost < 1) {
         return NO;
     }
@@ -233,6 +234,8 @@
     for (int i=0; i< [_privateMinutes count]; i++) {
         
         MinuteEntry *me = [_privateMinutes objectAtIndex:i];
+        
+        NSLog(@"\n\nPosting Entry to GetFit.\n\tactivity: %@\n\tintensity: %@ \n\tduration: %@", me.activity, me.intensity, @(me.duration));
         
         // exclude the minutes that have already been posted to DataHub
         if (me.postedToGetFit) {
@@ -300,7 +303,7 @@
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         
         // format the request
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString:@"https://getfit-d7-dev.mit.edu/system/ajax"]];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString:@"https://getfit.mit.edu/system/ajax"]];
         [request setHTTPMethod:@"POST"];
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         [request setAllHTTPHeaderFields:headers];

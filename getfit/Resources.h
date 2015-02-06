@@ -26,7 +26,7 @@
 - (datahub_accountAccountServiceClient *) createDataHubAccountClient;
 - (void) uploadOpenSenseData;
 
-- (NSDate *) previousSundayForDate:(NSDate *)date;
+- (NSDate *) previousMondayForDate:(NSDate *)date;
 - (NSDate *) nextSundayFromDate:(NSDate *)date;
 
 @end

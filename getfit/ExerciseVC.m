@@ -33,6 +33,8 @@
 @property UIPickerView *activityPicker;
 @property UIPickerView *intensityPicker;
 
+@property UIButton *intensityDoneButton;
+@property UIButton *activityDoneButton;
 
 @end
 
@@ -63,12 +65,17 @@
     return self;
 }
 
+- (void) foobar:(id)selector{
+    NSLog(@"foobar called");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
     greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
     textColor =[UIColor colorWithRed:.921568627 green:.941176471 blue:.945098039 alpha:1.0];
+    self.view.backgroundColor = [UIColor blackColor];
     
     // some useful varibales
     CGRect windowFrame = self.view.frame;
@@ -94,14 +101,34 @@
     [_intensityPicker reloadAllComponents];
     _intensityPicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _intensityPicker.layer.borderWidth = 1;
+
     
     // tap the background to remove pickers
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPickers)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
     
-    self.view.backgroundColor = [UIColor blackColor];
-    
+//    
+//    _activityDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50, 0, 50, 44)];
+//    [_activityDoneButton setTitle:@"Done" forState:UIControlStateNormal];
+//    [_activityDoneButton.titleLabel setTextAlignment:NSTextAlignmentRight];
+//    [_activityDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
+//    [_activityDoneButton addTarget:self action:@selector(foobar:) forControlEvents:UIControlEventTouchUpInside];
+//    [_activityDoneButton setUserInteractionEnabled:YES];
+//    
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(foobar:)];
+//    [_activityDoneButton addGestureRecognizer:tap];
+//    
+//    
+//    [_activityPicker addSubview:_activityDoneButton];
+//    
+//    _intensityDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 44)];
+//    [_intensityDoneButton setTitle:@"Done" forState:UIControlStateNormal];
+//    [_intensityDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
+//    [_intensityDoneButton addTarget:self action:@selector(foobar:) forControlEvents:UIControlEventTouchUpInside];
+//    [_intensityDoneButton setUserInteractionEnabled:YES];
+//    [_intensityPicker addSubview:_intensityDoneButton];
+//    
     // make buttons
     _activityButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 175, buttonWidth, buttonWidth)];
     [_activityButton setTitle:kACTIVITY_TITLE forState:UIControlStateNormal];
@@ -144,7 +171,7 @@
 
     _startButton = [UIButton buttonWithType:UIButtonTypeCustom];
 
-    CGRect screen = [UIScreen mainScreen].bounds;
+    CGRect screen = [UIScreen maigit add nScreen].bounds;
     
     if (screen.size.height == 480) { //4 or 4S {
         _startButton.frame = CGRectMake(windowFrame.size.width/2-buttonWidth/2, 290, buttonWidth, buttonWidth);
@@ -274,18 +301,21 @@
 
 - (void) editAction {
     Resources *resources = [Resources sharedResources];
-
-    [_activityPicker reloadAllComponents];
+    
+    // remove the intensityPicker if it was open
     [UIView beginAnimations:@"MoveOut" context:nil];
     [_intensityPicker removeFromSuperview];
     [UIView commitAnimations];
     
+    // move in the activity picker
+    [_activityPicker reloadAllComponents];
     [UIView beginAnimations:@"MoveIn" context:nil];
     [self.view insertSubview:_activityPicker aboveSubview:self.view];
     [UIView commitAnimations];
+    
+    // set the activity button title
     NSString *title = [resources.activities objectAtIndex:[_activityPicker selectedRowInComponent:0]];
     self.minuteEntry.activity = [resources.activities objectAtIndex:[_activityPicker selectedRowInComponent:0]];
-
     [_activityButton setTitle:title forState:UIControlStateNormal];
     [self adjustButtonForImage:_activityButton];
 
@@ -293,11 +323,13 @@
 
 - (void) editIntensity {
     Resources *resources = [Resources sharedResources];
-
-    [_intensityPicker reloadAllComponents];
+    
+    // remove the activityPicker if it was open
     [_activityPicker removeFromSuperview];
     [UIView commitAnimations];
     
+    
+    [_intensityPicker reloadAllComponents];
     [UIView beginAnimations:@"MoveIn" context:nil];
     [self.view insertSubview:_intensityPicker aboveSubview:self.view];
     [UIView commitAnimations];
@@ -583,6 +615,7 @@
     //[self activateRecordingButtonIfPossible];
     
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -89,10 +89,10 @@
     me = [[MinuteEntry alloc] initEntryWithActivity:@"" intensity:@"" duration:0 andEndTime:dateAtLoad];
     
     // resetup the dateTimePicker, so it uses the most current date
-    NSDate *previousSunday = [[Resources sharedResources] previousSundayForDate:[NSDate date]];
+    NSDate *previousMonday = [[Resources sharedResources] previousMondayForDate:[NSDate date]];
     endTimePicker = [[UIDatePicker alloc] init];
     endTimePicker.datePickerMode = UIDatePickerModeDateAndTime;
-    endTimePicker.minimumDate = previousSunday;
+    endTimePicker.minimumDate = previousMonday;
     endTimePicker.maximumDate= [NSDate date];
     [endTimePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
     }

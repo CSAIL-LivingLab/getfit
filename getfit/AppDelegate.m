@@ -50,9 +50,10 @@
         [self loadIntroViews];
     }
     
-    if (![defaults boolForKey:@"loaded_v.91"]) {
+    if (![defaults boolForKey:@"loaded_v.92"]) {
         [[MinuteStore sharedStore] removeAllMinutes];
-        [defaults setBool:YES forKey:@"loaded_v.91"];
+        [[OpenSense sharedInstance] deleteAllBatches];
+        [defaults setBool:YES forKey:@"loaded_v.92"];
         [defaults synchronize];
     }
     
@@ -115,9 +116,6 @@
         [NSThread sleepForTimeInterval:.5];
     }
 }
-
-
-
 
 @end
 

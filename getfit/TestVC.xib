@@ -88,6 +88,15 @@
                         <action selector="deleteOpenSenseBatches:" destination="-1" eventType="touchUpInside" id="Hgj-Lj-1NK"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FO0-aQ-aaJ">
+                    <rect key="frame" x="214" y="57" width="170" height="30"/>
+                    <state key="normal" title="Start OpenSense Probes">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="startOpenSenseProbes:" destination="-1" eventType="touchUpInside" id="T8C-mi-35p"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -103,6 +112,7 @@
                 <constraint firstItem="WNv-XT-SQz" firstAttribute="top" secondItem="hQm-IH-7fT" secondAttribute="bottom" constant="8" id="giP-py-dZe"/>
                 <constraint firstItem="mIc-WX-xUP" firstAttribute="top" secondItem="0Do-CL-LVt" secondAttribute="bottom" constant="8" id="jky-zc-K6c"/>
                 <constraint firstAttribute="centerX" secondItem="wdP-Et-dax" secondAttribute="centerX" constant="-0.5" id="nSY-ww-yOS"/>
+                <constraint firstAttribute="centerX" secondItem="FO0-aQ-aaJ" secondAttribute="centerX" constant="1" id="ob7-Li-1LF"/>
                 <constraint firstItem="FA5-0T-jBJ" firstAttribute="top" secondItem="Pkc-SW-Ox0" secondAttribute="bottom" constant="8" id="tep-7V-HJK"/>
                 <constraint firstAttribute="centerX" secondItem="Pkc-SW-Ox0" secondAttribute="centerX" constant="-0.5" id="uEQ-hU-chx"/>
                 <constraint firstAttribute="centerX" secondItem="WNv-XT-SQz" secondAttribute="centerX" constant="-0.5" id="xLo-Ob-VuR"/>
