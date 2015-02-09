@@ -19,26 +19,6 @@
 
 @interface ExerciseVC ()
 
-@property MinuteEntry *minuteEntry;
-
-@property BOOL exercising;
-@property UILabel *stopwatch;
-@property NSTimeInterval startTime;
-
-@property UIButton *intensityButton;
-@property UIButton *activityButton;
-@property UIButton *startButton;
-@property UIButton *plusButton;
-
-@property UIView *activityPickerParentView;
-@property UIPickerView *activityPicker;
-
-@property UIView *intensityPickerParentView;
-@property UIPickerView *intensityPicker;
-
-@property UIButton *intensityDoneButton;
-@property UIButton *activityDoneButton;
-
 @end
 
 
@@ -54,6 +34,25 @@
     UIColor *textColor;
     UIImage *activityImage;
     BOOL wasActive;
+    
+    BOOL exercising;
+    MinuteEntry *minuteEntry;
+    UILabel *stopwatch;
+    NSTimeInterval startTime;
+    
+    UIButton *intensityButton;
+    UIButton *activityButton;
+    UIButton *startButton;
+    UIButton *plusButton;
+
+    UIView *activityPickerParentView;
+    UIPickerView *activityPicker;
+    
+    UIView *intensityPickerParentView;
+    UIPickerView *intensityPicker;
+    
+    UIButton *intensityDoneButton;
+    UIButton *activityDoneButton;
 
 }
 
@@ -82,55 +81,55 @@
     
     //UIColor *systemBackground = [UIColor colorWithRed:.921568627 green:.941176471 blue:.945098039 alpha:1.0];
 
-    _minuteEntry = [[MinuteEntry alloc] init];
+    minuteEntry = [[MinuteEntry alloc] init];
 
     // make activity picker
-    _activityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+2, 216)];
-    _activityPicker.dataSource = self;
-    _activityPicker.delegate = self;
-    [_activityPicker setBackgroundColor:[UIColor blackColor]];
-    [_activityPicker reloadAllComponents];
-    _activityPicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    _activityPicker.layer.borderWidth = 1;
+    activityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+2, 216)];
+    activityPicker.dataSource = self;
+    activityPicker.delegate = self;
+    [activityPicker setBackgroundColor:[UIColor blackColor]];
+    [activityPicker reloadAllComponents];
+    activityPicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    activityPicker.layer.borderWidth = 1;
 
     // make activity done button
-    _activityDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50, 0, 50, 44)];
-    [_activityDoneButton setTitle:@"Done" forState:UIControlStateNormal];
-    [_activityDoneButton.titleLabel setTextAlignment:NSTextAlignmentRight];
-    [_activityDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
-    [_activityDoneButton addTarget:self action:@selector(dismissPickers) forControlEvents:UIControlEventTouchUpInside];
-    [_activityDoneButton setUserInteractionEnabled:YES];
+    activityDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50, 0, 50, 44)];
+    [activityDoneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [activityDoneButton.titleLabel setTextAlignment:NSTextAlignmentRight];
+    [activityDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
+    [activityDoneButton addTarget:self action:@selector(dismissPickers) forControlEvents:UIControlEventTouchUpInside];
+    [activityDoneButton setUserInteractionEnabled:YES];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPickers)];
-    [_activityDoneButton addGestureRecognizer:tap];
+    [activityDoneButton addGestureRecognizer:tap];
 
     // make activity picker parent view, and add subviews
-    _activityPickerParentView = [[UIView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
-    [_activityPickerParentView addSubview:_activityPicker];
-    [_activityPickerParentView addSubview:_activityDoneButton];
+    activityPickerParentView = [[UIView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
+    [activityPickerParentView addSubview:activityPicker];
+    [activityPickerParentView addSubview:activityDoneButton];
     
     
     // make intensity picker
-    _intensityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+2, 216)];
-    _intensityPicker.dataSource = self;
-    _intensityPicker.delegate = self;
-    [_intensityPicker setBackgroundColor:[UIColor blackColor]];
-    [_intensityPicker reloadAllComponents];
-    _intensityPicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    _intensityPicker.layer.borderWidth = 1;
+    intensityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+2, 216)];
+    intensityPicker.dataSource = self;
+    intensityPicker.delegate = self;
+    [intensityPicker setBackgroundColor:[UIColor blackColor]];
+    [intensityPicker reloadAllComponents];
+    intensityPicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    intensityPicker.layer.borderWidth = 1;
     
     // make intensity picker done button
-    _intensityDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50, 0, 50, 44)];
-    [_intensityDoneButton setTitle:@"Done" forState:UIControlStateNormal];
-    [_intensityDoneButton.titleLabel setTextAlignment:NSTextAlignmentRight];
-    [_intensityDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
-    [_intensityDoneButton addTarget:self action:@selector(dismissPickers) forControlEvents:UIControlEventTouchUpInside];
-    [_intensityDoneButton setUserInteractionEnabled:YES];
-    [_intensityPicker addSubview:_intensityDoneButton];
+    intensityDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50, 0, 50, 44)];
+    [intensityDoneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [intensityDoneButton.titleLabel setTextAlignment:NSTextAlignmentRight];
+    [intensityDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
+    [intensityDoneButton addTarget:self action:@selector(dismissPickers) forControlEvents:UIControlEventTouchUpInside];
+    [intensityDoneButton setUserInteractionEnabled:YES];
+    [intensityPicker addSubview:intensityDoneButton];
     
     // make intensity picker parent view, and add subviews
-    _intensityPickerParentView = [[UIView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
-    [_intensityPickerParentView addSubview:_intensityPicker];
-    [_intensityPickerParentView addSubview:_intensityDoneButton];
+    intensityPickerParentView = [[UIView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
+    [intensityPickerParentView addSubview:intensityPicker];
+    [intensityPickerParentView addSubview:intensityDoneButton];
 
     
     // tap the background to remove pickers
@@ -141,95 +140,95 @@
     
     
      // make buttons
-    _activityButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 175, buttonWidth, buttonWidth)];
-    [_activityButton setTitle:kACTIVITY_TITLE forState:UIControlStateNormal];
-    _activityButton.layer.cornerRadius = _activityButton.bounds.size.width/2;
-    _activityButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _activityButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    _activityButton.layer.borderWidth = 2.0;
-    [_activityButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [[_activityButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:16]];
-    [_activityButton.layer setBackgroundColor:[blueColor CGColor]];
-    [_activityButton addTarget:self action:@selector(editAction) forControlEvents:UIControlEventTouchUpInside];
+    activityButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 175, buttonWidth, buttonWidth)];
+    [activityButton setTitle:kACTIVITY_TITLE forState:UIControlStateNormal];
+    activityButton.layer.cornerRadius = activityButton.bounds.size.width/2;
+    activityButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    activityButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    activityButton.layer.borderWidth = 2.0;
+    [activityButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [[activityButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:16]];
+    [activityButton.layer setBackgroundColor:[blueColor CGColor]];
+    [activityButton addTarget:self action:@selector(editActivity) forControlEvents:UIControlEventTouchUpInside];
     CGSize s = [UIImage imageNamed:@"runner.png"].size;
     activityImage =[self imageWithImage:[UIImage imageNamed:@"runner.png"] scaledToSize:CGSizeMake(s.width/2.0, s.height/2.0)];
-    [_activityButton setImage:activityImage forState:UIControlStateNormal];
-    [self adjustButtonForImage:_activityButton];
-    [self.view addSubview:_activityButton];
-    _activityButton.titleLabel.numberOfLines = 2;
-    _activityButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [activityButton setImage:activityImage forState:UIControlStateNormal];
+    [self adjustButtonForImage:activityButton];
+    [self.view addSubview:activityButton];
+    activityButton.titleLabel.numberOfLines = 2;
+    activityButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
-    _intensityButton = [[UIButton alloc] initWithFrame:CGRectMake(windowFrame.size.width-10-buttonWidth, 175, buttonWidth, buttonWidth)];
-    [ _intensityButton setTitle:kINTENSITY_TITLE forState:UIControlStateNormal];
-    _intensityButton.layer.cornerRadius =  _intensityButton.bounds.size.width/2;
-    _intensityButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _intensityButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    _intensityButton.layer.borderWidth = 2.0;
+    intensityButton = [[UIButton alloc] initWithFrame:CGRectMake(windowFrame.size.width-10-buttonWidth, 175, buttonWidth, buttonWidth)];
+    [ intensityButton setTitle:kINTENSITY_TITLE forState:UIControlStateNormal];
+    intensityButton.layer.cornerRadius =  intensityButton.bounds.size.width/2;
+    intensityButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    intensityButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    intensityButton.layer.borderWidth = 2.0;
      s = [UIImage imageNamed:@"intensity.png"].size;
     UIImage *i =[self imageWithImage:[UIImage imageNamed:@"intensity.png"] scaledToSize:CGSizeMake(s.width/2.0, s.height/2.0)];
-    [_intensityButton setImage:i forState:UIControlStateNormal];
-    [self adjustButtonForImage:_intensityButton];
-    _intensityButton.titleLabel.numberOfLines = 2;
-    _intensityButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [intensityButton setImage:i forState:UIControlStateNormal];
+    [self adjustButtonForImage:intensityButton];
+    intensityButton.titleLabel.numberOfLines = 2;
+    intensityButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
 
-    [_intensityButton addTarget:self action:@selector(editIntensity) forControlEvents:UIControlEventTouchUpInside];
-    //[_intensityButton.layer setBorderColor:[greenColor CGColor]];
-    [_intensityButton.layer setBackgroundColor:[greenColor CGColor]];
-    [self.view addSubview: _intensityButton];
-    [[_intensityButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:16]];
-    [_intensityButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [intensityButton addTarget:self action:@selector(editIntensity) forControlEvents:UIControlEventTouchUpInside];
+    //[intensityButton.layer setBorderColor:[greenColor CGColor]];
+    [intensityButton.layer setBackgroundColor:[greenColor CGColor]];
+    [self.view addSubview: intensityButton];
+    [[intensityButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:16]];
+    [intensityButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
-    _startButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    startButton = [UIButton buttonWithType:UIButtonTypeCustom];
 
     CGRect screen = [UIScreen mainScreen].bounds;
     
     if (screen.size.height == 480) { //4 or 4S {
-        _startButton.frame = CGRectMake(windowFrame.size.width/2-buttonWidth/2, 290, buttonWidth, buttonWidth);
-        _stopwatch = [[UILabel alloc] initWithFrame:CGRectMake(0, 190,  windowFrame.size.width, 125)];
+        startButton.frame = CGRectMake(windowFrame.size.width/2-buttonWidth/2, 290, buttonWidth, buttonWidth);
+        stopwatch = [[UILabel alloc] initWithFrame:CGRectMake(0, 190,  windowFrame.size.width, 125)];
 
     } else {
-        _startButton.frame = CGRectMake(windowFrame.size.width/2-buttonWidth/2, 375, buttonWidth, buttonWidth);
-        _stopwatch = [[UILabel alloc] initWithFrame:CGRectMake(0, 238,  windowFrame.size.width, 125)];
+        startButton.frame = CGRectMake(windowFrame.size.width/2-buttonWidth/2, 375, buttonWidth, buttonWidth);
+        stopwatch = [[UILabel alloc] initWithFrame:CGRectMake(0, 238,  windowFrame.size.width, 125)];
     }
-    [_startButton setTitle:@"Start" forState:UIControlStateNormal];
-    [_startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _startButton.layer.borderWidth = 2.0;
-    _startButton.layer.cornerRadius = _startButton.bounds.size.width/2;
-    //[_startButton.layer setBorderColor:[[UIColor redColor] CGColor]];
-    [_startButton.layer setBackgroundColor:[[UIColor redColor] CGColor]];
-    [_startButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
-     _startButton.userInteractionEnabled = NO;
-    [self.view addSubview:_startButton];
-    [[_startButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:16]];
+    [startButton setTitle:@"Start" forState:UIControlStateNormal];
+    [startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    startButton.layer.borderWidth = 2.0;
+    startButton.layer.cornerRadius = startButton.bounds.size.width/2;
+    //[startButton.layer setBorderColor:[[UIColor redColor] CGColor]];
+    [startButton.layer setBackgroundColor:[[UIColor redColor] CGColor]];
+    [startButton addTarget:self action:@selector(toggleRecording) forControlEvents:UIControlEventTouchUpInside];
+     startButton.userInteractionEnabled = NO;
+    [self.view addSubview:startButton];
+    [[startButton titleLabel] setFont:[UIFont fontWithName:kFONT_NAME size:16]];
 
     // make stopwatch
-    [_stopwatch setText:@"00:00.0"];
-    _stopwatch.textAlignment = NSTextAlignmentCenter;
-    _stopwatch.font = [UIFont fontWithName:kFONT_NAME_BOLD size:90];
-    [_stopwatch setTextColor:textColor];
-    _stopwatch.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_stopwatch];
+    [stopwatch setText:@"00:00.0"];
+    stopwatch.textAlignment = NSTextAlignmentCenter;
+    stopwatch.font = [UIFont fontWithName:kFONT_NAME_BOLD size:90];
+    [stopwatch setTextColor:textColor];
+    stopwatch.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:stopwatch];
     
-    _startButton.hidden = YES;
-    _stopwatch.hidden = YES;
+    startButton.hidden = YES;
+    stopwatch.hidden = YES;
     
     // add plus button
     CGRect frame = [UIScreen mainScreen].bounds;
     CGRect rightFrame = CGRectMake(frame.size.width - 190, 10, 200, 40);
-    _plusButton = [[UIButton alloc] initWithFrame:rightFrame];
-    [_plusButton setTitle:@"manual entry +" forState:UIControlStateNormal];
-    [_plusButton setTitleColor:blueColor forState:UIControlStateNormal];
+    plusButton = [[UIButton alloc] initWithFrame:rightFrame];
+    [plusButton setTitle:@"manual entry +" forState:UIControlStateNormal];
+    [plusButton setTitleColor:blueColor forState:UIControlStateNormal];
     AppDelegate *del = [[UIApplication sharedApplication] delegate];
-    [_plusButton addTarget:del action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_plusButton];
+    [plusButton addTarget:del action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:plusButton];
 }
 
 
 - (void) dismissPickers {
     [UIView beginAnimations:@"MoveOut" context:nil];
-    [_activityPickerParentView removeFromSuperview];
-    [_intensityPickerParentView removeFromSuperview];
+    [activityPickerParentView removeFromSuperview];
+    [intensityPickerParentView removeFromSuperview];
     [UIView commitAnimations];
     [self activateRecordingButtonIfPossible];
 
@@ -241,57 +240,57 @@
 
 - (void) toggleRecording {
     [self dismissPickers];
-    _exercising = !_exercising;
+    exercising = !exercising;
     
-    if (_exercising) {
-        [_startButton setTitle:@"Stop" forState:UIControlStateNormal];
-         _startTime = [NSDate timeIntervalSinceReferenceDate];
+    if (exercising) {
+        [startButton setTitle:@"Stop" forState:UIControlStateNormal];
+         startTime = [NSDate timeIntervalSinceReferenceDate];
         [[OpenSense sharedInstance] startCollector];
         
         [self updateStopwatch];
         [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            _intensityButton.backgroundColor = [UIColor clearColor];
-            _activityButton.backgroundColor = [UIColor clearColor];
-            [_plusButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-            _stopwatch.textColor = textColor;
-            _startButton.backgroundColor = [UIColor redColor];
+            intensityButton.backgroundColor = [UIColor clearColor];
+            activityButton.backgroundColor = [UIColor clearColor];
+            [plusButton setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+            stopwatch.textColor = textColor;
+            startButton.backgroundColor = [UIColor redColor];
 
 
-            [self offsetViews:@[_stopwatch,_startButton] byY:-100];
-            [self offsetViews:@[_intensityButton,_activityButton] byY:100];
+            [self offsetViews:@[stopwatch,startButton] byY:-100];
+            [self offsetViews:@[intensityButton,activityButton] byY:100];
 
 
         }completion:^(BOOL done){
             //some completition
-            _intensityButton.hidden = TRUE;
-            _activityButton.hidden = TRUE;
-            _plusButton.hidden = TRUE;
+            intensityButton.hidden = TRUE;
+            activityButton.hidden = TRUE;
+            plusButton.hidden = TRUE;
         }];
 
     } else {
-        [_startButton setTitle:@"Start" forState:UIControlStateNormal];
+        [startButton setTitle:@"Start" forState:UIControlStateNormal];
         
 
-        _intensityButton.hidden = FALSE;
-        _activityButton.hidden = FALSE;
-        _plusButton.hidden = FALSE;
-        _stopwatch.hidden = YES;
+        intensityButton.hidden = FALSE;
+        activityButton.hidden = FALSE;
+        plusButton.hidden = FALSE;
+        stopwatch.hidden = YES;
 
         [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            _intensityButton.backgroundColor = blueColor;
-            _activityButton.backgroundColor = greenColor;
-            [_plusButton setTitleColor:blueColor forState:UIControlStateNormal];
+            intensityButton.backgroundColor = blueColor;
+            activityButton.backgroundColor = greenColor;
+            [plusButton setTitleColor:blueColor forState:UIControlStateNormal];
             
-            [self offsetViews:@[_stopwatch,_startButton] byY:100];
-            //[self offsetViews:@[_intensityButton,_activityButton] byY:-100];
+            [self offsetViews:@[stopwatch,startButton] byY:100];
+            //[self offsetViews:@[intensityButton,activityButton] byY:-100];
 
 
-            _startButton.backgroundColor = [UIColor clearColor];
-            [_stopwatch setTextColor:[UIColor clearColor]];
+            startButton.backgroundColor = [UIColor clearColor];
+            [stopwatch setTextColor:[UIColor clearColor]];
 
 
         }completion:^(BOOL done){
-            _startButton.hidden = YES;
+            startButton.hidden = YES;
             wasActive = FALSE;
             //some completition
         }];
@@ -300,35 +299,35 @@
         [self saveMinuteEntry];
 
         // clear the pickers
-        [ _activityButton setTitle:kACTIVITY_TITLE forState:UIControlStateNormal];
-        //[_activityButton setImage:activityImage forState:UIControlStateNormal];
-        [ _intensityButton setTitle:kINTENSITY_TITLE forState:UIControlStateNormal];
-        [self adjustButtonForImage:_intensityButton];
-        [self adjustButtonForImage:_activityButton];
+        [ activityButton setTitle:kACTIVITY_TITLE forState:UIControlStateNormal];
+        //[activityButton setImage:activityImage forState:UIControlStateNormal];
+        [ intensityButton setTitle:kINTENSITY_TITLE forState:UIControlStateNormal];
+        [self adjustButtonForImage:intensityButton];
+        [self adjustButtonForImage:activityButton];
 
     }
 
 }
 
-- (void) editAction {
+- (void) editActivity {
     Resources *resources = [Resources sharedResources];
     
     // remove the intensityPicker if it was open
     [UIView beginAnimations:@"MoveOut" context:nil];
-    [_intensityPickerParentView removeFromSuperview];
+    [intensityPickerParentView removeFromSuperview];
     [UIView commitAnimations];
     
     // move in the activity picker
-    [_activityPicker reloadAllComponents];
+    [activityPicker reloadAllComponents];
     [UIView beginAnimations:@"MoveIn" context:nil];
-    [self.view insertSubview:_activityPickerParentView aboveSubview:self.view];
+    [self.view insertSubview:activityPickerParentView aboveSubview:self.view];
     [UIView commitAnimations];
     
     // set the activity button title
-    NSString *title = [resources.activities objectAtIndex:[_activityPicker selectedRowInComponent:0]];
-    self.minuteEntry.activity = [resources.activities objectAtIndex:[_activityPicker selectedRowInComponent:0]];
-    [_activityButton setTitle:title forState:UIControlStateNormal];
-    [self adjustButtonForImage:_activityButton];
+    NSString *title = [resources.activities objectAtIndex:[activityPicker selectedRowInComponent:0]];
+    minuteEntry.activity = [resources.activities objectAtIndex:[activityPicker selectedRowInComponent:0]];
+    [activityButton setTitle:title forState:UIControlStateNormal];
+    [self adjustButtonForImage:activityButton];
 
 }
 
@@ -336,45 +335,45 @@
     Resources *resources = [Resources sharedResources];
     
     // remove the activityPicker if it was open
-    [_activityPickerParentView removeFromSuperview];
+    [activityPickerParentView removeFromSuperview];
     [UIView commitAnimations];
     
     
-    [_intensityPicker reloadAllComponents];
+    [intensityPicker reloadAllComponents];
     [UIView beginAnimations:@"MoveIn" context:nil];
-    [self.view insertSubview:_intensityPickerParentView aboveSubview:self.view];
+    [self.view insertSubview:intensityPickerParentView aboveSubview:self.view];
     [UIView commitAnimations];
     
-    NSString *title = [resources.intensities objectAtIndex:[_intensityPicker selectedRowInComponent:0]];
-    self.minuteEntry.intensity = [resources.intensities objectAtIndex:[_intensityPicker selectedRowInComponent:0]];
+    NSString *title = [resources.intensities objectAtIndex:[intensityPicker selectedRowInComponent:0]];
+    minuteEntry.intensity = [resources.intensities objectAtIndex:[intensityPicker selectedRowInComponent:0]];
     
-    [_intensityButton setTitle:title forState:UIControlStateNormal];
-    [self adjustButtonForImage:_intensityButton];
+    [intensityButton setTitle:title forState:UIControlStateNormal];
+    [self adjustButtonForImage:intensityButton];
 
 }
 
 - (void) activateRecordingButtonIfPossible {
     
-    if (![_activityButton.titleLabel.text isEqualToString:kACTIVITY_TITLE]) {
+    if (![activityButton.titleLabel.text isEqualToString:kACTIVITY_TITLE]) {
         
         if (!wasActive) {
             wasActive = TRUE;
-            _startButton.backgroundColor = [UIColor clearColor];
-            _stopwatch.textColor = [UIColor clearColor];
-            //_stopwatch.layer.backgroundColor = [UIColor blackColor].CGColor;
-            _stopwatch.hidden = NO;
-            _startButton.hidden = NO;
+            startButton.backgroundColor = [UIColor clearColor];
+            stopwatch.textColor = [UIColor clearColor];
+            //stopwatch.layer.backgroundColor = [UIColor blackColor].CGColor;
+            stopwatch.hidden = NO;
+            startButton.hidden = NO;
             [UIView animateWithDuration:.25 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
 
-                [self offsetViews:@[_intensityButton,_activityButton] byY:-25];
+                [self offsetViews:@[intensityButton,activityButton] byY:-25];
 
             }completion:^(BOOL done){
                 [UIView animateWithDuration:.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                    [self offsetViews:@[_intensityButton,_activityButton] byY:-75];
+                    [self offsetViews:@[intensityButton,activityButton] byY:-75];
 
-                    _startButton.backgroundColor = [UIColor redColor];
-                    //_stopwatch.layer.backgroundColor = textColor.CGColor; //can't animate uilabel background color!
-                    _stopwatch.textColor = textColor;
+                    startButton.backgroundColor = [UIColor redColor];
+                    //stopwatch.layer.backgroundColor = textColor.CGColor; //can't animate uilabel background color!
+                    stopwatch.textColor = textColor;
                     
                 }completion:^(BOOL done){
                     //some completition
@@ -384,26 +383,26 @@
 
 
             
-            _startButton.userInteractionEnabled = YES;
+            startButton.userInteractionEnabled = YES;
         }
     } else {
         if (wasActive) {
             wasActive = FALSE;
             [UIView animateWithDuration:1.0 delay:0.5 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-                _startButton.backgroundColor = [UIColor clearColor];
-                _stopwatch.textColor = [UIColor clearColor];
+                startButton.backgroundColor = [UIColor clearColor];
+                stopwatch.textColor = [UIColor clearColor];
 
-                // _stopwatch.layer.backgroundColor = [UIColor blackColor].CGColor; //can't animate uilabel background color!
-                [self offsetViews:@[_intensityButton,_activityButton] byY:100];
+                // stopwatch.layer.backgroundColor = [UIColor blackColor].CGColor; //can't animate uilabel background color!
+                [self offsetViews:@[intensityButton,activityButton] byY:100];
 
             }completion:^(BOOL done){
-                _stopwatch.hidden = YES;
-                _startButton.hidden = YES;
+                stopwatch.hidden = YES;
+                startButton.hidden = YES;
 
             }];
 
         }
-        _startButton.userInteractionEnabled = NO;
+        startButton.userInteractionEnabled = NO;
     }
 }
 
@@ -411,13 +410,13 @@
 
 # pragma mark - helper
 - (void) updateStopwatch {
-    if (!_exercising) {
-        _stopwatch.text = @"00:00.0";
+    if (!exercising) {
+        stopwatch.text = @"00:00.0";
         return;
     };
     
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-    NSTimeInterval elapsed = currentTime - _startTime;
+    NSTimeInterval elapsed = currentTime - startTime;
     
     int min = (int) (elapsed / 60.0);
     elapsed -= min * 60;
@@ -425,7 +424,7 @@
     elapsed -= sec;
     int fraction = elapsed * 10;
     
-    _stopwatch.text = [NSString stringWithFormat:@"%02u:%02u.%u", min, sec, fraction];
+    stopwatch.text = [NSString stringWithFormat:@"%02u:%02u.%u", min, sec, fraction];
     
     [self performSelector:@selector(updateStopwatch) withObject:self afterDelay:0.1];
 }
@@ -433,12 +432,12 @@
 // compute and save the duration
 - (void) saveMinuteEntry {
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-    NSTimeInterval elapsed = currentTime - _startTime;
+    NSTimeInterval elapsed = currentTime - startTime;
     int min = (int) (elapsed / 60.0);
     
     // save the EndTime
-    _minuteEntry.endTime = [NSDate date];
-    _minuteEntry.duration = min;
+    minuteEntry.endTime = [NSDate date];
+    minuteEntry.duration = min;
  
     // send OpenSense data to DataHub
     [[OpenSense sharedInstance] stopCollector];
@@ -446,14 +445,14 @@
  
     
     // add an alert asking the user whether they want to post to GetFit
-    NSString *alertMessage = [NSString stringWithFormat:@"activity: %@\nintensity: %@\n duration: %d minutes.", _minuteEntry.activity, _minuteEntry.intensity, min];
+    NSString *alertMessage = [NSString stringWithFormat:@"activity: %@\nintensity: %@\n duration: %d minutes.", minuteEntry.activity, minuteEntry.intensity, min];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults boolForKey:@"postToGetFit"]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save to GetFit?" message:alertMessage delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"save", nil];
         [alert show];
     } else {
-        _minuteEntry.postedToGetFit = YES;
+        minuteEntry.postedToGetFit = YES;
     }
     
     
@@ -468,13 +467,13 @@
     // 0 is cancel
     if (buttonIndex == 0) {
         // set this up so that it will post to datahub, but not getfit
-        _minuteEntry.postedToDataHub = NO;
-        _minuteEntry.postedToGetFit = YES;
-        _minuteEntry.verified = NO;
+        minuteEntry.postedToDataHub = NO;
+        minuteEntry.postedToGetFit = YES;
+        minuteEntry.verified = NO;
     }
     
     MinuteStore *ms = [MinuteStore sharedStore];
-    [ms addMinuteEntry:_minuteEntry];
+    [ms addMinuteEntry:minuteEntry];
     
 //     post minutes to DataHub
     [ms postToDataHub];
@@ -489,7 +488,7 @@
     // if the cookies are valid
     // and if tokens are valid
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults boolForKey:@"postToGetFit"] && [ms checkForValidCookies] && [ms checkForValidTokens:_minuteEntry.endTime] ) {
+    if ([defaults boolForKey:@"postToGetFit"] && [ms checkForValidCookies] && [ms checkForValidTokens:minuteEntry.endTime] ) {
         BOOL * success = [ms postToGetFit];
         
         
@@ -510,11 +509,11 @@
     } else {
         // set the minuteEntry.postedToGetFit to yes, because the user doesn't want postings, anyhow
         // this will make sure the minuteEntry is deletable later
-        _minuteEntry.postedToGetFit = YES;
+        minuteEntry.postedToGetFit = YES;
     }
     
     // create a new minuteEntry, for next time the user posts
-    _minuteEntry = [[MinuteEntry alloc] init];
+    minuteEntry = [[MinuteEntry alloc] init];
     
 }
 
@@ -577,7 +576,7 @@
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     Resources *resources = [Resources sharedResources];
     
-    if (pickerView == _activityPicker) {
+    if (pickerView == activityPicker) {
         return [resources.activities count];
     }
     
@@ -592,7 +591,7 @@
 {
     Resources *resources = [Resources sharedResources];
     NSString *title = @"";
-    if (pickerView == _activityPicker) {
+    if (pickerView == activityPicker) {
         title = [resources.activities objectAtIndex:row];
     } else {
         title = [resources.intensities objectAtIndex:row];
@@ -608,19 +607,19 @@
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     Resources *resources = [Resources sharedResources];
     
-    if (pickerView == _activityPicker) {
+    if (pickerView == activityPicker) {
         NSString *activity = [resources.activities objectAtIndex:row];
-        [_activityButton setTitle:activity forState:UIControlStateNormal];
-        //[_activityButton setImage:NULL forState:UIControlStateNormal];
-        [self adjustButtonForImage:_activityButton];
-        _minuteEntry.activity = activity;
+        [activityButton setTitle:activity forState:UIControlStateNormal];
+        //[activityButton setImage:NULL forState:UIControlStateNormal];
+        [self adjustButtonForImage:activityButton];
+        minuteEntry.activity = activity;
         
     } else {
         NSString *intensity = [resources.intensities objectAtIndex:row];
-        [_intensityButton setTitle:intensity forState:UIControlStateNormal];
-        [self adjustButtonForImage:_intensityButton];
+        [intensityButton setTitle:intensity forState:UIControlStateNormal];
+        [self adjustButtonForImage:intensityButton];
 
-        _minuteEntry.intensity = intensity;
+        minuteEntry.intensity = intensity;
     }
     
     //[self activateRecordingButtonIfPossible];
