@@ -513,14 +513,21 @@
     // set the sensor resume date, etc
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if (donateSwitch.isOn) {
+    if (donateSwitch.isOn && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+        // synchronize defaults and request permission,
+        // which will dismiss the VC itself.
         [defaults setObject:[NSDate date] forKey:@"resumeSensorDate"];
         [defaults synchronize];
-        
-        // [CLLocationmanager didChangeAuthorizationStatus]
-        // will change the app delegate
         [self requestLocPermissions];
+        
+    } else if (donateSwitch.isOn){
+        // just synchronize defaults and dismiss
+        [defaults setObject:[NSDate date] forKey:@"resumeSensorDate"];
+        [defaults synchronize];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
     } else {
+        // synchronize defaults and dismiss
         [defaults setObject:[NSDate distantFuture] forKey:@"resumeSensorDate"];
         [defaults synchronize];
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -531,7 +538,6 @@
 # pragma mark - setup
 - (void) accept:(id) sender {
     [self loadChoiceView];
-
 }
 
 - (void) setupDataHubNewUser{
