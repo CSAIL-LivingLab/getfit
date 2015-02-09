@@ -171,7 +171,7 @@
 
     _startButton = [UIButton buttonWithType:UIButtonTypeCustom];
 
-    CGRect screen = [UIScreen maigit add nScreen].bounds;
+    CGRect screen = [UIScreen mainScreen].bounds;
     
     if (screen.size.height == 480) { //4 or 4S {
         _startButton.frame = CGRectMake(windowFrame.size.width/2-buttonWidth/2, 290, buttonWidth, buttonWidth);

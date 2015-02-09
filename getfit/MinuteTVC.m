@@ -110,7 +110,7 @@
     if (![me verifyEntry]) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:@"Check your minutes"
-                                    message:@"Please make sure that you have made all selections"
+                                    message:@"Please make sure that you have made selections for activity, duration, and end time."
                                     delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
         [alert show];
         return;
