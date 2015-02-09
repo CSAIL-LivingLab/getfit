@@ -30,7 +30,10 @@
 @property UIButton *startButton;
 @property UIButton *plusButton;
 
+@property UIView *activityPickerParentView;
 @property UIPickerView *activityPicker;
+
+@property UIView *intensityPickerParentView;
 @property UIPickerView *intensityPicker;
 
 @property UIButton *intensityDoneButton;
@@ -65,10 +68,6 @@
     return self;
 }
 
-- (void) foobar:(id)selector{
-    NSLog(@"foobar called");
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -85,8 +84,8 @@
 
     _minuteEntry = [[MinuteEntry alloc] init];
 
-    // make pickers
-    _activityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
+    // make activity picker
+    _activityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+2, 216)];
     _activityPicker.dataSource = self;
     _activityPicker.delegate = self;
     [_activityPicker setBackgroundColor:[UIColor blackColor]];
@@ -94,13 +93,44 @@
     _activityPicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _activityPicker.layer.borderWidth = 1;
 
-    _intensityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
+    // make activity done button
+    _activityDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50, 0, 50, 44)];
+    [_activityDoneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [_activityDoneButton.titleLabel setTextAlignment:NSTextAlignmentRight];
+    [_activityDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
+    [_activityDoneButton addTarget:self action:@selector(dismissPickers) forControlEvents:UIControlEventTouchUpInside];
+    [_activityDoneButton setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPickers)];
+    [_activityDoneButton addGestureRecognizer:tap];
+
+    // make activity picker parent view, and add subviews
+    _activityPickerParentView = [[UIView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
+    [_activityPickerParentView addSubview:_activityPicker];
+    [_activityPickerParentView addSubview:_activityDoneButton];
+    
+    
+    // make intensity picker
+    _intensityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+2, 216)];
     _intensityPicker.dataSource = self;
     _intensityPicker.delegate = self;
     [_intensityPicker setBackgroundColor:[UIColor blackColor]];
     [_intensityPicker reloadAllComponents];
     _intensityPicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _intensityPicker.layer.borderWidth = 1;
+    
+    // make intensity picker done button
+    _intensityDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50, 0, 50, 44)];
+    [_intensityDoneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [_intensityDoneButton.titleLabel setTextAlignment:NSTextAlignmentRight];
+    [_intensityDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
+    [_intensityDoneButton addTarget:self action:@selector(dismissPickers) forControlEvents:UIControlEventTouchUpInside];
+    [_intensityDoneButton setUserInteractionEnabled:YES];
+    [_intensityPicker addSubview:_intensityDoneButton];
+    
+    // make intensity picker parent view, and add subviews
+    _intensityPickerParentView = [[UIView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
+    [_intensityPickerParentView addSubview:_intensityPicker];
+    [_intensityPickerParentView addSubview:_intensityDoneButton];
 
     
     // tap the background to remove pickers
@@ -108,28 +138,9 @@
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];
     
-//    
-//    _activityDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50, 0, 50, 44)];
-//    [_activityDoneButton setTitle:@"Done" forState:UIControlStateNormal];
-//    [_activityDoneButton.titleLabel setTextAlignment:NSTextAlignmentRight];
-//    [_activityDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
-//    [_activityDoneButton addTarget:self action:@selector(foobar:) forControlEvents:UIControlEventTouchUpInside];
-//    [_activityDoneButton setUserInteractionEnabled:YES];
-//    
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(foobar:)];
-//    [_activityDoneButton addGestureRecognizer:tap];
-//    
-//    
-//    [_activityPicker addSubview:_activityDoneButton];
-//    
-//    _intensityDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 44)];
-//    [_intensityDoneButton setTitle:@"Done" forState:UIControlStateNormal];
-//    [_intensityDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
-//    [_intensityDoneButton addTarget:self action:@selector(foobar:) forControlEvents:UIControlEventTouchUpInside];
-//    [_intensityDoneButton setUserInteractionEnabled:YES];
-//    [_intensityPicker addSubview:_intensityDoneButton];
-//    
-    // make buttons
+    
+    
+     // make buttons
     _activityButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 175, buttonWidth, buttonWidth)];
     [_activityButton setTitle:kACTIVITY_TITLE forState:UIControlStateNormal];
     _activityButton.layer.cornerRadius = _activityButton.bounds.size.width/2;
@@ -217,8 +228,8 @@
 
 - (void) dismissPickers {
     [UIView beginAnimations:@"MoveOut" context:nil];
-    [_activityPicker removeFromSuperview];
-    [_intensityPicker removeFromSuperview];
+    [_activityPickerParentView removeFromSuperview];
+    [_intensityPickerParentView removeFromSuperview];
     [UIView commitAnimations];
     [self activateRecordingButtonIfPossible];
 
@@ -304,13 +315,13 @@
     
     // remove the intensityPicker if it was open
     [UIView beginAnimations:@"MoveOut" context:nil];
-    [_intensityPicker removeFromSuperview];
+    [_intensityPickerParentView removeFromSuperview];
     [UIView commitAnimations];
     
     // move in the activity picker
     [_activityPicker reloadAllComponents];
     [UIView beginAnimations:@"MoveIn" context:nil];
-    [self.view insertSubview:_activityPicker aboveSubview:self.view];
+    [self.view insertSubview:_activityPickerParentView aboveSubview:self.view];
     [UIView commitAnimations];
     
     // set the activity button title
@@ -325,13 +336,13 @@
     Resources *resources = [Resources sharedResources];
     
     // remove the activityPicker if it was open
-    [_activityPicker removeFromSuperview];
+    [_activityPickerParentView removeFromSuperview];
     [UIView commitAnimations];
     
     
     [_intensityPicker reloadAllComponents];
     [UIView beginAnimations:@"MoveIn" context:nil];
-    [self.view insertSubview:_intensityPicker aboveSubview:self.view];
+    [self.view insertSubview:_intensityPickerParentView aboveSubview:self.view];
     [UIView commitAnimations];
     
     NSString *title = [resources.intensities objectAtIndex:[_intensityPicker selectedRowInComponent:0]];
