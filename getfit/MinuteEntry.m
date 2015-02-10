@@ -51,9 +51,10 @@
         return NO;
     }
     
-    if (_intensity == nil || [_intensity isEqualToString:@""]) {
-        return NO;
-    }
+    // don't verify intensity. It is set in postToGetFit
+//    if (_intensity == nil || [_intensity isEqualToString:@""]) {
+//        return NO;
+//    }
     
     if (_duration == 0 || _duration > 1440) {
         return NO;

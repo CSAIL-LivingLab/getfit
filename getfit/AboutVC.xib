@@ -25,28 +25,28 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="816"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lht-Ux-go8">
-                    <rect key="frame" x="0.0" y="20" width="600" height="564"/>
+                    <rect key="frame" x="0.0" y="20" width="600" height="780"/>
                     <subviews>
                         <view clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CwA-my-h4I">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="720"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="820"/>
                             <subviews>
-                                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="vLQ-WL-ADh">
-                                    <rect key="frame" x="147" y="535" width="305" height="40"/>
+                                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="vLQ-WL-ADh">
+                                    <rect key="frame" x="147" y="615" width="305" height="88"/>
                                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <accessibilityTraits key="traits" none="YES" link="YES"/>
                                     </accessibility>
                                     <constraints>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="JdG-fi-EZ4"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="JdG-fi-EZ4"/>
                                         <constraint firstAttribute="height" constant="40" id="OEN-Uo-L2N"/>
                                         <constraint firstAttribute="width" constant="305" id="sKy-TC-Tqa"/>
                                         <constraint firstAttribute="height" constant="40" id="vWH-RQ-wXA"/>
                                     </constraints>
-                                    <string key="text">The MIT Big Data Living Lab is building scalable data management tools and applications that enable researchers at MIT to demo new approaches to collecting, combining and using data on campus.  www.livinglab.mit.edu</string>
+                                    <string key="text">The MIT Big Data Living Lab is building scalable data management tools and applications that enable researchers at MIT to demo new privacy-preserving approaches to collecting, combining, and using data on campus.  www.livinglab.mit.edu</string>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -59,17 +59,19 @@
                                     </variation>
                                 </textView>
                                 <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="5EV-za-Xuy">
-                                    <rect key="frame" x="147" y="271" width="305" height="100"/>
+                                    <rect key="frame" x="147" y="271" width="305" height="180"/>
                                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <accessibilityTraits key="traits" none="YES" link="YES"/>
                                     </accessibility>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="XyR-eD-XwS"/>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="cCX-gc-Ff0"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="cCX-gc-Ff0"/>
                                         <constraint firstAttribute="width" constant="305" id="owP-AH-ZVz"/>
                                     </constraints>
-                                    <string key="text">Continuous data logging allows you to gather mobile sensor data and upload it to a personal DataHub account. Enabling this mode allows you to donate continuous sensor data to the MIT Big Data Living Lab project for research.</string>
+                                    <string key="text">Continuous data logging allows you to gather mobile sensor data and upload it to a personal DataHub account. Enabling this mode allows you to donate continuous sensor data to the MIT Big Data Living Lab project for research.
+
+sensor data includes: motion sensors (gyroscope, accelerometer, magnetometer), activity info, position data, and basic device info. It does not include call logs, text logs, audio, or video.</string>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -152,7 +154,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sensing will resume in XXXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rjw-WC-4fz">
-                                    <rect key="frame" x="140" y="362" width="320" height="16"/>
+                                    <rect key="frame" x="140" y="442" width="320" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="320" id="xEE-yG-clW"/>
                                     </constraints>
@@ -161,7 +163,7 @@
                                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kr-4l-TeN">
-                                    <rect key="frame" x="245" y="386" width="110" height="110"/>
+                                    <rect key="frame" x="245" y="466" width="110" height="110"/>
                                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="110" id="CE9-Io-H26"/>
@@ -173,7 +175,7 @@
                                     </state>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About Living Lab" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L0-bc-3wR">
-                                    <rect key="frame" x="237" y="508" width="126" height="20"/>
+                                    <rect key="frame" x="237" y="588" width="126" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="ate-t4-KLa"/>
                                     </constraints>
@@ -190,8 +192,8 @@
                                                 <action selector="appSwitchChanged:" destination="-1" eventType="valueChanged" id="wjP-TO-Ipt"/>
                                             </connections>
                                         </switch>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Post to GetFit Website (requires MIT ID)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozF-AE-1mm">
-                                            <rect key="frame" x="57" y="11" width="240" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Post to GetFit Website (requires MIT ID)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozF-AE-1mm">
+                                            <rect key="frame" x="59" y="13.5" width="238" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -225,7 +227,7 @@
                                 <constraint firstItem="vLQ-WL-ADh" firstAttribute="top" secondItem="6L0-bc-3wR" secondAttribute="bottom" constant="7" id="RED-9a-zOB"/>
                                 <constraint firstItem="ZtX-G6-Nd2" firstAttribute="top" secondItem="9Od-aK-ZFs" secondAttribute="bottom" constant="3.5" id="Rsu-4Y-Qd3"/>
                                 <constraint firstItem="jfm-I5-TNA" firstAttribute="top" secondItem="CwA-my-h4I" secondAttribute="top" id="Url-XY-8vS"/>
-                                <constraint firstAttribute="height" constant="720" id="VXL-7y-2CV"/>
+                                <constraint firstAttribute="height" constant="820" id="VXL-7y-2CV"/>
                                 <constraint firstAttribute="centerX" secondItem="ZtX-G6-Nd2" secondAttribute="centerX" id="Xtj-H6-r95"/>
                                 <constraint firstAttribute="centerX" secondItem="6kr-4l-TeN" secondAttribute="centerX" id="YG6-1L-AF5"/>
                                 <constraint firstAttribute="centerX" secondItem="vLQ-WL-ADh" secondAttribute="centerX" id="ci5-fd-DYk"/>
@@ -280,12 +282,13 @@
                 <constraint firstItem="lht-Ux-go8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vH8-Hs-ImW"/>
                 <constraint firstAttribute="trailing" secondItem="lht-Ux-go8" secondAttribute="trailing" id="xYM-Iu-jnt"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="vH8-Hs-ImW"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="103" y="158"/>
+            <point key="canvasLocation" x="103" y="266"/>
         </view>
     </objects>
 </document>

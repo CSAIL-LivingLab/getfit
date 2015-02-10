@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OAuthVC.h"
 
-@interface MinuteTVC : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate>
+
+@interface MinuteTVC : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, OAuthVCDelegate, UIAlertViewDelegate>
 
 @end

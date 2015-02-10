@@ -254,7 +254,7 @@
             activity=@"undefined";
         }
         
-        if (me.intensity !=nil){
+        if (me.intensity !=nil && ![me.intensity isEqualToString:@""]){
             intensity = me.intensity;
         } else {
             intensity=@"medium";

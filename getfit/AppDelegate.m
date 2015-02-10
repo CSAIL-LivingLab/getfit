@@ -36,6 +36,15 @@
     locationObj = [LocationObject sharedLocationObject];
     [self loadMainViews];
     
+    
+    if (![defaults boolForKey:@"loaded_v.93"]) {
+        [[MinuteStore sharedStore] removeAllMinutes];
+        [[OpenSense sharedInstance] deleteAllBatches];
+        [defaults setObject:nil forKey:@"email"];
+        [defaults setBool:YES forKey:@"loaded_v.93"];
+        [defaults synchronize];
+    }
+    
     // load the intro view if the user's email isn't set
     if (![defaults stringForKey:@"email"]) {
 //    if (YES) {
@@ -49,13 +58,7 @@
         
         [self loadIntroViews];
     }
-    
-    if (![defaults boolForKey:@"loaded_v.92"]) {
-        [[MinuteStore sharedStore] removeAllMinutes];
-        [[OpenSense sharedInstance] deleteAllBatches];
-        [defaults setBool:YES forKey:@"loaded_v.92"];
-        [defaults synchronize];
-    }
+
     
     // set default for cookie storage
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];

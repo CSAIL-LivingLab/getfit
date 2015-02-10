@@ -18,7 +18,9 @@
     UIColor *greenColor;
     UIImage *pauseImage;
     
+    UIView *pickerParentView;
     UIPickerView *pausePicker;
+    UIButton *pausePickerDoneButton;
     NSArray *pauseArr;
     UILabel *pauseText;
     
@@ -134,13 +136,28 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     // setup the pickerView here, because the view sizes will be set.
-    pausePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 250)];
+    pausePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+2, 250)];
     pausePicker.dataSource = self;
     pausePicker.delegate = self;
     [pausePicker setBackgroundColor:[UIColor blackColor]];
     pausePicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
     pausePicker.layer.borderWidth = 1;
     [pausePicker reloadAllComponents];
+    
+    pausePickerDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50, 0, 50, 44)];
+    [pausePickerDoneButton setTitle:@"Done" forState:UIControlStateNormal];
+    [pausePickerDoneButton.titleLabel setTextAlignment:NSTextAlignmentRight];
+    [pausePickerDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
+    [pausePickerDoneButton addTarget:self action:@selector(dismissPicker:) forControlEvents:UIControlEventTouchUpInside];
+    [pausePickerDoneButton setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker:)];
+    [pausePickerDoneButton addGestureRecognizer:tap];
+    
+    // make activity picker parent view, and add subviews
+    pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
+    [pickerParentView addSubview:pausePicker];
+    [pickerParentView addSubview:pausePickerDoneButton];
+
     
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker:)];
     [tapBackground setNumberOfTapsRequired:1];
@@ -159,14 +176,29 @@
 
 #pragma mark - Picker
 - (void) addPicker:(id)sender {
+    
+    // default the date to the first item in the index
+    NSNumber *minutes = [[pauseArr objectAtIndex:0] objectAtIndex:1];
+    NSInteger intMins = [minutes integerValue];
+    NSDate *resumeDate = [[NSDate date] dateByAddingTimeInterval:intMins*60];
+    [defaults setObject:resumeDate forKey:@"resumeSensorDate"];
+    [defaults synchronize];
+    
+    // adjust the label accordingly
+    [self adjustResumeLabelText];
+    
     [UIView beginAnimations:@"MoveIn" context:nil];
-    [self.view insertSubview:pausePicker aboveSubview:self.view];
+    [self.view insertSubview:pickerParentView aboveSubview:self.view];
     [UIView commitAnimations];
 }
 
 - (void) dismissPicker:(id)sender {
+    // make sure to capture the input
+//    NSNumber *minutes = [[pauseArr objectAtIndex:row] objectAtIndex:1];
+    
+    // dismiss the picker
     [UIView beginAnimations:@"MoveOut" context:nil];
-    [pausePicker removeFromSuperview];
+    [pickerParentView removeFromSuperview];
     [UIView commitAnimations];
 }
 

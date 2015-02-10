@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OAuthVC.h"
 
-@interface ExerciseVC : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate>
+@interface ExerciseVC : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate, OAuthVCDelegate>
 
 @end

@@ -9,8 +9,20 @@
 #import <UIKit/UIKit.h>
 @class MinuteTVC;
 
+@protocol OAuthVCDelegate <NSObject>
+@required
+- (void) didDismissOAuthVCWithSuccessfulExtraction:(BOOL)success;
+@end
+
+
+
+
 @interface OAuthVC : UIViewController <UIWebViewDelegate, NSURLConnectionDelegate, UIAlertViewDelegate>
 
+
+- (id) initWithDelegate:(UIViewController<OAuthVCDelegate> *)delegateVC;
+
 @property (weak, nonatomic) MinuteTVC *minuteTVC;
+@property (strong, atomic) UIViewController<OAuthVCDelegate> *delegate;
 
 @end
