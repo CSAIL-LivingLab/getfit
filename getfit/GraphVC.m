@@ -51,7 +51,7 @@
     // make the initial web view
     // we'll just be loading scripts later
     [self loadBlackView];
-    [self loadWebView];
+    
    }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -91,6 +91,10 @@
     [blackView addSubview:workingSpinner];
     
     [self setView:blackView];
+    
+    if ([self isNetworkAvailable:@"mit.edu"]) {
+        [self loadWebView];
+    }
 }
 
 - (void) loadWebView {
