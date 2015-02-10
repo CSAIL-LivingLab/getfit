@@ -115,7 +115,7 @@
 
 
 
-    // add to the minuteStore, and post things
+    // add to the minuteStore, and post things to datahub, but not getfit
     [ms addMinuteEntry:me];
     [ms postToDataHub];
     [[Resources sharedResources] uploadOpenSenseData];
