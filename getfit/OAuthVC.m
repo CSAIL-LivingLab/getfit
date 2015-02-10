@@ -21,6 +21,10 @@
     NSString *token;
     NSUserDefaults *defaults;
     BOOL success;
+    
+    UIView *backgroundView;
+    UIActivityIndicatorView *activityIndicator;
+    UILabel *message;
 }
 
 - (id) initWithDelegate:(UIViewController<OAuthVCDelegate> *)delegateVC {
@@ -42,6 +46,32 @@
     
     // prep defaults
     defaults = [NSUserDefaults standardUserDefaults];
+    
+    
+    // add the background view
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    // black view
+    backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height)];
+    [backgroundView setBackgroundColor:[UIColor blackColor]];
+    
+    // activity indicator
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(screenRect.size.width/2-30, screenRect.size.height/2-30, 60, 60)];
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    [activityIndicator startAnimating];
+    
+    
+    // label
+    message = [[UILabel alloc] initWithFrame:CGRectMake(screenRect.size.width/2-150, screenRect.size.height/2+20, 300, 40)];
+    message.text = @"Sending Data to GetFit";
+    message.font = [UIFont systemFontOfSize:20];
+    message.textColor = [UIColor grayColor];
+    message.textAlignment = NSTextAlignmentCenter;
+    
+    
+    // add the views
+    [backgroundView addSubview:activityIndicator];
+    [backgroundView addSubview:message];
     
 }
 
@@ -100,10 +130,10 @@
     NSArray *form_build_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"csail.getFilteredBuildIds().toString();"]componentsSeparatedByString:@","];
     NSArray *form_ids = [[myWebView stringByEvaluatingJavaScriptFromString:@"csail.getFilteredFormIds().toString();"] componentsSeparatedByString:@","];
     
-    NSLog(@"%@", form_tokens);
-    NSLog(@"%@", form_ids);
-    NSLog(@"%@", form_build_ids);
-    
+//    NSLog(@"%@", form_tokens);
+//    NSLog(@"%@", form_ids);
+//    NSLog(@"%@", form_build_ids);
+//    
     // set save as defaults.
     [defaults setObject:form_tokens forKey:@"form_tokens"];
     [defaults setObject:form_build_ids forKey:@"form_build_ids"];
@@ -121,31 +151,14 @@
 
 - (void) hideWebViewAndShowSpinnerView {
     myWebView.hidden = YES;
-    
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    
-    // white view
-    UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height)];
-    [backgroundView setBackgroundColor:[UIColor blackColor]];
-    
-    // activity indicator
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(screenRect.size.width/2-30, screenRect.size.height/2-30, 60, 60)];
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    [activityIndicator startAnimating];
-    
-    
-    // label
-    UILabel *message = [[UILabel alloc] initWithFrame:CGRectMake(screenRect.size.width/2-150, screenRect.size.height/2+20, 300, 40)];
-    message.text = @"Sending Data to GetFit";
-    message.font = [UIFont systemFontOfSize:20];
-    message.textColor = [UIColor grayColor];
-    message.textAlignment = NSTextAlignmentCenter;
-    
-    
-    // add the views
-    [backgroundView addSubview:activityIndicator];
-    [backgroundView addSubview:message];
+    backgroundView.hidden = NO;
     [self fadeInNewView:backgroundView];
+}
+
+- (void) showWebViewAndHideSpinnerView {
+    myWebView.hidden = NO;
+    backgroundView.hidden = YES;
+    [self fadeOutView:backgroundView];
 }
 
 
@@ -154,7 +167,7 @@
 
 - (void) webViewDidStartLoad:(UIWebView *)webView {
     NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
-    NSLog(@"\n\nURL: %@", url);
+    NSLog(@"\n\nweb view did start load URL: %@", url);
     
     // detect the redirect url (https://idp.mit.edu/idp/profile/SAML2/Redirect/SSO)
     // because the dashboard url will only show in webViewDidFinishLoad
@@ -162,11 +175,21 @@
         [self hideWebViewAndShowSpinnerView];
     }
     
+    
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString *url = [webView stringByEvaluatingJavaScriptFromString:@"document.URL"];
+    
+    NSLog(@"web view did finish load url: %@", url);
+    
+    // it's possible to false positive by checking webViewDidStartLoad
+    // because of the absurd way touchstone redirects work, it's hard to tell
+    // if the user successfully logged in or not, unless we check for this url on webView DidLoad
+    if ([url rangeOfString:@"UsernamePassword"].location != NSNotFound) {
+        [self showWebViewAndHideSpinnerView];
+    }
     
     // do nothing unless it's a getfit url. have to check because dashboard might sometimes pass this.
     if ([url rangeOfString:@"getfit"].location == NSNotFound || [url rangeOfString:@"idp.mit.edu"].location != NSNotFound) {
@@ -191,6 +214,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+# pragma mark - animation
+
 - (void) fadeInNewView:(UIView *) newView{
     // fade a new view in from an old one
     
@@ -206,13 +231,15 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
     [imageView setImage:capturedImage];
     [newView addSubview:imageView];
+
     
     // add this view to the top of the other
     // this is different from most fadeInNewView methods, since the root view is preserved
+    newView.hidden = NO;
     [self.view addSubview:newView];
     
     // fade out the image
-    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         
         [imageView setAlpha:0];
         
@@ -221,6 +248,39 @@
         imageView.hidden = YES;
         [imageView removeFromSuperview];
     }];
+}
+
+
+- (void) fadeOutView:(UIView *)oldView {
+    // fade a new view in from an old one
+    
+    // take a picture of the old view
+    CGRect rect = [self.view bounds];
+    UIGraphicsBeginImageContextWithOptions(rect.size,YES,0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.view.layer renderInContext:context];
+    UIImage *capturedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // add the picture the top of the main view
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
+    [imageView setImage:capturedImage];
+    [self.view addSubview:imageView];
+    
+    // hide the old view
+    oldView.hidden = YES;
+    
+    // fade out the image
+    [UIView animateWithDuration:0.7 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        
+        [imageView setAlpha:0];
+        
+    }completion:^(BOOL done){
+        // remove it from superview to avoid memory leaks
+        imageView.hidden = YES;
+        [imageView removeFromSuperview];
+    }];
+    
 }
 
 @end
