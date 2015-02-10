@@ -15,7 +15,6 @@
 #import "AboutVC.h"
 #import "ExerciseVC.h"
 #import "GraphVC.h"
-#import "MinuteTVC.h"
 #import "TestVC.h"
 
 #import "MinuteStore.h"
@@ -100,17 +99,6 @@
     
     IntroVC *introVC = [[IntroVC alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introVC];
-    [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
-}
-
-
-- (void)pushMinuteVC {
-    MinuteTVC *minuteTVC = [[MinuteTVC alloc] init];
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:minuteTVC];
-    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-
-    
     [self.window.rootViewController presentViewController:navController animated:YES completion:nil];
 }
 
