@@ -99,6 +99,9 @@
 
 # pragma mark - button actions
 
+- (void) dismiss {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void) save {
     MinuteStore *ms = [MinuteStore sharedStore];
