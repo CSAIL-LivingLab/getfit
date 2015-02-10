@@ -29,13 +29,8 @@
 		941895FC1A59EAEA00B5BC15 /* ExerciseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941895FB1A59EAEA00B5BC15 /* ExerciseVC.m */; };
 		941896071A59EB2300B5BC15 /* OAuthVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 941896061A59EB2300B5BC15 /* OAuthVC.m */; };
 		941896111A59EBAD00B5BC15 /* MinuteTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960A1A59EBAD00B5BC15 /* MinuteTVC.m */; };
-		941896121A59EBAD00B5BC15 /* ActivityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960C1A59EBAD00B5BC15 /* ActivityPickerView.m */; };
 		941896131A59EBAD00B5BC15 /* MinuteEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */; };
 		941896141A59EBAD00B5BC15 /* MinuteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 941896101A59EBAD00B5BC15 /* MinuteStore.m */; };
-		9431EE8F1A5CC52900B7EC36 /* IntroAboutVC_deprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = 9431EE8D1A5CC52900B7EC36 /* IntroAboutVC_deprecated.m */; };
-		9431EE901A5CC52900B7EC36 /* IntroAboutVC_deprecated.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9431EE8E1A5CC52900B7EC36 /* IntroAboutVC_deprecated.xib */; };
-		9431EE941A5CC54900B7EC36 /* IntroDetailVC_deprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = 9431EE921A5CC54900B7EC36 /* IntroDetailVC_deprecated.m */; };
-		9431EE951A5CC54900B7EC36 /* IntroDetailVC_deprecated.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9431EE931A5CC54900B7EC36 /* IntroDetailVC_deprecated.xib */; };
 		946949281A71F09C006E1DE2 /* account.m in Sources */ = {isa = PBXBuildFile; fileRef = 946948F61A71F09C006E1DE2 /* account.m */; };
 		946949291A71F09C006E1DE2 /* datahub.m in Sources */ = {isa = PBXBuildFile; fileRef = 946948F81A71F09C006E1DE2 /* datahub.m */; };
 		9469492A1A71F09C006E1DE2 /* TBinaryProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 946948FC1A71F09C006E1DE2 /* TBinaryProtocol.m */; };
@@ -75,10 +70,6 @@
 		94EA561B1A6CA6D40045EA4E /* IntroAuthorizationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA561A1A6CA6D40045EA4E /* IntroAuthorizationVC.m */; };
 		DB6680C71A69B65D0080560E /* runner.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680C61A69B65D0080560E /* runner.png */; };
 		DB6680CA1A69B8780080560E /* intensity.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680C91A69B8780080560E /* intensity.png */; };
-		DB6680CD1A69F32E0080560E /* launch.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB6680CC1A69F32E0080560E /* launch.xib */; };
-		DB6680CF1A69F8940080560E /* launch.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680CE1A69F8940080560E /* launch.png */; };
-		DB6680D11A69F8FC0080560E /* launch-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680D01A69F8FC0080560E /* launch-bg.png */; };
-		DB6680D31A69F9890080560E /* ll-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680D21A69F9890080560E /* ll-logo.png */; };
 		DBAD5E441A695DFB000F9692 /* Secret.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAD5E431A695DFB000F9692 /* Secret.m */; };
 		DBCDFDB81A695FAD00FC4A09 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DBCDFDB71A695FAD00FC4A09 /* icon.png */; };
 /* End PBXBuildFile section */
@@ -127,18 +118,10 @@
 		941896061A59EB2300B5BC15 /* OAuthVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthVC.m; sourceTree = "<group>"; };
 		941896091A59EBAD00B5BC15 /* MinuteTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteTVC.h; sourceTree = "<group>"; };
 		9418960A1A59EBAD00B5BC15 /* MinuteTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteTVC.m; sourceTree = "<group>"; };
-		9418960B1A59EBAD00B5BC15 /* ActivityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityPickerView.h; sourceTree = "<group>"; };
-		9418960C1A59EBAD00B5BC15 /* ActivityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityPickerView.m; sourceTree = "<group>"; };
 		9418960D1A59EBAD00B5BC15 /* MinuteEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteEntry.h; sourceTree = "<group>"; };
 		9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteEntry.m; sourceTree = "<group>"; };
 		9418960F1A59EBAD00B5BC15 /* MinuteStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinuteStore.h; sourceTree = "<group>"; };
 		941896101A59EBAD00B5BC15 /* MinuteStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinuteStore.m; sourceTree = "<group>"; };
-		9431EE8C1A5CC52900B7EC36 /* IntroAboutVC_deprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroAboutVC_deprecated.h; path = Intro/IntroAboutVC_deprecated.h; sourceTree = "<group>"; };
-		9431EE8D1A5CC52900B7EC36 /* IntroAboutVC_deprecated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroAboutVC_deprecated.m; path = Intro/IntroAboutVC_deprecated.m; sourceTree = "<group>"; };
-		9431EE8E1A5CC52900B7EC36 /* IntroAboutVC_deprecated.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IntroAboutVC_deprecated.xib; path = Intro/IntroAboutVC_deprecated.xib; sourceTree = "<group>"; };
-		9431EE911A5CC54900B7EC36 /* IntroDetailVC_deprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroDetailVC_deprecated.h; path = Intro/IntroDetailVC_deprecated.h; sourceTree = "<group>"; };
-		9431EE921A5CC54900B7EC36 /* IntroDetailVC_deprecated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroDetailVC_deprecated.m; path = Intro/IntroDetailVC_deprecated.m; sourceTree = "<group>"; };
-		9431EE931A5CC54900B7EC36 /* IntroDetailVC_deprecated.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IntroDetailVC_deprecated.xib; path = Intro/IntroDetailVC_deprecated.xib; sourceTree = "<group>"; };
 		946948F51A71F09C006E1DE2 /* account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = account.h; sourceTree = "<group>"; };
 		946948F61A71F09C006E1DE2 /* account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = account.m; sourceTree = "<group>"; };
 		946948F71A71F09C006E1DE2 /* datahub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = datahub.h; sourceTree = "<group>"; };
@@ -212,10 +195,6 @@
 		94EA561A1A6CA6D40045EA4E /* IntroAuthorizationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroAuthorizationVC.m; sourceTree = "<group>"; };
 		DB6680C61A69B65D0080560E /* runner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = runner.png; path = ../../Assets/runner.png; sourceTree = "<group>"; };
 		DB6680C91A69B8780080560E /* intensity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = intensity.png; path = ../../Assets/intensity.png; sourceTree = "<group>"; };
-		DB6680CC1A69F32E0080560E /* launch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = launch.xib; sourceTree = "<group>"; };
-		DB6680CE1A69F8940080560E /* launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch.png; sourceTree = "<group>"; };
-		DB6680D01A69F8FC0080560E /* launch-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch-bg.png"; sourceTree = "<group>"; };
-		DB6680D21A69F9890080560E /* ll-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ll-logo.png"; sourceTree = "<group>"; };
 		DBAD5E421A695DFB000F9692 /* Secret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secret.h; path = ../Secret.h; sourceTree = "<group>"; };
 		DBAD5E431A695DFB000F9692 /* Secret.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Secret.m; path = ../Secret.m; sourceTree = "<group>"; };
 		DBCDFDB71A695FAD00FC4A09 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -355,8 +334,6 @@
 			children = (
 				941896091A59EBAD00B5BC15 /* MinuteTVC.h */,
 				9418960A1A59EBAD00B5BC15 /* MinuteTVC.m */,
-				9418960B1A59EBAD00B5BC15 /* ActivityPickerView.h */,
-				9418960C1A59EBAD00B5BC15 /* ActivityPickerView.m */,
 				9418960D1A59EBAD00B5BC15 /* MinuteEntry.h */,
 				9418960E1A59EBAD00B5BC15 /* MinuteEntry.m */,
 				9418960F1A59EBAD00B5BC15 /* MinuteStore.h */,
@@ -372,12 +349,6 @@
 				947BAF581A79E63E003AD67D /* IntroVC.m */,
 				94EA56191A6CA6D40045EA4E /* IntroAuthorizationVC.h */,
 				94EA561A1A6CA6D40045EA4E /* IntroAuthorizationVC.m */,
-				9431EE8C1A5CC52900B7EC36 /* IntroAboutVC_deprecated.h */,
-				9431EE8D1A5CC52900B7EC36 /* IntroAboutVC_deprecated.m */,
-				9431EE8E1A5CC52900B7EC36 /* IntroAboutVC_deprecated.xib */,
-				9431EE911A5CC54900B7EC36 /* IntroDetailVC_deprecated.h */,
-				9431EE921A5CC54900B7EC36 /* IntroDetailVC_deprecated.m */,
-				9431EE931A5CC54900B7EC36 /* IntroDetailVC_deprecated.xib */,
 				94EA56151A6C76450045EA4E /* DataHubCreation.h */,
 				94EA56161A6C76450045EA4E /* DataHubCreation.m */,
 			);
@@ -513,10 +484,6 @@
 		DB6680CB1A69F31A0080560E /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-				DB6680CC1A69F32E0080560E /* launch.xib */,
-				DB6680D01A69F8FC0080560E /* launch-bg.png */,
-				DB6680CE1A69F8940080560E /* launch.png */,
-				DB6680D21A69F9890080560E /* ll-logo.png */,
 			);
 			name = Launch;
 			sourceTree = "<group>";
@@ -601,19 +568,13 @@
 				949DD4A41A8A8B9300850FEF /* icon@2x.png in Resources */,
 				DBCDFDB81A695FAD00FC4A09 /* icon.png in Resources */,
 				3DDED6E8167D098B006DE4F8 /* Default.png in Resources */,
-				DB6680D11A69F8FC0080560E /* launch-bg.png in Resources */,
 				3DDED6EA167D098B006DE4F8 /* Default@2x.png in Resources */,
 				3DDED6EC167D098B006DE4F8 /* Default-568h@2x.png in Resources */,
-				DB6680CF1A69F8940080560E /* launch.png in Resources */,
-				DB6680D31A69F9890080560E /* ll-logo.png in Resources */,
-				9431EE901A5CC52900B7EC36 /* IntroAboutVC_deprecated.xib in Resources */,
 				94CECD9F1A64565200DBE4C1 /* TestVC.xib in Resources */,
-				DB6680CD1A69F32E0080560E /* launch.xib in Resources */,
 				94B01BE81A5AEF890079F8A1 /* config.json in Resources */,
 				9416456B1A59F17300B9B2CD /* MainStoryboard.storyboard in Resources */,
 				DB6680CA1A69B8780080560E /* intensity.png in Resources */,
 				949DD4A71A8A925000850FEF /* Images.xcassets in Resources */,
-				9431EE951A5CC54900B7EC36 /* IntroDetailVC_deprecated.xib in Resources */,
 				946E4FE11A72F11600E881F1 /* AboutVC.xib in Resources */,
 				946BD8801A5F18B500735DEE /* info.png in Resources */,
 				946BD87F1A5F18B500735DEE /* chart.png in Resources */,
@@ -648,8 +609,6 @@
 				946949361A71F09C006E1DE2 /* TNSStreamTransport.m in Sources */,
 				946949391A71F09C006E1DE2 /* TSSLSocketException.m in Sources */,
 				946949281A71F09C006E1DE2 /* account.m in Sources */,
-				941896121A59EBAD00B5BC15 /* ActivityPickerView.m in Sources */,
-				9431EE8F1A5CC52900B7EC36 /* IntroAboutVC_deprecated.m in Sources */,
 				941896111A59EBAD00B5BC15 /* MinuteTVC.m in Sources */,
 				941895FC1A59EAEA00B5BC15 /* ExerciseVC.m in Sources */,
 				946949371A71F09C006E1DE2 /* TSocketClient.m in Sources */,
@@ -662,7 +621,6 @@
 				94EA56171A6C76450045EA4E /* DataHubCreation.m in Sources */,
 				9469492D1A71F09C006E1DE2 /* TProtocolException.m in Sources */,
 				9469492B1A71F09C006E1DE2 /* TMultiplexedProtocol.m in Sources */,
-				9431EE941A5CC54900B7EC36 /* IntroDetailVC_deprecated.m in Sources */,
 				DBAD5E441A695DFB000F9692 /* Secret.m in Sources */,
 				94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */,
 				94EA561B1A6CA6D40045EA4E /* IntroAuthorizationVC.m in Sources */,
