@@ -63,6 +63,7 @@
 		946E4FE11A72F11600E881F1 /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946E4FDF1A72F11600E881F1 /* AboutVC.xib */; };
 		946E4FE31A7303FC00E881F1 /* playpause.png in Resources */ = {isa = PBXBuildFile; fileRef = 946E4FE21A7303FC00E881F1 /* playpause.png */; };
 		947BAF591A79E63E003AD67D /* IntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 947BAF581A79E63E003AD67D /* IntroVC.m */; };
+		949DD4A41A8A8B9300850FEF /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DDED6DD167D098B006DE4F8 /* icon@2x.png */; };
 		94AAABD21A5B21E7005E92D6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AAABD11A5B21E7005E92D6 /* CFNetwork.framework */; };
 		94B01BE81A5AEF890079F8A1 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B01BE71A5AEF890079F8A1 /* config.json */; };
 		94B01BEB1A5AEFD40079F8A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B01BEA1A5AEFD40079F8A1 /* AppDelegate.m */; };
@@ -107,7 +108,7 @@
 		3DDED6D5167D098B006DE4F8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3DDED6D7167D098B006DE4F8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3DDED6D9167D098B006DE4F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		3DDED6DD167D098B006DE4F8 /* GetFit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GetFit-Info.plist"; sourceTree = "<group>"; };
+		3DDED6DD167D098B006DE4F8 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		3DDED6E1167D098B006DE4F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3DDED6E3167D098B006DE4F8 /* GetFit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GetFit-Prefix.pch"; sourceTree = "<group>"; };
 		3DDED6E7167D098B006DE4F8 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -473,7 +474,7 @@
 				DBCDFDB71A695FAD00FC4A09 /* icon.png */,
 				3DDED6E1167D098B006DE4F8 /* main.m */,
 				3DDED6E3167D098B006DE4F8 /* GetFit-Prefix.pch */,
-				3DDED6DD167D098B006DE4F8 /* GetFit-Info.plist */,
+				3DDED6DD167D098B006DE4F8 /* icon@2x.png */,
 				3DDCAA9D16B5EF630063DC29 /* Common.h */,
 				3DDED6E7167D098B006DE4F8 /* Default.png */,
 				3DDED6E9167D098B006DE4F8 /* Default@2x.png */,
@@ -594,6 +595,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				946E4FE31A7303FC00E881F1 /* playpause.png in Resources */,
+				949DD4A41A8A8B9300850FEF /* icon@2x.png in Resources */,
 				DBCDFDB81A695FAD00FC4A09 /* icon.png in Resources */,
 				3DDED6E8167D098B006DE4F8 /* Default.png in Resources */,
 				DB6680D11A69F8FC0080560E /* launch-bg.png in Resources */,
