@@ -99,9 +99,6 @@
 
 # pragma mark - button actions
 
-- (void) dismiss {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 - (void) save {
     MinuteStore *ms = [MinuteStore sharedStore];
@@ -128,19 +125,19 @@
     // check the [ExerciseVC postToGetFit] inside - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex { for additional doc
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults boolForKey:@"postToGetFit"] && [ms checkForValidCookies] && [ms checkForValidTokens:me.endTime]) {
-        BOOL * success = [ms postToGetFit];
+        BOOL success = [ms postToGetFit];
+        
         if (success) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
             [alert show];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Getfit Error" message:@"Your minutes were not saved. Please make sure that you are a member of a getfit challenge team.\n\n http://getfit.mit.edu" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles: nil];
             [alert show];
         }
         
-        [self dismissViewControllerAnimated:YES completion:nil];
     } else if ([defaults boolForKey:@"postToGetFit"]){
         // the oAuthVC will post the minutes
-        OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
+        OAuthVC *oAuthVC = [[OAuthVC alloc]  initWithDelegate:self];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentViewController:navController animated:YES completion:nil];
@@ -151,9 +148,8 @@
         me.postedToGetFit = YES;
         
         // dismiss the view
-        [self dismiss];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
-    
 }
 
 
@@ -480,6 +476,27 @@
     } else {
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
     }
+}
+
+
+# pragma mark - OAuthVC Delegate
+
+- (void) didDismissOAuthVCWithSuccessfulExtraction:(BOOL)success {
+    if (success) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Getfit Error" message:@"Your minutes were not saved. Please make sure that you are a member of a getfit challenge team.\n\n http://getfit.mit.edu" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+# pragma mark - UIAlertView Delegate
+
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    // used to dismiss the view after the OAuthVC successfully posts
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

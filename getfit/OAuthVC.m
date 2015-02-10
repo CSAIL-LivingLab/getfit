@@ -23,6 +23,14 @@
     BOOL success;
 }
 
+- (id) initWithDelegate:(UIViewController<OAuthVCDelegate> *)delegateVC {
+    self = [super init];
+    if (self) {
+        _delegate = delegateVC;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.topItem.title = @"Please Log In to GetFit";
@@ -37,56 +45,15 @@
     
 }
 
-
-- (void)dismissFollowingAlert {
-    // check to make sure the view is actually visible. The interval timer might cause alerts to be called, otherwise
-    if (!self.isViewLoaded || !self.view.window) {
-        return;
-    }
-        
-    // dismiss the view after the user clicks ok.
-    // Uses UIAlertViewDelegate didDismissWithButtonIndex
-    
-    if (success) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
-        [alert show];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Getfit Error" message:@"Your minutes were not saved. Please make sure that you are a member of a getfit challenge team.\n\n http://getfit.mit.edu" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
-        [alert show];
-    }
-}
-
-- (void) dismissWithoutSaving {
-    if (!self.isViewLoaded || !self.view.window) {
-        return;
-    }
-    
-    if (self.minuteTVC !=nil) {
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        [self.minuteTVC dismissViewControllerAnimated:YES completion:nil];
-    }
-    
+- (void) dismissWithoutNotification {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
-
-
 
 #pragma mark - UI Setup
 
-- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    
-        if (self.minuteTVC !=nil) {
-            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-            [self.minuteTVC dismissViewControllerAnimated:YES completion:nil];
-        }
-    
-        [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void) makeCancelButton {
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                    style:UIBarButtonItemStylePlain target:self action:@selector(dismissWithoutSaving)];
+                                                                    style:UIBarButtonItemStylePlain target:self action:@selector(dismissWithoutNotification)];
     self.navigationItem.leftBarButtonItem = leftButton;
 }
 
@@ -148,7 +115,8 @@
     MinuteStore *ms = [MinuteStore sharedStore];
     
     success = [ms postToGetFit];
-    [self dismissFollowingAlert];
+    [_delegate didDismissOAuthVCWithSuccessfulExtraction:success];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) hideWebViewAndShowSpinnerView {
@@ -178,11 +146,6 @@
     [backgroundView addSubview:activityIndicator];
     [backgroundView addSubview:message];
     [self fadeInNewView:backgroundView];
-//    [self.view addSubview:backgroundView];
-    
-    // make sure the view eventually dissapears, even if the web view doesn't load
-    NSTimeInterval delay = 15;
-    [self performSelector:@selector(dismissFollowingAlert) withObject:nil afterDelay:delay];
 }
 
 
@@ -223,11 +186,9 @@
         return;
     }
     
-    // dismiss the view after the user clicks ok.
-    // Uses UIAlertViewDelegate didDismissWithButtonIndex
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Network Error" message:@"There was a problem loading getfit. Your minutes are saved on your phone and there is no need to re-enter them. The app will post to GetFit later." delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
-    [alertView show];
-    
+    // dismiss the view and tell the delegate to show the alert
+    [_delegate didDismissOAuthVCWithSuccessfulExtraction:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) fadeInNewView:(UIView *) newView{

@@ -488,6 +488,8 @@
     // if the cookies are valid
     // and if tokens are valid
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    // cookies and tokens are valid, and user is posting to getFit
     if ([defaults boolForKey:@"postToGetFit"] && [ms checkForValidCookies] && [ms checkForValidTokens:minuteEntry.endTime] ) {
         BOOL * success = [ms postToGetFit];
         
@@ -500,9 +502,10 @@
             [alert show];
         }
         
+    // user is posting to getFit, but doens't have valid tokens
     } else if ([defaults boolForKey:@"postToGetFit"]){
         // the oAuthVC will post the minutes
-        OAuthVC *oAuthVC = [[OAuthVC alloc]  init];
+        OAuthVC *oAuthVC = [[OAuthVC alloc]  initWithDelegate:self];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:oAuthVC];
         navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentViewController:navController animated:YES completion:nil];
@@ -632,14 +635,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+# pragma mark - OAuthVC Delegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) didDismissOAuthVCWithSuccessfulExtraction:(BOOL)success {
+    if (success) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Minutes Saved" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Getfit Error" message:@"Your minutes were not saved. Please make sure that you are a member of a getfit challenge team.\n\n http://getfit.mit.edu" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
 }
-*/
 
 @end
