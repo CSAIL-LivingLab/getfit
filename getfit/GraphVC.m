@@ -104,7 +104,7 @@
     [webView setDelegate:self];
     
     // this is dumb, but we have to convert the html to a string and then display that, because of Safari's XSS issues.
-    NSURL *url = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/datahubGraphs.html"];
+    NSURL *url = [NSURL URLWithString:@"https://projects.csail.mit.edu/bigdata/getfit-html/datahubGraphs.html"];
     NSString *htmlString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
     [webView loadHTMLString:htmlString baseURL:nil];
 

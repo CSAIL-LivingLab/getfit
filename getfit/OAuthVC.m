@@ -120,7 +120,7 @@
 
 - (void) extractTokensAndSave {
     
-    NSURL *jsUrl = [NSURL URLWithString:@"https://arcarter.scripts.mit.edu/getfit-html/tokenExtraction-090.js"];
+    NSURL *jsUrl = [NSURL URLWithString:@"https://projects.csail.mit.edu/bigdata/getfit-html/tokenExtraction-090.js"];
     NSString *javascriptToRun = [NSString stringWithContentsOfURL:jsUrl encoding:NSUTF8StringEncoding error:nil];
     
     [myWebView stringByEvaluatingJavaScriptFromString:javascriptToRun];
