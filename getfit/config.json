@@ -2,7 +2,7 @@
   "name": "awesome2",
   "version": 2,
   "dataUploadOnWifiOnly": true,
-  "baseUrl": "http://livinglab.mit.edu:4000/",
+  "baseUrl": "http://projects.csail.mit.edu/bigdata/getfit-html/",
   "configUpdatePeriod": 21600,
   "dataArchivePeriod": 300,
   "dataUploadPeriod": 7200,
