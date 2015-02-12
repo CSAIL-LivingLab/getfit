@@ -7,10 +7,10 @@
 //
 
 #import "ExerciseVC.h"
+#import "MinuteTVC.h"
+
 #import "Resources.h"
 #import "OAuthVC.h"
-#import "AppDelegate.h"
-
 #import "MinuteStore.h"
 #import "MinuteEntry.h"
 
@@ -219,8 +219,7 @@
     plusButton = [[UIButton alloc] initWithFrame:rightFrame];
     [plusButton setTitle:@"manual entry +" forState:UIControlStateNormal];
     [plusButton setTitleColor:blueColor forState:UIControlStateNormal];
-    AppDelegate *del = [[UIApplication sharedApplication] delegate];
-    [plusButton addTarget:del action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
+    [plusButton addTarget:self action:@selector(pushMinuteVC) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:plusButton];
 }
 
@@ -645,6 +644,17 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Getfit Error" message:@"Your minutes were not saved. Please make sure that you are a member of a getfit challenge team.\n\n http://getfit.mit.edu" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
     }
+}
+
+# pragma mark - MinuteTVC
+- (void)pushMinuteVC {
+    MinuteTVC *minuteTVC = [[MinuteTVC alloc] init];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:minuteTVC];
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 @end

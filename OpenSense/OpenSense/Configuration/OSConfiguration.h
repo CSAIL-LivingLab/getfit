@@ -26,4 +26,5 @@
 - (NSDictionary *)motionConfig;
 - (NSDictionary *)sampleFrequencyForProbe:(NSString *)probeId;
 
+
 @end

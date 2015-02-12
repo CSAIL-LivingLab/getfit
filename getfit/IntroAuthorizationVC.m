@@ -52,7 +52,7 @@
     myWebView.delegate = self;
     
     // If the certs are good, go to GetFit. Otherwise, assume that the user will need to log in.
-    NSString *urlStr = [NSString stringWithFormat:@"http://datahub.csail.mit.edu/permissions/apps/allow_access/%@/%@?redirect_url=https://arcarter.scripts.mit.edu/getfit-html/datahubThankYou.html", appID, @"getfit"];
+    NSString *urlStr = [NSString stringWithFormat:@"http://datahub.csail.mit.edu/permissions/apps/allow_access/%@/%@?redirect_url=https://projects.csail.mit.edu/bigdata/getfit-html/datahubThankYou.html", appID, @"getfit"];
     
     NSURL *url = [NSURL URLWithString:urlStr];
     
