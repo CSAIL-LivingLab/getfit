@@ -15,7 +15,7 @@
 #define kDefaultDataUploadPeriod        6 * 60 * 60 // 6 hours
 #define kDefaultConfigUpdatePeriod      1 * 60 * 60 // 1 hour
 #define kDefaultDataUploadOnWifiOnly    NO
-#define kDefaultMaxDataFileSizeKb       2048 // 2mb
+#define kDefaultMaxDataFileSizeKb       1024 // 1mb
 
 @implementation OSConfiguration
 

@@ -75,7 +75,7 @@
     uploadTimer = [NSTimer scheduledTimerWithTimeInterval:[[[OSConfiguration currentConfig] dataUploadPeriod] doubleValue] target:self selector:@selector(uploadData:) userInfo:nil repeats:YES];
     
     // Turn off config updating for now, as I don't see a reason for it -- ARC 2014-08-19.
-    //    configTimer = [NSTimer scheduledTimerWithTimeInterval:[[[OSConfiguration currentConfig] configUpdatePeriod] doubleValue] target:self selector:@selector(refreshConfig:) userInfo:nil repeats:YES];
+        configTimer = [NSTimer scheduledTimerWithTimeInterval:[[[OSConfiguration currentConfig] configUpdatePeriod] doubleValue] target:self selector:@selector(refreshConfig:) userInfo:nil repeats:YES];
     
     // For debugging
     //[self uploadData:nil];
@@ -264,6 +264,8 @@
             if (lineStr) {
                 [jsonString appendFormat:@"%@,", lineStr];
             }
+            
+            
         }
         
         // We don't need to append anything if no valid data was found
