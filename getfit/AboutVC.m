@@ -169,8 +169,6 @@
     pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
     [pickerParentView addSubview:pausePicker];
     [pickerParentView addSubview:pausePickerDoneButton];
-
-    
     UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker:)];
     [tapBackground setNumberOfTapsRequired:1];
     [self.view addGestureRecognizer:tapBackground];

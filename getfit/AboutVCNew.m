@@ -21,12 +21,19 @@
     UIImage *pauseImage;
     NSUserDefaults *defaults;
     
+    // picker view stuff
+    UIView *pickerParentView;
     UIPickerView *pausePicker;
+    UIButton *pausePickerDoneButton;
     NSArray *pauseArr;
     UILabel *pauseText;
-    
+
+    // block text
     UILabel *appTitle;
     UITextView *appTextView;
+    
+    UISwitch *appSwitch;
+    UILabel *appSwitchLabel;
     
     UILabel *datahubTitle;
     UITextView *datahubTextView;
@@ -42,7 +49,7 @@
     
     UILabel *sensingTitle;
     UITextView *sensingTextView;
-    
+    UILabel *resumeLabel;
     
     UIButton *pauseButton;
     UITextView *sensingIncludesTextView;
@@ -87,9 +94,47 @@
         contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, 800)];
         [scrollView addSubview:contentView];
         
-        
         // define relative variables
         CGFloat offsetFromTop = 15;
+        
+        // setup picker
+        pausePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width+2, 250)];
+        pausePicker.dataSource = self;
+        pausePicker.delegate = self;
+        [pausePicker setBackgroundColor:[UIColor blackColor]];
+        pausePicker.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        pausePicker.layer.borderWidth = 1;
+        [pausePicker reloadAllComponents];
+        
+        pausePickerDoneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50, 0, 50, 44)];
+        [pausePickerDoneButton setTitle:@"Done" forState:UIControlStateNormal];
+        [pausePickerDoneButton.titleLabel setTextAlignment:NSTextAlignmentRight];
+        [pausePickerDoneButton.titleLabel setTextColor:[UIColor whiteColor]];
+        [pausePickerDoneButton addTarget:self action:@selector(dismissPicker:) forControlEvents:UIControlEventTouchUpInside];
+        [pausePickerDoneButton setUserInteractionEnabled:YES];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker:)];
+        [pausePickerDoneButton addGestureRecognizer:tap];
+        
+        // make activity picker parent view, and add subviews
+        pickerParentView = [[UIView alloc] initWithFrame:CGRectMake(-1, self.view.bounds.size.height-250, self.view.bounds.size.width+2, 216)];
+        [pickerParentView addSubview:pausePicker];
+        [pickerParentView addSubview:pausePickerDoneButton];
+        UITapGestureRecognizer* tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker:)];
+        [tapBackground setNumberOfTapsRequired:1];
+        [self.view addGestureRecognizer:tapBackground];
+        
+        pauseArr = [[NSArray alloc] initWithObjects:@[@"Resume Data Donation", @0],
+                    @[@"10 min", @10],
+                    @[@"30 min", @30],
+                    @[@"1 hr", @60],
+                    @[@"2 hr", @120],
+                    @[@"5 hr", @300],
+                    @[@"10 hr", @600],
+                    @[@"1 day", @1440],
+                    @[@"1 week", @10080],
+                    @[@"Forever", @999],
+                    nil];
+        
         
         // setup app info
         appTitle = [[UILabel alloc] initWithFrame:CGRectMake(8, offsetFromTop, bounds.width-16, 15)];
@@ -115,10 +160,21 @@
         [appTextView sizeToFit];
         [contentView addSubview:appTextView];
         
-        CGFloat appInfoOffset = appTextView.frame.origin.y + appTextView.frame.size.height;
+        // app switch label
+        appSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(8, appTextView.frame.origin.y + appTextView.frame.size.height, 40, 25)];
+        appSwitch.userInteractionEnabled = YES;
+        [contentView addSubview:appSwitch];
+        
+        appSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(appSwitch.frame.origin.x + appSwitch.frame.size.width + 4, appTextView.frame.origin.y + appTextView.frame.size.height+3, bounds.width - 50, 25)];
+        [appSwitchLabel setText:@"Post to GetFit Website (requires MIT ID)"];
+        [appSwitchLabel setTextColor:[UIColor whiteColor]];
+        [appSwitchLabel setBackgroundColor:[UIColor clearColor]];
+        [appSwitchLabel setFont:[UIFont systemFontOfSize:14]];
+        [appSwitchLabel setTextAlignment:NSTextAlignmentLeft];
+        [contentView addSubview:appSwitchLabel];
         
         // setup datahub info
-        datahubTitle = [[UILabel alloc] initWithFrame:CGRectMake(8, 4+appInfoOffset, bounds.width-16, 15)];
+        datahubTitle = [[UILabel alloc] initWithFrame:CGRectMake(8, 4+appSwitch.frame.origin.y + appSwitch.frame.size.height, bounds.width-16, 15)];
         [datahubTitle setText:@"About DataHub"];
         [datahubTitle setTextColor:greenColor];
         [datahubTitle setBackgroundColor:[UIColor clearColor]];
@@ -126,7 +182,7 @@
         [datahubTitle setTextAlignment:NSTextAlignmentCenter];
         [contentView addSubview:datahubTitle];
         
-        datahubTextView =[[UITextView alloc] initWithFrame:CGRectMake(8, appInfoOffset + datahubTitle.bounds.size.height, bounds.width-16, 40)];
+        datahubTextView =[[UITextView alloc] initWithFrame:CGRectMake(8, datahubTitle.frame.origin.y + datahubTitle.bounds.size.height, bounds.width-16, 40)];
         datahubTextView.editable = NO;
         NSString *dataHubTextViewString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style><a href=\"https://datahub.csail.mit.edu\">DataHub</a> is a unified data management and collaboration platform under development at MIT CSAIL.";
         NSData *datahubTextViewData = [dataHubTextViewString dataUsingEncoding:NSUnicodeStringEncoding];
@@ -154,6 +210,7 @@
         
         yourDataTextView = [[UITextView alloc] initWithFrame:CGRectMake(8, datahubInfoOffset + yourDataTitle.frame.size.height, bounds.width-16, 40)];
         yourDataTextView.editable = NO;
+        yourDataTextView.scrollEnabled = NO;
         NSString *yourDataTextViewString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style>This app will create a data store for you on DataHub. You can access your personal data on DataHub <a href=\"https://datahub.csail.mit.edu/\">https://datahub.csail.mit.edu</a> using the following:";
         NSData *yourDataTextViewData = [yourDataTextViewString dataUsingEncoding:NSUnicodeStringEncoding];
         NSAttributedString *yourDataTextViewAttributedString= [[NSAttributedString alloc] initWithData:yourDataTextViewData options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
@@ -168,7 +225,7 @@
         [contentView addSubview:yourDataTextView];
         
         // username and password
-        username = [[UITextView alloc] initWithFrame:CGRectMake(8, yourDataTextView.frame.size.height + yourDataTextView.frame.origin.y, bounds.width/2-12, 22)];
+        username = [[UITextView alloc] initWithFrame:CGRectMake(8, yourDataTextView.frame.size.height + yourDataTextView.frame.origin.y - 10, bounds.width/2-12, 22)];
         username.scrollEnabled = NO;
         username.editable = NO;
         [username setText:@"username:"];
@@ -178,7 +235,7 @@
         [username setTextAlignment:NSTextAlignmentRight];
         [contentView addSubview:username];
         
-        password = [[UITextView alloc] initWithFrame:CGRectMake(8, username.frame.size.height + username.frame.origin.y, bounds.width/2-12, 22)];
+        password = [[UITextView alloc] initWithFrame:CGRectMake(8, username.frame.size.height + username.frame.origin.y- 5, bounds.width/2-12, 22)];
         password.scrollEnabled = NO;
         password.editable = NO;
         [password setText:@"password:"];
@@ -188,7 +245,7 @@
         [password setTextAlignment:NSTextAlignmentRight];
         [contentView addSubview:password];
         
-        storedUsername = [[UITextView alloc] initWithFrame:CGRectMake(bounds.width/2+4, yourDataTextView.frame.size.height + yourDataTextView.frame.origin.y, bounds.width/2-4, 22)];
+        storedUsername = [[UITextView alloc] initWithFrame:CGRectMake(bounds.width/2+4, yourDataTextView.frame.size.height + yourDataTextView.frame.origin.y- 10, bounds.width/2-4, 22)];
         storedUsername.scrollEnabled = NO;
         storedUsername.editable = NO;
         [storedUsername setText:[defaults objectForKey:@"username"]];
@@ -198,7 +255,7 @@
         [storedUsername setTextAlignment:NSTextAlignmentLeft];
         [contentView addSubview:storedUsername];
         
-        storedPassword = [[UITextView alloc] initWithFrame:CGRectMake(bounds.width/2+4, storedUsername.frame.size.height + storedUsername.frame.origin.y, bounds.width/2-4, 22)];
+        storedPassword = [[UITextView alloc] initWithFrame:CGRectMake(bounds.width/2+4, storedUsername.frame.size.height + storedUsername.frame.origin.y - 5, bounds.width/2-4, 22)];
         storedPassword.scrollEnabled = NO;
         storedPassword.editable = NO;
         [storedPassword setText:[defaults objectForKey:@"password"]];
@@ -210,7 +267,7 @@
 
         
         // setup sensing info
-        sensingTitle = [[UILabel alloc] initWithFrame:CGRectMake(8, storedPassword.frame.origin.y + storedPassword.frame.size.height + 8, bounds.width-16, 15)];
+        sensingTitle = [[UILabel alloc] initWithFrame:CGRectMake(8, storedPassword.frame.origin.y + storedPassword.frame.size.height + 12, bounds.width-16, 15)];
         [sensingTitle setText:@"Continuous Data Logging Mode"];
         [sensingTitle setTextColor:greenColor];
         [sensingTitle setBackgroundColor:[UIColor clearColor]];
@@ -232,8 +289,16 @@
         [sensingTextView sizeToFit];
         [contentView addSubview:sensingTextView];
         
+        resumeLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, sensingTextView.frame.origin.y + sensingTextView.frame.size.height, bounds.width-16, 15)];
+        [resumeLabel setText:@"Sensors will resume in"];
+        [resumeLabel setTextColor:[UIColor whiteColor]];
+        [resumeLabel setBackgroundColor:[UIColor clearColor]];
+        [resumeLabel setFont:[UIFont systemFontOfSize:13]];
+        [resumeLabel setTextAlignment:NSTextAlignmentCenter];
+        [contentView addSubview:resumeLabel];
+        
         // setup pause button
-        pauseButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-55, sensingTextView.frame.origin.y + sensingTextView.frame.size.height + 5, 110, 110)];
+        pauseButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width/2-55, resumeLabel.frame.origin.y + resumeLabel.frame.size.height + 5, 110, 110)];
         pauseButton.backgroundColor = blueColor;
         pauseButton.layer.cornerRadius = pauseButton.bounds.size.width/2;
         pauseButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -247,7 +312,6 @@
         pauseButton.titleLabel.numberOfLines = 2;
         pauseButton.titleLabel.textAlignment = NSTextAlignmentCenter;
         [contentView addSubview:pauseButton];
-        
         
         // sensing includes text
         NSString *sensingIncludesTextViewString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style>Mobile sensor data includes: motion sensors (gyroscope, accelerometer), activity info, position data and basic device info.  It does <span style=\"font-style: italic;\">not</span> include content or call logs from phone or txt messages (SMS), <span style=\"font-style: italic;\">>nor</span> do we capture any audio or video with this app.";
@@ -327,19 +391,121 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Picker
+- (void) addPicker:(id)sender {
+    
+    // default the date to the first item in the index
+    NSNumber *minutes = [[pauseArr objectAtIndex:0] objectAtIndex:1];
+    NSInteger intMins = [minutes integerValue];
+    NSDate *resumeDate = [[NSDate date] dateByAddingTimeInterval:intMins*60];
+    [defaults setObject:resumeDate forKey:@"resumeSensorDate"];
+    [defaults synchronize];
+    
+    // adjust the label accordingly
+    [self adjustResumeLabelText];
+    
+    [UIView beginAnimations:@"MoveIn" context:nil];
+    [self.view insertSubview:pickerParentView aboveSubview:self.view];
+    [UIView commitAnimations];
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (void) dismissPicker:(id)sender {
+    // make sure to capture the input
+    //    NSNumber *minutes = [[pauseArr objectAtIndex:row] objectAtIndex:1];
+    
+    // dismiss the picker
+    [UIView beginAnimations:@"MoveOut" context:nil];
+    [pickerParentView removeFromSuperview];
+    [UIView commitAnimations];
+}
+
+# pragma mark
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [pauseArr count];
+}
+
+- (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+# pragma mark
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [[pauseArr objectAtIndex:row] objectAtIndex:0];
+}
+
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    
+    NSString *title = @"";
+    
+    title = [[pauseArr objectAtIndex:row] objectAtIndex:0];
+    
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:kFONT_NAME}];
+    
+    return attString;
+}
+
+#pragma mark
+
+- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    NSNumber *minutes = [[pauseArr objectAtIndex:row] objectAtIndex:1];
+    NSDate *resumeDate;
+    
+    /// 999 means do not resume
+    if ([minutes isEqualToNumber:@999]) {
+        resumeDate = [NSDate distantFuture];
+    } else {
+        NSInteger intMins = [minutes integerValue];
+        resumeDate = [[NSDate date] dateByAddingTimeInterval:intMins*60];
+    }
+    
+    
+    [defaults setObject:resumeDate forKey:@"resumeSensorDate"];
+    [defaults synchronize];
+    [self adjustResumeLabelText];
+}
+
+# pragma mark
+
+// adjust the label informing the user of when data collection will resume
+- (void) adjustResumeLabelText {
+    //
+    NSDate *pauseUntil = [defaults objectForKey:@"resumeSensorDate"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MMM dd, hh:mm a"];
+    NSString *dateString = [dateFormatter stringFromDate:pauseUntil];
+    
+    NSString *bodyStr;
+    if (pauseUntil !=nil && [pauseUntil compare:[NSDate date]] == NSOrderedAscending) {
+        bodyStr = @"Sensors currently enabled.";
+        [pauseButton setTitle:kPAUSE_TITLE forState:UIControlStateNormal];
+    } else if ([pauseUntil compare:[NSDate distantFuture]] == NSOrderedSame) {
+        bodyStr = @"Sensor collection currently disabled forever.";
+        [pauseButton setTitle:kRESUME_TITLE forState:UIControlStateNormal];
+    } else {
+        bodyStr = [NSString stringWithFormat:@"Sensors resuming at %@", dateString];
+        [pauseButton setTitle:kRESUME_TITLE forState:UIControlStateNormal];
+    }
+    
+    // label
+    [resumeLabel setText:bodyStr];
+}
+
+# pragma mark - button and image resizing
+
+//generate a new image of a different size
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    // In next line, pass 0.0 to use the current device's pixel scaling factor (and thus account for Retina resolution).
+    // Pass 1.0 to force exact pixel size.
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 @end

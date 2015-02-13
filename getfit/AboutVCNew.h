@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutVCNew : UIViewController
+@interface AboutVCNew : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @end
