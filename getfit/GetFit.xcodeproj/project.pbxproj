@@ -68,6 +68,7 @@
 		94D491891A82A83000A2194B /* LocationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D491881A82A83000A2194B /* LocationObject.m */; };
 		94EA56171A6C76450045EA4E /* DataHubCreation.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA56161A6C76450045EA4E /* DataHubCreation.m */; };
 		94EA561B1A6CA6D40045EA4E /* IntroAuthorizationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 94EA561A1A6CA6D40045EA4E /* IntroAuthorizationVC.m */; };
+		94F5B7E11A8EA437003FD919 /* AboutVCNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F5B7E01A8EA437003FD919 /* AboutVCNew.m */; };
 		DB6680C71A69B65D0080560E /* runner.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680C61A69B65D0080560E /* runner.png */; };
 		DB6680CA1A69B8780080560E /* intensity.png in Resources */ = {isa = PBXBuildFile; fileRef = DB6680C91A69B8780080560E /* intensity.png */; };
 		DBAD5E441A695DFB000F9692 /* Secret.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAD5E431A695DFB000F9692 /* Secret.m */; };
@@ -193,6 +194,8 @@
 		94EA56161A6C76450045EA4E /* DataHubCreation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataHubCreation.m; sourceTree = "<group>"; };
 		94EA56191A6CA6D40045EA4E /* IntroAuthorizationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroAuthorizationVC.h; sourceTree = "<group>"; };
 		94EA561A1A6CA6D40045EA4E /* IntroAuthorizationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroAuthorizationVC.m; sourceTree = "<group>"; };
+		94F5B7DF1A8EA437003FD919 /* AboutVCNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutVCNew.h; sourceTree = "<group>"; };
+		94F5B7E01A8EA437003FD919 /* AboutVCNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVCNew.m; sourceTree = "<group>"; };
 		DB6680C61A69B65D0080560E /* runner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = runner.png; path = ../../Assets/runner.png; sourceTree = "<group>"; };
 		DB6680C91A69B8780080560E /* intensity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = intensity.png; path = ../../Assets/intensity.png; sourceTree = "<group>"; };
 		DBAD5E421A695DFB000F9692 /* Secret.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Secret.h; path = ../Secret.h; sourceTree = "<group>"; };
@@ -316,6 +319,8 @@
 				946E4FDD1A72F11600E881F1 /* AboutVC.h */,
 				946E4FDE1A72F11600E881F1 /* AboutVC.m */,
 				946E4FDF1A72F11600E881F1 /* AboutVC.xib */,
+				94F5B7DF1A8EA437003FD919 /* AboutVCNew.h */,
+				94F5B7E01A8EA437003FD919 /* AboutVCNew.m */,
 			);
 			name = About;
 			sourceTree = "<group>";
@@ -605,6 +610,7 @@
 				941895EC1A59EA6B00B5BC15 /* Resources.m in Sources */,
 				946E4FE01A72F11600E881F1 /* AboutVC.m in Sources */,
 				94CECD9E1A64565200DBE4C1 /* TestVC.m in Sources */,
+				94F5B7E11A8EA437003FD919 /* AboutVCNew.m in Sources */,
 				941896071A59EB2300B5BC15 /* OAuthVC.m in Sources */,
 				946949361A71F09C006E1DE2 /* TNSStreamTransport.m in Sources */,
 				946949391A71F09C006E1DE2 /* TSSLSocketException.m in Sources */,
