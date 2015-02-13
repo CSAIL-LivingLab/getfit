@@ -109,15 +109,27 @@
 - (void) viewWillAppear:(BOOL)animated {
     
     // setup content text
+    
+    NSString *appLabelHtmlString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style>This app, created by the <a href=\"http://livinglab.mit.edu/\">MIT bigdata Living Lab</a>, allows users to record and log activity data for the <a href=\"https://getfit.mit.edu/\">getfit@mit</a> challenge. The app also allows users to record and submit this activity data to a Personal Data Store on CSAIL’s DataHub.";
+    NSData *appLabelHtmlData = [appLabelHtmlString dataUsingEncoding:NSUnicodeStringEncoding];
+    NSAttributedString *appLabelAttributedString= [[NSAttributedString alloc] initWithData:appLabelHtmlData options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     [_appLabel setScrollEnabled:NO];
     [_appLabel setEditable:NO];
+    [_appLabel setAttributedText:appLabelAttributedString];
+    [_appLabel setTextColor:[UIColor whiteColor]];
     [_appLabel sizeToFit];
     
+    
+    NSString *datahubLabelHtmlString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style><a href=\"https://datahub.csail.mit.edu\">DataHub</a> (http://datahub.csail.mit.edu/) is a unified data management and collaboration platform under development at MIT CSAIL.";
+    NSData *datahubLabelHtmlData = [datahubLabelHtmlString dataUsingEncoding:NSUnicodeStringEncoding];
+    NSAttributedString *datahubLabelAttributedString= [[NSAttributedString alloc] initWithData:datahubLabelHtmlData options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     [_datahubLabel setScrollEnabled:NO];
     [_datahubLabel setEditable:NO];
+    [_datahubLabel setAttributedText:datahubLabelAttributedString];
+    [_datahubLabel setTextColor:[UIColor whiteColor]];
     [_datahubLabel sizeToFit];
-    _datahubLabel.dataDetectorTypes = UIDataDetectorTypeLink;
-    [_datahubLabel setTintColor:greenColor];
+//    
+//    [_datahubLabel setTintColor:greenColor];
 
     
     [_sensingLabel setScrollEnabled:NO];

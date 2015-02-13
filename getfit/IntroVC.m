@@ -41,8 +41,8 @@
     
     // choice View
     UIView *choiceView;
-    UIButton *anonymousButton;
-    UIButton *emailButton;
+    UIButton *randomUsernameButton;
+    UIButton *emailUsernameButton;
     UITextField *emailTextField;
     UITextView *datahubAcctExplanationTextView;
     NSString *explanationText;
@@ -90,7 +90,7 @@
     [self.view addSubview:firstView];
     
     // legal text
-    NSString *htmlString = @"<style>* {font-family: \"Helvetica Neue\"; text-align:justify;}</style><h2>Intro</h2><p>This app allows you to record your activity data on your phone and submit this activity data to getfit@mit and upload it to your personal DataHub account.  You must have a getfit@mit account for the app to work.</p><p>Register for getfit@mit account at <a href=\"http://getfit.mit.edu/\">getfit.mit.edu</a></p><p>A DataHub account will be automatically created for you. To access DataHub login using the username and password found on “Info/About” tab.</p><h2>Logging Activities</h2><p>Users can “record” activity data using the Activity Tracking Timer. User selects Activity and Intensity (optional), and hits Start in order to begin recording activity data. Whenever possible users should keep phone on them during workout in order to log mobile sensor data. When activity is complete, press Stop and data will be saved and uploaded to getfit@mit [activityname; intensity; duration] and DataHub [activityname; intensity; duration; and sensor data]</p><p>Sensor data includes: motion sensors (gyroscope, accelerometer), activity info, position data and basic device info. It does not include call logs, audio, or video. </p><p>Users can record activity data using “manual entry” mode which allows user to submit [activityname; intensity; duration] to getfit@mit and to DataHub. In “manual entry” mode, sensors are not activated.</p><h2>Data</h2><p>This app will send your data to getfit@mit for the purposes of the Challenge and to DataHub for research. Data is stored in a secure database at MIT. Users will be able to login, access and edit their own personal data via their DataHub account. By using this app, users consent to sharing the data with the MIT Living Lab team. For research purposes, your data will be de-identified and combined with other user data for analysis. You can view or export your data any time you want. You can enable, pause or disable Continuous Data Logging Mode at any time. You may withdraw your consent and discontinue participation at any time.</p><h2>Consent</h2><p>By entering your name and date then tapping I Agree you consent to participate in the study and share your data.</p><br /><br /><div style='height:250px;'></div>";
+    NSString *htmlString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;}</style><h2>Intro</h2><p>This GetFit app allows you to record your activity data on your phone and submit this activity data to getfit@mit and upload it to your Personal Data Store on DataHub. You must be a registered getfit@mit participant and have a DataHub account for the app to work.</p><p>A DataHub account will be created for you upon your consent to participate. To access your DataHub account login use the username and password found on app’s “About” tab.</p><h2>Logging Activities</h2><p>Users can “log” activity data using the timer on the Logger tab.  User selects Activity (required) and Intensity (optional), and then presses Start to begin recording activity data.</p><p>If users wishes to log mobile sensor data during activity, user should remember to keep phone on them during exercise.</p><p>When activity is complete, press Stop.  Choose to save your data to the getfit@mit website [activity; intensity; duration]; your data will also be uploaded to your Personal Data Store on DataHub [activity; intensity; duration; and sensor data].</p><p>Sensor data includes: motion sensors (gyroscope, accelerometer), activity info, position data and basic device info.  It does not include call logs, audio, or video.</p><p>Users can also record activity data using “manual entry” mode which allows submission of [activity; intensity; and duration] to the getfit@mit website and to DataHub.  In “manual entry” mode no sensor data is logged or stored.</p><p>This app does not reflect data that you may have entered separately via the getfit@mit website.  The app’s “Progress” tab displays activity data logged on DataHub only.</p><h2>Data</h2><p>This app will send your data to getfit@mit and to DataHub.  All data is stored on secure databases at MIT.   Users can login to access, edit and export personal data via their DataHub account at any time.</p><p>By using this app users agree to sharing their data with the MIT bigdata Living Lab team.  Your data will be de-identified and combined with other user data for the purposes of aggregate analysis and visualization.  On the app’s “About” tab you can enable, pause or disable Continuous Data Logging Mode at any time. You may withdraw your consent and discontinue participation at any time.</p><br /><br /><br /><br /></div>";
     NSData *htmlData = [htmlString dataUsingEncoding:NSUnicodeStringEncoding];
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:htmlData options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     legalText = [[UITextView alloc] initWithFrame:CGRectMake(8, 70, bounds.width-16, bounds.height-70)];
@@ -146,7 +146,7 @@
 }
 
 - (void) loadChoiceView{
-    [self setTitle:@"Please Select an Account Type"];
+    [self setTitle:@"Choose DataHub Account Option"];
     choiceView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
     [choiceView setBackgroundColor:[UIColor blackColor]];
     
@@ -156,31 +156,31 @@
     CGFloat buttonOffsetY = bounds.height/2-largeButtonWidth/2;
     CGFloat fieldsOffsetY = 100;
     
-    // select anonymous account
-    anonymousButton = [[UIButton alloc] initWithFrame:CGRectMake(10, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
-    anonymousButton.layer.cornerRadius = largeButtonWidth/2;
-    anonymousButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    anonymousButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    [anonymousButton setBackgroundColor:blueColor];
-    [anonymousButton setTitle:@"Anonymous Account" forState:UIControlStateNormal];
-    [anonymousButton.titleLabel setNumberOfLines:0];
-    [anonymousButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [anonymousButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
-    [anonymousButton addTarget:self action:@selector(anonymousButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
-    [choiceView addSubview:anonymousButton];
+    // select random username
+    randomUsernameButton = [[UIButton alloc] initWithFrame:CGRectMake(10, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
+    randomUsernameButton.layer.cornerRadius = largeButtonWidth/2;
+    randomUsernameButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    randomUsernameButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [randomUsernameButton setBackgroundColor:blueColor];
+    [randomUsernameButton setTitle:@"Assign me\na random\nusername" forState:UIControlStateNormal];
+    [randomUsernameButton.titleLabel setNumberOfLines:0];
+    [randomUsernameButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [randomUsernameButton.titleLabel setFont:[UIFont systemFontOfSize:18]];
+    [randomUsernameButton addTarget:self action:@selector(randomButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [choiceView addSubview:randomUsernameButton];
     
     // select account using email
-    emailButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width-10-largeButtonWidth, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
-    emailButton.layer.cornerRadius = largeButtonWidth/2;
-    emailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    emailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    [emailButton setBackgroundColor:greenColor];
-    [emailButton setTitle:@"Linked\nto Email" forState:UIControlStateNormal];
-    [emailButton.titleLabel setNumberOfLines:0];
-    [emailButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [emailButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
-    [emailButton addTarget:self action:@selector(emailButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
-    [choiceView addSubview:emailButton];
+    emailUsernameButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.width-10-largeButtonWidth, buttonOffsetY, largeButtonWidth, largeButtonWidth)];
+    emailUsernameButton.layer.cornerRadius = largeButtonWidth/2;
+    emailUsernameButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    emailUsernameButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    [emailUsernameButton setBackgroundColor:greenColor];
+    [emailUsernameButton setTitle:@"I'll use my\nemail as my\nusername" forState:UIControlStateNormal];
+    [emailUsernameButton.titleLabel setNumberOfLines:0];
+    [emailUsernameButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [emailUsernameButton.titleLabel setFont:[UIFont systemFontOfSize:18]];
+    [emailUsernameButton addTarget:self action:@selector(emailButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [choiceView addSubview:emailUsernameButton];
 
     /* Fields that will appear after tapping one of the above buttons. 
      These start as hidden with clearColor or alpha = 0 */
@@ -223,7 +223,7 @@
     cancelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [cancelButton setBackgroundColor:[UIColor clearColor]];
     [cancelButton setTitle:@"cancel" forState:UIControlStateNormal];
-    [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [cancelButton.titleLabel setFont:[UIFont systemFontOfSize:20]];
     [cancelButton addTarget:self action:@selector(cancelButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
     [choiceView addSubview:cancelButton];
 
@@ -235,12 +235,12 @@
     createButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [createButton setBackgroundColor:[UIColor clearColor]];
     [createButton setTitle:@"create" forState:UIControlStateNormal];
-    [createButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [createButton.titleLabel setFont:[UIFont systemFontOfSize:20]];
     [createButton addTarget:self action:@selector(createButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
     [choiceView addSubview:createButton];
 
     // explanation of account type
-    explanationText = @"Tap on each button for more information.\n\nYou will have an opportunity to go back to view other options.";
+    explanationText = @"";
     datahubAcctExplanationTextView = [[UITextView alloc] initWithFrame:CGRectMake(8, bounds.height-170, bounds.width-16, 170)];
     datahubAcctExplanationTextView.hidden = NO;
     datahubAcctExplanationTextView.alpha = 1;
@@ -311,7 +311,7 @@
     // explanationlabel
     explanationView = [[UITextView alloc] initWithFrame:CGRectMake(8, passwordLabel.frame.origin.y + 15, bounds.width-16, 140)];
     [explanationView setFont:[UIFont systemFontOfSize:14]];
-    [explanationView setText:@"Use it to view your data at\nhttps://www.datahub.csail.mit.edu\n\nYou may want to write your username and password down. You can view them from ths app, but because the app is anonymous, we can't reset your password if it's lost."];
+    [explanationView setText:@"Use it to view your data at\nhttps://www.datahub.csail.mit.edu\n\nYou can view your username and password from this app, but you may also want to write them down."];
     [explanationView setTextColor:[UIColor whiteColor]];
     [explanationView setBackgroundColor:[UIColor clearColor]];
     [explanationView setEditable:NO];
@@ -343,14 +343,14 @@
     [finalView addSubview:donateSwitch];
     
     donateSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, bounds.height - 105 , 330, 40)];
-    [donateSwitchLabel setText:@"Donate Data to Living Labs"];
+    [donateSwitchLabel setText:@"Allow Sensor Data Collection"];
     [donateSwitchLabel setTextColor:[UIColor whiteColor]];
     [donateSwitchLabel setFont:[UIFont systemFontOfSize:15]];
     [finalView addSubview:donateSwitchLabel];
     
     donateExplanationLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, bounds.height - 65, bounds.width-16, 60)];
     donateExplanationLabel.numberOfLines = 0;
-    [donateExplanationLabel setText:@"Donating sensor data requires your phone location.\nYour data belongs to you. At any time, you can stop collection from the phone, or delete your data from datahub, where it is stored."];
+    [donateExplanationLabel setText:@"Allowing sensor data collection requires your phone location. Your data belongs to you. At any time, you can stop collection from the phone, or delete your data from datahub, where it is stored."];
     [donateExplanationLabel setTextColor:[UIColor lightGrayColor]];
     [donateExplanationLabel setTextAlignment:NSTextAlignmentCenter];
     [donateExplanationLabel setFont:[UIFont systemFontOfSize:12]];
@@ -385,10 +385,10 @@
     // will be creating an account with an email address
     randomAcct = NO;
     
-    [self setTitle:@"Create an Account With Your Email"];
+    [self setTitle:@"DataHub with Email as Username"];
     
     // set the explanitory text
-    [datahubAcctExplanationTextView setText:@"This will create a DataHub account using your email address.\n\nYour email and username will be visible to LivingLab researchers.\n\nLater, you will be able to log into your datahub account and edit your data."];
+    [datahubAcctExplanationTextView setText:@"Chosing \"create\" will create a DataHub account using your email address as your username and a random password.\n\nYour email address will be visible to DataHub associated researchers."];
     
     cancelButton.hidden = NO;
     createButton.hidden = NO;
@@ -397,8 +397,8 @@
     
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         // hide the two big buttons
-        anonymousButton.backgroundColor = [UIColor clearColor];
-        emailButton.backgroundColor = [UIColor clearColor];
+        randomUsernameButton.backgroundColor = [UIColor clearColor];
+        emailUsernameButton.backgroundColor = [UIColor clearColor];
         
         // show the other stuff
         [cancelButton setBackgroundColor:[UIColor grayColor]];
@@ -406,25 +406,25 @@
         [emailTextField setAlpha:1];
         [datahubAcctExplanationTextView setAlpha:1];
         
-        [self offsetViews:@[anonymousButton, emailButton] byY:-100];
+        [self offsetViews:@[randomUsernameButton, emailUsernameButton] byY:-100];
         
         
     }completion:^(BOOL done){
         //some completition
-        anonymousButton.hidden = TRUE;
-        emailButton.hidden = TRUE;
+        randomUsernameButton.hidden = TRUE;
+        emailUsernameButton.hidden = TRUE;
     }];
 
 }
 
-- (void) anonymousButtonTouched:(id) sender{
+- (void) randomButtonTouched:(id) sender{
     // will be creating a random account
     randomAcct = YES;
     
-    [self setTitle:@"Create Anonymous Account"];
+    [self setTitle:@"DataHub With Random Username"];
     
     // set the explanitory text
-    [datahubAcctExplanationTextView setText:@"This will create a datahub account with a random username and password.\n\nYour data will be entirely anonymous, but living lab will be unable to provide personal tech support.\n\nLater, you will be able to log into your datahub account and edit your data."];
+    [datahubAcctExplanationTextView setText:@"Chosing \"create\" will create a DataHub account with a random username and password.\n\nYour data will be entirely anonymous, and DataHub associated researchers will be unable to provide tech support."];
     
     cancelButton.hidden = NO;
     createButton.hidden = NO;
@@ -433,21 +433,21 @@
     
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         // hide the two big buttons
-        anonymousButton.backgroundColor = [UIColor clearColor];
-        emailButton.backgroundColor = [UIColor clearColor];
+        randomUsernameButton.backgroundColor = [UIColor clearColor];
+        emailUsernameButton.backgroundColor = [UIColor clearColor];
         
         // show the other stuff
         [cancelButton setBackgroundColor:[UIColor grayColor]];
         [createButton setBackgroundColor:[UIColor redColor]];
         [datahubAcctExplanationTextView setAlpha:1];
         
-        [self offsetViews:@[anonymousButton, emailButton] byY:-100];
+        [self offsetViews:@[randomUsernameButton, emailUsernameButton] byY:-100];
         
         
     }completion:^(BOOL done){
         //some completition
-        anonymousButton.hidden = TRUE;
-        emailButton.hidden = TRUE;
+        randomUsernameButton.hidden = TRUE;
+        emailUsernameButton.hidden = TRUE;
     }];
 }
 # pragma mark
@@ -467,14 +467,14 @@
 }
 
 - (void) cancelButtonTouched:(id) sender{
-    [self setTitle:@"Please Select an Account Type"];
-    anonymousButton.hidden = NO;
-    emailButton.hidden = NO;
+    [self setTitle:@"Choose DataHub Account Option"];
+    randomUsernameButton.hidden = NO;
+    emailUsernameButton.hidden = NO;
     
     [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         // show the buttons
-        anonymousButton.backgroundColor = blueColor;
-        emailButton.backgroundColor = greenColor;
+        randomUsernameButton.backgroundColor = blueColor;
+        emailUsernameButton.backgroundColor = greenColor;
         
         // hide the other stuff
         [cancelButton setBackgroundColor:[UIColor clearColor]];
@@ -482,7 +482,7 @@
         [emailTextField setAlpha:0];
 //        [datahubAcctExplanationTextView setAlpha:0];
         
-        [self offsetViews:@[anonymousButton, emailButton] byY:100];
+        [self offsetViews:@[randomUsernameButton, emailUsernameButton] byY:100];
         
         
     }completion:^(BOOL done){

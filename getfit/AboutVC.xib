@@ -83,7 +83,7 @@ sensor data includes: motion sensors (gyroscope, accelerometer, magnetometer), a
                                     </variation>
                                 </textView>
                                 <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1ox-GT-4pt">
-                                    <rect key="frame" x="147" y="149.5" width="305" height="60"/>
+                                    <rect key="frame" x="147" y="150" width="305" height="60"/>
                                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <accessibilityTraits key="traits" none="YES" link="YES"/>
@@ -104,8 +104,8 @@ sensor data includes: motion sensors (gyroscope, accelerometer, magnetometer), a
                                         </mask>
                                     </variation>
                                 </textView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About This App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfm-I5-TNA">
-                                    <rect key="frame" x="242" y="0.0" width="115" height="20"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About the GetFit App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfm-I5-TNA">
+                                    <rect key="frame" x="221.5" y="0.0" width="157.5" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="OIK-0x-QIS"/>
                                     </constraints>
@@ -113,7 +113,7 @@ sensor data includes: motion sensors (gyroscope, accelerometer, magnetometer), a
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </label>
-                                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="52R-uS-RhZ">
+                                <textView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" text="appLabel Text" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="52R-uS-RhZ">
                                     <rect key="frame" x="147" y="22" width="305" height="60"/>
                                     <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <constraints>
@@ -121,7 +121,6 @@ sensor data includes: motion sensors (gyroscope, accelerometer, magnetometer), a
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="Bl8-VS-wc6"/>
                                         <constraint firstAttribute="width" constant="305" id="G4s-pV-OHN"/>
                                     </constraints>
-                                    <string key="text">The app allows users to record and submit activity data to getfit@mit and upload mobile activity data in their personal DataHub account.</string>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -142,13 +141,13 @@ sensor data includes: motion sensors (gyroscope, accelerometer, magnetometer), a
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Datahub User Credentials" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Zt-7X-uuo">
-                                    <rect key="frame" x="223" y="213.5" width="155" height="16"/>
+                                    <rect key="frame" x="223" y="214" width="155" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="About Sensing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwh-gi-KAJ">
-                                    <rect key="frame" x="246" y="244.5" width="109" height="19.5"/>
+                                    <rect key="frame" x="246" y="245" width="109" height="19.5"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -184,7 +183,7 @@ sensor data includes: motion sensors (gyroscope, accelerometer, magnetometer), a
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Od-aK-ZFs" userLabel="Getfit Switch View">
-                                    <rect key="frame" x="155" y="80" width="305" height="43.5"/>
+                                    <rect key="frame" x="155" y="80" width="305" height="44"/>
                                     <subviews>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5I8-La-Yi0">
                                             <rect key="frame" x="0.0" y="5" width="51" height="31"/>
@@ -193,7 +192,7 @@ sensor data includes: motion sensors (gyroscope, accelerometer, magnetometer), a
                                             </connections>
                                         </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Post to GetFit Website (requires MIT ID)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozF-AE-1mm">
-                                            <rect key="frame" x="59" y="13.5" width="238" height="16"/>
+                                            <rect key="frame" x="59" y="14" width="238" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
