@@ -12,7 +12,9 @@
 
 #import "IntroVC.h"
 
+#import "AboutVC_deprecated.h"
 #import "AboutVC.h"
+
 #import "ExerciseVC.h"
 #import "GraphVC.h"
 #import "TestVC.h"
