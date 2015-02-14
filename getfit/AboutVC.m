@@ -81,6 +81,7 @@
         
         // some variables to be used throughout
         defaults = [NSUserDefaults standardUserDefaults];
+        NSLog(@"%@", [defaults objectForKey:@"username"]);
         blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
         greenColor = [UIColor colorWithRed:.1 green:.8 blue:.1 alpha:1.0];
         CGSize bounds = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
@@ -395,6 +396,10 @@
 
 - (void) viewWillAppear:(BOOL)animated{
     [self adjustResumeLabelText];
+    
+    // necessary for first load after the user logs in
+    [storedUsername setText:[defaults objectForKey:@"username"]];
+    [storedPassword setText:[defaults objectForKey:@"password"]];
 }
 
 #pragma mark - Picker
