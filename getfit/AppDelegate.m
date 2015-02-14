@@ -12,8 +12,8 @@
 
 #import "IntroVC.h"
 
+#import "AboutVC_deprecated.h"
 #import "AboutVC.h"
-#import "AboutVCNew.h"
 
 #import "ExerciseVC.h"
 #import "GraphVC.h"
@@ -84,7 +84,7 @@
     
     ExerciseVC *exerciseVC = [[ExerciseVC alloc] init];
     GraphVC *graphVC = [[GraphVC alloc] init];
-    AboutVCNew *aboutVC = [[AboutVCNew alloc] init];
+    AboutVC *aboutVC = [[AboutVC alloc] init];
     TestVC *testVC = [[TestVC alloc] init];
     
     // add tabs
