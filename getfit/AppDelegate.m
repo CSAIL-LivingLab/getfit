@@ -12,9 +12,7 @@
 
 #import "IntroVC.h"
 
-#import "AboutVC_deprecated.h"
 #import "AboutVC.h"
-
 #import "ExerciseVC.h"
 #import "GraphVC.h"
 #import "TestVC.h"
@@ -38,11 +36,11 @@
     [self loadMainViews];
     
     
-    if (![defaults boolForKey:@"loaded_v.94"]) {
+    if (![defaults boolForKey:@"loaded_v.99"]) {
         [[MinuteStore sharedStore] removeAllMinutes];
         [[OpenSense sharedInstance] deleteAllBatches];
         [defaults setObject:nil forKey:@"email"];
-        [defaults setBool:YES forKey:@"loaded_v.94"];
+        [defaults setBool:YES forKey:@"loaded_v.99"];
         [defaults synchronize];
     }
     
