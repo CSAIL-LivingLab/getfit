@@ -73,6 +73,12 @@
 - (instancetype) init {
     self = [super init];
     if (self) {
+        // set the icon
+        self.tabBarItem.title = @"About";
+        UIImage *image = [UIImage imageNamed:@"info.png"];
+        self.tabBarItem.image = image;
+
+        
         // some variables to be used throughout
         defaults = [NSUserDefaults standardUserDefaults];
         blueColor = [UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0];
@@ -87,7 +93,7 @@
         // setup scroll view and add to main view
         scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, bounds.height)];
         [scrollView setScrollEnabled:YES];
-        [scrollView setContentSize:CGSizeMake(bounds.width, 900)];
+        [scrollView setContentSize:CGSizeMake(bounds.width, 950)];
         [self.view addSubview:scrollView];
         
         // setup content view and add to scroll view
@@ -163,6 +169,7 @@
         // app switch label
         appSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(8, appTextView.frame.origin.y + appTextView.frame.size.height, 40, 25)];
         appSwitch.userInteractionEnabled = YES;
+        [appSwitch addTarget:self action:@selector(appSwitchChanged:) forControlEvents:UIControlEventValueChanged];
         [contentView addSubview:appSwitch];
         
         appSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(appSwitch.frame.origin.x + appSwitch.frame.size.width + 4, appTextView.frame.origin.y + appTextView.frame.size.height+3, bounds.width - 50, 25)];
@@ -225,7 +232,7 @@
         [contentView addSubview:yourDataTextView];
         
         // username and password
-        username = [[UITextView alloc] initWithFrame:CGRectMake(8, yourDataTextView.frame.size.height + yourDataTextView.frame.origin.y - 10, bounds.width/2-12, 22)];
+        username = [[UITextView alloc] initWithFrame:CGRectMake(8, yourDataTextView.frame.size.height + yourDataTextView.frame.origin.y - 10, bounds.width/2-12, 24)];
         username.scrollEnabled = NO;
         username.editable = NO;
         [username setText:@"username:"];
@@ -235,7 +242,7 @@
         [username setTextAlignment:NSTextAlignmentRight];
         [contentView addSubview:username];
         
-        password = [[UITextView alloc] initWithFrame:CGRectMake(8, username.frame.size.height + username.frame.origin.y- 5, bounds.width/2-12, 22)];
+        password = [[UITextView alloc] initWithFrame:CGRectMake(8, username.frame.size.height + username.frame.origin.y- 5, bounds.width/2-12, 24)];
         password.scrollEnabled = NO;
         password.editable = NO;
         [password setText:@"password:"];
@@ -245,7 +252,7 @@
         [password setTextAlignment:NSTextAlignmentRight];
         [contentView addSubview:password];
         
-        storedUsername = [[UITextView alloc] initWithFrame:CGRectMake(bounds.width/2+4, yourDataTextView.frame.size.height + yourDataTextView.frame.origin.y- 10, bounds.width/2-4, 22)];
+        storedUsername = [[UITextView alloc] initWithFrame:CGRectMake(bounds.width/2+4, yourDataTextView.frame.size.height + yourDataTextView.frame.origin.y- 10, bounds.width/2-4, 24)];
         storedUsername.scrollEnabled = NO;
         storedUsername.editable = NO;
         [storedUsername setText:[defaults objectForKey:@"username"]];
@@ -255,7 +262,7 @@
         [storedUsername setTextAlignment:NSTextAlignmentLeft];
         [contentView addSubview:storedUsername];
         
-        storedPassword = [[UITextView alloc] initWithFrame:CGRectMake(bounds.width/2+4, storedUsername.frame.size.height + storedUsername.frame.origin.y - 5, bounds.width/2-4, 22)];
+        storedPassword = [[UITextView alloc] initWithFrame:CGRectMake(bounds.width/2+4, storedUsername.frame.size.height + storedUsername.frame.origin.y - 5, bounds.width/2-4, 24)];
         storedPassword.scrollEnabled = NO;
         storedPassword.editable = NO;
         [storedPassword setText:[defaults objectForKey:@"password"]];
@@ -267,7 +274,7 @@
 
         
         // setup sensing info
-        sensingTitle = [[UILabel alloc] initWithFrame:CGRectMake(8, storedPassword.frame.origin.y + storedPassword.frame.size.height + 12, bounds.width-16, 15)];
+        sensingTitle = [[UILabel alloc] initWithFrame:CGRectMake(8, storedPassword.frame.origin.y + storedPassword.frame.size.height + 12, bounds.width-16, 18)];
         [sensingTitle setText:@"Continuous Data Logging Mode"];
         [sensingTitle setTextColor:greenColor];
         [sensingTitle setBackgroundColor:[UIColor clearColor]];
@@ -276,7 +283,7 @@
         [contentView addSubview:sensingTitle];
         
 
-        sensingTextView =[[UITextView alloc] initWithFrame:CGRectMake(8,sensingTitle.frame.size.height + sensingTitle.frame.origin.y, bounds.width-16, 40)];
+        sensingTextView =[[UITextView alloc] initWithFrame:CGRectMake(8,sensingTitle.frame.size.height + sensingTitle.frame.origin.y-4, bounds.width-16, 40)];
         sensingTextView.editable = NO;
         sensingTextView.scrollEnabled = NO;
         [sensingTextView setText:@"Continuous Data Logging Mode allows users to gather mobile sensor data and upload it to a Personal Data Store on DataHub. You may turn on or off this function at any time."];
@@ -314,7 +321,7 @@
         [contentView addSubview:pauseButton];
         
         // sensing includes text
-        NSString *sensingIncludesTextViewString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style>Mobile sensor data includes: motion sensors (gyroscope, accelerometer), activity info, position data and basic device info.  It does <span style=\"font-style: italic;\">not</span> include content or call logs from phone or txt messages (SMS), <span style=\"font-style: italic;\">>nor</span> do we capture any audio or video with this app.";
+        NSString *sensingIncludesTextViewString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style>Mobile sensor data includes: motion sensors (gyroscope, accelerometer), activity info, position data and basic device info.  It does <span style=\"font-style: italic;\">not</span> include content or call logs from phone or txt messages (SMS), <span style=\"font-style: italic;\">nor</span> do we capture any audio or video with this app.";
         NSData *sensingIncludesData = [sensingIncludesTextViewString dataUsingEncoding:NSUnicodeStringEncoding];
         NSAttributedString *sensingIncludesAttributedString= [[NSAttributedString alloc] initWithData:sensingIncludesData options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
         sensingIncludesTextView =[[UITextView alloc] initWithFrame:CGRectMake(8,pauseButton.frame.size.height + pauseButton.frame.origin.y, bounds.width-16, 40)];
@@ -323,8 +330,8 @@
         [sensingIncludesTextView setTextColor:[UIColor whiteColor]];
         [sensingIncludesTextView setBackgroundColor:[UIColor clearColor]];
         [sensingIncludesTextView setTintColor:greenColor];
-        [sensingIncludesTextView setDataDetectorTypes:UIDataDetectorTypeAll];
-        [sensingIncludesTextView setFont:[UIFont systemFontOfSize:12]];
+//        [sensingIncludesTextView setDataDetectorTypes:UIDataDetectorTypeAll];
+//        [sensingIncludesTextView setFont:[UIFont systemFontOfSize:12]];
         [sensingIncludesTextView setTextAlignment:NSTextAlignmentJustified];
         [sensingIncludesTextView sizeToFit];
         [contentView addSubview:sensingIncludesTextView];
@@ -339,7 +346,7 @@
         [livingLabTitle setTextAlignment:NSTextAlignmentCenter];
         [contentView addSubview:livingLabTitle];
         
-        NSString *livingLabTextViewString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style>The <a href=\"https://livinglab.mit.edu/\">MIT bigdata Living Lab</a> is building scalable data management tools and applications that enable researchers at MIT to demo new approaches to collecting, combining and using data for good on campus.";
+        NSString *livingLabTextViewString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style>The <a href=\"http://livinglab.mit.edu/\">MIT bigdata Living Lab</a> is building scalable data management tools and applications that enable researchers at MIT to demo new approaches to collecting, combining and using data for good on campus.";
         NSData *livingLabData = [livingLabTextViewString dataUsingEncoding:NSUnicodeStringEncoding];
         NSAttributedString *livingLabAttributedString= [[NSAttributedString alloc] initWithData:livingLabData options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
         livingLabTextView =[[UITextView alloc] initWithFrame:CGRectMake(8,livingLabTitle.frame.size.height + livingLabTitle.frame.origin.y, bounds.width-16, 40)];
@@ -362,23 +369,20 @@
         [faqTitle setFont:[UIFont systemFontOfSize:17]];
         [faqTitle setTextAlignment:NSTextAlignmentCenter];
         [contentView addSubview:faqTitle];
-        
-        NSString *faqTextViewString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:center;</style>Support: <a href=\"mailto:getfit-livinglab@csail.mit.edu\">getfit-livinglab@csail.mit.edu</a><br />FAQ: <a href=\"https://livinglab.mit.edu/getfit-faq\">livinglab.mit.edu/getfit-faq</a>";
-        NSData *faqData = [faqTextViewString dataUsingEncoding:NSUnicodeStringEncoding];
-        NSAttributedString *faqAttributedString= [[NSAttributedString alloc] initWithData:faqData options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-        faqTextView =[[UITextView alloc] initWithFrame:CGRectMake(8,faqTitle.frame.size.height + faqTitle.frame.origin.y, bounds.width-16, 40)];
+       
+        faqTextView =[[UITextView alloc] initWithFrame:CGRectMake(8,faqTitle.frame.size.height + faqTitle.frame.origin.y, bounds.width-16, 80)];
         faqTextView.editable = NO;
-        [faqTextView setAttributedText:faqAttributedString];
+        faqTextView.userInteractionEnabled = YES;
+        [faqTextView setText:@"Support: getfit-livinglab@csail.mit.edu\nFAQ: http://livinglab.mit.edu/getfit-faq"];
         [faqTextView setTextColor:[UIColor whiteColor]];
         [faqTextView setBackgroundColor:[UIColor clearColor]];
         [faqTextView setTintColor:greenColor];
-        [faqTextView setDataDetectorTypes:UIDataDetectorTypeAll];
+        [faqTextView setDataDetectorTypes:UIDataDetectorTypeLink];
         [faqTextView setFont:[UIFont systemFontOfSize:12]];
         [faqTextView setTextAlignment:NSTextAlignmentCenter];
 //        [faqTextView sizeToFit];
         [contentView addSubview:faqTextView];
 
-        
         
         
     }
@@ -389,6 +393,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [self adjustResumeLabelText];
 }
 
 #pragma mark - Picker
@@ -485,7 +493,7 @@
         bodyStr = @"Sensor collection currently disabled forever.";
         [pauseButton setTitle:kRESUME_TITLE forState:UIControlStateNormal];
     } else {
-        bodyStr = [NSString stringWithFormat:@"Sensors resuming at %@", dateString];
+        bodyStr = [NSString stringWithFormat:@"Sensors resuming on %@", dateString];
         [pauseButton setTitle:kRESUME_TITLE forState:UIControlStateNormal];
     }
     
@@ -507,5 +515,15 @@
     return newImage;
 }
 
+#pragma mark - Switch
+- (void)appSwitchChanged:(id)sender {
+    // change the defaults determining whether or not to post to getfit
+    if (appSwitch.isOn) {
+        [defaults setBool:YES forKey:@"postToGetFit"];
+    } else {
+        [defaults setBool:NO forKey:@"postToGetFit"];
+    }
+    [defaults synchronize];
+}
 
 @end
