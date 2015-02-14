@@ -97,7 +97,7 @@
         [self.view addSubview:scrollView];
         
         // setup content view and add to scroll view
-        contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, 800)];
+        contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.width, 900)];
         [scrollView addSubview:contentView];
         
         // define relative variables
@@ -380,9 +380,7 @@
         [faqTextView setDataDetectorTypes:UIDataDetectorTypeLink];
         [faqTextView setFont:[UIFont systemFontOfSize:12]];
         [faqTextView setTextAlignment:NSTextAlignmentCenter];
-//        [faqTextView sizeToFit];
         [contentView addSubview:faqTextView];
-
         
         
     }
