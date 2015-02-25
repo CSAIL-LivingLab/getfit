@@ -36,11 +36,11 @@
     [self loadMainViews];
     
     
-    if (![defaults boolForKey:@"loaded_v.99"]) {
+    if (![defaults boolForKey:@"loaded_v.1.1"]) {
         [[MinuteStore sharedStore] removeAllMinutes];
         [[OpenSense sharedInstance] deleteAllBatches];
         [defaults setObject:nil forKey:@"email"];
-        [defaults setBool:YES forKey:@"loaded_v.99"];
+        [defaults setBool:YES forKey:@"loaded_v.1.1"];
         [defaults synchronize];
     }
     
