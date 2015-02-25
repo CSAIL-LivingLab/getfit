@@ -120,7 +120,7 @@
     
     // update HTMl using keys and generate chart
     script = [NSString stringWithFormat:@"var app_id = '%@'; var app_token = '%@'; var repo_base = '%@'; makeCharts();", app_id, app_token, repo_base];
-    NSLog(@"script: %@", script);
+    // NSLog(@"script: %@", script);
 }
 
 - (void) refreshWebViewData {
