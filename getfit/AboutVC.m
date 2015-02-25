@@ -171,6 +171,11 @@
         appSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(8, appTextView.frame.origin.y + appTextView.frame.size.height, 40, 25)];
         appSwitch.userInteractionEnabled = YES;
         [appSwitch addTarget:self action:@selector(appSwitchChanged:) forControlEvents:UIControlEventValueChanged];
+        
+        if ([defaults boolForKey:@"postToGetFit"]) {
+            [appSwitch setOn:YES];
+        }
+        
         [contentView addSubview:appSwitch];
         
         appSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(appSwitch.frame.origin.x + appSwitch.frame.size.width + 4, appTextView.frame.origin.y + appTextView.frame.size.height+3, bounds.width - 50, 25)];
