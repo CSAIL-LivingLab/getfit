@@ -316,6 +316,7 @@
     [explanationView setTextColor:[UIColor whiteColor]];
     [explanationView setBackgroundColor:[UIColor clearColor]];
     [explanationView setEditable:NO];
+    [explanationView setScrollEnabled:NO];
     [explanationView setTextAlignment:NSTextAlignmentCenter];
     [explanationView setDataDetectorTypes:UIDataDetectorTypeAll];
     [explanationView sizeToFit];

@@ -33,7 +33,7 @@
     // load intro screens on first launch
     defaults = [NSUserDefaults standardUserDefaults];
     locationObj = [LocationObject sharedLocationObject];
-    [self loadMainViews];
+    
     
     
     if (![defaults boolForKey:@"loaded_v.1.1"]) {
@@ -45,7 +45,7 @@
     }
     
     // load the intro view if the user's email isn't set
-    if (![defaults stringForKey:@"email"]) {
+    if (![defaults stringForKey:@"username"]) {
 //    if (YES) {
         // make sure the collector doesn't start right away
         [defaults setObject:[NSDate distantFuture] forKey:@"resumeSensorDate"];
@@ -54,8 +54,10 @@
         [defaults setObject:nil forKey:@"password"];
         [defaults setBool:YES forKey:@"postToGetFit"];
         [defaults synchronize];
-        
+        [self loadMainViews];
         [self loadIntroViews];
+    } else {
+        [self loadMainViews];
     }
 
     
