@@ -179,7 +179,7 @@
         [contentView addSubview:appSwitch];
         
         appSwitchLabel = [[UILabel alloc] initWithFrame:CGRectMake(appSwitch.frame.origin.x + appSwitch.frame.size.width + 4, appTextView.frame.origin.y + appTextView.frame.size.height+3, bounds.width - 50, 25)];
-        [appSwitchLabel setText:@"Post to GetFit Website (requires MIT ID)"];
+        [appSwitchLabel setText:@"Post to getfit@mit site (requires MIT ID)"];
         [appSwitchLabel setTextColor:[UIColor whiteColor]];
         [appSwitchLabel setBackgroundColor:[UIColor clearColor]];
         [appSwitchLabel setFont:[UIFont systemFontOfSize:14]];
