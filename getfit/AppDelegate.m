@@ -68,7 +68,7 @@
     // don't do this on the first load, because on the 5s,
     // the "allow location tracking"
     // alert will then be the first thing the user will see.
-    if ([defaults stringForKey:@"email"]) {
+    if ([defaults stringForKey:@"username"]) {
         [locationObj setupLocationManager];
         [NSThread sleepForTimeInterval:.5];
 
