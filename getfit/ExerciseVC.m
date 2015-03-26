@@ -448,10 +448,17 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults boolForKey:@"postToGetFit"]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save to GetFit?" message:alertMessage delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"save", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save to GetFit and DataHub?" message:alertMessage delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"save", nil];
         [alert show];
     } else {
+        
+        // mark the minute for removal later
         minuteEntry.postedToGetFit = YES;
+        
+        // ask if they'd like to post to DataHub
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save to DataHub?" message:alertMessage delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"save", nil];
+        [alert show];
+
     }
     
     
@@ -463,24 +470,21 @@
     
     NSLog(@"Button Index %ld", (long)buttonIndex);
     
-    // 0 is cancel
+    // 0 is cancel. Don't post anywhere.
     if (buttonIndex == 0) {
-        // set this up so that it will post to datahub, but not getfit
-        minuteEntry.postedToDataHub = NO;
-        minuteEntry.postedToGetFit = YES;
-        minuteEntry.verified = NO;
-    }
-    
-    MinuteStore *ms = [MinuteStore sharedStore];
-    [ms addMinuteEntry:minuteEntry];
-    
-//     post minutes to DataHub
-    [ms postToDataHub];
-    
-    // don't attempt to post to GetFit
-    if (buttonIndex == 0) {
+        // set this up so that it will not post to datahub or getfit
+        minuteEntry = [[MinuteEntry alloc] init];
         return;
     }
+
+    
+    // If the user said yes, post to datahub
+    MinuteStore *ms = [MinuteStore sharedStore];
+    [ms addMinuteEntry:minuteEntry];
+    [ms postToDataHub];
+    
+    
+    
     
     
     // only post right away if the user has allowed us to post to getfit
