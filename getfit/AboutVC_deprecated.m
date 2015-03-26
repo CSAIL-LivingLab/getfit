@@ -120,7 +120,7 @@
     [_appLabel sizeToFit];
     
     
-    NSString *datahubLabelHtmlString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style><a href=\"https://datahub.csail.mit.edu\">DataHub</a> (http://datahub.csail.mit.edu/) is a unified data management and collaboration platform under development at MIT CSAIL.";
+    NSString *datahubLabelHtmlString = @"<style>* {    font-family: \"Helvetica Neue\"; text-align:justify;</style><a href=\"https://datahub.csail.mit.edu\">DataHub</a> (https://datahub.csail.mit.edu/) is a unified data management and collaboration platform under development at MIT CSAIL.";
     NSData *datahubLabelHtmlData = [datahubLabelHtmlString dataUsingEncoding:NSUnicodeStringEncoding];
     NSAttributedString *datahubLabelAttributedString= [[NSAttributedString alloc] initWithData:datahubLabelHtmlData options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     [_datahubLabel setScrollEnabled:NO];
