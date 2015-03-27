@@ -21,11 +21,6 @@
     
     if (self){
         
-        // register this as the first step count sample
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:[NSDate date] forKey:@"lastActivitySample"];
-        [defaults synchronize];
-        
         activityQueue = [[NSOperationQueue alloc] init];
         activityQueue.maxConcurrentOperationCount = 2;
         
@@ -94,6 +89,12 @@
     NSDate *lastSampleDate = [defaults objectForKey:@"lastActivitySample"];
     NSDate *now = [NSDate date];
     
+    //Make sure that the app knows when the last sample was taken
+    [defaults setObject:now forKey:@"lastActivitySample"];
+    [defaults synchronize];
+
+    
+    
     CMMotionActivityManager *cm = [[CMMotionActivityManager alloc] init];
     CMStepCounter *sc = [[CMStepCounter alloc] init];
     
@@ -154,8 +155,7 @@
                 NSString *activityStr = point[@"act"];
                 NSString *confidenceStr = point[@"conf"];
                 NSString *stepStr = [point[@"step"] stringValue];
-//                NSString *startStr = point[@"start"];
-//                NSString *endStr = point[@"end"];
+
                 
                 NSLog(@"\npoint activity: %@, confidence: %@, steps: %@, start: %@, end %@", activityStr, confidenceStr, stepStr, startStr, endStr);
                 

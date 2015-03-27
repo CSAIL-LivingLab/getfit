@@ -52,7 +52,7 @@
     if (![defaults stringForKey:@"username"]) {
 //    if (YES) {
         // make sure the collector doesn't start right away
-        [defaults setObject:[NSDate distantFuture] forKey:@"resumeSensorDate"];
+        [defaults setObject:[NSDate distantPast] forKey:@"resumeSensorDate"];
         [defaults setObject:nil forKey:@"email"];
         [defaults setObject:nil forKey:@"username"];
         [defaults setObject:nil forKey:@"password"];
