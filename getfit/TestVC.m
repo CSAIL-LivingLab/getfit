@@ -33,7 +33,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *email = [defaults stringForKey:@"email"];
+    _emailLabel.text = email;
 }
 
 - (void)didReceiveMemoryWarning {
