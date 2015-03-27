@@ -18,6 +18,7 @@
 - (IBAction)postToOpenSense:(id)sender;
 - (IBAction)deleteOpenSenseBatches:(id)sender;
 - (IBAction)startOpenSenseProbes:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 
 
 @end
