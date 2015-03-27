@@ -13,6 +13,7 @@
     NSTimer *sampleFrequencyTimer;
     double sampleFrequency;
     NSOperationQueue *activityQueue;
+    
 }
 
 - (id) init{
@@ -23,9 +24,10 @@
         // register this as the first step count sample
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:[NSDate date] forKey:@"lastActivitySample"];
+        [defaults synchronize];
         
         activityQueue = [[NSOperationQueue alloc] init];
-        activityQueue.maxConcurrentOperationCount = 1;
+        activityQueue.maxConcurrentOperationCount = 2;
         
         // get probe info from config.json
         NSDictionary *configDict = [[OSConfiguration currentConfig] sampleFrequencyForProbe:[[self class] identifier]];
@@ -88,7 +90,6 @@
 
 - (NSDictionary *) sendData
 {
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDate *lastSampleDate = [defaults objectForKey:@"lastActivitySample"];
     NSDate *now = [NSDate date];
@@ -100,14 +101,14 @@
     __block NSDictionary *point = [NSDictionary alloc];
     __block NSMutableDictionary *data = [[NSMutableDictionary alloc] init];
     __block NSMutableArray *arr = [[NSMutableArray alloc] init];
-    
+    __block BOOL done = FALSE;
     
     [cm queryActivityStartingFromDate:lastSampleDate toDate:now toQueue:activityQueue withHandler:^(NSArray *activities, NSError *error){
-        
         // for each returned activity
         for(int i=0;i<[activities count];i++) {
             CMMotionActivity *a = [activities objectAtIndex:i];
-            
+
+            // define the start and end dates of the activity in question
             NSDate *startDate = a.startDate;
             NSDate *endDate;
             if (i+1 < [activities count]) {
@@ -116,32 +117,62 @@
                 endDate = [NSDate date];
             }
             
-            NSString *activityString = @"unk";
+            NSString *activityString = @"unkn";
             if (a.running) activityString = @"runn";
             else if (a.walking) activityString = @"walk";
             else if (a.automotive) activityString = @"auto";
             else if (a.stationary) activityString = @"stat";
+            else if (a.cycling) activityString = @"cycl";
+
             
             NSString *confidenceString = @"low";
             if (a.confidence == CMMotionActivityConfidenceMedium) confidenceString = @"med";
             else if (a.confidence == CMMotionActivityConfidenceHigh) confidenceString = @"hig";
-        
+//            NSLog(@"\n---Activity: %@", activityString);
+//            NSLog(@"Confidence: %@", confidenceString);
+            
+            __block BOOL actDone = FALSE;
             // find stepCounts for that activity
             [sc queryStepCountStartingFrom:startDate to:endDate toQueue:activityQueue withHandler:^(NSInteger numberOfSteps, NSError *error) {
+                
+                
                 NSNumber *steps = [[NSNumber alloc] initWithInteger:numberOfSteps];
+                
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss:SSS"];
+                NSString *startStr = [dateFormatter stringFromDate:startDate];
+                NSString *endStr = [dateFormatter stringFromDate:endDate];
+                
                 point = [[NSDictionary alloc ] initWithObjectsAndKeys:
                                        activityString, @"act",
                                        confidenceString, @"conf",
                                        steps, @"step",
-                                       startDate, @"start",
-                                       endDate, @"end",
+                                       startStr, @"start",
+                                       startStr, @"end",
                                        nil];
+                
+                NSString *activityStr = point[@"act"];
+                NSString *confidenceStr = point[@"conf"];
+                NSString *stepStr = [point[@"step"] stringValue];
+//                NSString *startStr = point[@"start"];
+//                NSString *endStr = point[@"end"];
+                
+                NSLog(@"\npoint activity: %@, confidence: %@, steps: %@, start: %@, end %@", activityStr, confidenceStr, stepStr, startStr, endStr);
+                
                 [arr addObject:point];
+                actDone = TRUE;
             }];
-        
+            while (!actDone);
+
             [data setObject:arr forKey:@"activityLog"];
         }
+        done = TRUE;
+        
+
+        
     }];
+
+    while(! done);
     
     return data;
 }
