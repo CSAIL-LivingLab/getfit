@@ -27,6 +27,7 @@
     CGSize bounds;
     BOOL *randomAcct;
     CLLocationManager *locManager;
+    LocationObject *locationObj;
     
     // first view
     UIView *firstView;
@@ -199,6 +200,8 @@
     [emailTextField setTextAlignment:NSTextAlignmentCenter];
     [emailTextField setClearButtonMode:UITextFieldViewModeWhileEditing];
     [emailTextField setTextColor:[UIColor whiteColor]];
+    [emailTextField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    [emailTextField setAutocorrectionType:UITextAutocorrectionTypeNo];
     // border
     emailTextField.layer.cornerRadius=8.0f;
     emailTextField.layer.masksToBounds=YES;
@@ -514,6 +517,7 @@
 - (void) goToGetFit:(id) sender{
     // set the sensor resume date, etc
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    locationObj = [LocationObject sharedLocationObject];
     
     if (donateSwitch.isOn && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
         // synchronize defaults and request permission,
@@ -526,6 +530,7 @@
         // just synchronize defaults and dismiss
         [defaults setObject:[NSDate date] forKey:@"resumeSensorDate"];
         [defaults synchronize];
+        [locationObj setupLocationManager];
         [self dismissViewControllerAnimated:YES completion:nil];
         
     } else {
