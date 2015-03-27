@@ -36,11 +36,15 @@
     
     
     
-    if (![defaults boolForKey:@"loaded_v.99"]) {
+    if (![defaults boolForKey:@"loaded_v.1.3"]) {
+        // clear minutes, probe data to prevent unexpected complications
+        // set up the activity probe to scrape past activity
         [[MinuteStore sharedStore] removeAllMinutes];
         [[OpenSense sharedInstance] deleteAllBatches];
-        [defaults setObject:nil forKey:@"email"];
-        [defaults setBool:YES forKey:@"loaded_v.99"];
+        
+        [defaults setObject:[NSDate distantPast] forKey:@"lastActivitySample"];
+        [defaults setBool:YES forKey:@"loaded_v.1.3"];
+        
         [defaults synchronize];
     }
     
