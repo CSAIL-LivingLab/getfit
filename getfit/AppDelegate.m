@@ -42,7 +42,8 @@
         [[MinuteStore sharedStore] removeAllMinutes];
         [[OpenSense sharedInstance] deleteAllBatches];
         
-        [defaults setObject:[NSDate distantPast] forKey:@"lastActivitySample"];
+        NSDate *getfitStart = [NSDate dateWithTimeIntervalSince1970:1422896400];
+        [defaults setObject:getfitStart forKey:@"lastActivitySample"];
         [defaults setBool:YES forKey:@"loaded_v.1.3"];
         
         [defaults synchronize];

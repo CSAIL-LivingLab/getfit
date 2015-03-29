@@ -149,15 +149,13 @@
                                        confidenceString, @"conf",
                                        steps, @"step",
                                        startStr, @"start",
-                                       startStr, @"end",
+                                       endStr, @"end",
                                        nil];
                 
-                NSString *activityStr = point[@"act"];
-                NSString *confidenceStr = point[@"conf"];
-                NSString *stepStr = [point[@"step"] stringValue];
-
-                
-                NSLog(@"\npoint activity: %@, confidence: %@, steps: %@, start: %@, end %@", activityStr, confidenceStr, stepStr, startStr, endStr);
+//                NSString *activityStr = point[@"act"];
+//                NSString *confidenceStr = point[@"conf"];
+//                NSString *stepStr = [point[@"step"] stringValue];
+//                NSLog(@"\npoint activity: %@, confidence: %@, steps: %@, start: %@, end %@", activityStr, confidenceStr, stepStr, startStr, endStr);
                 
                 [arr addObject:point];
                 actDone = TRUE;
