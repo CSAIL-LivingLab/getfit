@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1066" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestVC">
             <connections>
+                <outlet property="emailLabel" destination="qNa-f5-64U" id="ujx-Kc-Vfz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -97,14 +98,22 @@
                         <action selector="startOpenSenseProbes:" destination="-1" eventType="touchUpInside" id="T8C-mi-35p"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNa-f5-64U">
+                    <rect key="frame" x="279" y="437" width="41" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="FMe-lI-nq5" secondAttribute="centerX" id="0Pa-Tq-Bs8"/>
                 <constraint firstItem="hQm-IH-7fT" firstAttribute="top" secondItem="FA5-0T-jBJ" secondAttribute="bottom" constant="8" symbolic="YES" id="0eE-Zc-Rj8"/>
+                <constraint firstItem="qNa-f5-64U" firstAttribute="top" secondItem="mIc-WX-xUP" secondAttribute="bottom" constant="8" id="2uj-5S-5uy"/>
                 <constraint firstItem="wdP-Et-dax" firstAttribute="top" secondItem="FMe-lI-nq5" secondAttribute="bottom" constant="8" id="4ky-7R-zZA"/>
                 <constraint firstItem="Pkc-SW-Ox0" firstAttribute="top" secondItem="wdP-Et-dax" secondAttribute="bottom" constant="8" id="70O-aU-guV"/>
                 <constraint firstAttribute="centerY" secondItem="hQm-IH-7fT" secondAttribute="centerY" id="8yo-Ut-fxR"/>
+                <constraint firstAttribute="centerX" secondItem="qNa-f5-64U" secondAttribute="centerX" constant="0.5" id="Oas-Dw-tkp"/>
                 <constraint firstAttribute="centerX" secondItem="hQm-IH-7fT" secondAttribute="centerX" id="VHP-In-4U5"/>
                 <constraint firstAttribute="centerX" secondItem="mIc-WX-xUP" secondAttribute="centerX" id="Y94-PH-lLh"/>
                 <constraint firstItem="0Do-CL-LVt" firstAttribute="top" secondItem="WNv-XT-SQz" secondAttribute="bottom" constant="8" id="dFi-D4-F0r"/>

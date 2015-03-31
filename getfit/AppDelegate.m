@@ -36,11 +36,16 @@
 
     
     
-    if (![defaults boolForKey:@"loaded_v.1.1"]) {
+    if (![defaults boolForKey:@"loaded_v.1.3"]) {
+        // clear minutes, probe data to prevent unexpected complications
+        // set up the activity probe to scrape past activity
         [[MinuteStore sharedStore] removeAllMinutes];
         [[OpenSense sharedInstance] deleteAllBatches];
-        [defaults setObject:nil forKey:@"email"];
-        [defaults setBool:YES forKey:@"loaded_v.1.1"];
+        
+        NSDate *getfitStart = [NSDate dateWithTimeIntervalSince1970:1422896400];
+        [defaults setObject:getfitStart forKey:@"lastActivitySample"];
+        [defaults setBool:YES forKey:@"loaded_v.1.3"];
+        
         [defaults synchronize];
     }
     
@@ -49,7 +54,7 @@
     if (![defaults stringForKey:@"username"]) {
 //    if (YES) {
         // make sure the collector doesn't start right away
-        [defaults setObject:[NSDate distantFuture] forKey:@"resumeSensorDate"];
+        [defaults setObject:[NSDate distantPast] forKey:@"resumeSensorDate"];
         [defaults setObject:nil forKey:@"email"];
         [defaults setObject:nil forKey:@"username"];
         [defaults setObject:nil forKey:@"password"];
@@ -110,6 +115,14 @@
         [locationObj setupLocationManager];
         [NSThread sleepForTimeInterval:.5];
     }
+}
+
+- (void) applicationDidEnterBackground:(UIApplication *)application {
+    [defaults synchronize];
+}
+
+- (void) applicationWillTerminate:(UIApplication *)application {
+    [defaults synchronize];
 }
 
 @end

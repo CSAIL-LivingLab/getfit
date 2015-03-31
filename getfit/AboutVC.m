@@ -291,8 +291,8 @@
 
         sensingTextView =[[UITextView alloc] initWithFrame:CGRectMake(8,sensingTitle.frame.size.height + sensingTitle.frame.origin.y-4, bounds.width-16, 40)];
         sensingTextView.editable = NO;
-        sensingTextView.scrollEnabled = NO;
         [sensingTextView setText:@"Continuous Data Logging Mode allows users to gather mobile sensor data and upload it to a Personal Data Store on DataHub. You may turn on or off this function at any time."];
+        sensingTextView.scrollEnabled = NO;
         [sensingTextView setTextColor:[UIColor whiteColor]];
         [sensingTextView setBackgroundColor:[UIColor clearColor]];
         [sensingTextView setTintColor:greenColor];
@@ -405,6 +405,9 @@
     // necessary for first load after the user logs in
     [storedUsername setText:[defaults objectForKey:@"username"]];
     [storedPassword setText:[defaults objectForKey:@"password"]];
+    if ([defaults boolForKey:@"postToGetFit"]) {
+        [appSwitch setOn:YES];
+    }
 }
 
 #pragma mark - Picker
