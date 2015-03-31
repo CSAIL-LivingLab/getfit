@@ -117,6 +117,14 @@
     }
 }
 
+- (void) applicationDidEnterBackground:(UIApplication *)application {
+    [defaults synchronize];
+}
+
+- (void) applicationWillTerminate:(UIApplication *)application {
+    [defaults synchronize];
+}
+
 @end
 
 

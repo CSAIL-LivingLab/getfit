@@ -188,7 +188,7 @@
         [data setObject:stepArr forKey:@"stepLog"];
         stepDone = TRUE;
         }];
-    
+
     
     // function is blocking. This will release once activities and steps are counted
     while (!(actDone & stepDone));
