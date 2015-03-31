@@ -42,7 +42,8 @@
         [[MinuteStore sharedStore] removeAllMinutes];
         [[OpenSense sharedInstance] deleteAllBatches];
         
-        [defaults setObject:[NSDate distantPast] forKey:@"lastActivitySample"];
+        NSDate *getfitStart = [NSDate dateWithTimeIntervalSince1970:1422896400];
+        [defaults setObject:getfitStart forKey:@"lastActivitySample"];
         [defaults setBool:YES forKey:@"loaded_v.1.3"];
         
         [defaults synchronize];
@@ -114,6 +115,14 @@
         [locationObj setupLocationManager];
         [NSThread sleepForTimeInterval:.5];
     }
+}
+
+- (void) applicationDidEnterBackground:(UIApplication *)application {
+    [defaults synchronize];
+}
+
+- (void) applicationWillTerminate:(UIApplication *)application {
+    [defaults synchronize];
 }
 
 @end

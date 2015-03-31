@@ -405,6 +405,9 @@
     // necessary for first load after the user logs in
     [storedUsername setText:[defaults objectForKey:@"username"]];
     [storedPassword setText:[defaults objectForKey:@"password"]];
+    if ([defaults boolForKey:@"postToGetFit"]) {
+        [appSwitch setOn:YES];
+    }
 }
 
 #pragma mark - Picker
