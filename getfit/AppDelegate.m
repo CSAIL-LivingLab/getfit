@@ -111,9 +111,9 @@
 
 // do this to resume significant location tracking after user re-opens the app, after they've gone through the introduction screens
 - (void) applicationDidBecomeActive:(UIApplication *)application {
-    if ([defaults stringForKey:@"email"]) {
+    if ([defaults stringForKey:@"username"]) {
         [locationObj setupLocationManager];
-        [NSThread sleepForTimeInterval:.5];
+//        [NSThread sleepForTimeInterval:.5];
     }
 }
 
