@@ -78,7 +78,10 @@
         
         // Create data directory and probedata file
         if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]) {
+            OSLog(@"----ATTENTION----");
             OSLog(@"Could not create data directory: %@", [error localizedDescription]);
+            OSLog(@"error: %@", [error description]);
+            
         } else {
             [[NSFileManager defaultManager] createFileAtPath:currentFile contents:nil attributes:nil]; // Create blank probedata file
         }
