@@ -42,6 +42,7 @@
         [[MinuteStore sharedStore] removeAllMinutes];
         [[OpenSense sharedInstance] deleteAllBatches];
         
+        // February 2, 2015
         NSDate *getfitStart = [NSDate dateWithTimeIntervalSince1970:1422896400];
         [defaults setObject:getfitStart forKey:@"lastActivitySample"];
         [defaults setBool:YES forKey:@"loaded_v.1.3"];
