@@ -76,22 +76,19 @@
     NSString *dataPath = [documentsPath stringByAppendingPathComponent:kDIRECTORY_NAME];
     NSString *currentFile = [dataPath stringByAppendingPathComponent:@"probedata"];
 
-    // Create data directory and probedata file
-    // if the probedata file doesn't exist...
-
-        // check to see if the directory exists. If not, create it.
-        if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath]) {
-            OSLog(@"%@ directory DOES NOT exist", kDIRECTORY_NAME);
-            
-            NSError *error;
-            if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]) {
-                    OSLog(@"----ATTENTION----");
-                    OSLog(@"Could not create data directory: %@", [error localizedDescription]);
-                    OSLog(@"error: %@", [error description]);
-            } else {
-                OSLog(@"\n\n----Created OpenSenseData Directory----");
-            }
+    // check to see if the directory exists. If not, create it.
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath]) {
+        OSLog(@"%@ directory DOES NOT exist", kDIRECTORY_NAME);
+        
+        NSError *error;
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]) {
+                OSLog(@"----ATTENTION----");
+                OSLog(@"Could not create data directory: %@", [error localizedDescription]);
+                OSLog(@"error: %@", [error description]);
+        } else {
+            OSLog(@"\n\n----Created OpenSenseData Directory----");
         }
+    }
         
         // Check to see if the probedata file exists. If not, create it.
     if (![[NSFileManager defaultManager] fileExistsAtPath:currentFile]) {
