@@ -55,6 +55,17 @@
         return;
     }
     
+    // send a notification to the user
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    NSDate *now = [NSDate date];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"MMM dd, hh:mm a"];
+    NSString *currentDate = [df stringFromDate:now];
+    localNotification.fireDate = now;
+    localNotification.alertBody = [NSString stringWithFormat:@"didUpdateLocation at %@", currentDate];
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
     // start gathering data, and then turn the collector off after 30 seconds
     NSLog(@"\n\n----SIGNIFICANTLOCATIONCHANGE-----\n\n");
     OpenSense *opensense = [OpenSense sharedInstance];
