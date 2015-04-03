@@ -93,7 +93,7 @@
             
         } else {
             OSLog(@"\n\n----Created OpenSenseData Directory----");
-            [self sendNotificationToUser:[NSString stringWithFormat:@"created OpenSenseDataDirectory"]];
+            [self sendNotificationToUser:@"created OpenSenseDataDirectory"];
         }
     }
         
@@ -101,6 +101,7 @@
     if (![[NSFileManager defaultManager] fileExistsAtPath:currentFile]) {
         [[NSFileManager defaultManager] createFileAtPath:currentFile contents:nil attributes:nil];
         OSLog(@"\n\n----Created probedata file----\n");
+        [self sendNotificationToUser:@"created probedata file"];
     }
     
     // Check size of current probedata file
@@ -246,6 +247,7 @@
             success = NO;
         } else {
             OSLog(@"\n\n---Successfully deleted all probedata files---");
+            [self sendNotificationToUser:@"Successfully deleted all probedata files"];
         }
         
     }
