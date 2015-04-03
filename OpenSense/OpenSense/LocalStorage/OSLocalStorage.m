@@ -67,26 +67,37 @@
 }
 
 - (void)logrotate
+// creates the directory structure for storing data.
+// When the phone is locked, it becomes impossible to create directories, but possible to create files in previously created directories
+
 {
     // Create data dir ifneedbe
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *dataPath = [documentsPath stringByAppendingPathComponent:kDIRECTORY_NAME];
     NSString *currentFile = [dataPath stringByAppendingPathComponent:@"probedata"];
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath]) {
-        NSError *error = nil;
-        
-        // Create data directory and probedata file
-        if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]) {
-            OSLog(@"----ATTENTION----");
-            OSLog(@"Could not create data directory: %@", [error localizedDescription]);
-            OSLog(@"error: %@", [error description]);
+
+    // Create data directory and probedata file
+    // if the probedata file doesn't exist...
+
+        // check to see if the directory exists. If not, create it.
+        if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath]) {
+            OSLog(@"%@ directory DOES NOT exist", kDIRECTORY_NAME);
             
-        } else {
-            [[NSFileManager defaultManager] createFileAtPath:currentFile contents:nil attributes:nil]; // Create blank probedata file
+            NSError *error;
+            if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]) {
+                    OSLog(@"----ATTENTION----");
+                    OSLog(@"Could not create data directory: %@", [error localizedDescription]);
+                    OSLog(@"error: %@", [error description]);
+            } else {
+                OSLog(@"\n\n----Created OpenSenseData Directory----");
+            }
         }
+        
+        // Check to see if the probedata file exists. If not, create it.
+    if (![[NSFileManager defaultManager] fileExistsAtPath:currentFile]) {
+        [[NSFileManager defaultManager] createFileAtPath:currentFile contents:nil attributes:nil];
+        OSLog(@"\n\n----Created probedata file----\n");
     }
-    
     // Check size of current probedata file
     long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:currentFile error:nil][NSFileSize] longValue];
     long maxFileSize = ([[OSConfiguration currentConfig].maxDataFileSizeKb longValue] * 1024L);
@@ -217,14 +228,21 @@
     // find the path to the opensense data directory
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *dataPath = [documentsPath stringByAppendingPathComponent:kDIRECTORY_NAME];
-    
+    BOOL success = YES;
     // remove the whole directory, so that [OSLocalStorage logrotate] will create a new one
-    NSError *error;
-    BOOL success = [[NSFileManager defaultManager] removeItemAtPath:dataPath error:&error]; // Delete file
-    if (!success) {
-        NSLog(@"Error removing file %@", error);
-    } else {
-        NSLog(@"Successfully deleted all OpenSense Batches");
+    
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *error = nil;
+    for (NSString *file in [fm contentsOfDirectoryAtPath:dataPath error:&error]) {
+        
+        BOOL localSuccess = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", dataPath, file] error:&error];
+        if (!localSuccess || error) {
+            OSLog(@"Error removing file %@. Error: %@", file, [error description] );
+            success = NO;
+        } else {
+            OSLog(@"\n\n---Successfully deleted all probedata files---");
+        }
+        
     }
     
     return success;
