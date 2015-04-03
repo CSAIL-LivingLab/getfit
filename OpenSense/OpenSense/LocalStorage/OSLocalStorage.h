@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface OSLocalStorage : NSObject {
     dispatch_queue_t probeFileQueue;
