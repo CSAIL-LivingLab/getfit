@@ -90,11 +90,12 @@
         }
     }
         
-        // Check to see if the probedata file exists. If not, create it.
+    // Check to see if the probedata file exists. If not, create it.
     if (![[NSFileManager defaultManager] fileExistsAtPath:currentFile]) {
         [[NSFileManager defaultManager] createFileAtPath:currentFile contents:nil attributes:nil];
         OSLog(@"\n\n----Created probedata file----\n");
     }
+    
     // Check size of current probedata file
     long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:currentFile error:nil][NSFileSize] longValue];
     long maxFileSize = ([[OSConfiguration currentConfig].maxDataFileSizeKb longValue] * 1024L);
