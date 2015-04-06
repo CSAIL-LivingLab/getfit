@@ -149,17 +149,17 @@
     }
     @catch (NSException *exception) {
         NSLog(@"%@", exception);
-        
+//        
         NSDate *now = [NSDate date];
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"MMM dd, hh:mm:ss a"];
-        NSString *currentDate = [df stringFromDate:now];
-        
-        
+//        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//        [df setDateFormat:@"MMM dd, hh:mm:ss a"];
+//        NSString *currentDate = [df stringFromDate:now];
+//        
+//        
         // notify user that post was attempted
         UILocalNotification *newNotification = [[UILocalNotification alloc] init];
         newNotification.fireDate = now;
-        newNotification.alertBody = [NSString stringWithFormat:@"%@: Exc. posting to DH: %@", currentDate, exception];
+        newNotification.alertBody = [NSString stringWithFormat:@"%@", exception];
         newNotification.soundName = UILocalNotificationDefaultSoundName;
         [[UIApplication sharedApplication] scheduleLocalNotification:newNotification];
         
