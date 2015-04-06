@@ -75,7 +75,9 @@
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *dataPath = [documentsPath stringByAppendingPathComponent:kDIRECTORY_NAME];
     NSString *currentFile = [dataPath stringByAppendingPathComponent:@"probedata"];
+    NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionNone forKey:NSFileProtectionKey];
 
+    
     // check to see if the directory exists. If not, create it.
     if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath]) {
         OSLog(@"%@", [NSString stringWithFormat:@"%@ directory DOES NOT exist", kDIRECTORY_NAME]);
@@ -92,6 +94,10 @@
             
             
         } else {
+
+            [[NSFileManager defaultManager] setAttributes:protection ofItemAtPath:dataPath error:nil];
+    
+            
             OSLog(@"\n\n----Created OpenSenseData Directory----");
             [self sendNotificationToUser:@"created OpenSenseDataDirectory"];
         }
@@ -99,33 +105,44 @@
         
     // Check to see if the probedata file exists. If not, create it.
     if (![[NSFileManager defaultManager] fileExistsAtPath:currentFile]) {
-        [[NSFileManager defaultManager] createFileAtPath:currentFile contents:nil attributes:nil];
-        OSLog(@"\n\n----Created probedata file----\n");
-        [self sendNotificationToUser:@"created probedata file"];
+        
+        if ([[NSFileManager defaultManager]createFileAtPath:currentFile contents:nil attributes:nil]) {
+            OSLog(@"\n\n----Created probedata file----\n");
+            [self sendNotificationToUser:@"created probedata file"];
+        } else {
+            [self sendNotificationToUser:
+             [NSString stringWithFormat:@"failed to create probedata file errno: %s", strerror(errno)]];
+            
+            NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionNone forKey:NSFileProtectionKey];
+            [[NSFileManager defaultManager] setAttributes:protection ofItemAtPath:currentFile error:nil];
+            
+        }
     }
     
     // Check size of current probedata file
     long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:currentFile error:nil][NSFileSize] longValue];
     long maxFileSize = ([[OSConfiguration currentConfig].maxDataFileSizeKb longValue] * 1024L);
     
-    // If file is to big or the collector is running, make a new file
+    // If file is to big or the collector is running... just delete the old data
     if (fileSize > maxFileSize) {
         
-        OSLog(@"Rotating log file");
+        OSLog(@"fileSize exceeded. Deleting all batches");
+
+        [self deleteAllBatches];
         
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'hh-mm-ss"];
-        
-        NSString *newFileName = [NSString stringWithFormat:@"probedata.%@", [dateFormatter stringFromDate:[NSDate date]]];
-        NSString *newFile = [dataPath stringByAppendingPathComponent:newFileName];
-        
-        // Rename current probedata file to probedate.CURRENT_DATETIME
-        NSError *error = nil;
-        if (![[NSFileManager defaultManager] moveItemAtPath:currentFile toPath:newFile error:&error]) {
-            OSLog(@"Could not rename file %@ to %@ - %@", currentFile, newFileName, [error localizedDescription]);
-        } else {
-            [[NSFileManager defaultManager] createFileAtPath:currentFile contents:nil attributes:nil]; // Create a new probedata file
-        }
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'hh-mm-ss"];
+//        
+//        NSString *newFileName = [NSString stringWithFormat:@"probedata.%@", [dateFormatter stringFromDate:[NSDate date]]];
+//        NSString *newFile = [dataPath stringByAppendingPathComponent:newFileName];
+//        
+//        // Rename current probedata file to probedate.CURRENT_DATETIME
+//        NSError *error = nil;
+//        if (![[NSFileManager defaultManager] moveItemAtPath:currentFile toPath:newFile error:&error]) {
+//            OSLog(@"Could not rename file %@ to %@ - %@", currentFile, newFileName, [error localizedDescription]);
+//        } else {
+//            [[NSFileManager defaultManager] createFileAtPath:currentFile contents:nil attributes:nil]; // Create a new probedata file
+//        }
     }
 }
 
@@ -139,8 +156,26 @@
         NSString *dataPath = [documentsPath stringByAppendingPathComponent:kDIRECTORY_NAME];
         NSString *currentFile = [dataPath stringByAppendingPathComponent:@"probedata"];
         
+        // check directory permissions
+        NSError *error = nil;
+        NSDictionary *folderPermissions = [[NSFileManager defaultManager] attributesOfFileSystemForPath:dataPath error: &error];
+        OSLog(@"Folder Permissions: %@", folderPermissions);
+        
+        NSDictionary *filePermissions = [[NSFileManager defaultManager] attributesOfItemAtPath:currentFile error: &error];
+        OSLog(@"File Permissions: %@", filePermissions);
+        
+        NSFileManager *fm = [NSFileManager defaultManager];
+        BOOL isReadable = [fm isReadableFileAtPath:currentFile];
+        BOOL *isWritable = [fm isWritableFileAtPath:currentFile];
+        
+        
+        
+        
+        
+        
         NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:currentFile];
         if (!fileHandle) {
+            [self sendNotificationToUser:@"probedata file does not exist"];
             return;
         }
         
@@ -237,20 +272,40 @@
     BOOL success = YES;
     // remove the whole directory, so that [OSLocalStorage logrotate] will create a new one
     
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSError *error = nil;
-    for (NSString *file in [fm contentsOfDirectoryAtPath:dataPath error:&error]) {
-        
-        BOOL localSuccess = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", dataPath, file] error:&error];
-        if (!localSuccess || error) {
-            OSLog(@"Error removing file %@. Error: %@", file, [error description] );
-            success = NO;
-        } else {
-            OSLog(@"\n\n---Successfully deleted all probedata files---");
-            [self sendNotificationToUser:@"Successfully deleted all probedata files"];
-        }
-        
+//    NSFileManager *fm = [NSFileManager defaultManager];
+//    NSError *error = nil;
+    
+    NSFileHandle *file;
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", dataPath, @"probedata"];
+    file = [NSFileHandle fileHandleForUpdatingAtPath: filePath];
+    
+    if (file == nil) {
+        OSLog(@"Failed to open file");
+        return NO;
     }
+    
+    
+    [file truncateFileAtOffset: 0];
+    [file closeFile];
+    [self sendNotificationToUser:@"truncated probedata file"];
+
+    
+//    for (NSString *fileName in [fm contentsOfDirectoryAtPath:dataPath error:&error]) {
+//        
+//        NSFileHandle *file;
+//        NSString *filePath = [NSString stringWithFormat:@"%@/%@", dataPath, fileName];
+//        file = [NSFileHandle fileHandleForUpdatingAtPath: filePath];
+//
+//
+//        BOOL localSuccess = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", dataPath, fileName] error:&error];
+//        if (!localSuccess || error) {
+//            OSLog(@"Error removing file %@. Error: %@", fileName, [error description] );
+//            success = NO;
+//        } else {
+//            OSLog(@"\n\n---Successfully deleted all probedata files---");
+//            [self sendNotificationToUser:@"Successfully deleted all probedata files"];
+//        }
+//    }
     
     return success;
 }

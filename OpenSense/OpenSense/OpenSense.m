@@ -184,6 +184,7 @@
         
         OSLog(@"Constructing JSON document with %lu batches", (unsigned long)[batches count]);
         
+        
         // Construct JSON document by comma-separating indvidual data batches
         NSString *jsonFile = [[NSString alloc] init];
         for (NSData *lineData in batches) {
@@ -255,6 +256,22 @@
     [[OSLocalStorage sharedInstance] fetchBatchesForProbe:nil skipCurrent:skipCurrent parseJSON:NO success:^(NSArray *batches) {
         
         OSLog(@"Constructing JSON document with %lu batches", (unsigned long)[batches count]);
+        
+        
+        // notification crap
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        NSDate *now = [NSDate date];
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"MMM dd, hh:mm:ss a"];
+        NSString *currentDate = [df stringFromDate:now];
+        
+        // notify user that post was attempted
+        localNotification.fireDate = now;
+        localNotification.alertBody = [NSString stringWithFormat:@"%@: Constructing JSON doc with %lu batches", currentDate, (unsigned long)[batches count]];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        
+
         
         // Construct JSON document by comma-separating indvidual data batches
         NSMutableString *jsonString = [NSMutableString stringWithString:@"["];

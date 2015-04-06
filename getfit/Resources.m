@@ -111,6 +111,20 @@
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
     @try {
+        // notification crap
+        
+        NSDate *now = [NSDate date];
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"MMM dd, hh:mm:ss a"];
+        NSString *currentDate = [df stringFromDate:now];
+        
+        
+        // notify user that post was attempted
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.fireDate = now;
+        localNotification.alertBody = [NSString stringWithFormat:@"%@: Started OS to DH Post", currentDate];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         
         datahubDataHubClient *datahub_client = [self createDataHubClient];
         datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
@@ -123,11 +137,33 @@
     
         [datahub_client execute_sql:con_app query:statement query_params:nil];
         [[OpenSense sharedInstance] deleteAllBatches];
-        NSLog(@"opensense uploaded all batches");
+        NSLog(@"Posted to DH");
+        
+        // notify user that opensense data was posted
+        UILocalNotification *secondNotification = [[UILocalNotification alloc] init];
+        secondNotification.fireDate = now;
+        secondNotification.alertBody = [NSString stringWithFormat:@"%@: Posted to DH", currentDate];
+        secondNotification.soundName = UILocalNotificationDefaultSoundName;
+        [[UIApplication sharedApplication] scheduleLocalNotification:secondNotification];
 
     }
     @catch (NSException *exception) {
         NSLog(@"%@", exception);
+        
+        NSDate *now = [NSDate date];
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"MMM dd, hh:mm:ss a"];
+        NSString *currentDate = [df stringFromDate:now];
+        
+        
+        // notify user that post was attempted
+        UILocalNotification *newNotification = [[UILocalNotification alloc] init];
+        newNotification.fireDate = now;
+        newNotification.alertBody = [NSString stringWithFormat:@"%@: Exc. posting to DH: %@", currentDate, exception];
+        newNotification.soundName = UILocalNotificationDefaultSoundName;
+        [[UIApplication sharedApplication] scheduleLocalNotification:newNotification];
+        
+        
     }
 }
 

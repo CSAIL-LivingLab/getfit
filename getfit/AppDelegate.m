@@ -17,6 +17,8 @@
 #import "GraphVC.h"
 #import "TestVC.h"
 
+#import "Resources.h"
+
 #import "MinuteStore.h"
 
 
@@ -34,6 +36,8 @@
     defaults = [NSUserDefaults standardUserDefaults];
     locationObj = [LocationObject sharedLocationObject];
     
+//    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+//    
     
     
     if (![defaults boolForKey:@"loaded_v.1.3"]) {
@@ -90,6 +94,26 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+
+
+//- (void) application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+//    OSLog(@"application performFetchWithCompletionHandler entered");
+//    
+//    // only start the collector if it was running when the user exited
+//        
+//    [[OpenSense sharedInstance] startCollector];
+//    [NSTimer scheduledTimerWithTimeInterval:5 target:[Resources sharedResources]  selector:@selector(uploadOpenSenseData) userInfo:nil repeats:NO];
+//    
+//    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+//    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+//    NSDate *now = [NSDate date];
+//    localNotification.fireDate = now;
+//    localNotification.alertBody = @"performFetchWithCompletionHandler called. startCollector called";
+//    localNotification.soundName = UILocalNotificationDefaultSoundName;
+//    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+//    
+//}
 
 - (void) loadMainViews {
     
