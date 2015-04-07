@@ -75,17 +75,18 @@
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *dataPath = [documentsPath stringByAppendingPathComponent:kDIRECTORY_NAME];
     NSString *currentFile = [dataPath stringByAppendingPathComponent:@"probedata"];
-
+    NSDictionary *protection = [NSDictionary dictionaryWithObject:NSFileProtectionNone forKey:NSFileProtectionKey];
+    
+    
     // check to see if the directory exists. If not, create it.
     if (![[NSFileManager defaultManager] fileExistsAtPath:dataPath]) {
         OSLog(@"%@ directory DOES NOT exist", kDIRECTORY_NAME);
         
         NSError *error;
         if (![[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]) {
-                OSLog(@"----ATTENTION----");
-                OSLog(@"Could not create data directory: %@", [error localizedDescription]);
-                OSLog(@"error: %@", [error description]);
+                OSLog(@"\n\n---Could not create data directory:---%@, %@", [error localizedDescription], [error description]);
         } else {
+            [[NSFileManager defaultManager] setAttributes:protection ofItemAtPath:dataPath error:nil];
             OSLog(@"\n\n----Created OpenSenseData Directory----");
         }
     }
@@ -93,6 +94,7 @@
     // Check to see if the probedata file exists. If not, create it.
     if (![[NSFileManager defaultManager] fileExistsAtPath:currentFile]) {
         [[NSFileManager defaultManager] createFileAtPath:currentFile contents:nil attributes:nil];
+        [[NSFileManager defaultManager] setAttributes:protection ofItemAtPath:currentFile error:nil];
         OSLog(@"\n\n----Created probedata file----\n");
     }
     
@@ -235,7 +237,7 @@
         
         BOOL localSuccess = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", dataPath, file] error:&error];
         if (!localSuccess || error) {
-            OSLog(@"Error removing file %@. Error: %@", file, [error description] );
+            OSLog(@"\n\n---Error removing file %@. Error: %@", file, [error description] );
             success = NO;
         } else {
             OSLog(@"\n\n---Successfully deleted all probedata files---");
