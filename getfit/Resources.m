@@ -111,7 +111,7 @@
     NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
     
     @try {
-        
+        NSLog(@"\n\n---datahub starting to upload batches---");
         datahubDataHubClient *datahub_client = [self createDataHubClient];
         datahubConnectionParams *con_params_app = [[datahubConnectionParams alloc] initWithClient_id:nil seq_id:nil user:nil password:nil app_id:appID app_token:appToken repo_base:username];
         datahubConnection * con_app = [datahub_client open_connection:con_params_app];
@@ -123,7 +123,7 @@
     
         [datahub_client execute_sql:con_app query:statement query_params:nil];
         [[OpenSense sharedInstance] deleteAllBatches];
-        NSLog(@"opensense uploaded all batches");
+        NSLog(@"\n\n---datahub uploaded all batches---");
 
     }
     @catch (NSException *exception) {
