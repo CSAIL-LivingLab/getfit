@@ -42,10 +42,17 @@
         [[MinuteStore sharedStore] removeAllMinutes];
         [[OpenSense sharedInstance] deleteAllBatches];
         
-        [defaults setBool:YES forKey:@"loaded_v.1.4"];
-        
         [defaults synchronize];
     }
+    
+    // if the lastActivitySample date was never set, set it.
+    if (![defaults objectForKey:@"lastActivitySample"]) {
+        NSDate *getfitStart = [NSDate dateWithTimeIntervalSince1970:1422896400];
+        [defaults setObject:getfitStart forKey:@"lastActivitySample"];
+
+        [defaults synchronize];
+    }
+    
     
     // load the intro view if the user's email isn't set
     if (![defaults stringForKey:@"username"]) {
