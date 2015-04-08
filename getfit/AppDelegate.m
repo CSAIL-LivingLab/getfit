@@ -36,16 +36,13 @@
     
     
     
-    if (![defaults boolForKey:@"loaded_v.1.3"]) {
+    if (![defaults boolForKey:@"loaded_v.1.4"]) {
         // clear minutes, probe data to prevent unexpected complications
         // set up the activity probe to scrape past activity
         [[MinuteStore sharedStore] removeAllMinutes];
         [[OpenSense sharedInstance] deleteAllBatches];
         
-        // February 2, 2015
-        NSDate *getfitStart = [NSDate dateWithTimeIntervalSince1970:1422896400];
-        [defaults setObject:getfitStart forKey:@"lastActivitySample"];
-        [defaults setBool:YES forKey:@"loaded_v.1.3"];
+        [defaults setBool:YES forKey:@"loaded_v.1.4"];
         
         [defaults synchronize];
     }
